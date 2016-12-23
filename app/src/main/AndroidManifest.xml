@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".logic.edit.RingdroidEditActivity"
+            android:name=".logic.edit.CutterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".logic.MainActivity"

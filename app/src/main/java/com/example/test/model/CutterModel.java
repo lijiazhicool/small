@@ -11,10 +11,6 @@ import com.example.test.utils.modelcache.IBaseCacheModel;
  */
 
 public class CutterModel extends BaseModel implements IBaseCacheModel, Parcelable{
-//    public static final int FILE_KIND_MUSIC = 0;
-//    public static final int FILE_KIND_ALARM = 1;
-//    public static final int FILE_KIND_NOTIFICATION = 2;
-//    public static final int FILE_KIND_RINGTONE = 3;
     public  int type;
     public  String title;
     public  String path; // 音乐文件的路径

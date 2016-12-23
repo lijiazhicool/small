@@ -23,9 +23,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import static com.example.test.logic.edit.FileSaveDialog.FILE_KIND_ALARM;
-import static com.example.test.logic.edit.FileSaveDialog.FILE_KIND_MUSIC;
-import static com.example.test.logic.edit.FileSaveDialog.FILE_KIND_NOTIFICATION;
+import static com.example.test.Constants.FILE_KIND_ALARM;
+import static com.example.test.Constants.FILE_KIND_MUSIC;
+import static com.example.test.Constants.FILE_KIND_NOTIFICATION;
 
 /**
  * Created by LiJiaZhi on 16/12/19.

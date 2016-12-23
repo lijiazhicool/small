@@ -1,15 +1,3 @@
-/*
- * Copyright (C) 2008 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- */
 
 package com.example.test.logic.edit;
 
@@ -23,7 +11,6 @@ import com.example.test.R;
 import com.example.test.UserDatas;
 import com.example.test.base.BaseActivity;
 import com.example.test.model.CutterModel;
-import com.example.test.model.RecordModel;
 import com.example.test.model.SongModel;
 import com.example.test.soundfile.CheapSoundFile;
 import com.example.test.views.MarkerView;
@@ -58,22 +45,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * The activity for the Ringdroid main editor window. Keeps track of the waveform display, current horizontal offset,
- * marker handles, start / end text boxes, and handles all of the buttons and controls.
- */
-public class RingdroidEditActivity extends BaseActivity
+import static com.example.test.Constants.FILE_KIND_ALARM;
+import static com.example.test.Constants.FILE_KIND_MUSIC;
+import static com.example.test.Constants.FILE_KIND_NOTIFICATION;
+import static com.example.test.Constants.FILE_KIND_RINGTONE;
+
+public class CutterActivity extends BaseActivity
     implements MarkerView.MarkerListener, WaveformView.WaveformListener {
 
     public static final String INTENT_IN_MODEL = "intent_in_model";
     private SongModel mSong;
     private ImageView mBackIv;
     private ImageButton mSetIv;
+    private TextView mTotaltv;
 
     private long mLoadingLastUpdateTime;
     private boolean mLoadingKeepGoing;
@@ -92,8 +82,8 @@ public class RingdroidEditActivity extends BaseActivity
     private WaveformView mWaveformView;
     private MarkerView mStartMarker;
     private MarkerView mEndMarker;
-    private TextView mStartText;
-    private TextView mEndText;
+    private EditText mStartText;
+    private EditText mEndText;
     private TextView mInfo;
     private ImageButton mPlayButton;
     // private ImageButton mRewindButton;
@@ -168,6 +158,7 @@ public class RingdroidEditActivity extends BaseActivity
     protected void findViewById() {
         mBackIv = findView(R.id.back);
         mSetIv = findView(R.id.set);
+        mTotaltv = findView(R.id.total_tv);
         loadGui();
     }
 
@@ -204,7 +195,7 @@ public class RingdroidEditActivity extends BaseActivity
     /** Called with the activity is finally destroyed. */
     @Override
     protected void onDestroy() {
-        Log.i("Ringdroid", "EditActivity OnDestroy");
+        Log.i("Ringdroid", "CutterActivity OnDestroy");
 
         if (mPlayer != null && mPlayer.isPlaying()) {
             mPlayer.stop();
@@ -495,9 +486,9 @@ public class RingdroidEditActivity extends BaseActivity
         mMarkerTopOffset = (int) (10 * mDensity);
         mMarkerBottomOffset = (int) (10 * mDensity);
 
-        mStartText = (TextView) findViewById(R.id.starttext);
+        mStartText = (EditText) findViewById(R.id.starttext);
         mStartText.addTextChangedListener(mTextWatcher);
-        mEndText = (TextView) findViewById(R.id.endtext);
+        mEndText = (EditText) findViewById(R.id.endtext);
         mEndText.addTextChangedListener(mTextWatcher);
 
         mPlayButton = (ImageButton) findViewById(R.id.play);
@@ -572,7 +563,7 @@ public class RingdroidEditActivity extends BaseActivity
 
         mLoadingLastUpdateTime = System.currentTimeMillis();
         mLoadingKeepGoing = true;
-        mProgressDialog = new ProgressDialog(RingdroidEditActivity.this);
+        mProgressDialog = new ProgressDialog(CutterActivity.this);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setTitle(R.string.progress_dialog_loading);
         mProgressDialog.setCancelable(true);
@@ -667,7 +658,7 @@ public class RingdroidEditActivity extends BaseActivity
                     };
                     mHandler.post(runnable);
                 } else {
-                    RingdroidEditActivity.this.finish();
+                    CutterActivity.this.finish();
                 }
             }
         }.start();
@@ -811,12 +802,14 @@ public class RingdroidEditActivity extends BaseActivity
             // we only do the update if the text has actually changed.
             if (mStartPos != mLastDisplayedStartPos && !mStartText.hasFocus()) {
                 mStartText.setText(formatTime(mStartPos));
+                mTotaltv.setText(formatTime(mEndPos-mStartPos));
                 mLastDisplayedStartPos = mStartPos;
             }
 
             if (mEndPos != mLastDisplayedEndPos && !mEndText.hasFocus()) {
                 mEndText.setText(formatTime(mEndPos));
                 mLastDisplayedEndPos = mEndPos;
+                mTotaltv.setText(formatTime(mEndPos-mStartPos));
             }
 
             mHandler.postDelayed(mTimerRunnable, 100);
@@ -995,7 +988,7 @@ public class RingdroidEditActivity extends BaseActivity
             title = getResources().getText(R.string.alert_title_success);
         }
 
-        new AlertDialog.Builder(RingdroidEditActivity.this).setTitle(title).setMessage(message)
+        new AlertDialog.Builder(CutterActivity.this).setTitle(title).setMessage(message)
             .setPositiveButton(R.string.alert_ok_button, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     finish();
@@ -1011,16 +1004,16 @@ public class RingdroidEditActivity extends BaseActivity
         String parentdir;
         switch (mNewFileKind) {
             default:
-            case FileSaveDialog.FILE_KIND_MUSIC:
+            case FILE_KIND_MUSIC:
                 parentdir = "/sdcard/media/audio/music";
                 break;
-            case FileSaveDialog.FILE_KIND_ALARM:
+            case FILE_KIND_ALARM:
                 parentdir = "/sdcard/media/audio/alarms";
                 break;
-            case FileSaveDialog.FILE_KIND_NOTIFICATION:
+            case FILE_KIND_NOTIFICATION:
                 parentdir = "/sdcard/media/audio/notifications";
                 break;
-            case FileSaveDialog.FILE_KIND_RINGTONE:
+            case FILE_KIND_RINGTONE:
                 parentdir = "/sdcard/media/audio/ringtones";
                 break;
         }
@@ -1166,10 +1159,10 @@ public class RingdroidEditActivity extends BaseActivity
         values.put(MediaStore.Audio.Media.ARTIST, artist);
         values.put(MediaStore.Audio.Media.DURATION, duration);
 
-        values.put(MediaStore.Audio.Media.IS_RINGTONE, mNewFileKind == FileSaveDialog.FILE_KIND_RINGTONE);
-        values.put(MediaStore.Audio.Media.IS_NOTIFICATION, mNewFileKind == FileSaveDialog.FILE_KIND_NOTIFICATION);
-        values.put(MediaStore.Audio.Media.IS_ALARM, mNewFileKind == FileSaveDialog.FILE_KIND_ALARM);
-        values.put(MediaStore.Audio.Media.IS_MUSIC, mNewFileKind == FileSaveDialog.FILE_KIND_MUSIC);
+        values.put(MediaStore.Audio.Media.IS_RINGTONE, mNewFileKind == FILE_KIND_RINGTONE);
+        values.put(MediaStore.Audio.Media.IS_NOTIFICATION, mNewFileKind == FILE_KIND_NOTIFICATION);
+        values.put(MediaStore.Audio.Media.IS_ALARM, mNewFileKind == FILE_KIND_ALARM);
+        values.put(MediaStore.Audio.Media.IS_MUSIC, mNewFileKind == FILE_KIND_MUSIC);
 
         // save data
         UserDatas.getInstance().addCuttereds(new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize));
@@ -1189,7 +1182,7 @@ public class RingdroidEditActivity extends BaseActivity
 
         // There's nothing more to do with music or an alarm. Show a
         // success message and then quit.
-        if (mNewFileKind == FileSaveDialog.FILE_KIND_MUSIC || mNewFileKind == FileSaveDialog.FILE_KIND_ALARM) {
+        if (mNewFileKind == FILE_KIND_MUSIC || mNewFileKind == FILE_KIND_ALARM) {
             Toast.makeText(this, R.string.save_success_message, Toast.LENGTH_SHORT).show();
             // sendStatsToServerIfAllowedAndFinish();
             return;
@@ -1197,12 +1190,12 @@ public class RingdroidEditActivity extends BaseActivity
 
         // If it's a notification, give the user the option of making
         // this their default notification. If they say no, we're finished.
-        if (mNewFileKind == FileSaveDialog.FILE_KIND_NOTIFICATION) {
-            new AlertDialog.Builder(RingdroidEditActivity.this).setTitle(R.string.alert_title_success)
+        if (mNewFileKind == FILE_KIND_NOTIFICATION) {
+            new AlertDialog.Builder(CutterActivity.this).setTitle(R.string.alert_title_success)
                 .setMessage(R.string.set_default_notification)
                 .setPositiveButton(R.string.alert_yes_button, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        RingtoneManager.setActualDefaultRingtoneUri(RingdroidEditActivity.this,
+                        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this,
                             RingtoneManager.TYPE_NOTIFICATION, newUri);
                         // sendStatsToServerIfAllowedAndFinish();
                     }
@@ -1223,9 +1216,9 @@ public class RingdroidEditActivity extends BaseActivity
                 int actionId = response.arg1;
                 switch (actionId) {
                     case R.id.button_make_default:
-                        RingtoneManager.setActualDefaultRingtoneUri(RingdroidEditActivity.this,
+                        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this,
                             RingtoneManager.TYPE_RINGTONE, newUri);
-                        Toast.makeText(RingdroidEditActivity.this, R.string.default_ringtone_success_message,
+                        Toast.makeText(CutterActivity.this, R.string.default_ringtone_success_message,
                             Toast.LENGTH_SHORT).show();
                         // sendStatsToServerIfAllowedAndFinish();
                         break;
@@ -1282,7 +1275,7 @@ public class RingdroidEditActivity extends BaseActivity
         // if (serverAllowed == SERVER_ALLOWED_YES) {
         // Log.i("Ringdroid", "SERVER_ALLOWED_YES");
         //
-        // new AlertDialog.Builder(RingdroidEditActivity.this)
+        // new AlertDialog.Builder(CutterActivity.this)
         // .setTitle(R.string.alert_title_failure)
         // .setMessage(errorString)
         // .setPositiveButton(
@@ -1570,7 +1563,7 @@ public class RingdroidEditActivity extends BaseActivity
     // getResources().getText(R.string.server_prompt));
     // Linkify.addLinks(message, Linkify.ALL);
     //
-    // final AlertDialog dialog = new AlertDialog.Builder(RingdroidEditActivity.this)
+    // final AlertDialog dialog = new AlertDialog.Builder(CutterActivity.this)
     // .setTitle(R.string.server_title)
     // .setMessage(message)
     // .setPositiveButton(

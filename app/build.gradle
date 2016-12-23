@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+    defaultConfig {
+        applicationId "com.example.test"
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    signingConfigs {
+        releaseConfig {
+            storeFile file("../bbz.jks")
+            storePassword KEYSTORE_PASSWORD
+            keyAlias 'bzz'
+            keyPassword KEY_PASSWORD
+        }
+        debugConfig {
+            storeFile file("../bbz.jks")
+            storePassword KEYSTORE_PASSWORD
+            keyAlias 'bzz'
+            keyPassword KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+            signingConfig signingConfigs.debugConfig
+        }
+    }
+    //这个是解决lint报错的代码
+    lintOptions {
+        abortOnError false
+        disable 'InvalidPackage'
+        checkReleaseBuilds false
+    }
+
+    //重复dex问题，可以加这个
+    dexOptions {
+        //DexIndexOverflowException: Cannot merge new index 65572 into a non-jumbo instruction!w
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    // 打包配置
+    packagingOptions {// 排除一些文件
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    //渠道
+    productFlavors {
+        //test
+        _test {
+            manifestPlaceholders = [CHANNEL_VALUE: "test"]
+        }
+        //googleplay
+        googleplay {
+            manifestPlaceholders = [CHANNEL_VALUE: "googleplay"]
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile('com.ogaclejapan.smarttablayout:library:1.6.1@aar') {
+        transitive = true
+    }
+    //facebook ad
+    compile ('com.facebook.android:audience-network-sdk:4.9.0'){
+        exclude group: 'com.google.android.gms'
+    }
+    //google analytics
+    compile 'com.google.firebase:firebase-analytics:9.4.0'
+    //google crash
+    compile 'com.google.firebase:firebase-crash:9.4.0'
+    //gson
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.android.support:recyclerview-v7:22.+'
+}
+apply plugin: 'com.google.gms.google-services'

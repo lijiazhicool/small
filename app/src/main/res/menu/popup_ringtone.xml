@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_edit"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="never"
+        android:title="@string/edit" />
+    <item
+        android:id="@+id/menu_default"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="never"
+        android:title="@string/menu_set_default" />
+    <item
+        android:id="@+id/menu_notification"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="never"
+        android:title="@string/menu_set_notification" />
+    <item
+        android:id="@+id/menu_alarm"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="never"
+        android:title="@string/menu_set_alarm" />
+    <item
+        android:id="@+id/menu_delete"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="never"
+        android:title="@string/delete" />
+    <item
+        android:id="@+id/menu_share"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        android:showAsAction="never"
+        android:title="@string/menu_share" />
+</menu>

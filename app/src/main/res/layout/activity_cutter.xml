@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_cutter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/padding_16"
+            android:layout_marginLeft="@dimen/padding_16"
+            android:layout_height="@dimen/padding_16"
+            android:src="@drawable/ic_back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dip"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/title_cutter"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_big" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4a4a4a"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ad_ll"
+            android:layout_width="match_parent"
+            android:layout_height="72dip"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <View style="@style/HorizontalDivider" />
+
+        <AbsoluteLayout
+            android:layout_width="wrap_content"
+            android:layout_height="190dp">
+
+            <View
+                android:id="@+id/bkgnd"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#4a4a4a"
+                android:scaleType="centerCrop" />
+
+            <com.example.test.views.WaveformView
+                android:id="@+id/waveform"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.example.test.views.MarkerView
+                android:id="@+id/startmarker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/start_marker"
+                android:nextFocusDown="@+id/endmarker"
+                android:src="@drawable/marker_left" />
+
+            <com.example.test.views.MarkerView
+                android:id="@+id/endmarker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/end_marker"
+                android:nextFocusDown="@+id/info"
+                android:nextFocusUp="@+id/startmarker"
+                android:src="@drawable/marker_right" />
+
+        </AbsoluteLayout>
+
+        <View style="@style/HorizontalDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="13dip"
+            android:paddingTop="13dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:text="00:00"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/mark_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dip"
+                android:clickable="true"
+                android:text="@string/start_label"
+                android:textColor="#eeeeee"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/starttext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/start_label"
+                android:text="00:00"
+                android:textColor="#eeeeee"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/mark_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dip"
+                android:clickable="true"
+                android:text="@string/end_label"
+                android:textColor="#eeeeee"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/endtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/end_label"
+                android:text="00:00"
+                android:textColor="#eeeeee"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dip"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/set"
+                android:layout_width="56dip"
+                android:layout_height="56dip"
+                android:background="@drawable/ic_set" />
+
+            <ImageButton
+                android:id="@+id/play"
+                android:layout_width="56dip"
+                android:layout_height="56dip"
+                android:layout_marginLeft="36dip"
+                android:background="@drawable/ic_play" />
+
+            <ImageButton
+                android:id="@+id/save"
+                android:layout_width="56dip"
+                android:layout_height="56dip"
+                android:layout_marginLeft="36dip"
+                android:background="@drawable/ic_save" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:nextFocusDown="@+id/play"
+            android:nextFocusUp="@+id/endmarker" />
+    </LinearLayout>
+
+
+</LinearLayout>

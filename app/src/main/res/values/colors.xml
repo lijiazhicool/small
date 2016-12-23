@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff4081</color>
+    <color name="colorPrimaryDark">#f50057</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="bg_gridview">#1ad8d8d8</color>
+
+    <color name="text_black">#de000000</color>
+    <color name="text_gray">#8a000000</color>
+
+
+    <color name="text_enabled">#FFFFFFFF</color>
+    <color name="text_disabled">#4DFFFFFF</color>
+
+
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+
+
+    <color name="waveform_selected">#8dffff</color>
+    <color name="waveform_unselected">#106072</color>
+    <color name="waveform_unselected_bkgnd_overlay">#33000000</color>
+    <color name="selection_border">#ffffff</color>
+    <color name="playback_indicator">#ffff66</color>
+    <color name="grid_line">#ee01a9a9</color>
+    <color name="timecode">#ddffffdd</color>
+    <color name="timecode_shadow">#aa000000</color>
+
+    <color name="type_bkgnd_alarm">#88880000</color>
+    <color name="type_bkgnd_ringtone">#88008888</color>
+    <color name="type_bkgnd_notification">#88666600</color>
+    <color name="type_bkgnd_music">#88000000</color>
+    <color name="type_bkgnd_unsupported">#88cccccc</color>
+</resources>

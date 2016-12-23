@@ -8,12 +8,59 @@
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_16"
         android:gravity="center"
         android:horizontalSpacing="@dimen/padding_16"
         android:numColumns="2"
-        android:layout_margin="@dimen/padding_16"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/padding_16" />
+        android:verticalSpacing="@dimen/padding_16"/>
+
+    <LinearLayout
+        android:id="@+id/share_ll"
+        android:layout_width="match_parent"
+        android:layout_height="72dip"
+        android:background="@drawable/item_shape_bg_home"
+        android:layout_marginLeft="@dimen/padding_16"
+        android:layout_marginRight="@dimen/padding_16"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/image_width"
+            android:layout_height="@dimen/image_width"
+            android:layout_marginLeft="10dip"
+            android:src="@drawable/ic_star_24_px" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_weight="1"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"
+                android:layout_height="wrap_content"
+                android:text="Great!" />
+
+            <TextView
+                android:id="@+id/cutcount_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/text_gray"
+                android:text="You have cutted 10 songs, share it!" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="22dip"
+            android:layout_height="22dip"
+            android:layout_marginRight="10dip"
+            android:src="@drawable/ic_share" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/home_ad"

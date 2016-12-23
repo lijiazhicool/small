@@ -33,7 +33,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
     }
 
     public void setDatas(List<RecordModel> datas) {
-        mDatas.clear();
         this.mDatas = datas;
         notifyDataSetChanged();
 

@@ -22,6 +22,9 @@ public class UserDatas {
 
     private static volatile UserDatas sUserDatas;
 
+    // 裁剪次数
+    private int mCutCount = 0;
+
     private List<SongModel> mSongs;
     private List<RecordModel> mRecords;
     private List<CutterModel> mCuttereds;
@@ -35,6 +38,7 @@ public class UserDatas {
 
     // records
     private LightModelCache mLightModelCache;
+    private static final String CUT_COUNT_KEY = "cut_count_key";
     private static final String RECORD_S_KEY = "record_s_key";
     private static final String CUTTERED_S_KEY = "cuttered_s_key";
 
@@ -59,9 +63,23 @@ public class UserDatas {
     }
 
     public void loadDatas() {
+        mCutCount = mLightModelCache.getIntValue(CUT_COUNT_KEY, 0);
         loadMusics();
         loadReords();
         loadCutters();
+    }
+
+    public int getCutCount() {
+        return mCutCount;
+    }
+
+    public void addCutCount() {
+        this.mCutCount++;
+        mLightModelCache.putInt(CUT_COUNT_KEY, mCutCount);
+
+        if (null != mCountListener) {
+            mCountListener.updateCutCount(mCutCount);
+        }
     }
 
     public void register(DataChangedListener listener) {
@@ -85,7 +103,7 @@ public class UserDatas {
     }
 
     public List<SongModel> getSongs() {
-        if (null ==mSongs){
+        if (null == mSongs) {
             mSongs = new ArrayList<>();
         }
         return mSongs;
@@ -99,7 +117,7 @@ public class UserDatas {
     }
 
     public List<RecordModel> getRecords() {
-        if (mRecords == null){
+        if (mRecords == null) {
             mRecords = new ArrayList<>();
         }
         return mRecords;
@@ -122,7 +140,7 @@ public class UserDatas {
     }
 
     public List<CutterModel> getCuttereds() {
-        if (null ==mCuttereds){
+        if (null == mCuttereds) {
             mCuttereds = new ArrayList<>();
         }
         return mCuttereds;
@@ -142,6 +160,8 @@ public class UserDatas {
         if (null != mCountListener) {
             mCountListener.updatecount(getSongs().size(), getRecords().size(), getCuttereds().size());
         }
+
+        addCutCount();
     }
 
     private void loadMusics() {
@@ -213,5 +233,7 @@ public class UserDatas {
 
     public interface DataCountChangedListener {
         void updatecount(int isong, int irecord, int icutter);
+        void updateCutCount(int count);
     }
+
 }

@@ -5,16 +5,27 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ab72b6e0-c62a-4e84-9ed0-587bfd80d1dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_star_24_px.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_star_24_px.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Small.iml" afterPath="$PROJECT_DIR$/Small.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/home/HomeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/home/HomeFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordsAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="small.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2799,7 +2810,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/model/CutterModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/model/RecordModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/edit/FileSaveDialog.java" />
@@ -2809,13 +2819,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/model/SongModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/edit/EditActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/edit/CutterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/MyLayoutManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/utils/ShareUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/views/HelpDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_help.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/edit/CutterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/test/logic/home/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
       </list>
     </option>
@@ -2879,42 +2894,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -2928,6 +2907,10 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="device.picker.selection" value="3b45356e" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
+    <property name="DEBUGGABLE_DEVICE" value="xiaomi-mi_5-3b45356e" />
+    <property name="DEBUGGABLE_PROCESS" value="com.example.test" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="DEBUGGER_ID" value="Auto" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -3250,13 +3233,13 @@
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3838527" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39943343" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3269,6 +3252,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3278,7 +3262,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3320,7 +3303,29 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordFragment.java</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java</url>
+          <line>134</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordFragment.java</url>
+          <line>115</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="5" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -3347,6 +3352,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3354,6 +3360,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3361,14 +3368,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="50" column="32" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
-          <folding />
+          <folding>
+            <element signature="e#2219#2264#0" expanded="false" />
+            <element signature="e#2337#2377#0" expanded="false" />
+            <element signature="e#2403#2443#0" expanded="false" />
+            <element signature="e#2542#2585#0" expanded="false" />
+            <element signature="e#4843#4844#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3398,111 +3404,6 @@
         <state relative-caret-position="478">
           <caret line="150" column="52" selection-start-line="150" selection-start-column="52" selection-end-line="150" selection-end-column="52" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/edit/CutterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
-          <folding>
-            <element signature="e#4734#4735#0" expanded="false" />
-            <element signature="e#4781#4782#0" expanded="false" />
-            <element signature="e#5223#5365#0" expanded="false" />
-            <element signature="e#5364#5365#0" expanded="false" />
-            <element signature="e#5402#5546#0" expanded="false" />
-            <element signature="e#5545#5546#0" expanded="false" />
-            <element signature="e#6647#6959#0" expanded="false" />
-            <element signature="e#6958#6959#0" expanded="false" />
-            <element signature="e#13110#13215#0" expanded="false" />
-            <element signature="e#13214#13215#0" expanded="false" />
-            <element signature="e#17362#17394#0" expanded="false" />
-            <element signature="e#17486#17652#0" expanded="false" />
-            <element signature="e#17651#17652#0" expanded="false" />
-            <element signature="e#17745#18202#0" expanded="false" />
-            <element signature="e#18201#18202#0" expanded="false" />
-            <element signature="e#18306#19251#0" expanded="false" />
-            <element signature="e#18930#19145#0" expanded="false" />
-            <element signature="e#19049#19092#0" expanded="false" />
-            <element signature="e#19144#19145#0" expanded="false" />
-            <element signature="e#19250#19251#0" expanded="false" />
-            <element signature="e#19324#21521#0" expanded="false" />
-            <element signature="e#19839#19892#0" expanded="false" />
-            <element signature="e#19961#20015#0" expanded="false" />
-            <element signature="e#20214#20435#0" expanded="false" />
-            <element signature="e#20434#20435#0" expanded="false" />
-            <element signature="e#20764#20979#0" expanded="false" />
-            <element signature="e#20883#20926#0" expanded="false" />
-            <element signature="e#20978#20979#0" expanded="false" />
-            <element signature="e#21196#21358#0" expanded="false" />
-            <element signature="e#21357#21358#0" expanded="false" />
-            <element signature="e#21520#21521#0" expanded="false" />
-            <element signature="e#22185#22232#0" expanded="false" />
-            <element signature="e#24228#24273#0" expanded="false" />
-            <element signature="e#24347#24390#0" expanded="false" />
-            <element signature="e#24654#24848#0" expanded="false" />
-            <element signature="e#24847#24848#0" expanded="false" />
-            <element signature="e#25295#25485#0" expanded="false" />
-            <element signature="e#25484#25485#0" expanded="false" />
-            <element signature="e#26181#26963#0" expanded="false" />
-            <element signature="e#26962#26963#0" expanded="false" />
-            <element signature="e#27157#27194#0" expanded="false" />
-            <element signature="e#27336#27373#0" expanded="false" />
-            <element signature="e#27742#27743#0" expanded="false" />
-            <element signature="e#27795#27796#0" expanded="false" />
-            <element signature="e#27844#27845#0" expanded="false" />
-            <element signature="e#27905#27906#0" expanded="false" />
-            <element signature="e#27944#27945#0" expanded="false" />
-            <element signature="e#27995#27996#0" expanded="false" />
-            <element signature="e#28042#28043#0" expanded="false" />
-            <element signature="e#28101#28102#0" expanded="false" />
-            <element signature="e#31625#31626#0" expanded="false" />
-            <element signature="e#31678#31679#0" expanded="false" />
-            <element signature="e#31987#32006#0" expanded="false" />
-            <element signature="e#32611#32663#0" expanded="false" />
-            <element signature="e#32811#32863#0" expanded="false" />
-            <element signature="e#32996#33020#0" expanded="false" />
-            <element signature="e#33022#33202#0" expanded="false" />
-            <element signature="e#33201#33202#0" expanded="false" />
-            <element signature="e#35424#35451#0" expanded="false" />
-            <element signature="e#36067#36098#0" expanded="false" />
-            <element signature="e#36290#38472#0" expanded="false" />
-            <element signature="e#36684#37150#0" expanded="false" />
-            <element signature="e#37149#37150#0" expanded="false" />
-            <element signature="e#37464#37511#0" expanded="false" />
-            <element signature="e#37615#37659#0" expanded="false" />
-            <element signature="e#37853#38056#0" expanded="false" />
-            <element signature="e#38055#38056#0" expanded="false" />
-            <element signature="e#38230#38406#0" expanded="false" />
-            <element signature="e#38405#38406#0" expanded="false" />
-            <element signature="e#38471#38472#0" expanded="false" />
-            <element signature="e#38742#38770#0" expanded="false" />
-            <element signature="e#38783#38807#0" expanded="false" />
-            <element signature="e#38844#38868#0" expanded="false" />
-            <element signature="e#39123#39167#0" expanded="false" />
-            <element signature="e#40999#41028#0" expanded="false" />
-            <element signature="e#41409#41437#0" expanded="false" />
-            <element signature="e#41467#41500#0" expanded="false" />
-            <element signature="e#41537#41562#0" expanded="false" />
-            <element signature="e#41564#41953#0" expanded="false" />
-            <element signature="e#41952#41953#0" expanded="false" />
-            <element signature="e#41973#41997#0" expanded="false" />
-            <element signature="e#41999#42227#0" expanded="false" />
-            <element signature="e#42226#42227#0" expanded="false" />
-            <element signature="e#42503#43484#0" expanded="false" />
-            <element signature="e#42927#42968#0" expanded="false" />
-            <element signature="e#43483#43484#0" expanded="false" />
-            <element signature="e#48382#48634#0" expanded="false" />
-            <element signature="e#48633#48634#0" expanded="false" />
-            <element signature="e#49022#49126#0" expanded="false" />
-            <element signature="e#49125#49126#0" expanded="false" />
-            <element signature="e#49173#49286#0" expanded="false" />
-            <element signature="e#49285#49286#0" expanded="false" />
-            <element signature="e#51008#51277#0" expanded="false" />
-            <element signature="e#51276#51277#0" expanded="false" />
-            <element signature="e#51327#51625#0" expanded="false" />
-            <element signature="e#51624#51625#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3543,6 +3444,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3637,13 +3539,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/edit/CutterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="1171" column="44" selection-start-line="1171" selection-start-column="44" selection-end-line="1171" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/UserDatas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/record/RecordsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="205">
+          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/test/logic/home/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="39" column="28" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="37" />
           <folding />
         </state>
       </provider>

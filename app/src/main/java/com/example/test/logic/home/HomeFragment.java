@@ -7,6 +7,7 @@ import com.example.test.model.CutterModel;
 import com.example.test.model.HomeModel;
 import com.example.test.model.RecordModel;
 import com.example.test.model.SongModel;
+import com.example.test.utils.ShareUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +32,9 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private onHomeListener mListener;
     private MyAdapter mAdapter;
 
+    private LinearLayout mSharell;
+    private TextView mSharetv;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -38,6 +43,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
         mGridView = findViewById(R.id.gv);
+        mSharell = findViewById(R.id.share_ll);
+        mSharetv = findViewById(R.id.cutcount_tv);
     }
 
     @Override
@@ -55,10 +62,11 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             String.format(getString(R.string.home_record_count), 0)));
         mDatas.add(new HomeModel(3, R.drawable.ic_tones, getString(R.string.tab_four),
             String.format(getString(R.string.home_cuttered_count), 0)));
+        mDatas.add(new HomeModel(4, R.drawable.ic_tones, "广告",
+                "广告"));
         mAdapter = new MyAdapter(getActivity());
         mGridView.setAdapter(mAdapter);
         loadAds();
-
     }
 
     @Override
@@ -83,6 +91,12 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                 }
             }
         });
+        mSharell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareUtils.shareText(mActivity);
+            }
+        });
     }
 
     private void loadAds() {
@@ -96,6 +110,16 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mDatas.get(1).subtitle = String.format(getString(R.string.home_record_count), irecord);
         mDatas.get(2).subtitle = String.format(getString(R.string.home_cuttered_count), icutter);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateCutCount(int count) {
+        if (count > 3) {
+            mSharell.setVisibility(View.VISIBLE);
+            mSharetv.setText(String.format(getString(R.string.home_cut_count), count));
+        } else {
+            mSharell.setVisibility(View.GONE);
+        }
     }
 
     // 自定义适配器

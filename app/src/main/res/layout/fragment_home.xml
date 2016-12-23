@@ -22,6 +22,7 @@
         android:background="@drawable/item_shape_bg_home"
         android:layout_marginLeft="@dimen/padding_16"
         android:layout_marginRight="@dimen/padding_16"
+        android:visibility="visible"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -52,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/text_gray"
-                android:text="You have cutted 10 songs, share it!" />
+                android:text="You have cutted 0 songs, share it!" />
         </LinearLayout>
 
         <ImageView

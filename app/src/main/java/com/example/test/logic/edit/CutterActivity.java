@@ -153,7 +153,7 @@ public class CutterActivity extends BaseActivity
 
     @Override
     protected void initBundleExtra() {
-        mSong = getIntent().getParcelableExtra(INTENT_IN_MODEL);
+        mSong = (SongModel)getIntent().getSerializableExtra(INTENT_IN_MODEL);
         mFilename = mSong.path;
     }
 

@@ -6,6 +6,7 @@ import com.example.test.model.SongModel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 /**
  * Created by LiJiaZhi on 16/12/19.
@@ -14,7 +15,9 @@ import android.content.Intent;
 public class NavigationUtils {
     public static void goToCutter(Context context, SongModel song) {
         Intent intent = new Intent(context, CutterActivity.class);
-        intent.putExtra(CutterActivity.INTENT_IN_MODEL, song);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable(CutterActivity.INTENT_IN_MODEL, song);
+        intent.putExtras(mBundle);
         context.startActivity(intent);
     }
 

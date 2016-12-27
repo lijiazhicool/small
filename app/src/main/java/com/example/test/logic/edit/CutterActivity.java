@@ -4,6 +4,8 @@ package com.example.test.logic.edit;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
@@ -32,6 +34,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -1134,6 +1137,30 @@ public class CutterActivity extends BaseActivity
         }.start();
     }
 
+    public void copyFile(String oldPath, String newPath) {
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件不存在时
+                InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                FileOutputStream fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ( (byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+                    System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+        }
+
+    }
     private void afterSavingRingtone(CharSequence title, String outPath, File outFile, int duration) {
         long length = outFile.length();
         if (length <= 512) {
@@ -1164,8 +1191,12 @@ public class CutterActivity extends BaseActivity
         values.put(MediaStore.Audio.Media.IS_ALARM, mNewFileKind == FILE_KIND_ALARM);
         values.put(MediaStore.Audio.Media.IS_MUSIC, mNewFileKind == FILE_KIND_MUSIC);
 
+        //存到自己目录下一份－－不然分享不出去
+        String newPath = getExternalCacheDir().getPath()+"/"+outFile.getName();
+        copyFile(outPath, newPath);
+
         // save data
-        UserDatas.getInstance().addCuttereds(new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize));
+        UserDatas.getInstance().addCuttereds(new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath));
 
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);

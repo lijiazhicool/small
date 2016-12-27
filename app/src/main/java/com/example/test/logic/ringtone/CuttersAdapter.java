@@ -1,9 +1,13 @@
 package com.example.test.logic.ringtone;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import com.example.test.R;
+import com.example.test.UserDatas;
 import com.example.test.base.BaseActivity;
 import com.example.test.model.CutterModel;
 import com.example.test.model.SongModel;
@@ -13,6 +17,7 @@ import com.example.test.utils.ToastUtils;
 
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -76,18 +81,20 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
     }
 
     private void setOnPopupMenuListener(ItemHolder itemHolder, final int position) {
+        itemHolder.popupMenu.setTag(mDatas.get(position));
         itemHolder.popupMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final PopupMenu menu = new PopupMenu(mContext, v);
+                final CutterModel tempModel = (CutterModel)v.getTag();
+                PopupMenu menu = new PopupMenu(mContext, v);
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Uri newUri = Uri.fromFile(new File(mDatas.get(position).path));
+                        Uri newUri = Uri.fromFile(new File(tempModel.path));
                         switch (item.getItemId()) {
                             case R.id.menu_edit:
-                                SongModel model = new SongModel(mDatas.get(position).title, mDatas.get(position).path,
-                                    mDatas.get(position).duration);
+                                SongModel model = new SongModel(tempModel.title, tempModel.path,
+                                        tempModel.duration);
                                 NavigationUtils.goToCutter(mContext, model);
                                 break;
                             case R.id.menu_default:
@@ -103,7 +110,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                     newUri);
                                 break;
                             case R.id.menu_delete:
-                                File file = new File(mDatas.get(position).path);
+                                File file = new File(tempModel.path);
                                 if (file.exists()) {
                                     if (file.delete()) {
                                         ToastUtils.makeToastAndShow(mContext,
@@ -117,10 +124,12 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                         MediaStore.Images.Media.DATA + " LIKE ?", params);
                                     mDatas.remove(position);
                                     notifyItemRemoved(position);
+
+                                    UserDatas.getInstance().setCuttereds(mDatas);
                                 }
                                 break;
                             case R.id.menu_share:
-                                ShareUtils.shareFile(mContext,newUri);
+                                ShareUtils.shareFile(mContext,Uri.fromFile(new File(tempModel.localPath)));
                                 break;
                         }
                         return false;

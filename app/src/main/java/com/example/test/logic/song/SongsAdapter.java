@@ -45,7 +45,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
         SongModel localItem = mDatas.get(i);
         itemHolder.type.setImageResource(R.drawable.ic_music_small);
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " " + localItem.artistName+" "+ localItem.path);
+        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " " + localItem.artist +" "+ localItem.path);
         setOnPopupMenuListener(itemHolder, i);
     }
 

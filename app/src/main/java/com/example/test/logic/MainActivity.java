@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -75,6 +76,12 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
     }
 
     @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
     }
@@ -97,8 +104,8 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         mSearchBackiv = findView(R.id.search_back);
         mSearchev = findView(R.id.search_ev);
         mSearchRecyclerView = findView(R.id.search_list);
-        mAdapter = new CommonAdapter();
-        mSearchRecyclerView.setAdapter(mAdapter);
+//        mAdapter = new CommonAdapter();
+//        mSearchRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -176,8 +183,22 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filteredDataList = filter(UserDatas.getInstance().getSongs(), s.toString());
-                mAdapter.notifyDataSetChanged();
+                if (mViewPager.getCurrentItem()==1){
+                    filteredDataList = filter(UserDatas.getInstance().getSongs(), s.toString());
+                    SongsAdapter adapter = new SongsAdapter(MainActivity.this, filteredDataList);
+                    mSearchRecyclerView.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
+                } else if (mViewPager.getCurrentItem()==2){
+                    filteredDataList = filter(UserDatas.getInstance().getSongs(), s.toString());
+                    SongsAdapter adapter = new SongsAdapter(MainActivity.this, filteredDataList);
+                    mSearchRecyclerView.setAdapter(adapter);
+                } else if (mViewPager.getCurrentItem()==3){
+                    filteredDataList = filter(UserDatas.getInstance().getSongs(), s.toString());
+                    SongsAdapter adapter = new SongsAdapter(MainActivity.this, filteredDataList);
+                    mSearchRecyclerView.setAdapter(adapter);
+                }
+//                filteredDataList = filter(UserDatas.getInstance().getSongs(), s.toString());
+//                mAdapter.notifyDataSetChanged();
                 if (filteredDataList == null || filteredDataList.size() == 0) {
                     mSearchRecyclerView.setVisibility(View.GONE);
                 } else {
@@ -358,7 +379,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
             itemHolder.type.setImageResource(R.drawable.ic_music_small);
             itemHolder.title.setText(localItem.title);
             itemHolder.artist
-                .setText(getDuration(localItem.duration / 1000) + " " + localItem.artistName + " " + localItem.path);
+                .setText(getDuration(localItem.duration / 1000) + " " + localItem.artist + " " + localItem.path);
             setOnPopupMenuListener(itemHolder, i);
         }
 

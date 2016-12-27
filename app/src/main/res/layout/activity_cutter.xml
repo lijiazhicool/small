@@ -130,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/start_label"
                 android:text="00:00"
+                android:background="@drawable/line_shape_red"
                 android:inputType="numberDecimal"
                 android:digits="1234567890."
                 android:textColor="#eeeeee"
@@ -153,6 +154,7 @@
                 android:text="00:00"
                 android:inputType="numberDecimal"
                 android:digits="1234567890."
+                android:background="@drawable/line_shape_red"
                 android:textColor="#eeeeee"
                 android:textSize="16sp" />
         </LinearLayout>

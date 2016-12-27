@@ -1,7 +1,6 @@
 package com.example.test.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 import com.example.test.utils.modelcache.IBaseCacheModel;
 
@@ -10,57 +9,18 @@ import com.example.test.utils.modelcache.IBaseCacheModel;
  * cutter
  */
 
-public class CutterModel extends BaseModel implements IBaseCacheModel, Parcelable{
+public class CutterModel extends BaseModel implements IBaseCacheModel, Serializable {
     public  int type;
-    public  String title;
-    public  String path; // 音乐文件的路径
-    public  String artist;
-    public int duration;
     public long fileSize;
+    public  String localPath; // 本地自己存储的路径
 
-    public CutterModel(int type, String title, String path, String artisit, int duration, long fileSize) {
+    public CutterModel(int type, String title, String path, String artisit, int duration, long fileSize,String localPath) {
         this.type = type;
         this.title = title;
         this.path = path;
         this.artist = artisit;
         this.duration = duration;
         this.fileSize = fileSize;
+        this.localPath = localPath;
     }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.type);
-        dest.writeString(this.title);
-        dest.writeString(this.path);
-        dest.writeString(this.artist);
-        dest.writeInt(this.duration);
-        dest.writeLong(this.fileSize);
-    }
-
-    protected CutterModel(Parcel in) {
-        this.type = in.readInt();
-        this.title = in.readString();
-        this.path = in.readString();
-        this.artist = in.readString();
-        this.duration = in.readInt();
-        this.fileSize = in.readLong();
-    }
-
-    public static final Creator<CutterModel> CREATOR = new Creator<CutterModel>() {
-        @Override
-        public CutterModel createFromParcel(Parcel source) {
-            return new CutterModel(source);
-        }
-
-        @Override
-        public CutterModel[] newArray(int size) {
-            return new CutterModel[size];
-        }
-    };
 }

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.test.logic.song.SongFragment">
+    tools:context="com.av.ringtone.logic.song.SongFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_music_no_data_hint" />
+            android:src="@drawable/ic_music_note_48_px" />
 
         <TextView
             android:layout_marginTop="10dip"

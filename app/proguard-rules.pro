@@ -20,8 +20,11 @@
 -keepattributes Exceptions,InnerClasses
 
 -keep class com.google.android.gms.internal.** { *; }
--dontwarn com.google.android.gms.ads.**
+-keep class com.facebook.ads.** { *; }
+-dontwarn com.facebook.ads.**
 
--keep public class com.example.test.R$*{
+-keep public class com.av.ringtone.R$*{
     public static final int *;
 }
+
+-keep class com.av.ringtone.model.** { *; }

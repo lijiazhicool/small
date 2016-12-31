@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "907172716184",
-    "firebase_url": "https://test-45251.firebaseio.com",
-    "project_id": "test-45251",
-    "storage_bucket": "test-45251.appspot.com"
+    "project_number": "488836143997",
+    "firebase_url": "https://cuttermp3-c2954.firebaseio.com",
+    "project_id": "cuttermp3-c2954",
+    "storage_bucket": "cuttermp3-c2954.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:907172716184:android:39edc59b7833da50",
+        "mobilesdk_app_id": "1:488836143997:android:f74d7465763e9ce4",
         "android_client_info": {
-          "package_name": "com.example.test"
+          "package_name": "com.av.ringtone"
         }
       },
       "oauth_client": [
         {
-          "client_id": "907172716184-q4ppo7t0ldon6ghldu0q4qgqhqd2o7pv.apps.googleusercontent.com",
+          "client_id": "488836143997-es5igomer388d2cerv9ugobr866hkb1v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.test",
+            "package_name": "com.av.ringtone",
             "certificate_hash": "7FD00247ACC87344C7A519D4E5360FD46CB6CCE2"
           }
         },
         {
-          "client_id": "907172716184-cjk1gnpsfkfi883tesabqou14vh3ngpn.apps.googleusercontent.com",
+          "client_id": "488836143997-amugso7o9dp2pi727jhgdfeos1l23l29.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-h0Sip55yFVSOeON9mvxWf0rkSj0Mqx0"
+          "current_key": "AIzaSyDiLazG3fz9GxtGaf_c5V_isTqhya8hvOc"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "907172716184-cjk1gnpsfkfi883tesabqou14vh3ngpn.apps.googleusercontent.com",
+              "client_id": "488836143997-amugso7o9dp2pi727jhgdfeos1l23l29.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

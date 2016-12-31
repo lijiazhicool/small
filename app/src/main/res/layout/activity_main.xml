@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/colorPrimary"
+
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -28,7 +31,8 @@
             android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_search" />
+            android:visibility="gone"
+            android:src="@drawable/ic_search" />
 
         <ImageView
             android:id="@+id/menu"
@@ -36,7 +40,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="20dip"
             android:paddingRight="20dip"
-            android:src="@drawable/ic_more" />
+            android:src="@drawable/ic_more_white" />
     </LinearLayout>
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@id/ll"
-        android:background="@color/colorPrimary"
         app:stl_distributeEvenly="true"
         app:stl_dividerColor="@null"
         app:stl_indicatorColor="@android:color/white"
@@ -57,6 +60,7 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:layout_below="@id/viewpagertab" />
 
     <LinearLayout
@@ -91,8 +95,9 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:hint="@string/search_hint"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/text_big" />
         </LinearLayout>
 

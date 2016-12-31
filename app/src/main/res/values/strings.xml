@@ -2,6 +2,7 @@
     <string name="app_name">MP3 Cutter &amp; Ringtone Maker</string>
     <string name="welcome_hint">MP3 Cutter \n Ringtone Maker</string>
 
+    <string name="facebook_app_id">179525592481992</string>
     <string name="ad_unit_id">ca-app-pub-9920536185791139/3952367202</string>
 
     <!--main menu-->
@@ -68,7 +69,7 @@
     <string name="type_notification">Notification</string>
     <string name="type_ringtone">Ringtone</string>
 
-    <string name="ringtone_name_label">Name:</string>
+    <string name="ringtone_name_label">FileName:</string>
 
     <string name="artist_name">Ringdroid</string>
 
@@ -113,7 +114,7 @@
     <string name="tab_one">HOME</string>
     <string name="tab_two">MUSIC</string>
     <string name="tab_three">RECORDS</string>
-    <string name="tab_four">MY CUTTERED</string>
+    <string name="tab_four">CUTTERED</string>
 
     <string name="tab_two_hint">Musics</string>
     <string name="tab_three_hint">Records</string>
@@ -124,6 +125,8 @@
     <string name="home_cuttered_count">%1$d cuttereds</string>
     <string name="home_cut_count">You have cutted %1$d songs, share it!</string>
 
+    <!--about-->
+    <string name="about_version">Version: V %1$s</string>
 
 
     <string name="sdcard_readonly">Sorry, the SD Card is mounted as read-only and MP3 Cutter &amp; Ringtone Maker requires it to be writable.</string>

@@ -9,6 +9,7 @@ import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
@@ -75,7 +76,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
         }
 
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " " + localItem.artist + " " + localItem.path);
+        itemHolder.artist.setText(getDuration(localItem.duration) + " " + localItem.artist + " " + FileUtils.getFileDir(localItem.path));
         setOnPopupMenuListener(itemHolder, i);
         itemHolder.rl.setTag(localItem);
         itemHolder.rl.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                 if (mListener != null) {
                     if (local.playStatus == 0) {
                         // ---播放
-                        mListener.play(local.localPath);
+                        mListener.play(local);
                         local.playStatus = 1;
                         if (currentPlayItem != null && local != currentPlayItem && currentPlayItem.playStatus == 1) {
                             currentPlayItem.playStatus = 2;
@@ -96,7 +97,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         local.playStatus = 2;
                     } else {
                         // ---播放
-                        mListener.play(local.localPath);
+                        mListener.play(local);
                         local.playStatus = 1;
                         if (currentPlayItem != null && local != currentPlayItem && currentPlayItem.playStatus == 1) {
                             currentPlayItem.playStatus = 2;
@@ -133,7 +134,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         Uri newUri = Uri.fromFile(new File(tempModel.path));
                         switch (item.getItemId()) {
                             case R.id.menu_edit:
-                                SongModel model = new SongModel(tempModel.title, tempModel.path, tempModel.duration);
+                                SongModel model = new SongModel(tempModel.title, tempModel.path, tempModel.duration,tempModel.date);
                                 NavigationUtils.goToCutter(mContext, model);
                                 break;
                             case R.id.menu_default:
@@ -183,6 +184,11 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
         });
     }
 
+    public void upateDatas(List<CutterModel> list){
+        mDatas = list;
+        notifyDataSetChanged();
+    }
+
     public class ItemHolder extends RecyclerView.ViewHolder {
         protected RelativeLayout rl;
         protected TextView title, artist;
@@ -203,7 +209,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
     }
 
     public interface MediaListener {
-        void play(String path);
+        void play(CutterModel model);
 
         void pause();
 

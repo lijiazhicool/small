@@ -45,6 +45,7 @@
         android:text="@string/make_default_ringtone_button" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/button_choose_contact"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

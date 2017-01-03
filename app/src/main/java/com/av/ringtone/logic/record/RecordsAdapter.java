@@ -5,8 +5,10 @@ import java.util.List;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -50,7 +53,15 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         RecordModel localItem = mDatas.get(i);
         itemHolder.type.setImageResource(R.drawable.icon_record);
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " " + localItem.path);
+        itemHolder.artist.setText(getDuration(localItem.duration) + " " + FileUtils.getFileDir(localItem.path));
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final RecordModel tempModel = (RecordModel) v.getTag();
+                NavigationUtils.goToCutter(mContext, tempModel);
+            }
+        });
         setOnPopupMenuListener(itemHolder, i);
     }
 
@@ -71,21 +82,22 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
     }
 
     private void setOnPopupMenuListener(ItemHolder itemHolder, final int position) {
+        itemHolder.popupMenu.setTag(mDatas.get(position));
         itemHolder.popupMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final RecordModel tempModel = (RecordModel) v.getTag();
                 final PopupMenu menu = new PopupMenu(mContext, v);
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.popup_song_edit:
-                                SongModel model = new SongModel(mDatas.get(position).title,mDatas.get(position).path,mDatas.get(position).duration);
-                                NavigationUtils.goToCutter(mContext, model);
+                                NavigationUtils.goToCutter(mContext, tempModel);
                                 break;
                             case R.id.popup_song_delete:
                                 //只删除纪录，不删除文件
-                                mDatas.remove(position);
+                                mDatas.remove(tempModel);
                                 UserDatas.getInstance().setRecords(mDatas);
                                 notifyItemRemoved(position);
                                 break;
@@ -100,12 +112,13 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder {
+        protected RelativeLayout rl;
         protected TextView title, artist;
         protected ImageView type, popupMenu;
 
         public ItemHolder(View view) {
             super(view);
-
+            this.rl = (RelativeLayout) view.findViewById(R.id.rl);
             this.type = (ImageView) view.findViewById(R.id.type_iv);
             this.title = (TextView) view.findViewById(R.id.song_title);
             this.artist = (TextView) view.findViewById(R.id.song_detail);
@@ -115,5 +128,10 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
 
     public List<RecordModel> getDatas() {
         return mDatas;
+    }
+
+    public void upateDatas(List<RecordModel> list){
+        mDatas = list;
+        notifyDataSetChanged();
     }
 }

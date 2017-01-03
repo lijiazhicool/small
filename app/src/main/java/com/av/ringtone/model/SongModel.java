@@ -17,13 +17,14 @@ public class SongModel extends BaseModel implements Serializable {
     public long id;
     public int trackNumber;
 
-    public SongModel(String title, String path, int duration) {
+    public SongModel(String title, String path, int duration, long date) {
         this.title = title;
         this.path = path;
         this.duration = duration;
+        this.date = date;
     }
     public SongModel(long id, long albumId, long artistId, String title, String artistName, String albumName, int duration,
-        int trackNumber, String path) {
+        int trackNumber, String path, long date) {
         this.albumId = albumId;
         this.albumName = albumName;
         this.artistId = artistId;
@@ -33,5 +34,6 @@ public class SongModel extends BaseModel implements Serializable {
         this.title = title;
         this.trackNumber = trackNumber;
         this.path = path;
+        this.date = date;
     }
 }

@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.av.ringtone.R;
 import com.av.ringtone.base.BaseActivity;
-import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
 
@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -48,7 +49,15 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
         SongModel localItem = mDatas.get(i);
         itemHolder.type.setImageResource(R.drawable.ic_music_small);
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " " + localItem.artist +" "+ localItem.path);
+        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " " + localItem.artist +" "+ FileUtils.getFileDir(localItem.path));
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final SongModel tempModel = (SongModel) v.getTag();
+                NavigationUtils.goToCutter(mContext, tempModel);
+            }
+        });
         setOnPopupMenuListener(itemHolder, i);
     }
 
@@ -107,12 +116,13 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder {
+        protected RelativeLayout rl;
         protected TextView title, artist;
         protected ImageView type, popupMenu;
 
         public ItemHolder(View view) {
             super(view);
-
+            this.rl = (RelativeLayout) view.findViewById(R.id.rl);
             this.type = (ImageView) view.findViewById(R.id.type_iv);
             this.title = (TextView) view.findViewById(R.id.song_title);
             this.artist = (TextView) view.findViewById(R.id.song_detail);
@@ -122,5 +132,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
 
     public List<SongModel> getDatas() {
         return mDatas;
+    }
+    public void upateDatas(List<SongModel> list){
+        mDatas = list;
+        notifyDataSetChanged();
     }
 }

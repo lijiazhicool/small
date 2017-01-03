@@ -22,7 +22,14 @@ import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.ExitDialog;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.NativeAd;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import android.content.Context;
@@ -44,6 +51,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,13 +66,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends BaseActivity implements HomeFragment.onHomeListener,CuttersAdapter.MediaListener  {
+public class MainActivity extends BaseActivity implements HomeFragment.onHomeListener, CuttersAdapter.MediaListener {
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     private FragmentPagerAdapter mAdpter;
     private ViewPager mViewPager;
     private SmartTabLayout mTabLayout;
-    private ImageView mSearchIv, mMoreMenu;
+    private ImageView mSearchIv, mrRfreshIv, mMoreMenu;
 
     // 全屏幕搜索
     private LinearLayout mSearchll;
@@ -74,10 +82,18 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
     private int mCurrentPage = 0;
 
-
-
     private boolean mIsPlaying;
     private MediaPlayer mPlayer;
+
+    static NativeAd nativeAd;
+    private String mAdPlacementId = "179525592481992_179525999148618";
+    private boolean isAdLoaded = false;
+
+    private CutterModel currentModel = null;
+
+    private final static String EVENT_AD_TYPE = "Exit_NativeAd_Click";
+    private final static String EVENT_AD_NAME = "Exit_NativeAd";
+    private final static String EVENT_AD_ID = "Exit_NativeAd_ID";
 
     public static void launch(Context context) {
         Intent i = new Intent(context, MainActivity.class);
@@ -90,7 +106,6 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
     protected void onPostResume() {
         super.onPostResume();
     }
-
 
     @Override
     protected int getLayoutId() {
@@ -110,6 +125,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         mTabLayout.setCustomTabView(R.layout.custom_tab, R.id.custom_text);
         mTabLayout.setDividerColors(getResources().getColor(R.color.transparent));
         mSearchIv = findView(R.id.search);
+        mrRfreshIv = findView(R.id.refresh);
         mMoreMenu = findView(R.id.menu);
 
         mSearchll = findView(R.id.search_ll);
@@ -120,6 +136,12 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
     @Override
     protected void initListeners() {
+        mrRfreshIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserDatas.getInstance().loadMusics();
+            }
+        });
         mSearchll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +179,15 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
+                            case R.id.menu_sort_name:
+                                UserDatas.getInstance().sortByName(mCurrentPage);
+                                break;
+                            case R.id.menu_sort_length:
+                                UserDatas.getInstance().sortByLength(mCurrentPage);
+                                break;
+                            case R.id.menu_sort_date:
+                                UserDatas.getInstance().sortByDate(mCurrentPage);
+                                break;
                             case R.id.menu_about:
                                 NavigationUtils.goToAbout(MainActivity.this);
                                 break;
@@ -175,6 +206,11 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
                     }
                 });
                 menu.inflate(R.menu.popup_main);
+                if (mCurrentPage == 0) {
+                    menu.getMenu().setGroupVisible(R.id.menu_group_sort, false);
+                } else {
+                    menu.getMenu().setGroupVisible(R.id.menu_group_sort, true);
+                }
                 menu.show();
             }
         });
@@ -186,8 +222,8 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mViewPager.getCurrentItem()==1){
-                    List<SongModel>  filteredDataList = filterSongs(UserDatas.getInstance().getSongs(), s.toString());
+                if (mViewPager.getCurrentItem() == 1) {
+                    List<SongModel> filteredDataList = filterSongs(UserDatas.getInstance().getSongs(), s.toString());
                     SongsAdapter adapter = new SongsAdapter(MainActivity.this, filteredDataList);
                     mSearchRecyclerView.setAdapter(adapter);
                     if (filteredDataList == null || filteredDataList.size() == 0) {
@@ -195,8 +231,9 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
                     } else {
                         mSearchRecyclerView.setVisibility(View.VISIBLE);
                     }
-                } else if (mViewPager.getCurrentItem()==2){
-                    List<RecordModel>  filteredDataList = filterRecords(UserDatas.getInstance().getRecords(), s.toString());
+                } else if (mViewPager.getCurrentItem() == 2) {
+                    List<RecordModel> filteredDataList =
+                        filterRecords(UserDatas.getInstance().getRecords(), s.toString());
                     RecordsAdapter adapter = new RecordsAdapter(MainActivity.this, filteredDataList);
                     mSearchRecyclerView.setAdapter(adapter);
                     if (filteredDataList == null || filteredDataList.size() == 0) {
@@ -204,8 +241,9 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
                     } else {
                         mSearchRecyclerView.setVisibility(View.VISIBLE);
                     }
-                } else if (mViewPager.getCurrentItem()==3){
-                    List<CutterModel>  filteredDataList = filterCutters(UserDatas.getInstance().getCuttereds(), s.toString());
+                } else if (mViewPager.getCurrentItem() == 3) {
+                    List<CutterModel> filteredDataList =
+                        filterCutters(UserDatas.getInstance().getCuttereds(), s.toString());
                     CuttersAdapter adapter = new CuttersAdapter(MainActivity.this, filteredDataList);
                     mSearchRecyclerView.setAdapter(adapter);
                     if (filteredDataList == null || filteredDataList.size() == 0) {
@@ -235,6 +273,11 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
                 } else {
                     mSearchIv.setVisibility(View.VISIBLE);
                 }
+                if (mCurrentPage == 1) {
+                    mrRfreshIv.setVisibility(View.VISIBLE);
+                } else {
+                    mrRfreshIv.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -246,11 +289,11 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
     private List<SongModel> filterSongs(List<SongModel> dataList, String newText) {
         newText = newText.toLowerCase();
-        if (TextUtils.isEmpty(newText)){
+        if (TextUtils.isEmpty(newText)) {
             return new ArrayList<>();
         }
         String text;
-        List<SongModel>filteredDataList = new ArrayList<>();
+        List<SongModel> filteredDataList = new ArrayList<>();
         for (SongModel dataFromDataList : dataList) {
             text = dataFromDataList.title.toLowerCase();
 
@@ -261,9 +304,10 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
         return filteredDataList;
     }
+
     private List<RecordModel> filterRecords(List<RecordModel> dataList, String newText) {
         newText = newText.toLowerCase();
-        if (TextUtils.isEmpty(newText)){
+        if (TextUtils.isEmpty(newText)) {
             return new ArrayList<>();
         }
         String text;
@@ -278,9 +322,10 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
         return filteredDataList;
     }
+
     private List<CutterModel> filterCutters(List<CutterModel> dataList, String newText) {
         newText = newText.toLowerCase();
-        if (TextUtils.isEmpty(newText)){
+        if (TextUtils.isEmpty(newText)) {
             return new ArrayList<>();
         }
         String text;
@@ -313,6 +358,34 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
         UserDatas.getInstance().setContext(this);
         UserDatas.getInstance().loadDatas();
+
+        loadExitAd();
+    }
+
+    private void loadExitAd() {
+        nativeAd = new NativeAd(this, mAdPlacementId);
+        // AdSettings.addTestDevice("77bb29fa8fa20aaa97ce77cfe38e36b4");
+        nativeAd.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError error) {
+                System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                isAdLoaded = true;
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_TYPE);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+                mFirebaseAnalytics.logEvent(EVENT_AD_ID, bundle);
+            }
+        });
+        // Request an ad
+        nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
     }
 
     private void freshMediaDB() {
@@ -323,12 +396,12 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         } else {
             // http://www.tuicool.com/articles/vyYZny
             MediaScannerConnection.scanFile(this,
-                    new String[] { Environment.getExternalStorageDirectory().getAbsolutePath()}, null,
-                    new MediaScannerConnection.OnScanCompletedListener() {
-                        public void onScanCompleted(String path, Uri uri) {
-                            UserDatas.getInstance().loadMusics();
-                        }
-                    });
+                new String[] { Environment.getExternalStorageDirectory().getAbsolutePath() }, null,
+                new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        UserDatas.getInstance().loadMusics();
+                    }
+                });
         }
 
     }
@@ -396,11 +469,19 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
     }
 
     @Override
-    public void play(String filePath) {
+    public void play(CutterModel model) {
+        currentModel = model;
         mIsPlaying = false;
         mPlayer.reset();
         try {
-            mPlayer.setDataSource(MainActivity.this, Uri.fromFile(new File(filePath)));
+            mPlayer.setDataSource(MainActivity.this, Uri.fromFile(new File(model.localPath)));
+            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    currentModel.playStatus = 0;
+                    UserDatas.getInstance().updateCutters();
+                }
+            });
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
@@ -409,6 +490,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         }
         mIsPlaying = true;
     }
+
     @Override
     public void pause() {
         if (mPlayer.isPlaying()) {
@@ -416,6 +498,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
             mIsPlaying = false;
         }
     }
+
     @Override
     public void stop() {
         if (mPlayer.isPlaying()) {
@@ -430,6 +513,10 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         if (mPlayer.isPlaying()) {
             mPlayer.stop();
             mIsPlaying = false;
+            if (currentModel != null) {
+                currentModel.playStatus = 0;
+                UserDatas.getInstance().updateCutters();
+            }
         }
     }
 
@@ -441,5 +528,24 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
             mIsPlaying = false;
         }
         mPlayer = null;
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+
+                ExitDialog dialog =
+                    new ExitDialog(MainActivity.this, isAdLoaded ? nativeAd : null, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    });
+                dialog.setCancelable(false);
+                dialog.show();
+                break;
+        }
+        return true;
     }
 }

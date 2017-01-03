@@ -2,6 +2,10 @@ package com.av.ringtone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import com.av.ringtone.logic.song.SongLoader;
 import com.av.ringtone.model.CutterModel;
@@ -41,6 +45,11 @@ public class UserDatas {
     private static final String CUT_COUNT_KEY = "cut_count_key";
     private static final String RECORD_S_KEY = "record_s_key";
     private static final String CUTTERED_S_KEY = "cuttered_s_key";
+
+
+    public static final  int SORT_SONG=1;
+    public static final  int SORT_RECORD=2;
+    public static final  int SORT_CUT=3;
 
     // cutters
 
@@ -168,7 +177,10 @@ public class UserDatas {
         if (null != mTask && mTask.isCancelled()) {
             mTask.cancel(true);
         }
-        mTask = new loadSongs().execute("");
+        LinkedBlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<Runnable>();
+        ExecutorService exec = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, blockingQueue);
+        mTask = new loadSongs().executeOnExecutor(exec);
+        // mTask = new loadSongs().execute(String.valueOf(taskcount++));
     }
 
     private void loadReords() {
@@ -196,6 +208,38 @@ public class UserDatas {
         }
         if (null != mCountListener) {
             mCountListener.updatecount(getSongs().size(), getRecords().size(), getCuttereds().size());
+        }
+    }
+
+    public void updateCutters() {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.updateCutters();
+            }
+        }
+    }
+
+    public void sortByName(int sortType) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.sortByName(sortType);
+            }
+        }
+    }
+
+    public void sortByLength(int sortType) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.sortByLength(sortType);
+            }
+        }
+    }
+
+    public void sortByDate(int sortType) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.sortByDate(sortType);
+            }
         }
     }
 
@@ -229,10 +273,19 @@ public class UserDatas {
         void updateRecords(List<RecordModel> list);
 
         void updateCutters(List<CutterModel> list);
+
+        void updateCutters();
+
+        void sortByName(int sortType);
+
+        void sortByLength(int sortType);
+
+        void sortByDate(int sortType);
     }
 
     public interface DataCountChangedListener {
         void updatecount(int isong, int irecord, int icutter);
+
         void updateCutCount(int count);
     }
 

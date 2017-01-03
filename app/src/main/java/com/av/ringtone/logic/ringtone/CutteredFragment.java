@@ -14,16 +14,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * cuttered
  */
-public class CutteredFragment extends BaseFragment implements UserDatas.DataChangedListener{
+public class CutteredFragment extends BaseFragment implements UserDatas.DataChangedListener {
     private RecyclerView mRecyclerView;
     private CuttersAdapter mAdapter;
     private LinearLayout mEmptyll;
-
 
     @Override
     protected int getLayoutId() {
@@ -77,6 +78,11 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     }
 
     @Override
+    public void updateCutters() {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void updateCutters(List<CutterModel> list) {
         mAdapter = new CuttersAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
@@ -86,6 +92,73 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             mRecyclerView.setAdapter(mAdapter);
         }
     }
+    @Override
+    public void sortByName(int sortType) {
+        if (sortType!= UserDatas.SORT_CUT){
+            return;
+        }
+        List<CutterModel> list = mAdapter.getDatas();
+        Collections.sort(list, new Comparator<CutterModel>(){
 
+            /*
+             * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+             * 返回负数表示：o1 小于o2，
+             * 返回0 表示：o1和o2相等，
+             * 返回正数表示：o1大于o2。
+             */
+            public int compare(CutterModel o1, CutterModel o2) {
 
+                //按照学生的年龄进行升序排列
+                if(o1.title.compareTo(o2.title)>0){
+                    return 1;
+                }
+                return -1;
+            }
+        });
+        mAdapter.upateDatas(list);
+    }
+
+    @Override
+    public void sortByLength(int sortType) {
+        if (sortType!= UserDatas.SORT_CUT){
+            return;
+        }
+        List<CutterModel> list = mAdapter.getDatas();
+        Collections.sort(list, new Comparator<CutterModel>(){
+            public int compare(CutterModel o1, CutterModel o2) {
+
+                //按照学生的年龄进行升序排列
+                if(o1.duration > o2.duration){
+                    return 1;
+                }
+                if(o1.duration == o2.duration){
+                    return 0;
+                }
+                return -1;
+            }
+        });
+        mAdapter.upateDatas(list);
+    }
+
+    @Override
+    public void sortByDate(int sortType) {
+        if (sortType!= UserDatas.SORT_CUT){
+            return;
+        }
+        List<CutterModel> list = mAdapter.getDatas();
+        Collections.sort(list, new Comparator<CutterModel>(){
+            public int compare(CutterModel o1, CutterModel o2) {
+
+                //按照学生的年龄进行升序排列
+                if(o1.date > o2.date){
+                    return 1;
+                }
+                if(o1.date == o2.date){
+                    return 0;
+                }
+                return -1;
+            }
+        });
+        mAdapter.upateDatas(list);
+    }
 }

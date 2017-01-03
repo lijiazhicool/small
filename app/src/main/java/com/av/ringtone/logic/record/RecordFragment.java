@@ -5,6 +5,8 @@ import static android.app.Activity.RESULT_OK;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.av.ringtone.R;
@@ -186,5 +188,79 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     @Override
     public void updateCutters(List<CutterModel> list) {
 
+    }
+
+    @Override
+    public void updateCutters() {
+
+    }
+    @Override
+    public void sortByName(int sortType) {
+        if (sortType!= UserDatas.SORT_RECORD){
+            return;
+        }
+        List<RecordModel> list = mAdapter.getDatas();
+        Collections.sort(list, new Comparator<RecordModel>(){
+
+            /*
+             * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+             * 返回负数表示：o1 小于o2，
+             * 返回0 表示：o1和o2相等，
+             * 返回正数表示：o1大于o2。
+             */
+            public int compare(RecordModel o1, RecordModel o2) {
+
+                //按照学生的年龄进行升序排列
+                if(o1.title.compareTo(o2.title)>0){
+                    return 1;
+                }
+                return -1;
+            }
+        });
+        mAdapter.upateDatas(list);
+    }
+
+    @Override
+    public void sortByLength(int sortType) {
+        if (sortType!= UserDatas.SORT_RECORD){
+            return;
+        }
+        List<RecordModel> list = mAdapter.getDatas();
+        Collections.sort(list, new Comparator<RecordModel>(){
+            public int compare(RecordModel o1, RecordModel o2) {
+
+                //按照学生的年龄进行升序排列
+                if(o1.duration > o2.duration){
+                    return 1;
+                }
+                if(o1.duration == o2.duration){
+                    return 0;
+                }
+                return -1;
+            }
+        });
+        mAdapter.upateDatas(list);
+    }
+
+    @Override
+    public void sortByDate(int sortType) {
+        if (sortType!= UserDatas.SORT_RECORD){
+            return;
+        }
+        List<RecordModel> list = mAdapter.getDatas();
+        Collections.sort(list, new Comparator<RecordModel>(){
+            public int compare(RecordModel o1, RecordModel o2) {
+
+                //按照学生的年龄进行升序排列
+                if(o1.date > o2.date){
+                    return 1;
+                }
+                if(o1.date == o2.date){
+                    return 0;
+                }
+                return -1;
+            }
+        });
+        mAdapter.upateDatas(list);
     }
 }

@@ -6,6 +6,10 @@
     <string name="ad_unit_id">ca-app-pub-9920536185791139/3952367202</string>
 
     <!--main menu-->
+    <string name="menu_sort">Sort by……</string>
+    <string name="menu_sort_name">Name</string>
+    <string name="menu_sort_length">Length</string>
+    <string name="menu_sort_date">Date</string>
     <string name="menu_about">About</string>
     <string name="menu_rate">Rate us</string>
     <string name="menu_invite">Invite Friends</string>
@@ -18,7 +22,9 @@
 
 
     <!--title-->
-    <string name="title_cutter">Cutter</string>
+    <string name="title_cutter">Cut Audio</string>
+    <string name="title_main">MP3 Cutter</string>
+
 
 
     <!--第三方-->

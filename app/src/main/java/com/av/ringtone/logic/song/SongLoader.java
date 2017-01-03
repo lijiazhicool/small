@@ -31,8 +31,9 @@ public class SongLoader {
                 long artistId = cursor.getInt(6);
                 long albumId = cursor.getLong(7);
                 String path=cursor.getString(8);
+                long date = cursor.getLong(9);
 
-                arrayList.add(new SongModel(id, albumId, artistId, title, artist, album, duration, trackNumber,path));
+                arrayList.add(new SongModel(id, albumId, artistId, title, artist, album, duration, trackNumber,path,date));
             } while (cursor.moveToNext());
         if (cursor != null)
             cursor.close();
@@ -52,7 +53,7 @@ public class SongLoader {
             selectionStatement = selectionStatement + " AND " + selection;
         }
         return context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            new String[] { "_id", "title", "artist", "album", "duration", "track", "artist_id", "album_id","_data"},
+            new String[] { "_id", "title", "artist", "album", "duration", "track", "artist_id", "album_id","_data","date_modified"},
             selectionStatement, paramArrayOfString, sortOrder);
 
     }

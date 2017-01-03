@@ -11,4 +11,5 @@ public class BaseModel implements Serializable {
     public  String path; // 音乐文件的路径
     public  String artist;
     public int duration;
+    public long date;//时间
 }

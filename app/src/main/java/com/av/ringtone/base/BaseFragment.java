@@ -10,11 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 /**
  * Created by LiJiaZhi on 16/11/7. base
  */
 
 public abstract class BaseFragment extends Fragment {
+
+    //统计
+    protected FirebaseAnalytics mFirebaseAnalytics;
 
     // 为了防止getActivity()空指针，用mActivity代替getActivity()
     protected BaseActivity mActivity;
@@ -70,6 +75,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(mActivity);
         initView(view, savedInstanceState);
         initListener();
         initData();

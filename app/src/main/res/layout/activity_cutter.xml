@@ -53,7 +53,7 @@
 
         <AbsoluteLayout
             android:layout_width="wrap_content"
-            android:layout_height="190dp">
+            android:layout_height="230dp">
 
             <View
                 android:id="@+id/bkgnd"
@@ -196,6 +196,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:nextFocusDown="@+id/play"
             android:nextFocusUp="@+id/endmarker" />
     </LinearLayout>

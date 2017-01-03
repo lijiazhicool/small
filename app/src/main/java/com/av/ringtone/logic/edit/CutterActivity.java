@@ -19,6 +19,12 @@ import com.av.ringtone.soundfile.CheapSoundFile;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.MarkerView;
 import com.av.ringtone.views.WaveformView;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,6 +58,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +74,14 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private ImageView mBackIv;
     private ImageButton mSetIv;
     private TextView mTotaltv;
+    private LinearLayout mAdll;
+
+    private String adPlacementId = "179525592481992_179525999148618";
+    private AdView adView;
+    private final static String EVENT_AD_TYPE = "AdView_Click";
+    private final static String EVENT_AD_NAME = "AdView";
+    private final static String EVENT_AD_ID = "AdView_ID";
+
 
     private long mLoadingLastUpdateTime;
     private boolean mLoadingKeepGoing;
@@ -165,6 +180,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mBackIv = findView(R.id.back);
         mSetIv = findView(R.id.set);
         mTotaltv = findView(R.id.total_tv);
+        mAdll = findView(R.id.ad_ll);
         loadGui();
     }
 
@@ -199,7 +215,39 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         mHandler = new Handler();
         mHandler.postDelayed(mTimerRunnable, 100);
+
+        loadBanner();
         loadFromFile();
+    }
+
+    protected void loadBanner() {
+        // Instantiate an AdView view
+        adView = new AdView(this, adPlacementId, AdSize.BANNER_HEIGHT_50);
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                adView.destroy();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                if (null != mAdll) {
+                    mAdll.addView(adView);
+                }
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
+            }
+        });
+
+        // Request to load an ad
+        adView.loadAd();
     }
 
     /** Called with the activity is finally destroyed. */
@@ -211,6 +259,10 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             mPlayer.stop();
         }
         mPlayer = null;
+
+        if (null != adView) {
+            adView.destroy();
+        }
 
         super.onDestroy();
     }
@@ -1335,11 +1387,10 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                     case R.id.button_make_default:
                         RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE,
                             newUri);
-                        Toast.makeText(CutterActivity.this, R.string.default_ringtone_success_message,
-                            Toast.LENGTH_SHORT).show();
+                        ToastUtils.makeToastAndShow(CutterActivity.this,"Setting Success!");
                         break;
                     case R.id.button_choose_contact:
-                        chooseContactForRingtone(newUri);
+//                        chooseContactForRingtone(newUri);
                         break;
                     default:
                     case R.id.button_do_nothing:
@@ -1406,8 +1457,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE,
                 newUri);
-        Toast.makeText(CutterActivity.this, R.string.default_ringtone_success_message,
-                Toast.LENGTH_SHORT).show();
+        ToastUtils.makeToastAndShow(CutterActivity.this,"Setting Success!");
     }
 
     private void chooseContactForRingtone(Uri uri) {

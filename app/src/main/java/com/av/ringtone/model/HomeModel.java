@@ -7,7 +7,7 @@ import com.facebook.ads.NativeAd;
  */
 
 public class HomeModel extends BaseModel {
-    public int type;//1 music;   2 record;   3 cutterd;     4 ad
+    public int type;//1 music;   2 cutterd;   3 record;     4 ad
     public int resId;//image
     public String title;
     public String subtitle;

@@ -80,10 +80,10 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mDatas.clear();
         mDatas.add(new HomeModel(1, R.drawable.ic_music, getString(R.string.tab_two),
             String.format(getString(R.string.home_music_count), 0)));
-        mDatas.add(new HomeModel(2, R.drawable.ic_record, getString(R.string.tab_three),
-            String.format(getString(R.string.home_record_count), 0)));
-        mDatas.add(new HomeModel(3, R.drawable.ic_tones, getString(R.string.tab_four),
+        mDatas.add(new HomeModel(2, R.drawable.ic_tones, getString(R.string.tab_four),
             String.format(getString(R.string.home_cuttered_count), 0)));
+        mDatas.add(new HomeModel(3, R.drawable.icon_record, getString(R.string.tab_three),
+                String.format(getString(R.string.home_record_count), 0)));
         mAdapter = new MyAdapter(getActivity());
         mGridView.setAdapter(mAdapter);
         loadAds();
@@ -107,7 +107,13 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position < 3 && mListener != null) {
-                    mListener.gotoIndex(position + 1);
+                    if (position==0){
+                        mListener.gotoIndex(1);
+                    } else if (position==1){
+                        mListener.gotoIndex(3);
+                    } else {
+                        mListener.gotoIndex(2);
+                    }
                 }
             }
         });
@@ -131,8 +137,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             return;
         }
         mDatas.get(0).subtitle = String.format(getString(R.string.home_music_count), isong);
-        mDatas.get(1).subtitle = String.format(getString(R.string.home_record_count), irecord);
-        mDatas.get(2).subtitle = String.format(getString(R.string.home_cuttered_count), icutter);
+        mDatas.get(1).subtitle = String.format(getString(R.string.home_cuttered_count), icutter);
+        mDatas.get(2).subtitle = String.format(getString(R.string.home_record_count), irecord);
         mAdapter.notifyDataSetChanged();
     }
 

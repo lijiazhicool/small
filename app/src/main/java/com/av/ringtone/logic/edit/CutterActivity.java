@@ -82,7 +82,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private final static String EVENT_AD_NAME = "AdView";
     private final static String EVENT_AD_ID = "AdView_ID";
 
-
     private long mLoadingLastUpdateTime;
     private boolean mLoadingKeepGoing;
     private ProgressDialog mProgressDialog;
@@ -115,6 +114,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private int mMaxPos;
     private int mStartPos;
     private int mEndPos;
+    private int mTotalPos;
     private boolean mStartVisible;
     private boolean mEndVisible;
     private int mLastDisplayedStartPos;
@@ -195,12 +195,16 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mSetIv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mStartPos > mEndPos) {
+                    ToastUtils.makeToastAndShow(CutterActivity.this, "start must be smaller than end！");
+                    return;
+                }
                 // save and set
                 if (mIsPlaying) {
                     handlePause();
                 }
                 mNewFileKind = Constants.FILE_KIND_RINGTONE;
-                saveAndSetRingtone(mFileModel.title+"rintone"+mIndex++);
+                saveAndSetRingtone(mFileModel.title + "rintone" + mIndex++);
             }
         });
     }
@@ -712,7 +716,9 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                     return;
                 }
                 mProgressDialog.dismiss();
-                if (mLoadingKeepGoing) {
+                if (mLoadingKeepGoing)
+
+                {
                     Runnable runnable = new Runnable() {
                         public void run() {
                             finishOpeningSoundFile();
@@ -836,6 +842,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             if (!mEndVisible) {
                 // Delay this to avoid flicker
                 mHandler.postDelayed(new Runnable() {
+
                     public void run() {
                         mEndVisible = true;
                         mEndMarker.setAlpha(255);
@@ -865,6 +872,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             if (mStartPos != mLastDisplayedStartPos && !mStartText.hasFocus()) {
                 mStartText.setText(formatTime(mStartPos));
                 mTotaltv.setText(formatTime(mEndPos - mStartPos));
+                mTotalPos = mEndPos - mStartPos;
                 mLastDisplayedStartPos = mStartPos;
             }
 
@@ -872,6 +880,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                 mEndText.setText(formatTime(mEndPos));
                 mLastDisplayedEndPos = mEndPos;
                 mTotaltv.setText(formatTime(mEndPos - mStartPos));
+                mTotalPos = mEndPos - mStartPos;
             }
 
             mHandler.postDelayed(mTimerRunnable, 100);
@@ -1196,7 +1205,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }.start();
     }
 
-    //add
+    // add
     private void saveAndSetRingtone(final CharSequence title) {
         final String outPath = makeRingtoneFilename(title, mExtension);
 
@@ -1381,16 +1390,17 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         // contact, or do nothing.
 
         final Handler handler = new Handler() {
+
             public void handleMessage(Message response) {
                 int actionId = response.arg1;
                 switch (actionId) {
                     case R.id.button_make_default:
                         RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE,
                             newUri);
-                        ToastUtils.makeToastAndShow(CutterActivity.this,"Setting Success!");
+                        ToastUtils.makeToastAndShow(CutterActivity.this, "Setting Success!");
                         break;
                     case R.id.button_choose_contact:
-//                        chooseContactForRingtone(newUri);
+                        // chooseContactForRingtone(newUri);
                         break;
                     default:
                     case R.id.button_do_nothing:
@@ -1398,18 +1408,19 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                 }
             }
         };
+
         Message message = Message.obtain(handler);
         AfterSaveActionDialog dlog = new AfterSaveActionDialog(this, message);
         dlog.show();
     }
 
-    //add
+    // add
     private void afterSavingAndSetRingtone(CharSequence title, String outPath, File outFile, int duration) {
         long length = outFile.length();
         if (length <= 512) {
             outFile.delete();
             new AlertDialog.Builder(this).setTitle(R.string.alert_title_failure).setMessage(R.string.too_small_error)
-                    .setPositiveButton(R.string.alert_ok_button, null).setCancelable(false).show();
+                .setPositiveButton(R.string.alert_ok_button, null).setCancelable(false).show();
             return;
         }
 
@@ -1440,7 +1451,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         // save data
         UserDatas.getInstance().addCuttereds(
-                new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath));
+            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath));
 
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
@@ -1455,9 +1466,8 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         prefsEditor.putInt(PREF_SUCCESS_COUNT, successCount + 1);
         prefsEditor.commit();
 
-        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE,
-                newUri);
-        ToastUtils.makeToastAndShow(CutterActivity.this,"Setting Success!");
+        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE, newUri);
+        ToastUtils.makeToastAndShow(CutterActivity.this, "Setting Success!");
     }
 
     private void chooseContactForRingtone(Uri uri) {
@@ -1605,6 +1615,10 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
     private OnClickListener mSaveListener = new OnClickListener() {
         public void onClick(View sender) {
+            if (mStartPos > mEndPos) {
+                ToastUtils.makeToastAndShow(CutterActivity.this, "start must be smaller than end！");
+                return;
+            }
             onSave();
         }
     };
@@ -1696,9 +1710,32 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }
 
         public void afterTextChanged(Editable s) {
+            String temp = s.toString();
+            int posDot = temp.indexOf(".");
+            if (posDot > 0 && temp.length() - posDot - 1 > 2) {
+                s.delete(posDot + 3, posDot + 4);
+            }
+
             if (mStartText.hasFocus()) {
                 try {
                     mStartPos = mWaveformView.secondsToPixels(Double.parseDouble(mStartText.getText().toString()));
+                    if (mStartPos > mMaxPos) {
+                        mStartPos = 0;
+                        mStartText.setText("0.00");
+                        mStartText.setSelection(mEndText.getText().toString().length());
+                        ToastUtils.makeToastAndShow(CutterActivity.this,
+                            "Start time must be less than the maximum time!");
+                    }
+                    if (mStartPos > mEndPos) {
+                        mEndPos = mStartPos + mTotalPos;
+                        if (mEndPos > mMaxPos) {
+                            mEndPos = mMaxPos;
+                            mEndText.setText(String.valueOf(mWaveformView.pixelsToSeconds(mMaxPos)));
+                            mEndText.setSelection(mEndText.getText().toString().length());
+                        }
+                        ToastUtils.makeToastAndShow(CutterActivity.this, "Start time must be less than the end time!");
+
+                    }
                     updateDisplay();
                 } catch (NumberFormatException e) {
                 }
@@ -1706,6 +1743,13 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             if (mEndText.hasFocus()) {
                 try {
                     mEndPos = mWaveformView.secondsToPixels(Double.parseDouble(mEndText.getText().toString()));
+                    if (mEndPos > mMaxPos) {
+                        mEndPos = mMaxPos;
+                        mEndText.setText(String.valueOf(mWaveformView.pixelsToSeconds(mMaxPos)));
+                        mEndText.setSelection(mEndText.getText().toString().length());
+                        ToastUtils.makeToastAndShow(CutterActivity.this,
+                            "End time must be less than the maximum time!");
+                    }
                     updateDisplay();
                 } catch (NumberFormatException e) {
                 }
@@ -2055,7 +2099,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             // The user finished saving their ringtone and they're
             // just applying it to a contact. When they return here,
             // they're done.
-            ToastUtils.makeToastAndShow(CutterActivity.this,"Setting Success!");
+            ToastUtils.makeToastAndShow(CutterActivity.this, "Setting Success!");
             return;
         }
     }

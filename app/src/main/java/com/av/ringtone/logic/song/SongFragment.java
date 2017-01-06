@@ -89,6 +89,9 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void updateSongs(List<SongModel> list) {
+        if (mAdapter!= null && mAdapter.getDatas() == list){
+            return;
+        }
         mSwipeLayout.setRefreshing(false);
         mAdapter = new SongsAdapter((BaseActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {

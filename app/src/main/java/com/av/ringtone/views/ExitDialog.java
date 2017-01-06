@@ -23,7 +23,7 @@ public class ExitDialog extends Dialog {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // Inflate our UI from its XML layout description.
-        setContentView(R.layout.dialog_normal_layout);
+        setContentView(R.layout.dialog_exit);
 
         MediaView mediaView = (MediaView)findViewById(R.id.adIv);
         if (null != nativeAd){

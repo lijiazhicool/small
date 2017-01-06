@@ -1,5 +1,6 @@
 package com.av.ringtone.logic.record;
 
+import java.io.File;
 import java.util.List;
 
 import com.av.ringtone.R;
@@ -10,6 +11,7 @@ import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
+import com.av.ringtone.utils.ToastUtils;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -65,14 +67,9 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         setOnPopupMenuListener(itemHolder, i);
     }
 
-//    private String getDuration(int d) {
-//        int min = d/60;
-//        float sec = (float)(d - 60 * min);
-//        return String.format("%d:%05.2f", min, sec);
-//    }
     private String getDuration(int d) {
         int min = d/60;
-        int sec = (int)(d - 60 * min);
+        int sec = d - 60 * min;
         return String.format("%02d:%02d", min, sec);
     }
 
@@ -97,9 +94,19 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                                 break;
                             case R.id.popup_song_delete:
                                 //只删除纪录，不删除文件
-                                mDatas.remove(tempModel);
-                                UserDatas.getInstance().setRecords(mDatas);
-                                notifyItemRemoved(position);
+                                File file = new File(tempModel.path);
+                                if (file.exists()) {
+                                    if (file.delete()) {
+                                        ToastUtils.makeToastAndShow(mContext,
+                                                file.getPath() + mContext.getString(R.string.delete_success));
+                                    } else {
+                                        ToastUtils.makeToastAndShow(mContext,
+                                                file.getPath() + mContext.getString(R.string.delete_failed));
+                                    }
+                                    mDatas.remove(tempModel);
+                                    UserDatas.getInstance().setRecords(mDatas);
+                                    notifyItemRemoved(position);
+                                }
                                 break;
                         }
                         return false;

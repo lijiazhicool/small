@@ -15,16 +15,15 @@
     <string name="menu_invite">Invite Friends</string>
     <string name="menu_help">Help &amp; Feedback</string>
 
-    <string name="menu_set_default">Set as default rintone</string>
-    <string name="menu_set_notification">Set as notification rintone</string>
-    <string name="menu_set_alarm">Set as alarm rintone</string>
+    <string name="menu_set_default">Set as default ringtone</string>
+    <string name="menu_set_notification">Set as notification ringtone</string>
+    <string name="menu_set_alarm">Set as alarm ringtone</string>
     <string name="menu_share">Share</string>
 
 
     <!--title-->
     <string name="title_cutter">Cut Audio</string>
     <string name="title_main">MP3 Cutter</string>
-
 
 
     <!--第三方-->
@@ -37,8 +36,8 @@
     <string name="zoom_in">Zoom In</string>
     <string name="zoom_out">Zoom Out</string>
     <string name="save_button">Save</string>
-    <string name="start_label">Start:</string>
-    <string name="end_label">End:</string>
+    <string name="start_label">Start</string>
+    <string name="end_label">End</string>
     <string name="total">Total:</string>
     <!-- Progress dialog text for loading or saving... -->
     <string name="progress_dialog_loading">Loading...</string>
@@ -59,6 +58,10 @@
     <string name="no_extension_error">Sorry, Ringdroid can\'t edit a file if it doesn\'t have an extension like .mp3 or .wav</string>
 
     <string name="time_seconds">seconds</string>
+    <string name="progress_dialog_recording">Recording…</string>
+
+    <string name="progress_dialog_cancel">Cancel</string>
+    <string name="progress_dialog_stop">Stop</string>
 
     <!--
      File Save dialog
@@ -77,7 +80,7 @@
 
     <string name="ringtone_name_label">FileName:</string>
 
-    <string name="artist_name">Ringdroid</string>
+    <string name="artist_name">mp3 cutter</string>
 
     <string name="alert_title_success">Success</string>
     <string name="alert_title_failure">Error</string>
@@ -97,18 +100,6 @@
     <string name="do_nothing_with_ringtone_button">Close</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <string name="search_hint">Search</string>
 
     <string name="no_data">No datas</string>
@@ -119,7 +110,7 @@
 
     <string name="tab_one">HOME</string>
     <string name="tab_two">MUSIC</string>
-    <string name="tab_three">RECORDS</string>
+    <string name="tab_three">RECORD</string>
     <string name="tab_four">CUTTERED</string>
 
     <string name="tab_two_hint">Musics</string>
@@ -138,5 +129,11 @@
     <string name="sdcard_readonly">Sorry, the SD Card is mounted as read-only and MP3 Cutter &amp; Ringtone Maker requires it to be writable.</string>
     <string name="no_sdcard">Sorry, MP3 Cutter &amp; Ringtone Maker can\'t run unless you have an SD Card inserted.</string>
     <string name="sdcard_shared">Sorry, MP3 Cutter &amp; Ringtone Maker can\'t run while your handset is mounted as a USB device.</string>
+
+
+    <string name="error_no_sdcard">没有SD卡，无法存储录音数据</string>
+    <string name="error_state_record">正在录音中，请先停止录音</string>
+    <string name="error_unknown">无法识别的错误</string>
+
 
 </resources>

@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Message;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import com.av.ringtone.R;
@@ -30,7 +31,7 @@ public class AfterSaveActionDialog extends Dialog {
 
     public AfterSaveActionDialog(Context context, Message response) {
         super(context);
-
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         // Inflate our UI from its XML layout description.
         setContentView(R.layout.after_save_action);
 

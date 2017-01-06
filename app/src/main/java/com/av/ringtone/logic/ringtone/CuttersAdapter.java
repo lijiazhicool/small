@@ -88,9 +88,6 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         // ---播放
                         mListener.play(local);
                         local.playStatus = 1;
-                        if (currentPlayItem != null && local != currentPlayItem && currentPlayItem.playStatus == 1) {
-                            currentPlayItem.playStatus = 2;
-                        }
                     } else if (local.playStatus == 1) {
                         // ---暂停
                         mListener.pause();
@@ -99,9 +96,9 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         // ---播放
                         mListener.play(local);
                         local.playStatus = 1;
-                        if (currentPlayItem != null && local != currentPlayItem && currentPlayItem.playStatus == 1) {
-                            currentPlayItem.playStatus = 2;
-                        }
+                    }
+                    if (currentPlayItem != null && local != currentPlayItem) {
+                        currentPlayItem.playStatus = 0;
                     }
                     currentPlayItem = local;
                     notifyDataSetChanged();

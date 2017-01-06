@@ -84,6 +84,9 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     public void updateCutters(List<CutterModel> list) {
+        if (mAdapter!= null && mAdapter.getDatas() == list){
+            return;
+        }
         mAdapter = new CuttersAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
             mEmptyll.setVisibility(View.VISIBLE);

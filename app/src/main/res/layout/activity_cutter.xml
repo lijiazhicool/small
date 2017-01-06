@@ -130,13 +130,16 @@
 
             <EditText
                 android:id="@+id/starttext"
-                android:layout_width="wrap_content"
+                android:layout_width="64dip"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/start_label"
-                android:text="00:00"
-                android:background="@drawable/line_shape_red"
+                android:text="00:00213213123123213213213123213123"
+                android:background="@drawable/line_shape_white"
                 android:inputType="numberDecimal"
                 android:digits="1234567890."
+                android:singleLine="true"
+                android:paddingBottom="6dip"
+                android:layout_marginLeft="11dp"
                 android:textColor="#eeeeee"
                 android:textSize="16sp" />
 
@@ -152,13 +155,16 @@
 
             <EditText
                 android:id="@+id/endtext"
-                android:layout_width="wrap_content"
+                android:layout_width="64dip"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/end_label"
                 android:text="00:00"
+                android:layout_marginLeft="11dp"
+                android:singleLine="true"
+                android:paddingBottom="6dip"
                 android:inputType="numberDecimal"
                 android:digits="1234567890."
-                android:background="@drawable/line_shape_red"
+                android:background="@drawable/line_shape_white"
                 android:textColor="#eeeeee"
                 android:textSize="16sp" />
         </LinearLayout>

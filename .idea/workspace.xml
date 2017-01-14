@@ -10,90 +10,69 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="tag" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fd8d04d-5513-4ed9-a075-21115b33187c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_placeholder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_placeholder.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_2_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_impl_10_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_basement_10_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_24_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_24_0_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioFileFunc.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioRecordFunc.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/ErrorCode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/MediaRecordFunc.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/MusicVisualizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/RecordingDialog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/line_shape_white.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_record_audio.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_base_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_basement_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_fab_star.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_record.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_recording.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/fab_bg_mini.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/fab_bg_normal.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_fab_star.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_record.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_recording.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bkgnd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_native_ad.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_10_0_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_impl_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_10_0_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_common_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_crash_10_0_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_core_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_iid_10_0_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_crash_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_core_10_0_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_iid_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_common_10_0_1.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/line_shape_red.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/line_shape_blue.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_normal_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_exit.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_mic_48_px.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_music_note_48_px.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_placeholder.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_ringtone_no_data_hint.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_mic_48_px.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_music_note_48_px.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_placeholder.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_ringtone_no_data_hint.png" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/ExitDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/DeleteDialog.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_exit.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_delete.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_pause_red.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_pause_red.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_play.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_play.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_save.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_save.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_set.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_set.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_pause_red.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_pause_red.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_play.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_play.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_save.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_save.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_set.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_set.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compile_testDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_back_red.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_back_red.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_back_red.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_back_red.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/mockable-android-22.jar" afterPath="$PROJECT_DIR$/build/generated/mockable-android-22.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/google-services.json" afterPath="$PROJECT_DIR$/app/google-services.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/AfterSaveActionDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/AfterSaveActionDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/FileSaveDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/FileSaveDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/ExitDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/ExitDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/item_bg_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/item_bg_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ShareUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ShareUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/after_save_action.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/after_save_action.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/file_save.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/file_save.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_music.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_music.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/popup_ringtone.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/popup_ringtone.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="ringtone.iws" />
@@ -128,7 +107,134 @@
     <favorites_list name="ringtone" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="DeleteDialog.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/DeleteDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+              <folding>
+                <element signature="e#686#912#0" expanded="true" />
+                <element signature="e#911#912#0" expanded="true" />
+                <element signature="e#981#1105#0" expanded="true" />
+                <element signature="e#1104#1105#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SongFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-417">
+              <caret line="160" column="49" selection-start-line="160" selection-start-column="49" selection-end-line="160" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="123">
+              <caret line="512" column="15" selection-start-line="512" selection-start-column="15" selection-end-line="512" selection-end-column="15" />
+              <folding>
+                <marker date="1484408355000" expanded="false" signature="14978:15129" ph="(path, uri) → { " />
+                <marker date="1484408355000" expanded="false" signature="15166:15206" ph=" }" />
+                <marker date="1484408355000" expanded="false" signature="15634:15661" ph="&quot;HOME&quot;" />
+                <marker date="1484408355000" expanded="false" signature="15684:15711" ph="&quot;MUSIC&quot;" />
+                <marker date="1484408355000" expanded="false" signature="15734:15763" ph="&quot;RECORD&quot;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SongsAdapter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="143" column="24" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="24" />
+              <folding>
+                <element signature="e#3475#4690#0" expanded="true" />
+                <element signature="e#4557#4600#0" expanded="true" />
+                <element signature="e#4689#4690#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup_song.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="41" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="41" />
+              <folding>
+                <element signature="e#396#412#0" expanded="true" />
+                <element signature="e#672#703#0" expanded="true" />
+                <element signature="e#815#839#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup_ringtone.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_ringtone.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="23" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CuttersAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="152" column="38" selection-start-line="138" selection-start-column="28" selection-end-line="152" selection-end-column="38" />
+              <folding>
+                <element signature="e#6615#8146#0" expanded="true" />
+                <element signature="e#8013#8056#0" expanded="true" />
+                <element signature="e#8145#8146#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecordsAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
+              <folding>
+                <element signature="e#3572#4531#0" expanded="true" />
+                <element signature="e#4398#4441#0" expanded="true" />
+                <element signature="e#4530#4531#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -2899,45 +3005,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongLoader.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_music.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_normal_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/file_paths.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/xml.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/test.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/soundfile/CheapSoundFile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/RecordUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/AudioRecordFunc.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/MediaRecordFunc.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/AudioFileFunc.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/ErrorCode.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioRecordFunc.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/Main2Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/Main2Activity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/MediaRecordFunc.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/record_audio.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/MusicVisualizer.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_record_audio.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/RecordingDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioFileFunc.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/line_shape_red.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/item_bg_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/FileSaveDialog.java" />
@@ -2946,10 +3025,37 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/AfterSaveActionDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/after_save_action.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/Constants.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ShareUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_music.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_delete.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/DeleteDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/popup_ringtone.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" />
       </list>
     </option>
   </component>
@@ -2983,7 +3089,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3002,18 +3113,105 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="small" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane />
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$USER_HOME$/github/VoiceManager" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
@@ -3024,10 +3222,12 @@
     <property name="DEBUGGER_ID" value="Auto" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/xml" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.av.ringtone" />
@@ -3035,12 +3235,10 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.av.ringtone.views" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/xml" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
       <recent name="$PROJECT_DIR$/app/src/main/res" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -3351,14 +3549,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="822" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="23" width="1440" height="822" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5056657" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.51133144" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3838527" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68696886" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3370,13 +3568,14 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.49433428" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22031474" sideWeight="0.48866856" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32719547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3386,7 +3585,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39943343" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -3405,543 +3603,575 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java</url>
-          <line>122</line>
+          <line>125</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
-          <line>86</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
-          <line>227</line>
+          <line>233</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
-          <line>233</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java</url>
-          <line>55</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java</url>
-          <line>89</line>
-          <properties />
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>1794</line>
+          <line>1792</line>
           <properties />
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>1712</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java</url>
+          <line>85</line>
           <properties />
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
+          <line>167</line>
+          <properties />
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
+          <line>1338</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
+          <line>1625</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
+          <line>666</line>
+          <properties />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
+          <line>253</line>
+          <properties />
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java</url>
+          <line>75</line>
+          <properties />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
+          <line>171</line>
+          <properties />
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
+          <line>293</line>
+          <properties />
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
+          <line>170</line>
+          <properties />
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="60" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/media/MediaRecorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="765" column="23" selection-start-line="765" selection-start-column="23" selection-end-line="765" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/WelcomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/Main2Activity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioRecordFunc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/NavigationUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/ErrorCode.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/MediaRecordFunc.java">
+    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="57" column="40" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="40" />
+        <state relative-caret-position="435">
+          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="100" column="72" selection-start-line="100" selection-start-column="72" selection-end-line="100" selection-end-column="72" />
-          <folding>
-            <element signature="e#3973#4015#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/ExitDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_exit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="35" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_recording.png" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/MusicVisualizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/RecordingDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_record_audio.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioFileFunc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="86" column="66" selection-start-line="86" selection-start-column="66" selection-end-line="86" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_pause_red.png">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.hdodenhof/circleimageview/2.1.0/f099f4aafdd665b05e0c31d59b900812a172e30f/circleimageview-2.1.0-sources.jar!/de/hdodenhof/circleimageview/CircleImageView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="131" column="42" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="42" />
-          <folding>
-            <element signature="e#5675#5694#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/googleplay/debug/com/av/ringtone/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="2291" column="32" selection-start-line="2291" selection-start-column="32" selection-end-line="2291" selection-end-column="32" />
+        <state relative-caret-position="75">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="28" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="401" column="48" selection-start-line="401" selection-start-column="48" selection-end-line="401" selection-end-column="48" />
-          <folding>
-            <element signature="e#16054#16083#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="237" column="77" selection-start-line="237" selection-start-column="72" selection-end-line="237" selection-end-column="81" />
-          <folding>
-            <element signature="e#3020#3049#0" expanded="false" />
-            <element signature="e#3590#4123#0" expanded="false" />
-            <element signature="e#4122#4123#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/media/MediaPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="1164" column="24" selection-start-line="1164" selection-start-column="24" selection-end-line="1164" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/item_bg_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/line_shape_blue.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/line_shape_white.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        <state relative-caret-position="285">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/file_save.xml">
+    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/_test/debug/com/av/ringtone/R.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="226">
+          <caret line="2239" column="32" selection-start-line="2239" selection-start-column="32" selection-end-line="2239" selection-end-column="32" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_home.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/FileSaveDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="66" column="39" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="41" />
+        <state relative-caret-position="90">
+          <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
+          <folding>
+            <element signature="e#462#482#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_song.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+          <folding>
+            <element signature="e#2390#2409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/text/SpannableStringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="931" column="0" selection-start-line="931" selection-start-column="0" selection-end-line="931" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/RecordingDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/AudioFileFunc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="99" column="37" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ShareUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#800#819#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="23" selection-end-column="43" />
+          <folding>
+            <element signature="e#802#821#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/widget/Toast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ToastUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_ringtone_no_data_hint.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_music_note_48_px.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_back_red.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="95" column="50" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="84" column="37" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="37" />
+        <state relative-caret-position="120">
+          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/after_save_action.xml">
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/os/Build.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        <state relative-caret-position="241">
+          <caret line="595" column="63" selection-start-line="595" selection-start-column="63" selection-end-line="595" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="116" column="63" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/AboutActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/AfterSaveActionDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
+        <state relative-caret-position="240">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/fab_bg_mini.png" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_fab_star.png" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bkgnd.png" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_native_ad.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/fab.png">
-      <provider selected="true" editor-type-id="images">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
+      <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="990">
+          <caret line="66" column="31" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_music.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
-          <folding>
-            <element signature="e#1254#1255#0" expanded="false" />
-            <element signature="e#1304#1305#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_record.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="55" column="129" selection-start-line="55" selection-start-column="116" selection-end-line="55" selection-end-column="129" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/BaseModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="149" column="9" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="93" column="9" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="419">
+          <caret line="181" column="13" selection-start-line="181" selection-start-column="13" selection-end-line="181" selection-end-column="13" />
+          <folding>
+            <element signature="e#4077#4762#0" expanded="true" />
+            <element signature="e#4761#4762#0" expanded="true" />
+            <element signature="e#9834#10195#0" expanded="true" />
+            <element signature="e#10194#10195#0" expanded="true" />
+            <element signature="e#10250#10647#0" expanded="true" />
+            <element signature="e#10646#10647#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state relative-caret-position="-1527">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding>
-            <element signature="e#3006#4019#0" expanded="false" />
-            <element signature="e#4018#4019#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="450">
+          <caret line="165" column="28" selection-start-line="165" selection-start-column="16" selection-end-line="165" selection-end-column="28" />
+          <folding>
+            <element signature="e#2774#2775#0" expanded="true" />
+            <element signature="e#2820#2821#0" expanded="true" />
+            <element signature="e#5499#5509#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/WaveformView.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="241" column="18" selection-start-line="241" selection-start-column="18" selection-end-line="241" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/java/lang/Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="336" column="25" selection-start-line="336" selection-start-column="25" selection-end-line="336" selection-end-column="25" />
+        <state relative-caret-position="345">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="1740" column="17" selection-start-line="1740" selection-start-column="17" selection-end-line="1740" selection-end-column="17" />
+        <state relative-caret-position="482">
+          <caret line="1363" column="19" selection-start-line="1363" selection-start-column="19" selection-end-line="1363" selection-end-column="19" />
           <folding>
-            <element signature="e#21601#23815#0" expanded="true" />
-            <element signature="e#23490#23652#0" expanded="true" />
-            <element signature="e#23651#23652#0" expanded="true" />
-            <element signature="e#23814#23815#0" expanded="true" />
-            <element signature="e#24479#24526#0" expanded="true" />
-            <element signature="e#26522#26567#0" expanded="true" />
-            <element signature="e#26641#26684#0" expanded="true" />
-            <element signature="e#26948#27142#0" expanded="true" />
-            <element signature="e#27141#27142#0" expanded="true" />
-            <element signature="e#27589#27780#0" expanded="true" />
-            <element signature="e#27779#27780#0" expanded="true" />
-            <element signature="e#28476#29360#0" expanded="true" />
-            <element signature="e#29359#29360#0" expanded="true" />
-            <element signature="e#29549#29586#0" expanded="true" />
-            <element signature="e#29719#29756#0" expanded="true" />
-            <element signature="e#30125#30126#0" expanded="true" />
-            <element signature="e#30178#30179#0" expanded="true" />
-            <element signature="e#30227#30228#0" expanded="true" />
-            <element signature="e#30288#30289#0" expanded="true" />
-            <element signature="e#30327#30328#0" expanded="true" />
-            <element signature="e#30378#30379#0" expanded="true" />
-            <element signature="e#30425#30426#0" expanded="true" />
-            <element signature="e#30484#30485#0" expanded="true" />
-            <element signature="e#34008#34009#0" expanded="true" />
-            <element signature="e#34061#34062#0" expanded="true" />
-            <element signature="e#34370#34389#0" expanded="true" />
-            <element signature="e#34994#35046#0" expanded="true" />
-            <element signature="e#35194#35246#0" expanded="true" />
-            <element signature="e#35379#35403#0" expanded="true" />
-            <element signature="e#35405#35585#0" expanded="true" />
-            <element signature="e#35584#35585#0" expanded="true" />
-            <element signature="e#37807#37834#0" expanded="true" />
-            <element signature="e#38450#38481#0" expanded="true" />
-            <element signature="e#38673#40855#0" expanded="true" />
-            <element signature="e#39067#39533#0" expanded="true" />
-            <element signature="e#39532#39533#0" expanded="true" />
-            <element signature="e#39847#39894#0" expanded="true" />
-            <element signature="e#39998#40042#0" expanded="true" />
-            <element signature="e#40236#40439#0" expanded="true" />
-            <element signature="e#40438#40439#0" expanded="true" />
-            <element signature="e#40613#40789#0" expanded="true" />
-            <element signature="e#40788#40789#0" expanded="true" />
-            <element signature="e#40854#40855#0" expanded="true" />
-            <element signature="e#41095#41122#0" expanded="true" />
-            <element signature="e#41738#41769#0" expanded="true" />
-            <element signature="e#41961#44149#0" expanded="true" />
-            <element signature="e#42355#42821#0" expanded="true" />
-            <element signature="e#42820#42821#0" expanded="true" />
-            <element signature="e#43135#43182#0" expanded="true" />
-            <element signature="e#43286#43330#0" expanded="true" />
-            <element signature="e#43524#43727#0" expanded="true" />
-            <element signature="e#43726#43727#0" expanded="true" />
-            <element signature="e#43901#44083#0" expanded="true" />
-            <element signature="e#44082#44083#0" expanded="true" />
-            <element signature="e#44148#44149#0" expanded="true" />
-            <element signature="e#45281#45309#0" expanded="true" />
-            <element signature="e#45322#45346#0" expanded="true" />
-            <element signature="e#45383#45407#0" expanded="true" />
-            <element signature="e#45662#45706#0" expanded="true" />
-            <element signature="e#47711#47740#0" expanded="true" />
-            <element signature="e#48121#48149#0" expanded="true" />
-            <element signature="e#48179#48212#0" expanded="true" />
-            <element signature="e#48249#48274#0" expanded="true" />
-            <element signature="e#48276#48665#0" expanded="true" />
-            <element signature="e#48664#48665#0" expanded="true" />
-            <element signature="e#48685#48709#0" expanded="true" />
-            <element signature="e#48711#48939#0" expanded="true" />
-            <element signature="e#48938#48939#0" expanded="true" />
-            <element signature="e#49215#50000#0" expanded="true" />
-            <element signature="e#49999#50000#0" expanded="true" />
-            <element signature="e#50431#50459#0" expanded="true" />
-            <element signature="e#50472#50496#0" expanded="true" />
-            <element signature="e#50533#50557#0" expanded="true" />
-            <element signature="e#50812#50856#0" expanded="true" />
-            <element signature="e#57573#57825#0" expanded="true" />
-            <element signature="e#57824#57825#0" expanded="true" />
-            <element signature="e#58213#58495#0" expanded="true" />
-            <element signature="e#58494#58495#0" expanded="true" />
-            <element signature="e#58542#58655#0" expanded="true" />
-            <element signature="e#58654#58655#0" expanded="true" />
-            <element signature="e#60377#60646#0" expanded="true" />
-            <element signature="e#60645#60646#0" expanded="true" />
-            <element signature="e#60696#60994#0" expanded="true" />
-            <element signature="e#60993#60994#0" expanded="true" />
-            <marker date="1483671156000" expanded="false" signature="6047:6156" ph="(v) → { " />
-            <marker date="1483671156000" expanded="false" signature="6165:6189" ph=" }" />
-            <marker date="1483671156000" expanded="false" signature="6226:6313" ph="(v) → {" />
-            <marker date="1483671156000" expanded="false" signature="6773:6788" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="7388:7407" ph=" { " />
-            <marker date="1483671156000" expanded="false" signature="7424:7438" ph=" }" />
-            <marker date="1483671156000" expanded="false" signature="8924:8972" ph="() → {" />
-            <marker date="1483671156000" expanded="false" signature="9221:9236" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="15387:15452" ph="() → { " />
-            <marker date="1483671156000" expanded="false" signature="15468:15492" ph=" }" />
-            <marker date="1483671156000" expanded="false" signature="19639:19671" ph="&quot;Loading...&quot;" />
-            <marker date="1483671156000" expanded="false" signature="19763:19862" ph="(dialog) → {" />
-            <marker date="1483671156000" expanded="false" signature="19914:19929" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="20022:20130" ph="(fractionComplete) → {" />
-            <marker date="1483671156000" expanded="false" signature="20464:20479" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="21207:21267" ph="() → {" />
-            <marker date="1483671156000" expanded="false" signature="21326:21369" ph="&quot;Error reading file&quot;" />
-            <marker date="1483671156000" expanded="false" signature="21395:21422" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="21513:21528" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="22116:22169" ph="&quot;Sorry, Ringdroid can't edit a file if it doesn't have a...&quot;" />
-            <marker date="1483671156000" expanded="false" signature="22238:22292" ph="&quot;Sorry, Ringdroid is not yet able to edit files of type&quot;" />
-            <marker date="1483671156000" expanded="false" signature="22491:22555" ph="() → {" />
-            <marker date="1483671156000" expanded="false" signature="22681:22712" ph="}" />
-            <marker date="1483671156000" expanded="false" signature="23041:23101" ph="() → {" />
-            <marker date="1483671156000" expanded="false" signature="23160:23203" ph="&quot;Error reading file&quot;" />
-            <marker date="1483671156000" expanded="false" signature="23229:23256" ph="}" />
+            <marker date="1484407577000" expanded="true" signature="19585:19617" ph="&quot;Loading...&quot;" />
+            <marker date="1484407577000" expanded="false" signature="21291:21334" ph="&quot;Error reading file&quot;" />
+            <marker date="1484407577000" expanded="false" signature="22063:22116" ph="&quot;Sorry, Ringdroid can't edit a file if it doesn't have a...&quot;" />
+            <marker date="1484407577000" expanded="false" signature="22185:22239" ph="&quot;Sorry, Ringdroid is not yet able to edit files of type&quot;" />
+            <marker date="1484407577000" expanded="false" signature="23107:23150" ph="&quot;Error reading file&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="512" column="15" selection-start-line="512" selection-start-column="15" selection-end-line="512" selection-end-column="15" />
+          <folding>
+            <marker date="1484408355000" expanded="false" signature="14978:15129" ph="(path, uri) → { " />
+            <marker date="1484408355000" expanded="false" signature="15166:15206" ph=" }" />
+            <marker date="1484408355000" expanded="false" signature="15634:15661" ph="&quot;HOME&quot;" />
+            <marker date="1484408355000" expanded="false" signature="15684:15711" ph="&quot;MUSIC&quot;" />
+            <marker date="1484408355000" expanded="false" signature="15734:15763" ph="&quot;RECORD&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
+          <folding>
+            <element signature="e#3572#4531#0" expanded="true" />
+            <element signature="e#4398#4441#0" expanded="true" />
+            <element signature="e#4530#4531#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_record_audio.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_delete.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/DeleteDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding>
+            <element signature="e#686#912#0" expanded="true" />
+            <element signature="e#911#912#0" expanded="true" />
+            <element signature="e#981#1105#0" expanded="true" />
+            <element signature="e#1104#1105#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_ringtone.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="23" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-417">
+          <caret line="160" column="49" selection-start-line="160" selection-start-column="49" selection-end-line="160" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="41" />
+          <folding>
+            <element signature="e#396#412#0" expanded="true" />
+            <element signature="e#672#703#0" expanded="true" />
+            <element signature="e#815#839#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="152" column="38" selection-start-line="138" selection-start-column="28" selection-end-line="152" selection-end-column="38" />
+          <folding>
+            <element signature="e#6615#8146#0" expanded="true" />
+            <element signature="e#8013#8056#0" expanded="true" />
+            <element signature="e#8145#8146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="143" column="24" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="24" />
+          <folding>
+            <element signature="e#3475#4690#0" expanded="true" />
+            <element signature="e#4557#4600#0" expanded="true" />
+            <element signature="e#4689#4690#0" expanded="true" />
           </folding>
         </state>
       </provider>

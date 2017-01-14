@@ -1,12 +1,12 @@
 package com.av.ringtone.logic.home;
 
+import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.model.HomeModel;
 import com.av.ringtone.utils.ShareUtils;
 import com.facebook.ads.Ad;
-import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
 import com.facebook.ads.MediaView;
@@ -21,9 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,9 +43,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     private NativeAd mSmallNativeAd;
     private NativeAd mBigNativeAd;
-
-    private String mSmallAdPlacementId = "179525592481992_179525999148618";
-    private String mBigAdPlacementId = "179525592481992_179525999148618";
 
     private final static String EVENT_Big_AD_TYPE = "Home_Big_NativeAd_Click";
     private final static String EVENT_Big_AD_NAME = "Home_Big_NativeAd";
@@ -87,6 +82,14 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mAdapter = new MyAdapter(getActivity());
         mGridView.setAdapter(mAdapter);
         loadAds();
+
+        if (UserDatas.getInstance().getCutCount() >= 3) {
+            mSharell.setVisibility(View.VISIBLE);
+        } else {
+            mSharell.setVisibility(View.GONE);
+        }
+        mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+
     }
 
     @Override
@@ -120,7 +123,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mSharell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtils.shareText(mActivity);
+                ShareUtils.shareHomeText(mActivity);
             }
         });
     }
@@ -144,7 +147,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     @Override
     public void updateCutCount(int count) {
-        if (count > 3) {
+        if (count >= 3) {
             mSharell.setVisibility(View.VISIBLE);
         } else {
             mSharell.setVisibility(View.GONE);
@@ -153,7 +156,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     }
 
     private void showSmallNativeAd() {
-        mSmallNativeAd = new NativeAd(mActivity, mSmallAdPlacementId);
+        mSmallNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_SMALL);
         // AdSettings.addTestDevice("77bb29fa8fa20aaa97ce77cfe38e36b4");
         mSmallNativeAd.setAdListener(new AdListener() {
 
@@ -182,7 +185,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     }
 
     private void showBigNativeAd() {
-        mBigNativeAd = new NativeAd(mActivity, mBigAdPlacementId);
+        mBigNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_BIG);
         mBigNativeAd.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError error) {

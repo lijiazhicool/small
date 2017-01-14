@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@+id/type_iv"
+            android:layout_toLeftOf="@+id/popup_menu"
             android:orientation="vertical"
             android:paddingLeft="12dp"
             android:paddingTop="5dp">

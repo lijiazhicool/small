@@ -1,5 +1,7 @@
 package com.av.ringtone.utils;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -40,7 +42,7 @@ public class FileUtils {
      * @return amr文件时间长度
      * @throws IOException
      */
-    public int getAmrDuration(File file) throws IOException {
+    public static int getAmrDuration(File file) throws IOException {
         long duration = -1;
         int[] packedSize = { 12, 13, 15, 17, 19, 20, 26, 31, 5, 0, 0, 0, 0, 0, 0, 0 };
         RandomAccessFile randomAccessFile = null;
@@ -70,5 +72,16 @@ public class FileUtils {
             }
         }
         return (int) ((duration / 1000) + 1);
+    }
+
+    public static String getSDPath(){
+        File sdDir = null;
+        boolean sdCardExist = Environment.getExternalStorageState()
+                .equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
+        if (sdCardExist)
+        {
+            sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+        }
+        return sdDir.toString();
     }
 }

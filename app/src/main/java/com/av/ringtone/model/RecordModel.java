@@ -13,9 +13,10 @@ import com.av.ringtone.utils.modelcache.IBaseCacheModel;
 public class RecordModel extends BaseModel implements Serializable, IBaseCacheModel {
     public int type = FILE_KIND_RECORD;
 
-    public RecordModel(String title, String path, int duration) {
+    public RecordModel(String title, String path, int duration, long date) {
         this.title = title;
         this.path = path;
         this.duration = duration;
+        this.date = date;
     }
 }

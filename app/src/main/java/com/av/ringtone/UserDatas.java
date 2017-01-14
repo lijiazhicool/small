@@ -169,6 +169,11 @@ public class UserDatas {
         if (null != mCountListener) {
             mCountListener.updatecount(getSongs().size(), getRecords().size(), getCuttereds().size());
         }
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.updateCutters(getCuttereds());
+            }
+        }
 
         addCutCount();
     }
@@ -217,6 +222,7 @@ public class UserDatas {
                 listener.updateCutters();
             }
         }
+        mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
     }
 
     public void sortByName(int sortType) {

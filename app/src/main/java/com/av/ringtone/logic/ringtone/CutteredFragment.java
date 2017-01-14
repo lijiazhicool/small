@@ -7,13 +7,19 @@ import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.utils.FileUtils;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -24,7 +30,12 @@ import java.util.List;
 public class CutteredFragment extends BaseFragment implements UserDatas.DataChangedListener {
     private RecyclerView mRecyclerView;
     private CuttersAdapter mAdapter;
-    private LinearLayout mEmptyll;
+    private TextView mEmptyTv;
+    private TextView mPathTv;
+
+    private boolean mSortReverseByName = true;
+    private boolean mSortReverseByLength = true;
+    private boolean mSortReverseByDate = true;
 
     @Override
     protected int getLayoutId() {
@@ -33,7 +44,9 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
-        mEmptyll = findViewById(R.id.emptyll);
+        mEmptyTv = findViewById(R.id.empty_tv);
+        mPathTv = findViewById(R.id.path_tv);
+
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -47,7 +60,29 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     protected void initListener() {
+        mPathTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAssignFolder(FileUtils.getSDPath());
+            }
+        });
+    }
 
+    //使用文件管理器打开指定文件夹
+    private void openAssignFolder(String path){
+        File file = new File(path);
+        if(null==file || !file.exists()){
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.fromFile(file), "file/*");
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -84,14 +119,11 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     public void updateCutters(List<CutterModel> list) {
-        if (mAdapter!= null && mAdapter.getDatas() == list){
-            return;
-        }
         mAdapter = new CuttersAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
-            mEmptyll.setVisibility(View.VISIBLE);
+            mEmptyTv.setVisibility(View.VISIBLE);
         } else {
-            mEmptyll.setVisibility(View.GONE);
+            mEmptyTv.setVisibility(View.GONE);
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -101,24 +133,42 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             return;
         }
         List<CutterModel> list = mAdapter.getDatas();
-        Collections.sort(list, new Comparator<CutterModel>(){
+        if (mSortReverseByName){
+            Collections.sort(list, new Comparator<CutterModel>(){
 
-            /*
-             * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-             * 返回负数表示：o1 小于o2，
-             * 返回0 表示：o1和o2相等，
-             * 返回正数表示：o1大于o2。
-             */
-            public int compare(CutterModel o1, CutterModel o2) {
-
-                //按照学生的年龄进行升序排列
-                if(o1.title.compareTo(o2.title)>0){
-                    return 1;
+                /*
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+                 * 返回负数表示：o1 小于o2，
+                 * 返回0 表示：o1和o2相等，
+                 * 返回正数表示：o1大于o2。
+                 */
+                public int compare(CutterModel o1, CutterModel o2) {
+                    if(o1.title.compareTo(o2.title)<0){
+                        return 1;
+                    }
+                    return -1;
                 }
-                return -1;
-            }
-        });
+            });
+        } else {
+            Collections.sort(list, new Comparator<CutterModel>(){
+
+                /*
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+                 * 返回负数表示：o1 小于o2，
+                 * 返回0 表示：o1和o2相等，
+                 * 返回正数表示：o1大于o2。
+                 */
+                public int compare(CutterModel o1, CutterModel o2) {
+                    if(o1.title.compareTo(o2.title)>0){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
+        }
         mAdapter.upateDatas(list);
+
+        mSortReverseByName = !mSortReverseByName;
     }
 
     @Override
@@ -127,20 +177,34 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             return;
         }
         List<CutterModel> list = mAdapter.getDatas();
-        Collections.sort(list, new Comparator<CutterModel>(){
-            public int compare(CutterModel o1, CutterModel o2) {
 
-                //按照学生的年龄进行升序排列
-                if(o1.duration > o2.duration){
-                    return 1;
+        if (mSortReverseByLength){
+            Collections.sort(list, new Comparator<CutterModel>(){
+                public int compare(CutterModel o1, CutterModel o2) {
+                    if(o1.duration < o2.duration){
+                        return 1;
+                    }
+                    if(o1.duration == o2.duration){
+                        return 0;
+                    }
+                    return -1;
                 }
-                if(o1.duration == o2.duration){
-                    return 0;
+            });
+        } else {
+            Collections.sort(list, new Comparator<CutterModel>(){
+                public int compare(CutterModel o1, CutterModel o2) {
+                    if(o1.duration > o2.duration){
+                        return 1;
+                    }
+                    if(o1.duration == o2.duration){
+                        return 0;
+                    }
+                    return -1;
                 }
-                return -1;
-            }
-        });
+            });
+        }
         mAdapter.upateDatas(list);
+        mSortReverseByLength = !mSortReverseByLength;
     }
 
     @Override
@@ -149,19 +213,33 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             return;
         }
         List<CutterModel> list = mAdapter.getDatas();
-        Collections.sort(list, new Comparator<CutterModel>(){
-            public int compare(CutterModel o1, CutterModel o2) {
-
-                //按照学生的年龄进行升序排列
-                if(o1.date > o2.date){
-                    return 1;
+        if (mSortReverseByDate){
+            Collections.sort(list, new Comparator<CutterModel>(){
+                public int compare(CutterModel o1, CutterModel o2) {
+                    if(o1.date < o2.date){
+                        return 1;
+                    }
+                    if(o1.date == o2.date){
+                        return 0;
+                    }
+                    return -1;
                 }
-                if(o1.date == o2.date){
-                    return 0;
+            });
+        } else {
+            Collections.sort(list, new Comparator<CutterModel>(){
+                public int compare(CutterModel o1, CutterModel o2) {
+                    //按照学生的年龄进行倒序排列
+                    if(o1.date > o2.date){
+                        return 1;
+                    }
+                    if(o1.date == o2.date){
+                        return 0;
+                    }
+                    return -1;
                 }
-                return -1;
-            }
-        });
+            });
+        }
         mAdapter.upateDatas(list);
+        mSortReverseByDate = !mSortReverseByDate;
     }
 }

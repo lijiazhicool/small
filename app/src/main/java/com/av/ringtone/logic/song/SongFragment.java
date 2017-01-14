@@ -11,7 +11,6 @@ import com.av.ringtone.utils.ToastUtils;
 
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,10 +24,14 @@ import java.util.List;
  * 我的音乐
  */
 public class SongFragment extends BaseFragment implements UserDatas.DataChangedListener {
-    private SwipeRefreshLayout mSwipeLayout;
+//    private SwipeRefreshLayout mSwipeLayout;
     private RecyclerView mRecyclerView;
     private SongsAdapter mAdapter;
     private LinearLayout mEmptyll;
+
+    private boolean mSortReverseByName = true;
+    private boolean mSortReverseByLength = true;
+    private boolean mSortReverseByDate = true;
 
     @Override
     protected int getLayoutId() {
@@ -37,11 +40,11 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
-        mSwipeLayout = findViewById(R.id.id_swipe_ly);
-        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-            android.R.color.holo_orange_light, android.R.color.holo_red_light);
+//        mSwipeLayout = findViewById(R.id.id_swipe_ly);
+//        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+//            android.R.color.holo_orange_light, android.R.color.holo_red_light);
 
-        mEmptyll = findViewById(R.id.emptyll);
+        mEmptyll = findViewById(R.id.empty_tv);
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -67,12 +70,12 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     protected void initListener() {
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                UserDatas.getInstance().loadMusics();
-            }
-        });
+//        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                UserDatas.getInstance().loadMusics();
+//            }
+//        });
     }
 
     @Override
@@ -89,10 +92,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void updateSongs(List<SongModel> list) {
-        if (mAdapter!= null && mAdapter.getDatas() == list){
-            return;
-        }
-        mSwipeLayout.setRefreshing(false);
+//        mSwipeLayout.setRefreshing(false);
         mAdapter = new SongsAdapter((BaseActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
             mEmptyll.setVisibility(View.VISIBLE);
@@ -119,68 +119,117 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByName(int sortType) {
-        if (sortType != UserDatas.SORT_SONG) {
+        if (sortType!= UserDatas.SORT_SONG){
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        Collections.sort(list, new Comparator<SongModel>() {
+        if (mSortReverseByName){
+            Collections.sort(list, new Comparator<SongModel>(){
 
-            /*
-             * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
-             */
-            public int compare(SongModel o1, SongModel o2) {
-
-                // 按照学生的年龄进行升序排列
-                if (o1.title.compareTo(o2.title) > 0) {
-                    return 1;
+                /*
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+                 * 返回负数表示：o1 小于o2，
+                 * 返回0 表示：o1和o2相等，
+                 * 返回正数表示：o1大于o2。
+                 */
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.title.compareTo(o2.title)<0){
+                        return 1;
+                    }
+                    return -1;
                 }
-                return -1;
-            }
-        });
+            });
+        } else {
+            Collections.sort(list, new Comparator<SongModel>(){
+
+                /*
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+                 * 返回负数表示：o1 小于o2，
+                 * 返回0 表示：o1和o2相等，
+                 * 返回正数表示：o1大于o2。
+                 */
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.title.compareTo(o2.title)>0){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
+        }
         mAdapter.upateDatas(list);
+
+        mSortReverseByName = !mSortReverseByName;
     }
 
     @Override
     public void sortByLength(int sortType) {
-        if (sortType != UserDatas.SORT_SONG) {
+        if (sortType!= UserDatas.SORT_SONG){
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        Collections.sort(list, new Comparator<SongModel>() {
-            public int compare(SongModel o1, SongModel o2) {
 
-                // 按照学生的年龄进行升序排列
-                if (o1.duration > o2.duration) {
-                    return 1;
+        if (mSortReverseByLength){
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.duration < o2.duration){
+                        return 1;
+                    }
+                    if(o1.duration == o2.duration){
+                        return 0;
+                    }
+                    return -1;
                 }
-                if (o1.duration == o2.duration) {
-                    return 0;
+            });
+        } else {
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.duration > o2.duration){
+                        return 1;
+                    }
+                    if(o1.duration == o2.duration){
+                        return 0;
+                    }
+                    return -1;
                 }
-                return -1;
-            }
-        });
+            });
+        }
         mAdapter.upateDatas(list);
+        mSortReverseByLength = !mSortReverseByLength;
     }
 
     @Override
     public void sortByDate(int sortType) {
-        if (sortType != UserDatas.SORT_SONG) {
+        if (sortType!= UserDatas.SORT_SONG){
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        Collections.sort(list, new Comparator<SongModel>() {
-            public int compare(SongModel o1, SongModel o2) {
-
-                // 按照学生的年龄进行升序排列
-                if (o1.date > o2.date) {
-                    return 1;
+        if (mSortReverseByDate){
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.date < o2.date){
+                        return 1;
+                    }
+                    if(o1.date == o2.date){
+                        return 0;
+                    }
+                    return -1;
                 }
-                if (o1.date == o2.date) {
-                    return 0;
+            });
+        } else {
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    //按照学生的年龄进行倒序排列
+                    if(o1.date > o2.date){
+                        return 1;
+                    }
+                    if(o1.date == o2.date){
+                        return 0;
+                    }
+                    return -1;
                 }
-                return -1;
-            }
-        });
+            });
+        }
         mAdapter.upateDatas(list);
+        mSortReverseByDate = !mSortReverseByDate;
     }
 }

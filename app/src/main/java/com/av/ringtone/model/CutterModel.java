@@ -15,7 +15,7 @@ public class CutterModel extends BaseModel implements IBaseCacheModel, Serializa
     public  String localPath; // 本地自己存储的路径
     public int playStatus = 0;//0 无效、1播放、2停止
 
-    public CutterModel(int type, String title, String path, String artisit, int duration, long fileSize,String localPath) {
+    public CutterModel(int type, String title, String path, String artisit, int duration, long fileSize,String localPath, long date) {
         this.type = type;
         this.title = title;
         this.path = path;
@@ -23,5 +23,6 @@ public class CutterModel extends BaseModel implements IBaseCacheModel, Serializa
         this.duration = duration;
         this.fileSize = fileSize;
         this.localPath = localPath;
+        this.date = date;
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:id="@+id/menu_group_sort">
         <item
             android:id="@+id/menu_sort"
@@ -27,21 +28,21 @@
     <item
         android:id="@+id/menu_about"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_about" />
     <item
         android:id="@+id/menu_rate"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_rate" />
     <item
         android:id="@+id/menu_invite"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_invite" />
     <item
         android:id="@+id/menu_help"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_help" />
 </menu>

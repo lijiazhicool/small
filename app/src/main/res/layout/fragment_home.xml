@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="72dip"
         android:visibility="gone"
-        android:background="@drawable/item_shape_bg_home"
+        android:background="@drawable/item_bg_home"
         android:layout_marginLeft="@dimen/padding_16"
         android:layout_marginRight="@dimen/padding_16"
         android:gravity="center_vertical"

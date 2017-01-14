@@ -20,12 +20,7 @@ import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
-import com.av.ringtone.views.ExitDialog;
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.NativeAd;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.av.ringtone.utils.ToastUtils;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import android.content.Context;
@@ -45,7 +40,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -74,10 +68,6 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
     private boolean mIsPlaying;
     private MediaPlayer mPlayer;
-
-    static NativeAd nativeAd;
-    private String mAdPlacementId = "179525592481992_179525999148618";
-    private boolean isAdLoaded = false;
 
     private CutterModel currentModel = null;
 
@@ -186,7 +176,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
                                 launchAppDetail(appPackageName, "com.android.vending");
                                 break;
                             case R.id.menu_invite:
-                                ShareUtils.shareText(MainActivity.this);
+                                ShareUtils.shareAppText(MainActivity.this);
                                 break;
                             case R.id.menu_help:
                                 ShareUtils.adviceEmail(MainActivity.this);
@@ -348,35 +338,33 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
         UserDatas.getInstance().setContext(this);
         UserDatas.getInstance().loadDatas();
-
-        loadExitAd();
     }
 
-    private void loadExitAd() {
-        nativeAd = new NativeAd(this, mAdPlacementId);
-        // AdSettings.addTestDevice("77bb29fa8fa20aaa97ce77cfe38e36b4");
-        nativeAd.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError error) {
-                System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                isAdLoaded = true;
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_TYPE);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-                mFirebaseAnalytics.logEvent(EVENT_AD_ID, bundle);
-            }
-        });
-        // Request an ad
-        nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
-    }
+//    private void loadExitAd() {
+//        nativeAd = new NativeAd(this, Constants.AD_PLACE_EXIT);
+//        // AdSettings.addTestDevice("77bb29fa8fa20aaa97ce77cfe38e36b4");
+//        nativeAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onError(Ad ad, AdError error) {
+//                System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
+//            }
+//
+//            @Override
+//            public void onAdLoaded(Ad ad) {
+//                isAdLoaded = true;
+//            }
+//
+//            @Override
+//            public void onAdClicked(Ad ad) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_TYPE);
+//                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+//                mFirebaseAnalytics.logEvent(EVENT_AD_ID, bundle);
+//            }
+//        });
+//        // Request an ad
+//        nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
+//    }
 
     private void freshMediaDB() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -520,22 +508,36 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         mPlayer = null;
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
+//    @Override
+//    public boolean onKeyUp(int keyCode, KeyEvent event) {
+//        switch (keyCode) {
+//            case KeyEvent.KEYCODE_BACK:
+//
+//                DeleteDialog dialog =
+//                    new DeleteDialog(MainActivity.this, isAdLoaded ? nativeAd : null, new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            finish();
+//                        }
+//                    });
+//                dialog.setCancelable(false);
+//                dialog.show();
+//                break;
+//        }
+//        return true;
+//    }
 
-                ExitDialog dialog =
-                    new ExitDialog(MainActivity.this, isAdLoaded ? nativeAd : null, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    });
-                dialog.setCancelable(false);
-                dialog.show();
-                break;
+    private long mPressedTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        long mNowTime = System.currentTimeMillis();// 获取第一次按键时间
+        if ((mNowTime - mPressedTime) > 2000) {// 比较两次按键时间差
+            ToastUtils.makeToastAndShow(this, "Press it again to return key to exit!");
+            mPressedTime = mNowTime;
+        } else {// 退出程序
+            this.finish();
+            System.exit(0);
         }
-        return true;
     }
 }

@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity
             android:name=".logic.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -45,7 +46,6 @@
             android:name="com.facebook.ads.InterstitialAdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
-        <!--<activity android:name=".logic.Main2Activity"></activity>-->
     </application>
 
 </manifest>

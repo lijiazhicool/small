@@ -8,22 +8,37 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 
+import com.av.ringtone.R;
+import com.av.ringtone.UserDatas;
+
 /**
  * Created by LiJiaZhi on 16/12/18. share
  */
 
 public class ShareUtils {
-    // 分享文字
-    public static void shareText(Activity act) {
+    // 分享文字--全局
+    public static void shareAppText(Activity act) {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT,
-            "Great app for mp3 cutter! Try Mp3 Cutter & Ringtone Maker now! https://play.google.com/store/apps/details?id=com.happykids.zoo");
+            "I'm using a great ringtone maker APP,come and enjoy in MP3 cutter and ringtone maker. https://play.google.com/store/apps/details?id=com.av.ringtone");
         shareIntent.setType("text/plain");
 
         // 设置分享列表的标题，并且每次都显示分享列表
-        act.startActivity(Intent.createChooser(shareIntent, "分享到"));
+        act.startActivity(Intent.createChooser(shareIntent, "Share To"));
     }
+    //home
+    public static void shareHomeText(Activity act) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                String.format("I have maked %1$d ringtones with  mp3 cutter and ringtone maker APP,come and enjoy it ! https://play.google.com/store/apps/details?id=com.av.ringtone", UserDatas.getInstance().getCutCount()));
+        shareIntent.setType("text/plain");
+
+        // 设置分享列表的标题，并且每次都显示分享列表
+        act.startActivity(Intent.createChooser(shareIntent, "Share To"));
+    }
+
 
     public static void shareMultipleImage(Activity act) {
         ArrayList<Uri> uriList = new ArrayList<>();
@@ -37,7 +52,7 @@ public class ShareUtils {
         shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
         shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriList);
         shareIntent.setType("image/*");
-        act.startActivity(Intent.createChooser(shareIntent, "分享到"));
+        act.startActivity(Intent.createChooser(shareIntent, "Share To"));
     }
 
     public static void shareFile(Activity act, Uri uri) {
@@ -61,8 +76,8 @@ public class ShareUtils {
 
     public static void adviceEmail(Activity act) {
         Intent data = new Intent(Intent.ACTION_SENDTO);
-        data.setData(Uri.parse("mailto:lijiazhicool@gmail.com"));
-        data.putExtra(Intent.EXTRA_SUBJECT, "Cutter");
+        data.setData(Uri.parse("mailto: wenjoyai@gmail.com"));
+        data.putExtra(Intent.EXTRA_SUBJECT, act.getString(R.string.app_name));
         act.startActivity(data);
     }
 }

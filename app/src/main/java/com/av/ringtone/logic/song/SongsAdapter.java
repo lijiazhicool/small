@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.av.ringtone.R;
 import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.DeleteDialog;
 
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -49,7 +51,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
         SongModel localItem = mDatas.get(i);
         itemHolder.type.setImageResource(R.drawable.ic_music_small);
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " " + localItem.artist +" "+ FileUtils.getFileDir(localItem.path));
+        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " | " + localItem.artist + " | "
+            + FileUtils.getFileDir(localItem.path));
         itemHolder.rl.setTag(localItem);
         itemHolder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +65,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
     }
 
     private String getDuration(int d) {
-        int min = d/60;
-        int sec = (int)(d - 60 * min);
+        int min = d / 60;
+        int sec = (int) (d - 60 * min);
         return String.format("%02d:%02d", min, sec);
     }
 
@@ -87,23 +90,40 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                                 NavigationUtils.goToCutter(mContext, tempModel);
                                 break;
                             case R.id.popup_song_delete:
-                                File file = new File(tempModel.path);
-                                if (file.exists()) {
-                                    if (file.delete()) {
-                                        ToastUtils.makeToastAndShow(mContext, file.getPath() + mContext.getString(R.string.delete_success));
-                                    } else {
-                                        ToastUtils.makeToastAndShow(mContext, file.getPath() + mContext.getString(R.string.delete_failed));
-                                    }
-                                    String params[] = new String[] { file.getPath() };
-                                    mContext.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                                        MediaStore.Images.Media.DATA + " LIKE ?", params);
-                                    mDatas.remove(position);
-                                    notifyItemRemoved(position);
-                                }
+                                DeleteDialog dialog =
+                                        new DeleteDialog(mContext, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                File file = new File(tempModel.path);
+                                                if (file.exists()) {
+                                                    file.delete();
+                                                    String params[] = new String[] { file.getPath() };
+                                                    mContext.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                                                            MediaStore.Images.Media.DATA + " LIKE ?", params);
+                                                }
+                                                mDatas.remove(tempModel);
+                                                notifyDataSetChanged();
+                                                ToastUtils.makeToastAndShow(mContext,
+                                                        file.getPath() + mContext.getString(R.string.delete_success));
+                                            }
+                                        });
+                                dialog.setCancelable(false);
+                                dialog.show();
                                 break;
                             case R.id.popup_song_default:
                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE,
+                                    Uri.fromFile(new File(tempModel.path)));
+                                ToastUtils.makeToastAndShow(mContext, "Set Ringtone Success!");
+                                break;
+                            case R.id.popup_song_notification:
+                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION,
                                         Uri.fromFile(new File(tempModel.path)));
+                                ToastUtils.makeToastAndShow(mContext, "Set Notification Success!");
+                                break;
+                            case R.id.popup_song_alarm:
+                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM,
+                                        Uri.fromFile(new File(tempModel.path)));
+                                ToastUtils.makeToastAndShow(mContext, "Set Alarm Success!");
                                 break;
                         }
                         return false;
@@ -133,7 +153,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
     public List<SongModel> getDatas() {
         return mDatas;
     }
-    public void upateDatas(List<SongModel> list){
+
+    public void upateDatas(List<SongModel> list) {
         mDatas = list;
         notifyDataSetChanged();
     }

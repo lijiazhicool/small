@@ -12,7 +12,9 @@ import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.DeleteDialog;
 
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -55,7 +57,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         RecordModel localItem = mDatas.get(i);
         itemHolder.type.setImageResource(R.drawable.icon_record);
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " " + FileUtils.getFileDir(localItem.path));
+        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
         itemHolder.rl.setTag(localItem);
         itemHolder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,20 +95,23 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                                 NavigationUtils.goToCutter(mContext, tempModel);
                                 break;
                             case R.id.popup_song_delete:
-                                //只删除纪录，不删除文件
-                                File file = new File(tempModel.path);
-                                if (file.exists()) {
-                                    if (file.delete()) {
-                                        ToastUtils.makeToastAndShow(mContext,
-                                                file.getPath() + mContext.getString(R.string.delete_success));
-                                    } else {
-                                        ToastUtils.makeToastAndShow(mContext,
-                                                file.getPath() + mContext.getString(R.string.delete_failed));
-                                    }
-                                    mDatas.remove(tempModel);
-                                    UserDatas.getInstance().setRecords(mDatas);
-                                    notifyItemRemoved(position);
-                                }
+                                DeleteDialog dialog =
+                                        new DeleteDialog(mContext, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                File file = new File(tempModel.path);
+                                                if (file.exists()) {
+                                                    file.delete();
+                                                }
+                                                mDatas.remove(tempModel);
+                                                UserDatas.getInstance().setRecords(mDatas);
+                                                notifyDataSetChanged();
+                                                ToastUtils.makeToastAndShow(mContext,
+                                                        file.getPath() + mContext.getString(R.string.delete_success));
+                                            }
+                                        });
+                                dialog.setCancelable(false);
+                                dialog.show();
                                 break;
                         }
                         return false;

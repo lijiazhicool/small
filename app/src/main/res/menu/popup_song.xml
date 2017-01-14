@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/popup_song_edit"
+        app:showAsAction="never"
         android:title="@string/edit" />
     <item
         android:id="@+id/popup_song_delete"
+        app:showAsAction="never"
         android:title="@string/delete" />
     <item
         android:id="@+id/popup_song_default"
-        android:actionProviderClass="android.widget.ShareActionProvider"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/menu_set_default" />
+
+    <item
+        android:id="@+id/popup_song_notification"
+        app:showAsAction="never"
+        android:title="@string/menu_set_notification" />
+    <item
+        android:id="@+id/popup_song_alarm"
+        app:showAsAction="never"
+        android:title="@string/menu_set_alarm" />
 </menu>

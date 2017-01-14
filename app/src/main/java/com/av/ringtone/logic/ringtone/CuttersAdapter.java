@@ -13,6 +13,7 @@ import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.DeleteDialog;
 
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -76,7 +77,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
         }
 
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " " + localItem.artist + " " + FileUtils.getFileDir(localItem.path));
+        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
         setOnPopupMenuListener(itemHolder, i);
         itemHolder.rl.setTag(localItem);
         itemHolder.rl.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +109,8 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
     }
 
     private String getDuration(int d) {
-        int min = d/60;
-        int sec = (int)(d - 60 * min);
+        int min = d / 60;
+        int sec = (int) (d - 60 * min);
         return String.format("%02d:%02d", min, sec);
     }
 
@@ -131,42 +132,49 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         Uri newUri = Uri.fromFile(new File(tempModel.path));
                         switch (item.getItemId()) {
                             case R.id.menu_edit:
-                                SongModel model = new SongModel(tempModel.title, tempModel.path, tempModel.duration,tempModel.date);
+                                SongModel model =
+                                    new SongModel(tempModel.title, tempModel.path, tempModel.duration, tempModel.date);
                                 NavigationUtils.goToCutter(mContext, model);
                                 break;
                             case R.id.menu_default:
                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE,
                                     newUri);
+                                ToastUtils.makeToastAndShow(mContext, "Set Ringtone Success!");
                                 break;
                             case R.id.menu_notification:
                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION,
                                     newUri);
+                                ToastUtils.makeToastAndShow(mContext, "Set Notification Success!");
                                 break;
                             case R.id.menu_alarm:
                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM,
                                     newUri);
+                                ToastUtils.makeToastAndShow(mContext, "Set Alarm Success!");
                                 break;
                             case R.id.menu_delete:
-                                if (tempModel.playStatus == 1 && null != mListener) {
-                                    mListener.stop();
-                                }
-                                File file = new File(tempModel.path);
-                                if (file.exists()) {
-                                    if (file.delete()) {
-                                        ToastUtils.makeToastAndShow(mContext,
-                                            file.getPath() + mContext.getString(R.string.delete_success));
-                                    } else {
-                                        ToastUtils.makeToastAndShow(mContext,
-                                            file.getPath() + mContext.getString(R.string.delete_failed));
-                                    }
-                                    String params[] = new String[] { file.getPath() };
-                                    mContext.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                                        MediaStore.Images.Media.DATA + " LIKE ?", params);
-                                    mDatas.remove(position);
-                                    notifyItemRemoved(position);
-
-                                    UserDatas.getInstance().setCuttereds(mDatas);
-                                }
+                                DeleteDialog dialog =
+                                        new DeleteDialog(mContext, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                if (tempModel.playStatus == 1 && null != mListener) {
+                                                    mListener.stop();
+                                                }
+                                                File file = new File(tempModel.path);
+                                                if (file.exists()) {
+                                                    file.delete();
+                                                    String params[] = new String[] { file.getPath() };
+                                                    mContext.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                                                            MediaStore.Images.Media.DATA + " LIKE ?", params);
+                                                }
+                                                mDatas.remove(tempModel);
+                                                notifyDataSetChanged();
+                                                UserDatas.getInstance().setCuttereds(mDatas);
+                                                ToastUtils.makeToastAndShow(mContext,
+                                                        file.getPath() + mContext.getString(R.string.delete_success));
+                                            }
+                                        });
+                                dialog.setCancelable(false);
+                                dialog.show();
                                 break;
                             case R.id.menu_share:
                                 ShareUtils.shareFile(mContext, Uri.fromFile(new File(tempModel.localPath)));
@@ -181,7 +189,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
         });
     }
 
-    public void upateDatas(List<CutterModel> list){
+    public void upateDatas(List<CutterModel> list) {
         mDatas = list;
         notifyDataSetChanged();
     }

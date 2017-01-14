@@ -1,32 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.av.ringtone.logic.song.SongFragment">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/path_tv" />
 
-    <LinearLayout
-        android:id="@+id/emptyll"
+    <TextView
+        android:id="@+id/empty_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_centerInParent="true"
+        android:text="@string/no_data"
+        android:textSize="20dip" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_ringtone_no_data_hint" />
+    <TextView
+        android:id="@+id/path_tv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="sfdsfdsfsdf" />
 
-        <TextView
-            android:layout_marginTop="10dip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_data" />
-    </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

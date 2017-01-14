@@ -76,7 +76,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private TextView mTotaltv;
     private LinearLayout mAdll;
 
-    private String adPlacementId = "179525592481992_179525999148618";
     private AdView adView;
     private final static String EVENT_AD_TYPE = "AdView_Click";
     private final static String EVENT_AD_NAME = "AdView";
@@ -226,7 +225,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
     protected void loadBanner() {
         // Instantiate an AdView view
-        adView = new AdView(this, adPlacementId, AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
 
         adView.setAdListener(new AdListener() {
             @Override
@@ -660,11 +659,11 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                 System.out.println("Seek test done, creating media player.");
                 try {
                     MediaPlayer player = new MediaPlayer();
-                    player.setDataSource(mFile.getAbsolutePath());
+                    player.setDataSource(new FileInputStream(mFile.getAbsolutePath()).getFD());
                     player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     player.prepare();
                     mPlayer = player;
-                } catch (final java.io.IOException e) {
+                } catch (final Exception e) {
                     Runnable runnable = new Runnable() {
                         public void run() {
                             handleFatalError("ReadError", getResources().getText(R.string.read_error), e);
@@ -672,7 +671,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                     };
                     mHandler.post(runnable);
                 }
-                ;
             }
         }.start();
 
@@ -1343,7 +1341,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         // save data
         UserDatas.getInstance().addCuttereds(
-            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath));
+            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath,outFile.lastModified()));
 
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
@@ -1451,7 +1449,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         // save data
         UserDatas.getInstance().addCuttereds(
-            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath));
+            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath,outFile.lastModified()));
 
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
@@ -1482,7 +1480,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
     private void handleFatalError(final CharSequence errorInternalName, final CharSequence errorString,
         final Exception exception) {
-        Log.i("Ringdroid", "handleFatalError");
+        Log.i("Ringdroid", "handleFatalError " + errorInternalName +" "+errorString);
 
         // SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
         // int failureCount = prefs.getInt(PREF_ERROR_COUNT, 0);

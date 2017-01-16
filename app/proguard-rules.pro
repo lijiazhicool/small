@@ -28,3 +28,7 @@
 }
 
 -keep class com.av.ringtone.model.** { *; }
+
+# 第三方包 jl1.0.1.jar
+-dontwarn javazoom.jl.**
+-keep class javazoom.jl.** { *;}

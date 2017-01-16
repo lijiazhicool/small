@@ -2,8 +2,10 @@ package com.av.ringtone.logic.ringtone;
 
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
+import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
+import com.av.ringtone.logic.record.RecordsAdapter;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
@@ -23,6 +25,11 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static com.av.ringtone.Constants.FILE_KIND_ALARM;
+import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
+import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
+import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
 
 /**
  * cuttered
@@ -55,7 +62,72 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     protected void initData() {
+        List<CutterModel> list = UserDatas.getInstance().getCuttereds();
+        if (list.size()==0){
+            //load from sdcard---ringtone
+            String ringtonePath = FileUtils.getRingtonePath(mActivity);
+            File ringtonefile = new File(ringtonePath);
+            File[] ringtonesubFile = ringtonefile.listFiles();
+            for (int iFileLength = 0; iFileLength < ringtonesubFile.length; iFileLength++) {
+                // 判断是否为文件夹
+                if (!ringtonesubFile[iFileLength].isDirectory()) {
+                    File temp = ringtonesubFile[iFileLength];
+                    String fileName = temp.getName();
+                    String artist = "" + getResources().getText(R.string.artist_name);
 
+                    CutterModel tempModel = new CutterModel(FILE_KIND_RINGTONE,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),temp.lastModified());
+                    UserDatas.getInstance().addCuttereds(tempModel);
+                }
+            }
+
+            //load from sdcard---music
+            String musicpath = FileUtils.getMusicPath(mActivity);
+            File musicfile = new File(musicpath);
+            File[] musicsubFile = musicfile.listFiles();
+            for (int iFileLength = 0; iFileLength < musicsubFile.length; iFileLength++) {
+                // 判断是否为文件夹
+                if (!musicsubFile[iFileLength].isDirectory()) {
+                    File temp = musicsubFile[iFileLength];
+                    String fileName = temp.getName();
+                    String artist = "" + getResources().getText(R.string.artist_name);
+
+                    CutterModel tempModel = new CutterModel(FILE_KIND_MUSIC,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    UserDatas.getInstance().addCuttereds(tempModel);
+                }
+            }
+
+            //load from sdcard---notification
+            String notipath = FileUtils.getNotificationPath(mActivity);
+            File notifile = new File(notipath);
+            File[] notisubFile = notifile.listFiles();
+            for (int iFileLength = 0; iFileLength < notisubFile.length; iFileLength++) {
+                // 判断是否为文件夹
+                if (!notisubFile[iFileLength].isDirectory()) {
+                    File temp = notisubFile[iFileLength];
+                    String fileName = temp.getName();
+                    String artist = "" + getResources().getText(R.string.artist_name);
+
+                    CutterModel tempModel = new CutterModel(FILE_KIND_NOTIFICATION,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    UserDatas.getInstance().addCuttereds(tempModel);
+                }
+            }
+            //load from sdcard---notification
+            String alarmpath = FileUtils.getAlarmPath(mActivity);
+            File alarmfile = new File(alarmpath);
+            File[] alarmsubFile = alarmfile.listFiles();
+            for (int iFileLength = 0; iFileLength < alarmsubFile.length; iFileLength++) {
+                // 判断是否为文件夹
+                if (!alarmsubFile[iFileLength].isDirectory()) {
+                    File temp = alarmsubFile[iFileLength];
+                    String fileName = temp.getName();
+                    String artist = "" + getResources().getText(R.string.artist_name);
+
+                    CutterModel tempModel = new CutterModel(FILE_KIND_ALARM,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    UserDatas.getInstance().addCuttereds(tempModel);
+                }
+            }
+        }
+        mPathTv.setText(FileUtils.getAppDir(getActivity()));
     }
 
     @Override
@@ -63,7 +135,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         mPathTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAssignFolder(FileUtils.getSDPath());
+                openAssignFolder(FileUtils.getAppDir(getActivity()));
             }
         });
     }

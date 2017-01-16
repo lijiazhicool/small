@@ -9,6 +9,7 @@ import com.av.ringtone.utils.ShareUtils;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -157,7 +158,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     private void showSmallNativeAd() {
         mSmallNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_SMALL);
-        // AdSettings.addTestDevice("77bb29fa8fa20aaa97ce77cfe38e36b4");
         mSmallNativeAd.setAdListener(new AdListener() {
 
             @Override
@@ -186,6 +186,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     private void showBigNativeAd() {
         mBigNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_BIG);
+//        AdSettings.addTestDevice("6707cd54fb24a306ba41dfacb8af2d8d");
         mBigNativeAd.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError error) {

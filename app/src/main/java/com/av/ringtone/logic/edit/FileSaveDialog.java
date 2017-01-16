@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.av.ringtone.R;
+import com.av.ringtone.utils.FileUtils;
 
 import static com.av.ringtone.Constants.*;
 
@@ -38,6 +39,7 @@ public class FileSaveDialog extends Dialog {
     private EditText mFilename;
     private Message mResponse;
     private String mOriginalName;
+    private TextView mSavePathTv;
     private ArrayList<String> mTypeArray;
     private int mPreviousSelection;
 
@@ -60,7 +62,7 @@ public class FileSaveDialog extends Dialog {
         }
     }
 
-    public FileSaveDialog(Context context, Resources resources, String originalName, Message response) {
+    public FileSaveDialog(final Context context, Resources resources, String originalName, Message response) {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // Inflate our UI from its XML layout description.
@@ -81,8 +83,10 @@ public class FileSaveDialog extends Dialog {
             new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, mTypeArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTypeSpinner = (Spinner) findViewById(R.id.ringtone_type);
+        mSavePathTv = (TextView) findViewById(R.id.savepath);
         mTypeSpinner.setAdapter(adapter);
         mTypeSpinner.setSelection(FILE_KIND_MUSIC);
+        mSavePathTv.setText(FileUtils.getMusicPath(context));
         mPreviousSelection = FILE_KIND_RINGTONE;
 
         setFilenameEditBoxFromName(false);
@@ -90,6 +94,15 @@ public class FileSaveDialog extends Dialog {
         mTypeSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView parent, View v, int position, long id) {
                 setFilenameEditBoxFromName(true);
+                if (position==0){
+                    mSavePathTv.setText(FileUtils.getMusicPath(context));
+                } else if (position==1){
+                    mSavePathTv.setText(FileUtils.getAlarmPath(context));
+                }else if (position==2){
+                    mSavePathTv.setText(FileUtils.getNotificationPath(context));
+                }else if (position==3){
+                    mSavePathTv.setText(FileUtils.getRingtonePath(context));
+                }
             }
 
             public void onNothingSelected(AdapterView parent) {

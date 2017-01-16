@@ -16,6 +16,7 @@ import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.model.BaseModel;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.soundfile.CheapSoundFile;
+import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.MarkerView;
 import com.av.ringtone.views.WaveformView;
@@ -226,7 +227,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     protected void loadBanner() {
         // Instantiate an AdView view
         adView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
-
         adView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
@@ -1281,30 +1281,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }.start();
     }
 
-    public void copyFile(String oldPath, String newPath) {
-        try {
-            int bytesum = 0;
-            int byteread = 0;
-            File oldfile = new File(oldPath);
-            if (oldfile.exists()) { // 文件不存在时
-                InputStream inStream = new FileInputStream(oldPath); // 读入原文件
-                FileOutputStream fs = new FileOutputStream(newPath);
-                byte[] buffer = new byte[1444];
-                int length;
-                while ((byteread = inStream.read(buffer)) != -1) {
-                    bytesum += byteread; // 字节数 文件大小
-                    System.out.println(bytesum);
-                    fs.write(buffer, 0, byteread);
-                }
-                inStream.close();
-            }
-        } catch (Exception e) {
-            System.out.println("复制单个文件操作出错");
-            e.printStackTrace();
-        }
-
-    }
-
     private void afterSavingRingtone(CharSequence title, String outPath, File outFile, int duration) {
         long length = outFile.length();
         if (length <= 512) {
@@ -1336,8 +1312,19 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         values.put(MediaStore.Audio.Media.IS_MUSIC, mNewFileKind == FILE_KIND_MUSIC);
 
         // 存到自己目录下一份－－不然分享不出去
-        String newPath = getExternalCacheDir().getPath() + "/" + outFile.getName();
-        copyFile(outPath, newPath);
+//        String newPath = getExternalCacheDir().getPath() + "/" + outFile.getName();
+        String newPath = "";
+        if (mNewFileKind == FILE_KIND_MUSIC){
+            newPath = FileUtils.getMusicPath(CutterActivity.this) + "/" + outFile.getName();
+        } else if (mNewFileKind == FILE_KIND_RINGTONE){
+            newPath = FileUtils.getRingtonePath(CutterActivity.this) + "/" + outFile.getName();
+        }else if (mNewFileKind == FILE_KIND_NOTIFICATION){
+            newPath = FileUtils.getNotificationPath(CutterActivity.this) + "/" + outFile.getName();
+        }else if (mNewFileKind == FILE_KIND_ALARM){
+            newPath = FileUtils.getAlarmPath(CutterActivity.this) + "/" + outFile.getName();
+        }
+
+        FileUtils.copyFile(outPath, newPath);
 
         // save data
         UserDatas.getInstance().addCuttereds(
@@ -1444,8 +1431,18 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         values.put(MediaStore.Audio.Media.IS_MUSIC, mNewFileKind == FILE_KIND_MUSIC);
 
         // 存到自己目录下一份－－不然分享不出去
-        String newPath = getExternalCacheDir().getPath() + "/" + outFile.getName();
-        copyFile(outPath, newPath);
+//        String newPath = getExternalCacheDir().getPath() + "/" + outFile.getName();
+        String newPath = "";
+        if (mNewFileKind == FILE_KIND_MUSIC){
+            newPath = FileUtils.getMusicPath(CutterActivity.this) + "/" + outFile.getName();
+        } else if (mNewFileKind == FILE_KIND_RINGTONE){
+            newPath = FileUtils.getRingtonePath(CutterActivity.this) + "/" + outFile.getName();
+        }else if (mNewFileKind == FILE_KIND_NOTIFICATION){
+            newPath = FileUtils.getNotificationPath(CutterActivity.this) + "/" + outFile.getName();
+        }else if (mNewFileKind == FILE_KIND_ALARM){
+            newPath = FileUtils.getAlarmPath(CutterActivity.this) + "/" + outFile.getName();
+        }
+        FileUtils.copyFile(outPath, newPath);
 
         // save data
         UserDatas.getInstance().addCuttereds(
@@ -1480,7 +1477,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
     private void handleFatalError(final CharSequence errorInternalName, final CharSequence errorString,
         final Exception exception) {
-        Log.i("Ringdroid", "handleFatalError " + errorInternalName +" "+errorString);
+        ToastUtils.makeToastAndShow(CutterActivity.this, "Error: "+errorInternalName +" "+errorString);
 
         // SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
         // int failureCount = prefs.getInt(PREF_ERROR_COUNT, 0);

@@ -22,6 +22,7 @@ public class HomeModel extends BaseModel {
     }
 
     public HomeModel(int type, NativeAd ad) {
+        this.type = type;
         this.ad = ad;
     }
 }

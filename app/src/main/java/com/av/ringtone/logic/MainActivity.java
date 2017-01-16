@@ -508,25 +508,6 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
         mPlayer = null;
     }
 
-//    @Override
-//    public boolean onKeyUp(int keyCode, KeyEvent event) {
-//        switch (keyCode) {
-//            case KeyEvent.KEYCODE_BACK:
-//
-//                DeleteDialog dialog =
-//                    new DeleteDialog(MainActivity.this, isAdLoaded ? nativeAd : null, new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            finish();
-//                        }
-//                    });
-//                dialog.setCancelable(false);
-//                dialog.show();
-//                break;
-//        }
-//        return true;
-//    }
-
     private long mPressedTime = 0;
 
     @Override

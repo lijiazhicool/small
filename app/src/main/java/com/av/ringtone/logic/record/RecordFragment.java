@@ -92,6 +92,25 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             ToastUtils.makeToastAndShow(mActivity, getString(R.string.no_sdcard));
             return;
         }
+
+        List<RecordModel> list = UserDatas.getInstance().getRecords();
+        if (list.size()==0){
+            //load from sdcard
+            String path = FileUtils.getRecordPath(mActivity);
+            File file = new File(path);
+            File[] subFile = file.listFiles();
+            for (int iFileLength = 0; iFileLength < subFile.length; iFileLength++) {
+                // 判断是否为文件夹
+                if (!subFile[iFileLength].isDirectory()) {
+                    File temp = subFile[iFileLength];
+                    String fileName = temp.getName();
+                    RecordModel tempModel = new RecordModel(fileName, temp.getAbsolutePath(), FileUtils.getMp3TrackLength(temp), new File(fileName).lastModified());
+                    UserDatas.getInstance().addRecord(tempModel);
+                }
+            }
+            mAdapter = new RecordsAdapter((BaseActivity) getActivity(), UserDatas.getInstance().getRecords());
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 
     @Override
@@ -161,13 +180,10 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
                         Uri uri = data.getData();
                         String filePath = uri.getPath();
                         String fileName = FileUtils.getFileName(filePath);
-                        int duration = 0;
-                        try {
-                            duration = FileUtils.getAmrDuration(new File(filePath));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        RecordModel tempModel = new RecordModel(fileName, filePath, duration, new File(filePath).lastModified());
+                        String newFilePath = FileUtils.getRecordPath(mActivity) + new File(filePath).getName();
+                        FileUtils.copyFile(filePath, newFilePath);
+                        int duration = FileUtils.getMp3TrackLength(new File(filePath));
+                        RecordModel tempModel = new RecordModel(fileName, newFilePath, duration, new File(filePath).lastModified());
                         UserDatas.getInstance().addRecord(tempModel);
                         mAdapter.setDatas(UserDatas.getInstance().getRecords());
                         NavigationUtils.goToCutter(mActivity, tempModel);
@@ -327,7 +343,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
      * @param mFlag，0：录制wav格式，1：录音amr格式
      */
     private void record(int mFlag) {
-        mRecordFilePath = AudioFileFunc.getAMRFilePath(mActivity);
+        mRecordFilePath = FileUtils.getRecordPath(mActivity)+FileUtils.createtFileName();
         if (mState != -1) {
             Message msg = new Message();
             Bundle b = new Bundle();// 存放数据

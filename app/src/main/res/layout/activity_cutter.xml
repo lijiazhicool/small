@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_cutter"
-    android:background="@color/colorPrimary"
-
-    android:fitsSystemWindows="true"
-    android:clipToPadding="true"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -41,19 +41,10 @@
         android:background="#4a4a4a"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/ad_ll"
-            android:layout_width="match_parent"
-            android:layout_height="72dip"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <View style="@style/HorizontalDivider" />
-
-        <AbsoluteLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="230dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <View
                 android:id="@+id/bkgnd"
@@ -84,7 +75,31 @@
                 android:nextFocusUp="@+id/startmarker"
                 android:src="@drawable/marker_right" />
 
-        </AbsoluteLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="60dip"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/zoom_in"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:contentDescription="@string/zoom_in"
+                    android:src="@drawable/ic_zoom_in" />
+
+                <ImageButton
+                    android:id="@+id/zoom_out"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="12dip"
+                    android:contentDescription="@string/zoom_out"
+                    android:src="@drawable/ic_zoom_out" />
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <View style="@style/HorizontalDivider" />
 
@@ -132,16 +147,21 @@
                 android:id="@+id/starttext"
                 android:layout_width="64dip"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/start_label"
-                android:text="00:00213213123123213213213123213123"
-                android:background="@drawable/line_shape_white"
-                android:inputType="numberDecimal"
-                android:digits="1234567890."
-                android:singleLine="true"
-                android:paddingBottom="6dip"
                 android:layout_marginLeft="11dp"
+                android:background="@drawable/line_shape_white"
+                android:contentDescription="@string/start_label"
+                android:digits="1234567890."
+                android:inputType="numberDecimal"
+                android:paddingBottom="6dip"
+                android:singleLine="true"
+                android:text="00:00213213123123213213213123213123"
                 android:textColor="#eeeeee"
                 android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/mark_end"
@@ -157,14 +177,15 @@
                 android:id="@+id/endtext"
                 android:layout_width="64dip"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/end_label"
-                android:text="00:00"
                 android:layout_marginLeft="11dp"
-                android:singleLine="true"
-                android:paddingBottom="6dip"
-                android:inputType="numberDecimal"
-                android:digits="1234567890."
+                android:layout_marginRight="40dip"
                 android:background="@drawable/line_shape_white"
+                android:contentDescription="@string/end_label"
+                android:digits="1234567890."
+                android:inputType="numberDecimal"
+                android:paddingBottom="6dip"
+                android:singleLine="true"
+                android:text="00:00"
                 android:textColor="#eeeeee"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -173,28 +194,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dip"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/padding_16"
+            android:paddingLeft="27dip">
 
             <ImageButton
-                android:id="@+id/set"
+                android:id="@+id/rew"
                 android:layout_width="56dip"
                 android:layout_height="56dip"
-                android:background="@drawable/ic_set" />
+                android:background="@drawable/ic_select_start" />
 
             <ImageButton
                 android:id="@+id/play"
                 android:layout_width="56dip"
                 android:layout_height="56dip"
-                android:layout_marginLeft="36dip"
+                android:layout_marginLeft="@dimen/padding_16"
                 android:background="@drawable/ic_play" />
 
             <ImageButton
-                android:id="@+id/save"
+                android:id="@+id/ffwd"
                 android:layout_width="56dip"
                 android:layout_height="56dip"
-                android:layout_marginLeft="36dip"
-                android:background="@drawable/ic_save" />
+                android:layout_marginLeft="@dimen/padding_16"
+                android:background="@drawable/ic_select_end" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/save"
+                    android:layout_width="56dip"
+                    android:layout_height="56dip"
+                    android:background="@drawable/ic_save" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -202,9 +236,20 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:visibility="gone"
             android:nextFocusDown="@+id/play"
-            android:nextFocusUp="@+id/endmarker" />
+            android:nextFocusUp="@+id/endmarker"
+            android:visibility="gone" />
+
+        <View style="@style/HorizontalDivider" />
+
+        <LinearLayout
+            android:id="@+id/ad_ll"
+            android:layout_width="match_parent"
+            android:layout_height="64dip"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

@@ -66,7 +66,7 @@ public class FileSaveDialog extends Dialog {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // Inflate our UI from its XML layout description.
-        setContentView(R.layout.file_save);
+        setContentView(R.layout.dialog_file_save);
 
 //        setTitle(resources.getString(R.string.file_save_title));
 

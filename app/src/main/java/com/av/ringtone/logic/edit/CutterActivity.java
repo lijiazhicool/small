@@ -55,11 +55,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsoluteLayout;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +73,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     public static final String INTENT_IN_MODEL = "intent_in_model";
     private BaseModel mFileModel;
     private ImageView mBackIv;
-    private ImageButton mSetIv;
     private TextView mTotaltv;
     private LinearLayout mAdll;
 
@@ -103,10 +102,10 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private EditText mEndText;
     private TextView mInfo;
     private ImageButton mPlayButton;
-    // private ImageButton mRewindButton;
-    // private ImageButton mFfwdButton;
-    // private ImageButton mZoomInButton;
-    // private ImageButton mZoomOutButton;
+     private ImageButton mRewindButton;
+     private ImageButton mFfwdButton;
+     private ImageButton mZoomInButton;
+     private ImageButton mZoomOutButton;
     private ImageButton mSaveButton;
     private boolean mKeyDown;
     private String mCaption = "";
@@ -178,7 +177,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     @Override
     protected void findViewById() {
         mBackIv = findView(R.id.back);
-        mSetIv = findView(R.id.set);
         mTotaltv = findView(R.id.total_tv);
         mAdll = findView(R.id.ad_ll);
         loadGui();
@@ -190,21 +188,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-        mSetIv.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mStartPos > mEndPos) {
-                    ToastUtils.makeToastAndShow(CutterActivity.this, "start must be smaller than end！");
-                    return;
-                }
-                // save and set
-                if (mIsPlaying) {
-                    handlePause();
-                }
-                mNewFileKind = Constants.FILE_KIND_RINGTONE;
-                saveAndSetRingtone(mFileModel.title + "rintone" + mIndex++);
             }
         });
     }
@@ -280,7 +263,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         super.onConfigurationChanged(newConfig);
 
         loadGui();
-        // enableZoomButtons();
+         enableZoomButtons();
 
         mHandler.postDelayed(new Runnable() {
             public void run() {
@@ -298,7 +281,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        MenuItem item;
+//        MenuItem item;
 
         // item = menu.add(0, CMD_SAVE, 0, R.string.menu_save);
         // item.setIcon(R.drawable.menu_save);
@@ -558,14 +541,14 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         mPlayButton = (ImageButton) findViewById(R.id.play);
         mPlayButton.setOnClickListener(mPlayListener);
-        // mRewindButton = (ImageButton)findViewById(R.id.rew);
-        // mRewindButton.setOnClickListener(mRewindListener);
-        // mFfwdButton = (ImageButton)findViewById(R.id.ffwd);
-        // mFfwdButton.setOnClickListener(mFfwdListener);
-        // mZoomInButton = (ImageButton)findViewById(R.id.zoom_in);
-        // mZoomInButton.setOnClickListener(mZoomInListener);
-        // mZoomOutButton = (ImageButton)findViewById(R.id.zoom_out);
-        // mZoomOutButton.setOnClickListener(mZoomOutListener);
+         mRewindButton = (ImageButton)findViewById(R.id.rew);
+         mRewindButton.setOnClickListener(mRewindListener);
+         mFfwdButton = (ImageButton)findViewById(R.id.ffwd);
+         mFfwdButton.setOnClickListener(mFfwdListener);
+         mZoomInButton = (ImageButton)findViewById(R.id.zoom_in);
+         mZoomInButton.setOnClickListener(mZoomInListener);
+         mZoomOutButton = (ImageButton)findViewById(R.id.zoom_out);
+         mZoomOutButton.setOnClickListener(mZoomOutListener);
         mSaveButton = (ImageButton) findViewById(R.id.save);
         mSaveButton.setOnClickListener(mSaveListener);
 
@@ -855,12 +838,25 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             endX = 0;
         }
 
-        mStartMarker.setLayoutParams(new AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.WRAP_CONTENT,
-            AbsoluteLayout.LayoutParams.WRAP_CONTENT, startX, mMarkerTopOffset));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(
+                startX,
+                mMarkerTopOffset,
+                -mStartMarker.getWidth(),
+                -mStartMarker.getHeight());
+        mStartMarker.setLayoutParams(params);
 
-        mEndMarker.setLayoutParams(new AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.WRAP_CONTENT,
-            AbsoluteLayout.LayoutParams.WRAP_CONTENT, endX,
-            mWaveformView.getMeasuredHeight() - mEndMarker.getHeight() - mMarkerBottomOffset));
+        params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(
+                endX,
+                mWaveformView.getMeasuredHeight() - mEndMarker.getHeight() - mMarkerBottomOffset,
+                -mStartMarker.getWidth(),
+                -mStartMarker.getHeight());
+        mEndMarker.setLayoutParams(params);
     }
 
     private Runnable mTimerRunnable = new Runnable() {
@@ -1203,84 +1199,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }.start();
     }
 
-    // add
-    private void saveAndSetRingtone(final CharSequence title) {
-        final String outPath = makeRingtoneFilename(title, mExtension);
-
-        if (outPath == null) {
-            showFinalAlert(new Exception(), R.string.no_unique_filename);
-            return;
-        }
-
-        mDstFilename = outPath;
-
-        double startTime = mWaveformView.pixelsToSeconds(mStartPos);
-        double endTime = mWaveformView.pixelsToSeconds(mEndPos);
-        final int startFrame = mWaveformView.secondsToFrames(startTime);
-        final int endFrame = mWaveformView.secondsToFrames(endTime);
-        final int duration = (int) (endTime - startTime + 0.5);
-
-        // Create an indeterminate progress dialog
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressDialog.setTitle(R.string.progress_dialog_saving);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
-
-        // Save the sound file in a background thread
-        new Thread() {
-            public void run() {
-                final File outFile = new File(outPath);
-                try {
-                    // Write the new file
-                    mSoundFile.WriteFile(outFile, startFrame, endFrame - startFrame);
-
-                    // Try to load the new file to make sure it worked
-                    final CheapSoundFile.ProgressListener listener = new CheapSoundFile.ProgressListener() {
-                        public boolean reportProgress(double frac) {
-                            // Do nothing - we're not going to try to
-                            // estimate when reloading a saved sound
-                            // since it's usually fast, but hard to
-                            // estimate anyway.
-                            return true; // Keep going
-                        }
-                    };
-                    CheapSoundFile.create(outPath, listener);
-                } catch (Exception e) {
-                    mProgressDialog.dismiss();
-
-                    CharSequence errorMessage;
-                    if (e.getMessage().equals("No space left on device")) {
-                        errorMessage = getResources().getText(R.string.no_space_error);
-                        e = null;
-                    } else {
-                        errorMessage = getResources().getText(R.string.write_error);
-                    }
-
-                    final CharSequence finalErrorMessage = errorMessage;
-                    final Exception finalException = e;
-                    Runnable runnable = new Runnable() {
-                        public void run() {
-                            handleFatalError("WriteError", finalErrorMessage, finalException);
-                        }
-                    };
-                    mHandler.post(runnable);
-                    return;
-                }
-
-                mProgressDialog.dismiss();
-
-                Runnable runnable = new Runnable() {
-                    public void run() {
-                        afterSavingAndSetRingtone(title, outPath, outFile, duration);
-                    }
-                };
-                mHandler.post(runnable);
-            }
-        }.start();
-    }
-
     private void afterSavingRingtone(CharSequence title, String outPath, File outFile, int duration) {
         long length = outFile.length();
         if (length <= 512) {
@@ -1397,72 +1315,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         Message message = Message.obtain(handler);
         AfterSaveActionDialog dlog = new AfterSaveActionDialog(this, message);
         dlog.show();
-    }
-
-    // add
-    private void afterSavingAndSetRingtone(CharSequence title, String outPath, File outFile, int duration) {
-        long length = outFile.length();
-        if (length <= 512) {
-            outFile.delete();
-            new AlertDialog.Builder(this).setTitle(R.string.alert_title_failure).setMessage(R.string.too_small_error)
-                .setPositiveButton(R.string.alert_ok_button, null).setCancelable(false).show();
-            return;
-        }
-
-        // Create the database record, pointing to the existing file path
-
-        long fileSize = outFile.length();
-        String mimeType = "audio/mpeg";
-
-        String artist = "" + getResources().getText(R.string.artist_name);
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.MediaColumns.DATA, outPath);
-        values.put(MediaStore.MediaColumns.TITLE, title.toString());
-        values.put(MediaStore.MediaColumns.SIZE, fileSize);
-        values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-
-        values.put(MediaStore.Audio.Media.ARTIST, artist);
-        values.put(MediaStore.Audio.Media.DURATION, duration);
-
-        values.put(MediaStore.Audio.Media.IS_RINGTONE, mNewFileKind == FILE_KIND_RINGTONE);
-        values.put(MediaStore.Audio.Media.IS_NOTIFICATION, mNewFileKind == FILE_KIND_NOTIFICATION);
-        values.put(MediaStore.Audio.Media.IS_ALARM, mNewFileKind == FILE_KIND_ALARM);
-        values.put(MediaStore.Audio.Media.IS_MUSIC, mNewFileKind == FILE_KIND_MUSIC);
-
-        // 存到自己目录下一份－－不然分享不出去
-//        String newPath = getExternalCacheDir().getPath() + "/" + outFile.getName();
-        String newPath = "";
-        if (mNewFileKind == FILE_KIND_MUSIC){
-            newPath = FileUtils.getMusicPath(CutterActivity.this) + "/" + outFile.getName();
-        } else if (mNewFileKind == FILE_KIND_RINGTONE){
-            newPath = FileUtils.getRingtonePath(CutterActivity.this) + "/" + outFile.getName();
-        }else if (mNewFileKind == FILE_KIND_NOTIFICATION){
-            newPath = FileUtils.getNotificationPath(CutterActivity.this) + "/" + outFile.getName();
-        }else if (mNewFileKind == FILE_KIND_ALARM){
-            newPath = FileUtils.getAlarmPath(CutterActivity.this) + "/" + outFile.getName();
-        }
-        FileUtils.copyFile(outPath, newPath);
-
-        // save data
-        UserDatas.getInstance().addCuttereds(
-            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath,outFile.lastModified()));
-
-        // Insert it into the database
-        Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
-        final Uri newUri = getContentResolver().insert(uri, values);
-        setResult(RESULT_OK, new Intent().setData(newUri));
-
-        // Update a preference that counts how many times we've
-        // successfully saved a ringtone or other audio
-        SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-        int successCount = prefs.getInt(PREF_SUCCESS_COUNT, 0);
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putInt(PREF_SUCCESS_COUNT, successCount + 1);
-        prefsEditor.commit();
-
-        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE, newUri);
-        ToastUtils.makeToastAndShow(CutterActivity.this, "Setting Success!");
     }
 
     private void chooseContactForRingtone(Uri uri) {
@@ -1603,10 +1455,10 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         dlog.show();
     }
 
-    // private void enableZoomButtons() {
-    // mZoomInButton.setEnabled(mWaveformView.canZoomIn());
-    // mZoomOutButton.setEnabled(mWaveformView.canZoomOut());
-    // }
+    private void enableZoomButtons() {
+        mZoomInButton.setEnabled(mWaveformView.canZoomIn());
+        mZoomOutButton.setEnabled(mWaveformView.canZoomOut());
+    }
 
     private OnClickListener mSaveListener = new OnClickListener() {
         public void onClick(View sender) {
@@ -1624,59 +1476,59 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }
     };
 
-    // private OnClickListener mZoomInListener = new OnClickListener() {
-    // public void onClick(View sender) {
-    // mWaveformView.zoomIn();
-    // mStartPos = mWaveformView.getStart();
-    // mEndPos = mWaveformView.getEnd();
-    // mMaxPos = mWaveformView.maxPos();
-    // mOffset = mWaveformView.getOffset();
-    // mOffsetGoal = mOffset;
-    // enableZoomButtons();
-    // updateDisplay();
-    // }
-    // };
-    //
-    // private OnClickListener mZoomOutListener = new OnClickListener() {
-    // public void onClick(View sender) {
-    // mWaveformView.zoomOut();
-    // mStartPos = mWaveformView.getStart();
-    // mEndPos = mWaveformView.getEnd();
-    // mMaxPos = mWaveformView.maxPos();
-    // mOffset = mWaveformView.getOffset();
-    // mOffsetGoal = mOffset;
-    // enableZoomButtons();
-    // updateDisplay();
-    // }
-    // };
-    //
-    // private OnClickListener mRewindListener = new OnClickListener() {
-    // public void onClick(View sender) {
-    // if (mIsPlaying) {
-    // int newPos = mPlayer.getCurrentPosition() - 5000;
-    // if (newPos < mPlayStartMsec)
-    // newPos = mPlayStartMsec;
-    // mPlayer.seekTo(newPos);
-    // } else {
-    // mStartMarker.requestFocus();
-    // markerFocus(mStartMarker);
-    // }
-    // }
-    // };
-    //
-    // private OnClickListener mFfwdListener = new OnClickListener() {
-    // public void onClick(View sender) {
-    // if (mIsPlaying) {
-    // int newPos = 5000 + mPlayer.getCurrentPosition();
-    // if (newPos > mPlayEndMsec)
-    // newPos = mPlayEndMsec;
-    // mPlayer.seekTo(newPos);
-    // } else {
-    // mEndMarker.requestFocus();
-    // markerFocus(mEndMarker);
-    // }
-    // }
-    // };
+    private OnClickListener mZoomInListener = new OnClickListener() {
+        public void onClick(View sender) {
+            mWaveformView.zoomIn();
+            mStartPos = mWaveformView.getStart();
+            mEndPos = mWaveformView.getEnd();
+            mMaxPos = mWaveformView.maxPos();
+            mOffset = mWaveformView.getOffset();
+            mOffsetGoal = mOffset;
+            enableZoomButtons();
+            updateDisplay();
+        }
+    };
+
+    private OnClickListener mZoomOutListener = new OnClickListener() {
+        public void onClick(View sender) {
+            mWaveformView.zoomOut();
+            mStartPos = mWaveformView.getStart();
+            mEndPos = mWaveformView.getEnd();
+            mMaxPos = mWaveformView.maxPos();
+            mOffset = mWaveformView.getOffset();
+            mOffsetGoal = mOffset;
+            enableZoomButtons();
+            updateDisplay();
+        }
+    };
+
+    private OnClickListener mRewindListener = new OnClickListener() {
+        public void onClick(View sender) {
+            if (mIsPlaying) {
+                int newPos = mPlayer.getCurrentPosition() - 5000;
+                if (newPos < mPlayStartMsec)
+                    newPos = mPlayStartMsec;
+                mPlayer.seekTo(newPos);
+            } else {
+                mStartMarker.requestFocus();
+                markerFocus(mStartMarker);
+            }
+        }
+    };
+
+    private OnClickListener mFfwdListener = new OnClickListener() {
+        public void onClick(View sender) {
+            if (mIsPlaying) {
+                int newPos = 5000 + mPlayer.getCurrentPosition();
+                if (newPos > mPlayEndMsec)
+                    newPos = mPlayEndMsec;
+                mPlayer.seekTo(newPos);
+            } else {
+                mEndMarker.requestFocus();
+                markerFocus(mEndMarker);
+            }
+        }
+    };
 
     private OnClickListener mMarkStartListener = new OnClickListener() {
         public void onClick(View sender) {

@@ -19,6 +19,7 @@ import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -39,6 +40,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     private CuttersAdapter mAdapter;
     private TextView mEmptyTv;
     private TextView mPathTv;
+    private LinearLayout mOpenFilell;
 
     private boolean mSortReverseByName = true;
     private boolean mSortReverseByLength = true;
@@ -53,6 +55,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     protected void initView(View parentView, Bundle savedInstanceState) {
         mEmptyTv = findViewById(R.id.empty_tv);
         mPathTv = findViewById(R.id.path_tv);
+        mOpenFilell = findViewById(R.id.openll);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -132,7 +135,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     protected void initListener() {
-        mPathTv.setOnClickListener(new View.OnClickListener() {
+        mOpenFilell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openAssignFolder(FileUtils.getAppDir(getActivity()));

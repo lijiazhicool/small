@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,7 +40,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private onHomeListener mListener;
     private MyAdapter mAdapter;
 
-    private LinearLayout mSharell;
+    private LinearLayout mSharell, mInfoll;
     private TextView mSharetv;
 
     private NativeAd mSmallNativeAd;
@@ -61,6 +62,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     protected void initView(View parentView, Bundle savedInstanceState) {
         mGridView = findViewById(R.id.gv);
         mSharell = findViewById(R.id.share_ll);
+        mInfoll = findViewById(R.id.info_ll);
         mSharetv = findViewById(R.id.cutcount_tv);
         mBigAdIv = findViewById(R.id.home_ad_iv);
     }
@@ -84,13 +86,32 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mGridView.setAdapter(mAdapter);
         loadAds();
 
-        if (UserDatas.getInstance().getCutCount() >= 3) {
-            mSharell.setVisibility(View.VISIBLE);
-        } else {
+        if (UserDatas.getInstance().getCutCount() < 3) {
             mSharell.setVisibility(View.GONE);
+            mBigAdIv.setVisibility(View.GONE);
+            mInfoll.setVisibility(View.VISIBLE);
+        } else {
+            randomShow();
         }
-        mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+    }
 
+    private void randomShow(){
+        //1-3
+        int index = new Random().nextInt(3)+1;
+        if (index%3 ==0){
+            mSharell.setVisibility(View.VISIBLE);
+            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+            mBigAdIv.setVisibility(View.GONE);
+            mInfoll.setVisibility(View.GONE);
+        } else if (index%3 ==1){
+            mSharell.setVisibility(View.GONE);
+            mBigAdIv.setVisibility(View.VISIBLE);
+            mInfoll.setVisibility(View.GONE);
+        } else if (index%3 ==2){
+            mSharell.setVisibility(View.GONE);
+            mBigAdIv.setVisibility(View.GONE);
+            mInfoll.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -149,9 +170,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     public void updateCutCount(int count) {
         if (count >= 3) {
-            mSharell.setVisibility(View.VISIBLE);
-        } else {
-            mSharell.setVisibility(View.GONE);
+            randomShow();
         }
         mSharetv.setText(String.format(getString(R.string.home_cut_count), count));
     }

@@ -7,7 +7,7 @@ android {
         applicationId "com.av.ringtone"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 1
+        versionCode 100
         versionName "1.0.0"
     }
     signingConfigs {

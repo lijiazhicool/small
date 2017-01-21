@@ -19,12 +19,16 @@ import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.NavigationUtils;
+import com.av.ringtone.utils.SharePreferenceUtil;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.RateDialog;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
@@ -50,7 +54,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
-public class MainActivity extends BaseActivity implements HomeFragment.onHomeListener, CuttersAdapter.MediaListener {
+public class MainActivity extends BaseActivity
+    implements CuttersAdapter.MediaListener, UserDatas.GotoFragmentListener {
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     private FragmentPagerAdapter mAdpter;
@@ -71,9 +76,9 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
     private CutterModel currentModel = null;
 
-    private final static String EVENT_AD_TYPE = "Exit_NativeAd_Click";
-    private final static String EVENT_AD_NAME = "Exit_NativeAd";
-    private final static String EVENT_AD_ID = "Exit_NativeAd_ID";
+
+    SharePreferenceUtil mSharePreferenceUtil;
+    private String KEY="is_check_hint";
 
     public static void launch(Context context) {
         Intent i = new Intent(context, MainActivity.class);
@@ -323,6 +328,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        mSharePreferenceUtil = new SharePreferenceUtil(this, "MainActivity");
         mPlayer = null;
         mIsPlaying = false;
         mPlayer = new MediaPlayer();
@@ -338,33 +344,25 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
 
         UserDatas.getInstance().setContext(this);
         UserDatas.getInstance().loadDatas();
-    }
 
-//    private void loadExitAd() {
-//        nativeAd = new NativeAd(this, Constants.AD_PLACE_EXIT);
-//        // AdSettings.addTestDevice("77bb29fa8fa20aaa97ce77cfe38e36b4");
-//        nativeAd.setAdListener(new AdListener() {
-//            @Override
-//            public void onError(Ad ad, AdError error) {
-//                System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
-//            }
-//
-//            @Override
-//            public void onAdLoaded(Ad ad) {
-//                isAdLoaded = true;
-//            }
-//
-//            @Override
-//            public void onAdClicked(Ad ad) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_TYPE);
-//                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-//                mFirebaseAnalytics.logEvent(EVENT_AD_ID, bundle);
-//            }
-//        });
-//        // Request an ad
-//        nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
-//    }
+        if (!UserDatas.getInstance().isRated(getVersionCode())){
+            if (UserDatas.getInstance().getAppStart()!=0 && UserDatas.getInstance().getAppStart()%7==0){
+                RateDialog dialog =
+                        new RateDialog(this, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String appPackageName = getPackageName();
+                                launchAppDetail(appPackageName, "com.android.vending");
+                                UserDatas.getInstance().addRated(getVersionCode());
+                            }
+                        });
+                dialog.setCancelable(true);
+                dialog.show();
+            }
+        }
+
+        UserDatas.getInstance().addAppStart();
+    }
 
     private void freshMediaDB() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -486,6 +484,12 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        UserDatas.getInstance().register(this);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         if (mPlayer.isPlaying()) {
@@ -501,6 +505,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        UserDatas.getInstance().unregister(this);
         if (mPlayer != null) {
             mPlayer.release();
             mIsPlaying = false;
@@ -521,4 +526,20 @@ public class MainActivity extends BaseActivity implements HomeFragment.onHomeLis
             System.exit(0);
         }
     }
+    /**
+     * 获取版本号
+     * @return 当前应用的版本号
+     */
+    public int getVersionCode() {
+        try {
+            PackageManager manager = this.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+            int version = info.versionCode;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

@@ -104,7 +104,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
                 if (!subFile[iFileLength].isDirectory()) {
                     File temp = subFile[iFileLength];
                     String fileName = temp.getName();
-                    RecordModel tempModel = new RecordModel(fileName, temp.getAbsolutePath(), FileUtils.getMp3TrackLength(temp), new File(fileName).lastModified());
+                    RecordModel tempModel = new RecordModel(fileName, temp.getAbsolutePath(), FileUtils.getAudioLength(getActivity(), temp), new File(fileName).lastModified());
                     UserDatas.getInstance().addRecord(tempModel);
                 }
             }
@@ -182,7 +182,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
                         String fileName = FileUtils.getFileName(filePath);
                         String newFilePath = FileUtils.getRecordPath(mActivity) + new File(filePath).getName();
                         FileUtils.copyFile(filePath, newFilePath);
-                        int duration = FileUtils.getMp3TrackLength(new File(filePath));
+                        int duration = FileUtils.getAudioLength(getActivity(), new File(filePath));
                         RecordModel tempModel = new RecordModel(fileName, newFilePath, duration, new File(filePath).lastModified());
                         UserDatas.getInstance().addRecord(tempModel);
                         mAdapter.setDatas(UserDatas.getInstance().getRecords());
@@ -430,7 +430,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int min = (int) (mRecordingTime / 60 / 1000);
+                            int min = mRecordingTime / 60 / 1000;
                             float sec = (float) (mRecordingTime - 60 * min * 1000) / 1000;
                             mTimerTextView.setText(String.format("%d:%05.2f", min, sec));
                             // int min = mRecordingTime / 60;
@@ -471,7 +471,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
                     break;
             }
         }
-    };
+    }
 
     class UIThread implements Runnable {
         int mTimeMill = 0;

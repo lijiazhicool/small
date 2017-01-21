@@ -4,8 +4,6 @@ package com.av.ringtone.logic.edit;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
@@ -13,11 +11,15 @@ import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.logic.SaveSuccessActivity;
 import com.av.ringtone.model.BaseModel;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.soundfile.CheapSoundFile;
 import com.av.ringtone.utils.FileUtils;
+import com.av.ringtone.utils.SharePreferenceUtil;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.FileSaveDialog;
+import com.av.ringtone.views.HintDialog;
 import com.av.ringtone.views.MarkerView;
 import com.av.ringtone.views.WaveformView;
 import com.facebook.ads.Ad;
@@ -40,7 +42,6 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,7 +62,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static com.av.ringtone.Constants.FILE_KIND_ALARM;
 import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
@@ -104,8 +104,8 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private ImageButton mPlayButton;
      private ImageButton mRewindButton;
      private ImageButton mFfwdButton;
-     private ImageButton mZoomInButton;
-     private ImageButton mZoomOutButton;
+     private ImageView mZoomInButton;
+     private ImageView mZoomOutButton;
     private ImageButton mSaveButton;
     private boolean mKeyDown;
     private String mCaption = "";
@@ -155,6 +155,9 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     // public static final String EDIT =
     // "com.ringdroid.action.EDIT";
 
+
+    SharePreferenceUtil mSharePreferenceUtil;
+    private String KEY="is_check_hint";
     /**
      * Preference names
      */
@@ -194,6 +197,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        mSharePreferenceUtil = new SharePreferenceUtil(this, "CutterActivity");
         mPlayer = null;
         mIsPlaying = false;
 
@@ -205,6 +209,21 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         loadBanner();
         loadFromFile();
+
+        if (!mSharePreferenceUtil.getBooleanValue(KEY, false)){
+            HintDialog dialog =
+                    new HintDialog(this, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            boolean isChecked = (boolean)v.getTag();
+                            if (isChecked){
+                                mSharePreferenceUtil.putBoolean(KEY, true);
+                            }
+                        }
+                    });
+            dialog.setCancelable(true);
+            dialog.show();
+        }
     }
 
     protected void loadBanner() {
@@ -545,9 +564,9 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
          mRewindButton.setOnClickListener(mRewindListener);
          mFfwdButton = (ImageButton)findViewById(R.id.ffwd);
          mFfwdButton.setOnClickListener(mFfwdListener);
-         mZoomInButton = (ImageButton)findViewById(R.id.zoom_in);
+         mZoomInButton = (ImageView)findViewById(R.id.zoom_in);
          mZoomInButton.setOnClickListener(mZoomInListener);
-         mZoomOutButton = (ImageButton)findViewById(R.id.zoom_out);
+         mZoomOutButton = (ImageView)findViewById(R.id.zoom_out);
          mZoomOutButton.setOnClickListener(mZoomOutListener);
         mSaveButton = (ImageButton) findViewById(R.id.save);
         mSaveButton.setOnClickListener(mSaveListener);
@@ -594,7 +613,13 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
     private void loadFromFile() {
         mFile = new File(mFilename);
-        mExtension = getExtensionFromFilename(mFilename);
+        try {
+            mExtension = getExtensionFromFilename(mFilename);
+        } catch (Exception e){
+            ToastUtils.makeToastAndShow(this, "File Error!");
+            finish();
+            return;
+        }
 
         SongMetadataReader metadataReader = new SongMetadataReader(this, mFilename);
         mTitle = metadataReader.mTitle;
@@ -1233,13 +1258,13 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 //        String newPath = getExternalCacheDir().getPath() + "/" + outFile.getName();
         String newPath = "";
         if (mNewFileKind == FILE_KIND_MUSIC){
-            newPath = FileUtils.getMusicPath(CutterActivity.this) + "/" + outFile.getName();
+            newPath = FileUtils.getMusicPath(CutterActivity.this) + outFile.getName();
         } else if (mNewFileKind == FILE_KIND_RINGTONE){
-            newPath = FileUtils.getRingtonePath(CutterActivity.this) + "/" + outFile.getName();
+            newPath = FileUtils.getRingtonePath(CutterActivity.this)+ outFile.getName();
         }else if (mNewFileKind == FILE_KIND_NOTIFICATION){
-            newPath = FileUtils.getNotificationPath(CutterActivity.this) + "/" + outFile.getName();
+            newPath = FileUtils.getNotificationPath(CutterActivity.this) + outFile.getName();
         }else if (mNewFileKind == FILE_KIND_ALARM){
-            newPath = FileUtils.getAlarmPath(CutterActivity.this) + "/" + outFile.getName();
+            newPath = FileUtils.getAlarmPath(CutterActivity.this) + outFile.getName();
         }
 
         FileUtils.copyFile(outPath, newPath);
@@ -1261,60 +1286,63 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         prefsEditor.putInt(PREF_SUCCESS_COUNT, successCount + 1);
         prefsEditor.commit();
 
-        // There's nothing more to do with music or an alarm. Show a
-        // success message and then quit.
-        if (mNewFileKind == FILE_KIND_MUSIC || mNewFileKind == FILE_KIND_ALARM) {
-            Toast.makeText(this, R.string.save_success_message, Toast.LENGTH_SHORT).show();
-            // sendStatsToServerIfAllowedAndFinish();
-            return;
-        }
+        SaveSuccessActivity.launch(CutterActivity.this, newUri);
+        finish();
 
-        // If it's a notification, give the user the option of making
-        // this their default notification. If they say no, we're finished.
-        if (mNewFileKind == FILE_KIND_NOTIFICATION) {
-            new AlertDialog.Builder(CutterActivity.this).setTitle(R.string.alert_title_success)
-                .setMessage(R.string.set_default_notification)
-                .setPositiveButton(R.string.alert_yes_button, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this,
-                            RingtoneManager.TYPE_NOTIFICATION, newUri);
-                        // sendStatsToServerIfAllowedAndFinish();
-                    }
-                }).setNegativeButton(R.string.alert_no_button, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // sendStatsToServerIfAllowedAndFinish();
-                    }
-                }).setCancelable(false).show();
-            return;
-        }
-
-        // If we get here, that means the type is a ringtone. There are
-        // three choices: make this your default ringtone, assign it to a
-        // contact, or do nothing.
-
-        final Handler handler = new Handler() {
-
-            public void handleMessage(Message response) {
-                int actionId = response.arg1;
-                switch (actionId) {
-                    case R.id.button_make_default:
-                        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE,
-                            newUri);
-                        ToastUtils.makeToastAndShow(CutterActivity.this, "Setting Success!");
-                        break;
-                    case R.id.button_choose_contact:
-                        // chooseContactForRingtone(newUri);
-                        break;
-                    default:
-                    case R.id.button_do_nothing:
-                        break;
-                }
-            }
-        };
-
-        Message message = Message.obtain(handler);
-        AfterSaveActionDialog dlog = new AfterSaveActionDialog(this, message);
-        dlog.show();
+//        // There's nothing more to do with music or an alarm. Show a
+//        // success message and then quit.
+//        if (mNewFileKind == FILE_KIND_MUSIC || mNewFileKind == FILE_KIND_ALARM) {
+//            Toast.makeText(this, R.string.save_success_message, Toast.LENGTH_SHORT).show();
+//            // sendStatsToServerIfAllowedAndFinish();
+//            return;
+//        }
+//
+//        // If it's a notification, give the user the option of making
+//        // this their default notification. If they say no, we're finished.
+//        if (mNewFileKind == FILE_KIND_NOTIFICATION) {
+//            new AlertDialog.Builder(CutterActivity.this).setTitle(R.string.alert_title_success)
+//                .setMessage(R.string.set_default_notification)
+//                .setPositiveButton(R.string.alert_yes_button, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this,
+//                            RingtoneManager.TYPE_NOTIFICATION, newUri);
+//                        // sendStatsToServerIfAllowedAndFinish();
+//                    }
+//                }).setNegativeButton(R.string.alert_no_button, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        // sendStatsToServerIfAllowedAndFinish();
+//                    }
+//                }).setCancelable(false).show();
+//            return;
+//        }
+//
+//        // If we get here, that means the type is a ringtone. There are
+//        // three choices: make this your default ringtone, assign it to a
+//        // contact, or do nothing.
+//
+//        final Handler handler = new Handler() {
+//
+//            public void handleMessage(Message response) {
+//                int actionId = response.arg1;
+//                switch (actionId) {
+//                    case R.id.button_make_default:
+//                        RingtoneManager.setActualDefaultRingtoneUri(CutterActivity.this, RingtoneManager.TYPE_RINGTONE,
+//                            newUri);
+//                        ToastUtils.makeToastAndShow(CutterActivity.this, "Setting Success!");
+//                        break;
+//                    case R.id.button_choose_contact:
+//                        // chooseContactForRingtone(newUri);
+//                        break;
+//                    default:
+//                    case R.id.button_do_nothing:
+//                        break;
+//                }
+//            }
+//        };
+//
+//        Message message = Message.obtain(handler);
+//        AfterSaveActionDialog dlog = new AfterSaveActionDialog(this, message);
+//        dlog.show();
     }
 
     private void chooseContactForRingtone(Uri uri) {

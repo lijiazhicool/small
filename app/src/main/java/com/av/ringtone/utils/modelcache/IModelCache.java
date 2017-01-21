@@ -11,15 +11,15 @@ import com.google.gson.reflect.TypeToken;
  */
 public interface IModelCache {
 	
-	public <T extends IBaseCacheModel> boolean putModel(String key, T model);
+	<T extends IBaseCacheModel> boolean putModel(String key, T model);
 	
-	public boolean contains(String key);
+	boolean contains(String key);
 	
-	public <T extends IBaseCacheModel> T getModel(String key, Class<T> clazz);
+	<T extends IBaseCacheModel> T getModel(String key, Class<T> clazz);
 	
-	public <T extends IBaseCacheModel> boolean putModelList(String key, List<T> modelList);
+	<T extends IBaseCacheModel> boolean putModelList(String key, List<T> modelList);
 	
-	public <T extends IBaseCacheModel> List<T> getModelList(String key, TypeToken<List<T>> typeToken);
+	<T extends IBaseCacheModel> List<T> getModelList(String key, TypeToken<List<T>> typeToken);
 	
-	public boolean removeModel(String key);
+	boolean removeModel(String key);
 }

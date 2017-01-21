@@ -7,13 +7,14 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
+import com.av.ringtone.logic.SaveSuccessActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
-import com.av.ringtone.views.DeleteDialog;
+import com.av.ringtone.views.CommonDialog;
 
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -47,7 +48,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
     public CuttersAdapter(MainActivity context, List<CutterModel> list) {
         this.mDatas = list;
         this.mContext = context;
-        mListener = (MediaListener) context;
+        mListener = context;
     }
 
     @Override
@@ -110,7 +111,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
 
     private String getDuration(int d) {
         int min = d / 60;
-        int sec = (int) (d - 60 * min);
+        int sec = d - 60 * min;
         return String.format("%02d:%02d", min, sec);
     }
 
@@ -129,37 +130,61 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Uri newUri = Uri.fromFile(new File(tempModel.path));
+                        final Uri newUri = Uri.fromFile(new File(tempModel.localPath));
                         switch (item.getItemId()) {
                             case R.id.menu_edit:
                                 SongModel model =
-                                    new SongModel(tempModel.title, tempModel.path, tempModel.duration, tempModel.date);
+                                    new SongModel(tempModel.title, tempModel.localPath, tempModel.duration, tempModel.date);
                                 NavigationUtils.goToCutter(mContext, model);
                                 break;
                             case R.id.menu_default:
-                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE,
-                                    newUri);
-                                ToastUtils.makeToastAndShow(mContext, "Set Ringtone Success!");
+                                CommonDialog dialog =
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_ringtone_hint),"",new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE,
+                                                        newUri);
+                                                ToastUtils.makeToastAndShowLong(mContext, "Set Ringtone Success!");
+                                            }
+                                        });
+                                dialog.setCancelable(true);
+                                dialog.show();
                                 break;
                             case R.id.menu_notification:
-                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION,
-                                    newUri);
-                                ToastUtils.makeToastAndShow(mContext, "Set Notification Success!");
+                                CommonDialog notidialog =
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_notification_hint),"",new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION,
+                                                        newUri);
+                                                ToastUtils.makeToastAndShowLong(mContext, "Set Notification Success!");
+                                            }
+                                        });
+                                notidialog.setCancelable(true);
+                                notidialog.show();
                                 break;
                             case R.id.menu_alarm:
-                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM,
-                                    newUri);
-                                ToastUtils.makeToastAndShow(mContext, "Set Alarm Success!");
+                                CommonDialog alarmdialog =
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_alarm_hint),"",new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM,
+                                                        newUri);
+                                                ToastUtils.makeToastAndShowLong(mContext, "Set Alarm Success!");
+                                            }
+                                        });
+                                alarmdialog.setCancelable(true);
+                                alarmdialog.show();
                                 break;
                             case R.id.menu_delete:
-                                DeleteDialog dialog =
-                                        new DeleteDialog(mContext, new View.OnClickListener() {
+                                CommonDialog deldialog =
+                                        new CommonDialog(mContext, mContext.getString(R.string.delete_hint),"Delete",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 if (tempModel.playStatus == 1 && null != mListener) {
                                                     mListener.stop();
                                                 }
-                                                File file = new File(tempModel.path);
+                                                File file = new File(tempModel.localPath);
                                                 if (file.exists()) {
                                                     file.delete();
                                                     String params[] = new String[] { file.getPath() };
@@ -169,12 +194,12 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                                 mDatas.remove(tempModel);
                                                 notifyDataSetChanged();
                                                 UserDatas.getInstance().setCuttereds(mDatas);
-                                                ToastUtils.makeToastAndShow(mContext,
-                                                        file.getPath() + mContext.getString(R.string.delete_success));
+                                                ToastUtils.makeToastAndShowLong(mContext,
+                                                        mContext.getString(R.string.delete_success));
                                             }
                                         });
-                                dialog.setCancelable(false);
-                                dialog.show();
+                                deldialog.setCancelable(false);
+                                deldialog.show();
                                 break;
                             case R.id.menu_share:
                                 ShareUtils.shareFile(mContext, Uri.fromFile(new File(tempModel.localPath)));

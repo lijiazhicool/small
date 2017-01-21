@@ -437,9 +437,8 @@ public class WaveformView extends View {
                     (frameGains[i    ] / 3.0) +
                     (frameGains[i + 1] / 3.0));
             }
-            smoothedGains[numFrames - 1] = (double)(
-                (frameGains[numFrames - 2] / 2.0) +
-                (frameGains[numFrames - 1] / 2.0));
+            smoothedGains[numFrames - 1] = (frameGains[numFrames - 2] / 2.0) +
+            (frameGains[numFrames - 1] / 2.0);
         }
 
         // Make sure the range is no more than 0 - 255

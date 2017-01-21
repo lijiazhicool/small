@@ -6,15 +6,12 @@ import java.util.List;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
-import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
-import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
-import com.av.ringtone.views.DeleteDialog;
+import com.av.ringtone.views.CommonDialog;
 
-import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -95,8 +92,8 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                                 NavigationUtils.goToCutter(mContext, tempModel);
                                 break;
                             case R.id.popup_song_delete:
-                                DeleteDialog dialog =
-                                        new DeleteDialog(mContext, new View.OnClickListener() {
+                                CommonDialog dialog =
+                                        new CommonDialog(mContext,mContext.getString(R.string.delete_hint),"Delete", new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 File file = new File(tempModel.path);
@@ -106,8 +103,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                                                 mDatas.remove(tempModel);
                                                 UserDatas.getInstance().setRecords(mDatas);
                                                 notifyDataSetChanged();
-                                                ToastUtils.makeToastAndShow(mContext,
-                                                        file.getPath() + mContext.getString(R.string.delete_success));
+                                                ToastUtils.makeToastAndShowLong(mContext,mContext.getString(R.string.delete_success));
                                             }
                                         });
                                 dialog.setCancelable(false);

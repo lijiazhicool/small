@@ -83,14 +83,14 @@
                 android:layout_marginTop="60dip"
                 android:orientation="vertical">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/zoom_in"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:contentDescription="@string/zoom_in"
                     android:src="@drawable/ic_zoom_in" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/zoom_out"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
@@ -239,8 +239,6 @@
             android:nextFocusDown="@+id/play"
             android:nextFocusUp="@+id/endmarker"
             android:visibility="gone" />
-
-        <View style="@style/HorizontalDivider" />
 
         <LinearLayout
             android:id="@+id/ad_ll"

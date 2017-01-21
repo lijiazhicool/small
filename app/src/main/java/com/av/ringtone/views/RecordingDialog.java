@@ -22,7 +22,7 @@ public class RecordingDialog extends Dialog {
 
         MusicVisualizer musicanimate = (MusicVisualizer) findViewById(R.id.musicanimate);
         musicanimate.setColor(context.getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.cancel)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (null != cancelListener) {
                     cancelListener.onClick(view);
@@ -30,7 +30,7 @@ public class RecordingDialog extends Dialog {
                 dismiss();
             }
         });
-        ((TextView) findViewById(R.id.exit)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.exit).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (null != okListener) {
                     okListener.onClick(view);

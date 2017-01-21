@@ -1,6 +1,7 @@
 package com.av.ringtone.utils;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.Toast;
 
 /**
@@ -45,6 +46,7 @@ public class ToastUtils {
             toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
             toast.setText(text);
             toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             oneTime = System.currentTimeMillis();
         } else {

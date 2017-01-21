@@ -37,7 +37,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private GridView mGridView;
     private MediaView mBigAdIv;
     private List<HomeModel> mDatas = new ArrayList<>();
-    private onHomeListener mListener;
     private MyAdapter mAdapter;
 
     private LinearLayout mSharell, mInfoll;
@@ -70,7 +69,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mListener = (onHomeListener) activity;
     }
 
     @Override
@@ -131,13 +129,13 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position < 3 && mListener != null) {
+                if (position < 3) {
                     if (position==0){
-                        mListener.gotoIndex(1);
+                        UserDatas.getInstance().gotoIndex(1);
                     } else if (position==1){
-                        mListener.gotoIndex(3);
+                        UserDatas.getInstance().gotoIndex(3);
                     } else {
-                        mListener.gotoIndex(2);
+                        UserDatas.getInstance().gotoIndex(2);
                     }
                 }
             }
@@ -172,7 +170,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         if (count >= 3) {
             randomShow();
         }
-        mSharetv.setText(String.format(getString(R.string.home_cut_count), count));
     }
 
     private void showSmallNativeAd() {
@@ -287,9 +284,5 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
             return convertView;
         }
-    }
-
-    public interface onHomeListener {
-        void gotoIndex(int index);
     }
 }

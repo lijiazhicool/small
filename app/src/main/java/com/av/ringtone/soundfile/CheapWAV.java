@@ -93,8 +93,8 @@ public class CheapWAV extends CheapSoundFile {
     }
 
     public void ReadFile(File inputFile)
-            throws java.io.FileNotFoundException,
-                   java.io.IOException {
+            throws
+            java.io.IOException {
         super.ReadFile(inputFile);
         mFileSize = (int)mInputFile.length();
 
@@ -303,4 +303,4 @@ public class CheapWAV extends CheapSoundFile {
         in.close();
         out.close();
     }
-};
+}

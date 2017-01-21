@@ -81,26 +81,6 @@ public abstract class BaseFragment extends Fragment {
         initData();
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        if (isStartEventBus()) {
-//            EventBus.getDefault().register(this);
-//        }
-//    }
-//
-//    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-//    public void onEvent(LPBaseEventBean event) {
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        if (isStartEventBus()) {
-//            EventBus.getDefault().unregister(this);
-//        }
-//        super.onStop();
-//    }
-
     /**
      * 通过ID查找控件
      *

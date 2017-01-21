@@ -40,6 +40,9 @@
         <activity
             android:name=".logic.AboutActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".logic.SaveSuccessActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.facebook.ads.InterstitialAdActivity"

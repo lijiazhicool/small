@@ -11,8 +11,6 @@
 
     <color name="transparent">#00000000</color>
 
-    <color name="bg_gridview">#1ad8d8d8</color>
-
     <color name="text_black">#de000000</color>
     <color name="text_gray">#8a000000</color>
 
@@ -20,9 +18,6 @@
     <color name="text_enabled">#FFFFFFFF</color>
     <color name="text_disabled">#4DFFFFFF</color>
 
-
-    <color name="pink">#e91e63</color>
-    <color name="pink_pressed">#ec407a</color>
 
 
     <color name="waveform_selected">#8dffff</color>

@@ -2,10 +2,8 @@ package com.av.ringtone.logic.ringtone;
 
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
-import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
-import com.av.ringtone.logic.record.RecordsAdapter;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
@@ -15,7 +13,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -78,7 +75,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_RINGTONE,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),temp.lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_RINGTONE,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),temp.lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
@@ -94,7 +91,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_MUSIC,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_MUSIC,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
@@ -110,7 +107,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_NOTIFICATION,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_NOTIFICATION,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
@@ -125,12 +122,12 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_ALARM,fileName, temp.getAbsolutePath(), artist, FileUtils.getMp3TrackLength(temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_ALARM,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
         }
-        mPathTv.setText(FileUtils.getAppDir(getActivity()));
+        mPathTv.setText(FileUtils.getAppDir_show());
     }
 
     @Override
@@ -150,7 +147,8 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             return;
         }
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+//        intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setDataAndType(Uri.fromFile(file), "file/*");
         try {
@@ -194,6 +192,19 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     public void updateCutters(List<CutterModel> list) {
+        //时间倒序
+        Collections.sort(list, new Comparator<CutterModel>(){
+            public int compare(CutterModel o1, CutterModel o2) {
+                if(o1.date < o2.date){
+                    return 1;
+                }
+                if(o1.date == o2.date){
+                    return 0;
+                }
+                return -1;
+            }
+        });
+
         mAdapter = new CuttersAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
             mEmptyTv.setVisibility(View.VISIBLE);

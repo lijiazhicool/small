@@ -20,6 +20,8 @@
     <string name="menu_share">Share</string>
 
 
+    <string name="share_to_friends">Share to friends</string>
+
     <!--title-->
     <string name="title_cutter">Cut Audio</string>
     <string name="title_main">MP3 Cutter</string>
@@ -28,13 +30,10 @@
     <!--第三方-->
     <string name="start_marker">Start marker</string>
     <string name="end_marker">End marker</string>
-    <string name="rewind">Rewind</string>
     <string name="play">Play</string>
     <string name="stop">Stop</string>
-    <string name="ffwd">Fast forward</string>
     <string name="zoom_in">Zoom In</string>
     <string name="zoom_out">Zoom Out</string>
-    <string name="save_button">Save</string>
     <string name="start_label">Start</string>
     <string name="end_label">End</string>
     <string name="total">Total:</string>
@@ -42,13 +41,8 @@
     <string name="progress_dialog_loading">Loading...</string>
     <string name="progress_dialog_saving">Saving...</string>
 
-    <string name="save_success_message">Saved!</string>
-    <string name="default_ringtone_success_message">Changed default ringtone</string>
-    <string name="default_notification_success_message">Changed default notification sound</string>
     <string name="play_error">Unable to play this media file</string>
     <string name="no_unique_filename">Unable to find unique filename</string>
-    <string name="delete_tmp_error">Error deleting temporary file</string>
-    <string name="record_error">Error launching Sound Recorder</string>
     <string name="too_small_error">Can\'t save a file that small, try making it longer.</string>
     <string name="write_error">Error writing file</string>
     <string name="read_error">Error reading file</string>
@@ -59,8 +53,6 @@
     <string name="time_seconds">seconds</string>
     <string name="progress_dialog_recording">Recording…</string>
 
-    <string name="progress_dialog_cancel">Cancel</string>
-    <string name="progress_dialog_stop">Stop</string>
 
     <!--
      File Save dialog
@@ -84,19 +76,8 @@
     <string name="alert_title_success">Success</string>
     <string name="alert_title_failure">Error</string>
     <string name="alert_ok_button">OK</string>
-    <string name="alert_yes_button">Yes, please!</string>
-    <string name="alert_no_button">No, thanks.</string>
 
     <string name="no_space_error">Your SD card is full, there is not enough space to save this file.</string>
-
-    <!-- After you save a notification or ringtone and have more options
-             for what to do with them -->
-    <string name="what_to_do_with_ringtone">Saved!  Make this your default ringtone or assign it to a contact?</string>
-    <string name="set_default_notification">Saved!  Make this your default notification?</string>
-
-    <string name="make_default_ringtone_button">Make Default</string>
-    <string name="choose_contact_ringtone_button">Assign to Contact</string>
-    <string name="do_nothing_with_ringtone_button">Close</string>
 
 
     <string name="search_hint">Search</string>
@@ -105,7 +86,6 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="delete_success"> delete success</string>
-    <string name="delete_failed"> delete failed</string>
 
     <string name="tab_one">HOME</string>
     <string name="tab_two">MUSIC</string>
@@ -129,6 +109,11 @@
     <string name="error_no_sdcard">没有SD卡，无法存储录音数据</string>
     <string name="error_state_record">正在录音中，请先停止录音</string>
     <string name="error_unknown">无法识别的错误</string>
+
+    <string name="delete_hint">"Are you sure to delete this file?"</string>
+    <string name="set_ringtone_hint">"Are you sure to set as default ringtone?"</string>
+    <string name="set_notification_hint">"Are you sure to set as notification ringtone?"</string>
+    <string name="set_alarm_hint">"Are you sure to set as alarm ringtone?"</string>\
 
 
 </resources>

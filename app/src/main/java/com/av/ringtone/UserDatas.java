@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.av.ringtone.logic.song.SongLoader;
 import com.av.ringtone.model.CutterModel;
+import com.av.ringtone.model.RateModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.modelcache.LightModelCache;
@@ -28,13 +29,18 @@ public class UserDatas {
 
     // 裁剪次数
     private int mCutCount = 0;
+    // app启动次数
+    private int mAppStart = 0;
 
     private List<SongModel> mSongs;
     private List<RecordModel> mRecords;
     private List<CutterModel> mCuttereds;
 
+    private List<RateModel> mRateds;
+
     private List<DataChangedListener> mListenerList = new ArrayList<>();
     private DataCountChangedListener mCountListener;
+    private GotoFragmentListener mGotoFragmentListener;
     private Context mContext;
 
     // songs
@@ -43,13 +49,15 @@ public class UserDatas {
     // records
     private LightModelCache mLightModelCache;
     private static final String CUT_COUNT_KEY = "cut_count_key";
+    private static final String APP_START_KEY = "app_start_key";
     private static final String RECORD_S_KEY = "record_s_key";
     private static final String CUTTERED_S_KEY = "cuttered_s_key";
 
+    private static final String RATED_S_KEY = "rated_s_key";
 
-    public static final  int SORT_SONG=1;
-    public static final  int SORT_RECORD=2;
-    public static final  int SORT_CUT=3;
+    public static final int SORT_SONG = 1;
+    public static final int SORT_RECORD = 2;
+    public static final int SORT_CUT = 3;
 
     // cutters
 
@@ -73,6 +81,12 @@ public class UserDatas {
 
     public void loadDatas() {
         mCutCount = mLightModelCache.getIntValue(CUT_COUNT_KEY, 0);
+        mAppStart = mLightModelCache.getIntValue(APP_START_KEY, 0);
+
+        TypeToken type = new TypeToken<List<RateModel>>() {
+        };
+        mRateds = mLightModelCache.getModelList(RATED_S_KEY, type);
+
         loadMusics();
         loadReords();
         loadCutters();
@@ -89,6 +103,15 @@ public class UserDatas {
         if (null != mCountListener) {
             mCountListener.updateCutCount(mCutCount);
         }
+    }
+
+    public int getAppStart() {
+        return mAppStart;
+    }
+
+    public void addAppStart() {
+        this.mAppStart++;
+        mLightModelCache.putInt(APP_START_KEY, mAppStart);
     }
 
     public void register(DataChangedListener listener) {
@@ -109,6 +132,42 @@ public class UserDatas {
 
     public void unregister(DataCountChangedListener listener) {
         mCountListener = null;
+    }
+
+    public void register(GotoFragmentListener listener) {
+        mGotoFragmentListener = listener;
+    }
+
+    public void unregister(GotoFragmentListener listener) {
+        mGotoFragmentListener = null;
+    }
+
+    public void gotoIndex(int index) {
+        if (null != mGotoFragmentListener) {
+            mGotoFragmentListener.gotoIndex(index);
+        }
+    }
+
+    public List<RateModel> getRateds() {
+        if (null == mRateds) {
+            mRateds = new ArrayList<>();
+        }
+        return mRateds;
+    }
+
+    public void addRated(int versionCode) {
+        if (null == mRateds) {
+            mRateds = new ArrayList<>();
+        }
+        mRateds.add(new RateModel(versionCode));
+        mLightModelCache.putModelList(RATED_S_KEY, mRateds);
+    }
+
+    public boolean isRated(int versionCode) {
+        if (getRateds().contains(new RateModel(versionCode))) {
+            return true;
+        }
+        return false;
     }
 
     public List<SongModel> getSongs() {
@@ -293,6 +352,10 @@ public class UserDatas {
         void updatecount(int isong, int irecord, int icutter);
 
         void updateCutCount(int count);
+    }
+
+    public interface GotoFragmentListener {
+        void gotoIndex(int index);
     }
 
 }

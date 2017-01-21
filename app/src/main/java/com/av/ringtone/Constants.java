@@ -14,6 +14,6 @@ public class Constants {
 
     public static final String AD_PLACE_HOME_BIG="1064813890295110_1064817493628083";
     public static final String AD_PLACE_HOME_SMALL="1064813890295110_1064817286961437";
-    public static final String AD_PLACE_EXIT="1064813890295110_1064818063628026";
+    public static final String AD_PLACE_SAVE="1064813890295110_1064818063628026";
     public static final String AD_PLACE_CUT_BANNER ="1064813890295110_1064817740294725";
 }

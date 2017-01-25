@@ -243,7 +243,8 @@
         <LinearLayout
             android:id="@+id/ad_ll"
             android:layout_width="match_parent"
-            android:layout_height="64dip"
+            android:layout_height="50dip"
+            android:gravity="bottom"
             android:orientation="vertical">
 
         </LinearLayout>

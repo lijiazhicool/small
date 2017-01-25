@@ -214,7 +214,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         }
     }
     @Override
-    public void sortByName(int sortType) {
+    public void sortByName(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_CUT){
             return;
         }
@@ -253,12 +253,13 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             });
         }
         mAdapter.upateDatas(list);
-
-        mSortReverseByName = !mSortReverseByName;
+        if (isNeedRevers) {
+            mSortReverseByName = !mSortReverseByName;
+        }
     }
 
     @Override
-    public void sortByLength(int sortType) {
+    public void sortByLength(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_CUT){
             return;
         }
@@ -290,11 +291,13 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             });
         }
         mAdapter.upateDatas(list);
-        mSortReverseByLength = !mSortReverseByLength;
+        if (isNeedRevers) {
+            mSortReverseByLength = !mSortReverseByLength;
+        }
     }
 
     @Override
-    public void sortByDate(int sortType) {
+    public void sortByDate(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_CUT){
             return;
         }
@@ -326,6 +329,8 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             });
         }
         mAdapter.upateDatas(list);
-        mSortReverseByDate = !mSortReverseByDate;
+        if (isNeedRevers) {
+            mSortReverseByDate = !mSortReverseByDate;
+        }
     }
 }

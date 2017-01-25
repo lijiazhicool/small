@@ -287,7 +287,7 @@ public class UserDatas {
     public void sortByName(int sortType) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
-                listener.sortByName(sortType);
+                listener.sortByName(sortType, true);
             }
         }
     }
@@ -295,7 +295,7 @@ public class UserDatas {
     public void sortByLength(int sortType) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
-                listener.sortByLength(sortType);
+                listener.sortByLength(sortType, true);
             }
         }
     }
@@ -303,7 +303,7 @@ public class UserDatas {
     public void sortByDate(int sortType) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
-                listener.sortByDate(sortType);
+                listener.sortByDate(sortType, true);
             }
         }
     }
@@ -341,11 +341,11 @@ public class UserDatas {
 
         void updateCutters();
 
-        void sortByName(int sortType);
+        void sortByName(int sortType, boolean isNeedRevers);
 
-        void sortByLength(int sortType);
+        void sortByLength(int sortType, boolean isNeedRevers);
 
-        void sortByDate(int sortType);
+        void sortByDate(int sortType, boolean isNeedRevers);
     }
 
     public interface DataCountChangedListener {

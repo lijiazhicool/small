@@ -7,9 +7,9 @@ import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.model.HomeModel;
 import com.av.ringtone.utils.ShareUtils;
 import com.facebook.ads.Ad;
+import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -22,7 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment extends BaseFragment implements UserDatas.DataCountChangedListener {
 
     private GridView mGridView;
-    private MediaView mBigAdIv;
+    private LinearLayout nativeAdContainer;
     private List<HomeModel> mDatas = new ArrayList<>();
     private MyAdapter mAdapter;
 
@@ -52,6 +54,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private final static String EVENT_Small_AD_NAME = "Home_Small_NativeAd";
     private final static String EVENT_Small_AD_ID = "Home_Small_NativeAd_ID";
 
+    private boolean mIsNeedFresh = false;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -63,7 +67,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mSharell = findViewById(R.id.share_ll);
         mInfoll = findViewById(R.id.info_ll);
         mSharetv = findViewById(R.id.cutcount_tv);
-        mBigAdIv = findViewById(R.id.home_ad_iv);
+        nativeAdContainer = findViewById(R.id.home_ad_ll);
     }
 
     @Override
@@ -79,36 +83,47 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mDatas.add(new HomeModel(2, R.drawable.ic_tones, getString(R.string.tab_four),
             String.format(getString(R.string.home_cuttered_count), 0)));
         mDatas.add(new HomeModel(3, R.drawable.icon_record, getString(R.string.tab_three),
-                String.format(getString(R.string.home_record_count), 0)));
+            String.format(getString(R.string.home_record_count), 0)));
         mAdapter = new MyAdapter(getActivity());
         mGridView.setAdapter(mAdapter);
         loadAds();
 
         if (UserDatas.getInstance().getCutCount() < 3) {
             mSharell.setVisibility(View.GONE);
-            mBigAdIv.setVisibility(View.GONE);
+            nativeAdContainer.setVisibility(View.GONE);
             mInfoll.setVisibility(View.VISIBLE);
         } else {
             randomShow();
         }
     }
 
-    private void randomShow(){
-        //1-3
-        int index = new Random().nextInt(3)+1;
-        if (index%3 ==0){
+    private void randomShow() {
+        // 1-3
+        int index = new Random().nextInt(3) + 1;
+        if (index % 3 == 0) {
             mSharell.setVisibility(View.VISIBLE);
             mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
-            mBigAdIv.setVisibility(View.GONE);
+            nativeAdContainer.setVisibility(View.GONE);
             mInfoll.setVisibility(View.GONE);
-        } else if (index%3 ==1){
+        } else if (index % 3 == 1) {
             mSharell.setVisibility(View.GONE);
-            mBigAdIv.setVisibility(View.VISIBLE);
+            nativeAdContainer.setVisibility(View.VISIBLE);
             mInfoll.setVisibility(View.GONE);
-        } else if (index%3 ==2){
+        } else if (index % 3 == 2) {
             mSharell.setVisibility(View.GONE);
-            mBigAdIv.setVisibility(View.GONE);
+            nativeAdContainer.setVisibility(View.GONE);
             mInfoll.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mIsNeedFresh) {
+            loadAds();
+            if (UserDatas.getInstance().getCutCount() >= 3) {
+                randomShow();
+            }
         }
     }
 
@@ -130,9 +145,9 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position < 3) {
-                    if (position==0){
+                    if (position == 0) {
                         UserDatas.getInstance().gotoIndex(1);
-                    } else if (position==1){
+                    } else if (position == 1) {
                         UserDatas.getInstance().gotoIndex(3);
                     } else {
                         UserDatas.getInstance().gotoIndex(2);
@@ -152,6 +167,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         // add data
         showSmallNativeAd();
         showBigNativeAd();
+        mIsNeedFresh = true;
     }
 
     @Override
@@ -184,6 +200,10 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
             @Override
             public void onAdLoaded(Ad ad) {
+                HomeModel model = new HomeModel(4, mSmallNativeAd);
+                if (mDatas.contains(model)){
+                    mDatas.remove(model);
+                }
                 mDatas.add(new HomeModel(4, mSmallNativeAd));
                 mAdapter.notifyDataSetChanged();
             }
@@ -202,7 +222,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     private void showBigNativeAd() {
         mBigNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_BIG);
-//        AdSettings.addTestDevice("6707cd54fb24a306ba41dfacb8af2d8d");
+        // AdSettings.addTestDevice("6707cd54fb24a306ba41dfacb8af2d8d");
         mBigNativeAd.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError error) {
@@ -212,12 +232,42 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
             @Override
             public void onAdLoaded(Ad ad) {
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
+                nativeAdContainer.removeAllViews();
+                nativeAdContainer.addView(adView);
+
+                // Create native UI using the ad metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+
+                // Set the Text.
+                nativeAdTitle.setText(mBigNativeAd.getAdTitle());
+                nativeAdSocialContext.setText(mBigNativeAd.getAdSocialContext());
+                nativeAdBody.setText(mBigNativeAd.getAdBody());
+                nativeAdCallToAction.setText(mBigNativeAd.getAdCallToAction());
+
+                // Download and display the ad icon.
+                NativeAd.Image adIcon = mBigNativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+
                 // Download and display the cover image.
-                mBigAdIv.setNativeAd(mBigNativeAd);
+                nativeAdMedia.setNativeAd(mBigNativeAd);
+
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(getActivity(), mBigNativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
+
                 // Register the Title and CTA button to listen for clicks.
                 List<View> clickableViews = new ArrayList<>();
-                clickableViews.add(mBigAdIv);
-                mBigNativeAd.registerViewForInteraction(mBigAdIv, clickableViews);
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                mBigNativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
             }
 
             @Override

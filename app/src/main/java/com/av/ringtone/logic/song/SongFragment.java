@@ -33,6 +33,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     private boolean mSortReverseByLength = true;
     private boolean mSortReverseByDate = true;
 
+    private int mSortType = 0;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_music;
@@ -92,13 +94,19 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void updateSongs(List<SongModel> list) {
-//        mSwipeLayout.setRefreshing(false);
         mAdapter = new SongsAdapter((BaseActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
             mEmptyll.setVisibility(View.VISIBLE);
         } else {
             mEmptyll.setVisibility(View.GONE);
             mRecyclerView.setAdapter(mAdapter);
+        }
+        if (mSortType ==  0){
+            sortByName_fresh();
+        } else if (mSortType ==  1){
+            sortByLength_fresh();
+        } else if (mSortType == 2){
+            sortByDate_fresh();
         }
     }
 
@@ -118,7 +126,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     @Override
-    public void sortByName(int sortType) {
+    public void sortByName(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_SONG){
             return;
         }
@@ -157,12 +165,14 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             });
         }
         mAdapter.upateDatas(list);
-
-        mSortReverseByName = !mSortReverseByName;
+        if (isNeedRevers) {
+            mSortReverseByName = !mSortReverseByName;
+        }
+        mSortType = 0;
     }
 
     @Override
-    public void sortByLength(int sortType) {
+    public void sortByLength(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_SONG){
             return;
         }
@@ -194,11 +204,14 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             });
         }
         mAdapter.upateDatas(list);
-        mSortReverseByLength = !mSortReverseByLength;
+        if (isNeedRevers) {
+            mSortReverseByLength = !mSortReverseByLength;
+        }
+        mSortType = 1;
     }
 
     @Override
-    public void sortByDate(int sortType) {
+    public void sortByDate(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_SONG){
             return;
         }
@@ -230,6 +243,111 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             });
         }
         mAdapter.upateDatas(list);
-        mSortReverseByDate = !mSortReverseByDate;
+        if (isNeedRevers) {
+        mSortReverseByDate = !mSortReverseByDate;}
+        mSortType = 2;
+    }
+
+    private void sortByName_fresh() {
+        List<SongModel> list = mAdapter.getDatas();
+        if (!mSortReverseByName){
+            Collections.sort(list, new Comparator<SongModel>(){
+
+                /*
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+                 * 返回负数表示：o1 小于o2，
+                 * 返回0 表示：o1和o2相等，
+                 * 返回正数表示：o1大于o2。
+                 */
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.title.compareTo(o2.title)<0){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
+        } else {
+            Collections.sort(list, new Comparator<SongModel>(){
+
+                /*
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
+                 * 返回负数表示：o1 小于o2，
+                 * 返回0 表示：o1和o2相等，
+                 * 返回正数表示：o1大于o2。
+                 */
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.title.compareTo(o2.title)>0){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
+        }
+        mAdapter.upateDatas(list);
+        mSortType = 0;
+    }
+
+    private void sortByLength_fresh() {
+        List<SongModel> list = mAdapter.getDatas();
+
+        if (!mSortReverseByLength){
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.duration < o2.duration){
+                        return 1;
+                    }
+                    if(o1.duration == o2.duration){
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+        } else {
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.duration > o2.duration){
+                        return 1;
+                    }
+                    if(o1.duration == o2.duration){
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+        }
+        mAdapter.upateDatas(list);
+        mSortType = 1;
+    }
+
+    private void sortByDate_fresh() {
+        List<SongModel> list = mAdapter.getDatas();
+        if (!mSortReverseByDate){
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    if(o1.date < o2.date){
+                        return 1;
+                    }
+                    if(o1.date == o2.date){
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+        } else {
+            Collections.sort(list, new Comparator<SongModel>(){
+                public int compare(SongModel o1, SongModel o2) {
+                    //按照学生的年龄进行倒序排列
+                    if(o1.date > o2.date){
+                        return 1;
+                    }
+                    if(o1.date == o2.date){
+                        return 0;
+                    }
+                    return -1;
+                }
+            });
+        }
+        mAdapter.upateDatas(list);
+        mSortType = 2;
     }
 }

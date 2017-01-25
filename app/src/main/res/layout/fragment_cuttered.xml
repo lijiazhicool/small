@@ -3,12 +3,6 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/openll" />
-
     <TextView
         android:id="@+id/empty_tv"
         android:layout_width="wrap_content"
@@ -28,6 +22,13 @@
         android:background="#f0f0f0"
         android:orientation="horizontal">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimary"
+            android:text="Saved path：" />
+        <TextView
             android:id="@+id/path_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,12 +36,21 @@
             android:textSize="14sp"
             android:singleLine="true"
             android:gravity="center_vertical"
-            tools:text="sfdsfdsfsdf" />
+            tools:text="/sdcard/mp3cut" />
         <ImageView
             android:layout_marginLeft="@dimen/padding_16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_folder"/>
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/openll"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

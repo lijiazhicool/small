@@ -5,15 +5,24 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="20dp"
-        android:text="Are you sure to delete this file?"
+        android:text="set as default notification"
         android:textColor="#de000000"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="10dp"
+        android:text="Are you sure to set default notification?"
+        android:textColor="@color/text_gray"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

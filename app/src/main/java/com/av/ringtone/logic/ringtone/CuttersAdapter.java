@@ -7,7 +7,6 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
-import com.av.ringtone.logic.SaveSuccessActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
@@ -139,12 +138,12 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                 break;
                             case R.id.menu_default:
                                 CommonDialog dialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.set_ringtone_hint),"",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_ringtone_title),mContext.getString(R.string.set_ringtone_content),"",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE,
                                                         newUri);
-                                                ToastUtils.makeToastAndShowLong(mContext, "Set Ringtone Success!");
+                                                ToastUtils.makeToastAndShowLong(mContext, mContext.getString(R.string.set_ringtone_success));
                                             }
                                         });
                                 dialog.setCancelable(true);
@@ -152,12 +151,12 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                 break;
                             case R.id.menu_notification:
                                 CommonDialog notidialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.set_notification_hint),"",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_notification_title), mContext.getString(R.string.set_notification_content),"",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION,
                                                         newUri);
-                                                ToastUtils.makeToastAndShowLong(mContext, "Set Notification Success!");
+                                                ToastUtils.makeToastAndShowLong(mContext, mContext.getString(R.string.set_notification_success));
                                             }
                                         });
                                 notidialog.setCancelable(true);
@@ -165,12 +164,12 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                 break;
                             case R.id.menu_alarm:
                                 CommonDialog alarmdialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.set_alarm_hint),"",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_alarm_title), mContext.getString(R.string.set_alarm_content),"",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM,
                                                         newUri);
-                                                ToastUtils.makeToastAndShowLong(mContext, "Set Alarm Success!");
+                                                ToastUtils.makeToastAndShowLong(mContext, mContext.getString(R.string.set_alarm_success));
                                             }
                                         });
                                 alarmdialog.setCancelable(true);
@@ -178,7 +177,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                 break;
                             case R.id.menu_delete:
                                 CommonDialog deldialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.delete_hint),"Delete",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.delete_title), mContext.getString(R.string.delete_content),"Delete",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 if (tempModel.playStatus == 1 && null != mListener) {

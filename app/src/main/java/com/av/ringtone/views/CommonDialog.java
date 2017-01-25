@@ -15,10 +15,15 @@ import android.widget.TextView;
 
 public class CommonDialog extends Dialog {
 
-    public CommonDialog(Context context, String content, String ok,  final  View.OnClickListener listener) {
+    public CommonDialog(Context context, String title, String content, String ok,  final  View.OnClickListener listener) {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_common);
+
+        TextView titleTV = (TextView)findViewById(R.id.title);
+        if (!TextUtils.isEmpty(title)){
+            titleTV.setText(title);
+        }
         TextView contentTV = (TextView)findViewById(R.id.content);
         contentTV.setText(content);
         TextView okTv = (TextView)findViewById(R.id.ok);
@@ -38,6 +43,6 @@ public class CommonDialog extends Dialog {
                 dismiss();
             }
         });
-
     }
+
 }

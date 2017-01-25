@@ -90,7 +90,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                                 break;
                             case R.id.popup_song_delete:
                                 CommonDialog deldialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.delete_hint),"Delete",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.delete_title),mContext.getString(R.string.delete_content),"Delete",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 File file = new File(tempModel.path);
@@ -110,12 +110,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                                 break;
                             case R.id.popup_song_default:
                                 CommonDialog dialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.set_ringtone_hint),"",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_ringtone_title),mContext.getString(R.string.set_ringtone_content),"",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_RINGTONE,
                                                         Uri.fromFile(new File(tempModel.path)));
-                                                ToastUtils.makeToastAndShowLong(mContext, "Set Ringtone Success!");
+                                                ToastUtils.makeToastAndShowLong(mContext, mContext.getString(R.string.set_ringtone_success));
                                             }
                                         });
                                 dialog.setCancelable(true);
@@ -123,12 +123,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                                 break;
                             case R.id.popup_song_notification:
                                 CommonDialog notidialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.set_notification_hint),"",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_notification_title), mContext.getString(R.string.set_notification_content),"",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION,
                                                         Uri.fromFile(new File(tempModel.path)));
-                                                ToastUtils.makeToastAndShowLong(mContext, "Set Notification Success!");
+                                                ToastUtils.makeToastAndShowLong(mContext, mContext.getString(R.string.set_notification_success));
                                             }
                                         });
                                 notidialog.setCancelable(true);
@@ -136,12 +136,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                                 break;
                             case R.id.popup_song_alarm:
                                 CommonDialog alarmdialog =
-                                        new CommonDialog(mContext, mContext.getString(R.string.set_alarm_hint),"",new View.OnClickListener() {
+                                        new CommonDialog(mContext, mContext.getString(R.string.set_alarm_title), mContext.getString(R.string.set_alarm_content),"",new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 RingtoneManager.setActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_ALARM,
                                                         Uri.fromFile(new File(tempModel.path)));
-                                                ToastUtils.makeToastAndShowLong(mContext, "Set Alarm Success!");
+                                                ToastUtils.makeToastAndShowLong(mContext, mContext.getString(R.string.set_alarm_success));
                                             }
                                         });
                                 alarmdialog.setCancelable(true);

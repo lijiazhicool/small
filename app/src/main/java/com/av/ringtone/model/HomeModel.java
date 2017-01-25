@@ -25,4 +25,20 @@ public class HomeModel extends BaseModel {
         this.type = type;
         this.ad = ad;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HomeModel homeModel = (HomeModel) o;
+
+        return type == homeModel.type;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return type;
+    }
 }

@@ -93,7 +93,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                                 break;
                             case R.id.popup_song_delete:
                                 CommonDialog dialog =
-                                        new CommonDialog(mContext,mContext.getString(R.string.delete_hint),"Delete", new View.OnClickListener() {
+                                        new CommonDialog(mContext,mContext.getString(R.string.delete_title), mContext.getString(R.string.delete_content),"Delete", new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 File file = new File(tempModel.path);

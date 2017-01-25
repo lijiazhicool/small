@@ -15,7 +15,7 @@
     <string name="menu_help">Help &amp; Feedback</string>
 
     <string name="menu_set_default">Set as default ringtone</string>
-    <string name="menu_set_notification">Set as notification ringtone</string>
+    <string name="menu_set_notification">Set as default notification</string>
     <string name="menu_set_alarm">Set as alarm ringtone</string>
     <string name="menu_share">Share</string>
 
@@ -110,10 +110,19 @@
     <string name="error_state_record">正在录音中，请先停止录音</string>
     <string name="error_unknown">无法识别的错误</string>
 
-    <string name="delete_hint">"Are you sure to delete this file?"</string>
-    <string name="set_ringtone_hint">"Are you sure to set as default ringtone?"</string>
-    <string name="set_notification_hint">"Are you sure to set as notification ringtone?"</string>
-    <string name="set_alarm_hint">"Are you sure to set as alarm ringtone?"</string>\
+    <string name="delete_content">Are you sure to delete this file?</string>
+    <string name="set_ringtone_content">Are you sure to set as default ringtone?</string>
+    <string name="set_notification_content">Are you sure to set as default notification?</string>
+    <string name="set_alarm_content">Are you sure to set as alarm ringtone?</string>
+
+    <string name="delete_title">Delete file</string>
+    <string name="set_ringtone_title">Set as default ringtone</string>
+    <string name="set_notification_title">Set as default notification</string>
+    <string name="set_alarm_title">Set as default alarm</string>
+
+    <string name="set_ringtone_success">Yes, Set Default Ringtone success!</string>
+    <string name="set_notification_success">Yes, Set Default Notification success!</string>
+    <string name="set_alarm_success">Yes, Set Default Alarm success!</string>
 
 
 </resources>

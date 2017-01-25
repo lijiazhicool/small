@@ -124,7 +124,8 @@ public class MainActivity extends BaseActivity
         mrRfreshIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserDatas.getInstance().loadMusics();
+//                UserDatas.getInstance().loadMusics();
+                freshMediaDB();
             }
         });
         mSearchll.setOnClickListener(new View.OnClickListener() {
@@ -270,6 +271,7 @@ public class MainActivity extends BaseActivity
 
             }
         });
+        UserDatas.getInstance().register(this);
     }
 
     private List<SongModel> filterSongs(List<SongModel> dataList, String newText) {
@@ -486,7 +488,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
-        UserDatas.getInstance().register(this);
     }
 
     @Override
@@ -519,7 +520,7 @@ public class MainActivity extends BaseActivity
     public void onBackPressed() {
         long mNowTime = System.currentTimeMillis();// 获取第一次按键时间
         if ((mNowTime - mPressedTime) > 2000) {// 比较两次按键时间差
-            ToastUtils.makeToastAndShow(this, "Press it again to return key to exit!");
+            ToastUtils.makeToastAndShow(this, " Press back key again to exit!");
             mPressedTime = mNowTime;
         } else {// 退出程序
             this.finish();

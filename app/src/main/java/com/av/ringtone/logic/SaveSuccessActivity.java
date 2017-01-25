@@ -8,6 +8,7 @@ import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
 import com.facebook.ads.Ad;
+import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
 import com.facebook.ads.MediaView;
@@ -20,12 +21,13 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class SaveSuccessActivity extends BaseActivity {
     private static final String INTENT_IN_URI = "intent_in_uri";
     private ImageView mBackIv;
     private LinearLayout mRingtonell, mNotificationll, mAlarmll, mSharell;
-    private MediaView mAdIv;
+    private LinearLayout nativeAdContainer;
 
     private NativeAd mNativeAd;
 
@@ -76,7 +78,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mNotificationll = findView(R.id.notification);
         mAlarmll = findView(R.id.alarm);
         mSharell = findView(R.id.share);
-        mAdIv = findView(R.id.ad_iv);
+        nativeAdContainer = findView(R.id.ad_ll);
     }
 
     @Override
@@ -91,12 +93,12 @@ public class SaveSuccessActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 CommonDialog dialog =
-                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_ringtone_hint),"",new View.OnClickListener() {
+                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_ringtone_title),getString(R.string.set_ringtone_content),"",new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this, RingtoneManager.TYPE_RINGTONE,
                                         mUri);
-                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, "Set Ringtone Success!");
+                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, getString(R.string.set_ringtone_success));
                                 onBackPressed();
                             }
                         });
@@ -108,12 +110,12 @@ public class SaveSuccessActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 CommonDialog dialog =
-                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_notification_hint),"",new View.OnClickListener() {
+                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_notification_title),getString(R.string.set_notification_content),"",new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this, RingtoneManager.TYPE_NOTIFICATION,
                                         mUri);
-                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, "Set Notification Success!");
+                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, getString(R.string.set_notification_success));
                                 onBackPressed();
                             }
                         });
@@ -126,11 +128,11 @@ public class SaveSuccessActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 CommonDialog dialog =
-                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_alarm_hint),"",new View.OnClickListener() {
+                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_alarm_title),getString(R.string.set_alarm_content),"",new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this, RingtoneManager.TYPE_ALARM, mUri);
-                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, "Set Alarm Success!");
+                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, getString(R.string.set_alarm_success));
                                 onBackPressed();
                             }
                         });
@@ -162,12 +164,43 @@ public class SaveSuccessActivity extends BaseActivity {
 
             @Override
             public void onAdLoaded(Ad ad) {
+                nativeAdContainer.setVisibility(View.VISIBLE);
+                LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
+                LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
+                nativeAdContainer.removeAllViews();
+                nativeAdContainer.addView(adView);
+
+                // Create native UI using the ad metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+
+                // Set the Text.
+                nativeAdTitle.setText(mNativeAd.getAdTitle());
+                nativeAdSocialContext.setText(mNativeAd.getAdSocialContext());
+                nativeAdBody.setText(mNativeAd.getAdBody());
+                nativeAdCallToAction.setText(mNativeAd.getAdCallToAction());
+
+                // Download and display the ad icon.
+                NativeAd.Image adIcon = mNativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+
                 // Download and display the cover image.
-                mAdIv.setNativeAd(mNativeAd);
+                nativeAdMedia.setNativeAd(mNativeAd);
+
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(SaveSuccessActivity.this, mNativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
+
                 // Register the Title and CTA button to listen for clicks.
                 List<View> clickableViews = new ArrayList<>();
-                clickableViews.add(mAdIv);
-                mNativeAd.registerViewForInteraction(mAdIv, clickableViews);
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                mNativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
             }
 
             @Override

@@ -33,7 +33,7 @@ public class SongLoader {
                 String path=cursor.getString(8);
                 long date = cursor.getLong(9);
 
-                arrayList.add(new SongModel(id, albumId, artistId, title, artist, album, duration, trackNumber,path,date));
+                arrayList.add(new SongModel(id, albumId, artistId, title, artist, album, duration/1000, trackNumber,path,date));
             } while (cursor.moveToNext());
         if (cursor != null)
             cursor.close();

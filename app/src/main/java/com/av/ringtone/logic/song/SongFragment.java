@@ -4,11 +4,14 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.base.BaseFragment;
+import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.ToastUtils;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +37,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     private boolean mSortReverseByDate = true;
 
     private int mSortType = 0;
-
+    private boolean mIsInit = false;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_music;
@@ -42,10 +45,6 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
-//        mSwipeLayout = findViewById(R.id.id_swipe_ly);
-//        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-//            android.R.color.holo_orange_light, android.R.color.holo_red_light);
-
         mEmptyll = findViewById(R.id.empty_tv);
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -68,6 +67,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             ToastUtils.makeToastAndShow(mActivity, getString(R.string.no_sdcard));
             return;
         }
+        mIsInit = true;
     }
 
     @Override
@@ -78,6 +78,15 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 //                UserDatas.getInstance().loadMusics();
 //            }
 //        });
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser && mIsInit) {
+            UserDatas.getInstance().resetSongs();
+            ((MainActivity)getActivity()).stop();
+        }
     }
 
     @Override
@@ -94,7 +103,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void updateSongs(List<SongModel> list) {
-        mAdapter = new SongsAdapter((BaseActivity) getActivity(), list);
+        mAdapter = new SongsAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
             mEmptyll.setVisibility(View.VISIBLE);
         } else {
@@ -121,8 +130,11 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     @Override
-    public void updateCutters() {
-
+    public void updatePlayStatus(int mainType) {
+        if (mainType != 1){
+            return;
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

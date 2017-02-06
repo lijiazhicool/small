@@ -7,6 +7,7 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
+import com.av.ringtone.logic.MediaListener;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
@@ -129,11 +130,11 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        final Uri newUri = Uri.fromFile(new File(tempModel.localPath));
+                        final Uri newUri = Uri.fromFile(new File(tempModel.path));
                         switch (item.getItemId()) {
                             case R.id.menu_edit:
                                 SongModel model =
-                                    new SongModel(tempModel.title, tempModel.localPath, tempModel.duration, tempModel.date);
+                                    new SongModel(tempModel.title, tempModel.path, tempModel.duration, tempModel.date);
                                 NavigationUtils.goToCutter(mContext, model);
                                 break;
                             case R.id.menu_default:
@@ -183,7 +184,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                                 if (tempModel.playStatus == 1 && null != mListener) {
                                                     mListener.stop();
                                                 }
-                                                File file = new File(tempModel.localPath);
+                                                File file = new File(tempModel.path);
                                                 if (file.exists()) {
                                                     file.delete();
                                                     String params[] = new String[] { file.getPath() };
@@ -201,7 +202,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                                 deldialog.show();
                                 break;
                             case R.id.menu_share:
-                                ShareUtils.shareFile(mContext, Uri.fromFile(new File(tempModel.localPath)));
+                                ShareUtils.shareFile(mContext, Uri.fromFile(new File(tempModel.path)));
                                 break;
                         }
                         return false;
@@ -235,13 +236,5 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
 
     public List<CutterModel> getDatas() {
         return mDatas;
-    }
-
-    public interface MediaListener {
-        void play(CutterModel model);
-
-        void pause();
-
-        void stop();
     }
 }

@@ -50,6 +50,7 @@ public class UserDatas {
     private LightModelCache mLightModelCache;
     private static final String CUT_COUNT_KEY = "cut_count_key";
     private static final String APP_START_KEY = "app_start_key";
+
     private static final String RECORD_S_KEY = "record_s_key";
     private static final String CUTTERED_S_KEY = "cuttered_s_key";
 
@@ -59,8 +60,9 @@ public class UserDatas {
     public static final int SORT_RECORD = 2;
     public static final int SORT_CUT = 3;
 
-    // cutters
+    private UserDatas(){
 
+    }
     public static UserDatas getInstance() {
         if (sUserDatas == null) {
             synchronized (UserDatas.class) {
@@ -275,13 +277,12 @@ public class UserDatas {
         }
     }
 
-    public void updateCutters() {
+    public void updateCuttersPlayStatus(int mainType) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
-                listener.updateCutters();
+                listener.updatePlayStatus(mainType);
             }
         }
-        mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
     }
 
     public void sortByName(int sortType) {
@@ -307,6 +308,30 @@ public class UserDatas {
             }
         }
     }
+
+    /**            重新设置 播放状态，即播放状态复原               **/
+    public void resetSongs(){
+        for (SongModel model : getSongs()) {
+            model.playStatus = 0;
+        }
+        updateCuttersPlayStatus(1);
+    }
+    public void resetRecords(){
+        for (RecordModel model : getRecords()) {
+            model.playStatus = 0;
+        }
+        mLightModelCache.putModelList(RECORD_S_KEY, mRecords);
+        updateCuttersPlayStatus(2);
+    }
+    public void resetCutteds(){
+        for (CutterModel model : getCuttereds()) {
+            model.playStatus = 0;
+        }
+        mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
+        updateCuttersPlayStatus(3);
+    }
+
+
 
     private class loadSongs extends AsyncTask<String, Void, String> {
         @Override
@@ -339,7 +364,7 @@ public class UserDatas {
 
         void updateCutters(List<CutterModel> list);
 
-        void updateCutters();
+        void updatePlayStatus(int mainType);
 
         void sortByName(int sortType, boolean isNeedRevers);
 

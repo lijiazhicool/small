@@ -1271,7 +1271,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         // save data
         UserDatas.getInstance().addCuttereds(
-            new CutterModel(mNewFileKind, title.toString(), outPath, artist, duration, fileSize, newPath,outFile.lastModified()));
+            new CutterModel(mNewFileKind, title.toString(), newPath, artist, duration, fileSize,outFile.lastModified()));
 
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
@@ -1316,7 +1316,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 //            return;
 //        }
 //
-//        // If we get here, that means the type is a ringtone. There are
+//        // If we get here, that means the catorytype is a ringtone. There are
 //        // three choices: make this your default ringtone, assign it to a
 //        // contact, or do nothing.
 //

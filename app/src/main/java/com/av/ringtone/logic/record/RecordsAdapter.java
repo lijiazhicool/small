@@ -6,6 +6,9 @@ import java.util.List;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.logic.MainActivity;
+import com.av.ringtone.logic.MediaListener;
+import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
@@ -22,6 +25,10 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import static com.av.ringtone.Constants.FILE_KIND_ALARM;
+import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
+import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
+
 /**
  * Created by LiJiaZhi on 16/12/19.
  */
@@ -30,10 +37,14 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
 
     private List<RecordModel> mDatas;
     private BaseActivity mContext;
+    private MediaListener mListener;
 
-    public RecordsAdapter(BaseActivity context, List<RecordModel> list) {
+    private RecordModel currentPlayItem = null;
+
+    public RecordsAdapter(MainActivity context, List<RecordModel> list) {
         this.mDatas = list;
         this.mContext = context;
+        mListener = context;
     }
 
     public void setDatas(List<RecordModel> datas) {
@@ -64,6 +75,45 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
             }
         });
         setOnPopupMenuListener(itemHolder, i);
+
+        if (localItem.playStatus == 0) {
+                itemHolder.type.setImageResource(R.drawable.icon_record);
+        } else if (localItem.playStatus == 1) {
+            itemHolder.type.setImageResource(R.drawable.ic_pause);
+        } else {
+            itemHolder.type.setImageResource(R.drawable.icon_play);
+        }
+
+        itemHolder.title.setText(localItem.title);
+        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
+        setOnPopupMenuListener(itemHolder, i);
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecordModel local = (RecordModel) v.getTag();
+                if (mListener != null) {
+                    if (local.playStatus == 0) {
+                        // ---播放
+                        mListener.play(local);
+                        local.playStatus = 1;
+                    } else if (local.playStatus == 1) {
+                        // ---暂停
+                        mListener.pause();
+                        local.playStatus = 2;
+                    } else {
+                        // ---播放
+                        mListener.play(local);
+                        local.playStatus = 1;
+                    }
+                    if (currentPlayItem != null && local != currentPlayItem) {
+                        currentPlayItem.playStatus = 0;
+                    }
+                    currentPlayItem = local;
+                    notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     private String getDuration(int d) {

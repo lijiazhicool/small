@@ -10,51 +10,14 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="System.err" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fd8d04d-5513-4ed9-a075-21115b33187c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_button_blue.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_big_ad.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/e/ah.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/e/al.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/e/b2.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/a8.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/a9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ae.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ah.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/at.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b_.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/h/ai.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/e/ah.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/e/al.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/e/b2.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/a8.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/a9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ae.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ah.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/at.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b_.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/h/ai.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/e/ah.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/e/al.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/e/b2.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/a8.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/a9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ae.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ah.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/at.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b_.png" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/ADManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MediaListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/VoiceModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -66,367 +29,29 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileGoogleplayReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed.apk" afterPath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed_7zip.apk" afterPath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed_7zip.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed_7zip_aligned.apk" afterPath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed_7zip_aligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed_aligned.apk" afterPath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_signed_aligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_unsigned.apk" afterPath="$PROJECT_DIR$/build/app-googleplay-release/app-googleplay-release_unsigned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/META-INF/BZZ.RSA" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/META-INF/BZZ.RSA" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/classes.dex" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a1.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a2.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a5.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a6.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/a6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/e/am.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/e/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/a_.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/a_.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aa.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ab.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ab.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ac.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ac.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ad.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/af.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/af.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ag.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ag.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ai.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ai.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aj.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ak.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ak.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/al.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/al.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/am.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/an.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/an.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ao.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ao.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ap.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ap.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aq.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ar.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/as.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/as.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/au.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/au.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/av.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/av.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aw.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/aw.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ax.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ax.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ay.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ay.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/az.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/az.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b0.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b0.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b1.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b1.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b2.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b2.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b3.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b3.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b4.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b4.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b5.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b5.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b6.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b6.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b7.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b7.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b8.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b8.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b9.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/b9.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ba.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/ba.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bb.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bc.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bd.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/be.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/be.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bf.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bg.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bh.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bi.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bj.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bk.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bl.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bm.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bn.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bo.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bp.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bq.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/br.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/br.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bs.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bt.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bu.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bv.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bw.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bx.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/by.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/by.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bz.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/bz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c0.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c1.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c2.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c3.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c4.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c5.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c6.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c7.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/f/c7.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/k/a.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/k/a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/l/a.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/l/a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/resources.arsc" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/resources.arsc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a1.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a2.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a5.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a6.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/a6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/e/am.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/e/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/a_.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/a_.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aa.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ab.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ab.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ac.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ac.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ad.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/af.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/af.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ag.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ag.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ai.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ai.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aj.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ak.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ak.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/al.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/al.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/am.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/an.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/an.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ao.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ao.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ap.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ap.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aq.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ar.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/as.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/as.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/au.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/au.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/av.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/av.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aw.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/aw.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ax.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ax.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ay.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ay.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/az.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/az.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b0.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b0.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b1.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b1.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b2.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b2.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b3.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b3.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b4.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b4.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b5.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b5.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b6.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b6.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b7.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b7.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b8.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b8.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b9.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/b9.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ba.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/ba.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bb.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bc.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bd.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/be.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/be.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bf.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bg.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bh.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bi.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bj.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bk.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bl.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bm.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bn.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bo.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bp.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bq.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/br.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/br.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bs.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bt.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bu.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bv.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bw.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bx.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/by.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/by.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bz.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/bz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c0.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c1.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c2.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c3.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c4.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c5.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c6.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c7.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/f/c7.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/k/a.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/k/a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/l/a.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/l/a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/resources.arsc" afterPath="$PROJECT_DIR$/build/app-googleplay-release/resources.arsc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a1.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a2.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a5.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a6.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/d/a6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/e/am.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/e/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/a_.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/a_.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aa.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ab.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ab.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ac.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ac.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ad.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/af.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/af.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ag.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ag.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ai.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ai.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aj.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ak.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ak.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/al.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/al.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/am.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/an.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/an.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ao.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ao.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ap.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ap.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aq.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ar.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/as.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/as.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/au.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/au.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/av.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/av.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aw.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/aw.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ax.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ax.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ay.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ay.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/az.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/az.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b0.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b0.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b1.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b1.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b2.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b2.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b3.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b3.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b4.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b4.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b5.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b5.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b6.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b6.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b7.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b7.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b8.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b8.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b9.9.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/b9.9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ba.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/ba.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bb.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bc.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bd.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/be.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/be.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bf.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bg.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bh.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bi.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bj.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bk.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bl.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bm.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bn.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bo.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bp.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bq.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/br.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/br.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bs.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bt.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bu.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bv.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bw.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bx.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/by.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/by.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bz.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/bz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c0.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c1.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c2.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c3.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c4.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c5.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c6.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c7.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/f/c7.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/k/a.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/k/a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/l/a.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/r/l/a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/resources.arsc" afterPath="$PROJECT_DIR$/build/app-googleplay-release/storefiles/resources.arsc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/META-INF/CERT.RSA" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/META-INF/CERT.RSA" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/classes.dex" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/mipmap-xhdpi-v4/icon.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/mipmap-xhdpi-v4/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/mipmap-xxhdpi-v4/icon.png" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/mipmap-xxhdpi-v4/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/resources.arsc" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/resources.arsc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/mockable-android-22.jar" afterPath="$PROJECT_DIR$/build/generated/mockable-android-22.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/SaveSuccessActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/SaveSuccessActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongLoader.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/CommonDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/CommonDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_save_success.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_save_success.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_common.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_common.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/soundfile/CheapAMR.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/soundfile/CheapAMR.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/AndroidManifest.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/META-INF/BZZ.SF" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/META-INF/BZZ.SF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/u.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/u.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/v.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/v.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/w.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/w.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/x.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/x.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/y.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/y.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/z.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/d/z.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a1.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a2.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a3.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a4.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a5.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a6.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a7.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a7.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a8.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a9.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a9.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a_.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/a_.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/aa.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/aa.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ab.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ab.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ac.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ac.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ad.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ad.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ae.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ae.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/af.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/af.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ag.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ag.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ao.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ap.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ap.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/aq.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/aq.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ar.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/ar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/z.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/g/z.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/j/a.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/j/a.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/j/b.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/j/b.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/j/c.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/out_7zip/r/j/c.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/u.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/u.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/v.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/v.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/w.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/w.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/x.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/x.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/y.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/y.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/d/z.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/d/z.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a1.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a2.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a3.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a4.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a5.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a6.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a7.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a7.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a8.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a9.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a9.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a_.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/a_.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/aa.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/aa.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ab.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ab.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ac.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ac.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ad.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ad.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ae.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ae.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/af.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/af.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ag.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ag.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ao.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ap.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ap.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/aq.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/aq.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ar.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/ar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/g/z.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/g/z.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/j/a.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/j/a.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/j/b.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/j/b.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/r/j/c.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/r/j/c.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/resource_mapping_app-googleplay-release.txt" afterPath="$PROJECT_DIR$/build/app-googleplay-release/resource_mapping_app-googleplay-release.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/AndroidManifest.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/META-INF/CERT.SF" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/META-INF/CERT.SF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/bg_checkbox.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/bg_checkbox.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/line_shape_blue.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/line_shape_blue.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/line_shape_white.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/line_shape_white.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/marker_left.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/marker_left.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/marker_right.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/drawable/marker_right.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_cutter.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_cutter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_save_success.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_save_success.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_welcome.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/activity_welcome.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/custom_tab.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/custom_tab.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_common.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_common.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_file_save.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_file_save.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_hint.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_hint.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_rate.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_rate.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_record_audio.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/dialog_record_audio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_cuttered.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_cuttered.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_home.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_music.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_music.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_record.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/fragment_record.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/item_home.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/item_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/item_song.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/layout/item_song.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/menu/popup_main.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/menu/popup_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/menu/popup_ringtone.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/menu/popup_ringtone.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/menu/popup_song.xml" afterPath="$PROJECT_DIR$/build/app-googleplay-release/temp/res/menu/popup_song.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_big_ad.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_big_ad.xml" />
     </list>
     <ignored path="ringtone.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -547,23 +172,13 @@
     <favorites_list name="ringtone" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="70" column="16" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="valueResourceFile" />
+        <option value="ASInterface" />
         <option value="ASClass" />
       </list>
     </option>
@@ -3333,16 +2948,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/FileSaveDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/file_save.xml" />
-        <option value="$PROJECT_DIR$/app/proguard-rules.pro" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MyLayoutManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_checkbox.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/HintDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/shape_bg_save_success_button.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
@@ -3361,29 +2966,39 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_delete.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/FileSaveDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/CommonDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_common.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_button_blue.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_save_success.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_big_ad.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseMediaPlayerFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MediaListener.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/VoiceModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongLoader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_song.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/ADManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/SaveSuccessActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_save_success.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/SaveSuccessActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
       </list>
     </option>
   </component>
@@ -3418,6 +3033,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -3427,140 +3043,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="history" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="outputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="outputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="small" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="outputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3574,28 +3059,29 @@
     <property name="DEBUGGABLE_PROCESS" value="com.av.ringtone" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
-    <property name="SearchEverywhereHistoryKey" value="item&#9;FILE&#9;file:///Users/Mtime/private/source/small/app/src/main/res/layout/item_home.xml&#10;hint&#9;FILE&#9;file:///Users/Mtime/private/source/small/app/src/main/res/layout/dialog_hint.xml" />
+    <property name="SearchEverywhereHistoryKey" value="item&#9;FILE&#9;file:///Users/Mtime/private/source/small/app/src/main/res/layout/item_song.xml&#10;hint&#9;FILE&#9;file:///Users/Mtime/private/source/small/app/src/main/res/layout/dialog_hint.xml" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/xml" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
+      <recent name="$PROJECT_DIR$/app/src/main/res" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.av.ringtone" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.av.ringtone.model" />
+      <recent name="com.av.ringtone.base" />
       <recent name="com.av.ringtone.views" />
       <recent name="com.av.ringtone.logic" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/xml" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
-      <recent name="$PROJECT_DIR$/app/src/main/res" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -3906,18 +3392,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="822" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="822" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23676682" sideWeight="0.6303116" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.6369565" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5141643" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5184136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Memory View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4220963" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3926,13 +3413,13 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904148" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3111588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44759208" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23676682" sideWeight="0.3696884" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.3638344" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32719547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.008583691" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3940,7 +3427,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53257793" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -3960,175 +3446,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
-          <line>292</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>1669</line>
-          <properties />
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java</url>
-          <line>85</line>
-          <properties />
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>1256</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>1502</line>
-          <properties />
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>674</line>
-          <properties />
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
-          <line>270</line>
-          <properties />
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java</url>
-          <line>77</line>
-          <properties />
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
-          <line>312</line>
-          <properties />
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
-          <line>186</line>
-          <properties />
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
-          <line>184</line>
-          <properties />
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
-          <line>154</line>
-          <properties />
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java</url>
-          <line>184</line>
-          <properties />
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java</url>
-          <line>143</line>
-          <properties />
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java</url>
-          <line>144</line>
+          <line>138</line>
           <properties />
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java</url>
-          <line>156</line>
-          <properties />
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>618</line>
-          <properties />
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>623</line>
-          <properties />
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>614</line>
-          <properties />
-          <option name="timeStamp" value="86" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java</url>
-          <line>295</line>
-          <properties />
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java</url>
-          <line>291</line>
-          <properties />
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java</url>
-          <line>93</line>
-          <properties />
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/FileSaveDialog.java</url>
-          <line>97</line>
-          <properties />
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java</url>
-          <line>158</line>
-          <properties />
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java</url>
-          <line>1269</line>
-          <properties />
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/SaveSuccessActivity.java</url>
-          <line>219</line>
-          <properties />
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java</url>
-          <line>218</line>
-          <properties />
-          <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java</url>
-          <line>126</line>
-          <properties />
-          <option name="timeStamp" value="118" />
+          <option name="timeStamp" value="123" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="119" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="124" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -4137,275 +3464,27 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/AboutActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="88" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RateModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/shape_bg_save_success_button.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ToastUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/HintDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" column="40" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/app/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="1108" column="16" selection-start-line="1108" selection-start-column="16" selection-end-line="1108" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/BaseModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_hint.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_record_audio.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_file_save.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="103" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_rate.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="53" column="32" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/ErrorCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="95" column="106" selection-start-line="95" selection-start-column="106" selection-end-line="95" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="142" column="71" selection-start-line="142" selection-start-column="71" selection-end-line="142" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/views/CommonDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="20" column="42" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_common.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_cuttered.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
-          <folding>
-            <element signature="e#8615#8656#0" expanded="false" />
-            <element signature="e#8658#8701#0" expanded="false" />
-            <element signature="e#8711#10234#0" expanded="false" />
-            <element signature="e#10233#10234#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="257" column="9" selection-start-line="257" selection-start-column="9" selection-end-line="257" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="265" column="9" selection-start-line="265" selection-start-column="9" selection-end-line="265" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.facebook.android/audience-network-sdk/4.9.0/jars/classes.jar!/com/facebook/ads/AdSize.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cutter.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="247" column="43" selection-start-line="247" selection-start-column="43" selection-end-line="247" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/HomeModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#923#924#0" expanded="false" />
-            <element signature="e#950#951#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_song.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_home.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/line_shape_blue.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4413,7 +3492,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4421,15 +3499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.facebook.android/audience-network-sdk/4.9.0/jars/classes.jar!/com/facebook/ads/NativeAd.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-269">
-          <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4437,7 +3506,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4445,29 +3513,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_big_ad.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="47" column="21" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="98" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4483,36 +3528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="543" column="32" selection-start-line="543" selection-start-column="32" selection-end-line="543" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-369">
-          <caret line="127" column="31" selection-start-line="127" selection-start-column="31" selection-end-line="127" selection-end-column="31" />
-          <folding>
-            <element signature="e#4128#4332#0" expanded="true" />
-            <element signature="e#4331#4332#0" expanded="true" />
-            <element signature="e#14992#15220#0" expanded="true" />
-            <element signature="e#15219#15220#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4524,50 +3539,376 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="1280" column="39" selection-start-line="1280" selection-start-column="39" selection-end-line="1280" selection-end-column="39" />
-          <folding>
-            <marker date="1485011192000" expanded="true" signature="19913:19945" ph="&quot;Loading...&quot;" />
-            <marker date="1485011192000" expanded="true" signature="21619:21662" ph="&quot;Error reading file&quot;" />
-            <marker date="1485011192000" expanded="false" signature="22391:22444" ph="&quot;Sorry, Ringdroid can't edit a file if it doesn't have a...&quot;" />
-            <marker date="1485011192000" expanded="false" signature="22513:22567" ph="&quot;Sorry, Ringdroid is not yet able to edit files of type&quot;" />
-            <marker date="1485011192000" expanded="false" signature="23435:23478" ph="&quot;Error reading file&quot;" />
-            <marker date="1485011192000" expanded="false" signature="44965:44994" ph="&quot;Saved!&quot;" />
-            <marker date="1485011192000" expanded="false" signature="45391:45419" ph="&quot;Success&quot;" />
-            <marker date="1485011192000" expanded="false" signature="45451:45484" ph="&quot;Saved! Make this your default notification?&quot;" />
-            <marker date="1485011192000" expanded="false" signature="45523:45548" ph="&quot;Yes, please!&quot;" />
-            <marker date="1485011192000" expanded="false" signature="45971:45995" ph="&quot;No, thanks.&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_save_success.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
           <caret line="159" column="23" selection-start-line="159" selection-start-column="23" selection-end-line="159" selection-end-column="23" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/outputs/apk/compress_app-googleplay-release.apk">
+      <provider selected="true" editor-type-id="apk-viewer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/outputs/apk/app-googleplay-release.apk">
+      <provider selected="true" editor-type-id="apk-viewer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/ShareUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="45" column="72" selection-start-line="45" selection-start-column="72" selection-end-line="45" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/AboutActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/WelcomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/SeekTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_big_ad.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_ringtone.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_song.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/popup_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/NavigationUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseMediaPlayerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/BaseModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MediaListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="43" column="25" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/modelcache/LightModelCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/CutterModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/RecordModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="60" column="64" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="35" column="97" selection-start-line="35" selection-start-column="97" selection-end-line="35" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/SongModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_song.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+          <folding>
+            <element signature="e#456#475#0" expanded="true" />
+            <element signature="e#609#629#0" expanded="true" />
+            <element signature="e#664#684#0" expanded="true" />
+            <element signature="e#2731#2750#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/model/VoiceModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CuttersAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="184" column="69" selection-start-line="184" selection-start-column="69" selection-end-line="184" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.facebook.android/audience-network-sdk/4.9.0/jars/classes.jar!/com/facebook/ads/NativeAd.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/SaveSuccessActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="166" column="62" selection-start-line="166" selection-start-column="62" selection-end-line="166" selection-end-column="62" />
+        <state relative-caret-position="374">
+          <caret line="157" column="72" selection-start-line="157" selection-start-column="72" selection-end-line="157" selection-end-column="72" />
+          <folding>
+            <element signature="e#5511#5512#0" expanded="true" />
+            <element signature="e#5535#5536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/UserDatas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/base/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="16" />
+        <state relative-caret-position="217">
+          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="65" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/ADManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="71" column="16" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/utils/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="185" column="22" selection-start-line="185" selection-start-column="22" selection-end-line="185" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/edit/CutterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="623" column="42" selection-start-line="623" selection-start-column="42" selection-end-line="623" selection-end-column="42" />
+          <folding>
+            <marker date="1486380176000" expanded="true" signature="19913:19945" ph="&quot;Loading...&quot;" />
+            <marker date="1486380176000" expanded="true" signature="21619:21662" ph="&quot;Error reading file&quot;" />
+            <marker date="1486380176000" expanded="false" signature="22391:22444" ph="&quot;Sorry, Ringdroid can't edit a file if it doesn't have a...&quot;" />
+            <marker date="1486380176000" expanded="false" signature="22513:22567" ph="&quot;Sorry, Ringdroid is not yet able to edit files of type&quot;" />
+            <marker date="1486380176000" expanded="false" signature="23435:23478" ph="&quot;Error reading file&quot;" />
+            <marker date="1486380176000" expanded="false" signature="44956:44985" ph="&quot;Saved!&quot;" />
+            <marker date="1486380176000" expanded="false" signature="45382:45410" ph="&quot;Success&quot;" />
+            <marker date="1486380176000" expanded="false" signature="45442:45475" ph="&quot;Saved! Make this your default notification?&quot;" />
+            <marker date="1486380176000" expanded="false" signature="45514:45539" ph="&quot;Yes, please!&quot;" />
+            <marker date="1486380176000" expanded="false" signature="45962:45986" ph="&quot;No, thanks.&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/ringtone/CutteredFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/record/RecordFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="121" column="50" selection-start-line="121" selection-start-column="50" selection-end-line="121" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/song/SongFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/home/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="71" column="31" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
+          <folding>
+            <marker date="1486384498000" expanded="false" signature="3728:3762" ph="&quot;You have cutted %1$d songs, share it!&quot;" />
+            <marker date="1486384498000" expanded="false" signature="5078:5234" ph="(parent, view, position, id) → {" />
+            <marker date="1486384498000" expanded="false" signature="5623:5638" ph="}" />
+            <marker date="1486384498000" expanded="false" signature="5677:5769" ph="(v) → {" />
+            <marker date="1486384498000" expanded="false" signature="5831:5846" ph="}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-22/android/widget/TextView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="3888" column="22" selection-start-line="3888" selection-start-column="22" selection-end-line="3888" selection-end-column="22" />
+          <folding>
+            <element signature="e#139348#139349#0" expanded="false" />
+            <element signature="e#139390#139391#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/av/ringtone/logic/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="217" column="60" selection-start-line="217" selection-start-column="60" selection-end-line="217" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>

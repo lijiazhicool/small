@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission  android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <activity
             android:name=".logic.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -28,7 +30,7 @@
             </intent-filter>
         </activity>
         <!--<activity android:name="com.facebook.ads.AudienceNetworkActivity"-->
-            <!--android:configChanges="keyboardHidden|orientation|screenSize" />-->
+        <!--android:configChanges="keyboardHidden|orientation|screenSize" />-->
 
         <activity
             android:name=".logic.edit.CutterActivity"
@@ -36,7 +38,19 @@
         <activity
             android:name=".logic.MainActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="file" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-ogg" />
+                <data android:mimeType="application/itunes" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".logic.AboutActivity"
             android:screenOrientation="portrait" />

@@ -9,6 +9,7 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.base.BaseFragment;
+import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
@@ -62,6 +63,8 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     private boolean mSortReverseByLength = true;
     private boolean mSortReverseByDate = true;
 
+    private boolean mIsInit = false;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_record;
@@ -108,8 +111,18 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
                     UserDatas.getInstance().addRecord(tempModel);
                 }
             }
-            mAdapter = new RecordsAdapter((BaseActivity) getActivity(), UserDatas.getInstance().getRecords());
+            mAdapter = new RecordsAdapter((MainActivity) getActivity(), UserDatas.getInstance().getRecords());
             mRecyclerView.setAdapter(mAdapter);
+        }
+        mIsInit = true;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser && mIsInit) {
+            UserDatas.getInstance().resetRecords();
+            ((MainActivity)getActivity()).stop();
         }
     }
 
@@ -207,7 +220,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
         } else {
             mEmptyll.setVisibility(View.GONE);
         }
-        mAdapter = new RecordsAdapter((BaseActivity) getActivity(), list);
+        mAdapter = new RecordsAdapter((MainActivity) getActivity(), list);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -217,8 +230,11 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     }
 
     @Override
-    public void updateCutters() {
-
+    public void updatePlayStatus(int mainType) {
+        if (mainType != 2){
+            return;
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

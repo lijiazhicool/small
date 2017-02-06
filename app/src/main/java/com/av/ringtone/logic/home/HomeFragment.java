@@ -54,7 +54,9 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private final static String EVENT_Small_AD_NAME = "Home_Small_NativeAd";
     private final static String EVENT_Small_AD_ID = "Home_Small_NativeAd_ID";
 
-    private boolean mIsNeedFresh = false;
+    private boolean mIsInit = false;
+
+    private boolean mLoadBigADSuccess = false;
 
     @Override
     protected int getLayoutId() {
@@ -95,6 +97,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         } else {
             randomShow();
         }
+        mIsInit = true;
     }
 
     private void randomShow() {
@@ -107,7 +110,11 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             mInfoll.setVisibility(View.GONE);
         } else if (index % 3 == 1) {
             mSharell.setVisibility(View.GONE);
-            nativeAdContainer.setVisibility(View.VISIBLE);
+            if (mLoadBigADSuccess){
+                nativeAdContainer.setVisibility(View.VISIBLE);
+            } else {
+                nativeAdContainer.setVisibility(View.GONE);
+            }
             mInfoll.setVisibility(View.GONE);
         } else if (index % 3 == 2) {
             mSharell.setVisibility(View.GONE);
@@ -119,9 +126,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && mIsNeedFresh) {
-            loadAds();
-            if (UserDatas.getInstance().getCutCount() >= 3) {
+        if (isVisibleToUser) {
+            if (UserDatas.getInstance().getCutCount() >= 3 && mIsInit) {
                 randomShow();
             }
         }
@@ -167,7 +173,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         // add data
         showSmallNativeAd();
         showBigNativeAd();
-        mIsNeedFresh = true;
     }
 
     @Override
@@ -201,7 +206,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             @Override
             public void onAdLoaded(Ad ad) {
                 HomeModel model = new HomeModel(4, mSmallNativeAd);
-                if (mDatas.contains(model)){
+                if (mDatas.contains(model)) {
                     mDatas.remove(model);
                 }
                 mDatas.add(new HomeModel(4, mSmallNativeAd));
@@ -214,6 +219,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                 bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_Small_AD_ID);
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_Small_AD_NAME);
                 mFirebaseAnalytics.logEvent(EVENT_Small_AD_TYPE, bundle);
+                // 广告点击后，请求新的广告缓存
+                showSmallNativeAd();
             }
         });
         // Request an ad
@@ -232,6 +239,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
             @Override
             public void onAdLoaded(Ad ad) {
+                mLoadBigADSuccess = true;
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
                 LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
                 nativeAdContainer.removeAllViews();
@@ -245,11 +253,15 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                 TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
                 Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
+                TextView nativeAdSponsor = (TextView) adView.findViewById(R.id.sponsored_label);
+
                 // Set the Text.
                 nativeAdTitle.setText(mBigNativeAd.getAdTitle());
                 nativeAdSocialContext.setText(mBigNativeAd.getAdSocialContext());
                 nativeAdBody.setText(mBigNativeAd.getAdBody());
                 nativeAdCallToAction.setText(mBigNativeAd.getAdCallToAction());
+
+                nativeAdSponsor.setText(mBigNativeAd.getAdBody());
 
                 // Download and display the ad icon.
                 NativeAd.Image adIcon = mBigNativeAd.getAdIcon();
@@ -276,6 +288,9 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                 bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_Big_AD_ID);
                 bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_Big_AD_NAME);
                 mFirebaseAnalytics.logEvent(EVENT_Big_AD_TYPE, bundle);
+
+                // 广告点击后，请求新的广告缓存
+                showBigNativeAd();
             }
         });
         // Request an ad

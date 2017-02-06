@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by LiJiaZhi on 16/12/19. music
  */
 
-public class SongModel extends BaseModel implements Serializable {
+public class SongModel extends VoiceModel {
 
     public int type = FILE_KIND_MUSIC;
     public long albumId;
@@ -22,6 +22,8 @@ public class SongModel extends BaseModel implements Serializable {
         this.path = path;
         this.duration = duration;
         this.date = date;
+
+        catorytype = 1;
     }
     public SongModel(long id, long albumId, long artistId, String title, String artistName, String albumName, int duration,
         int trackNumber, String path, long date) {
@@ -35,5 +37,7 @@ public class SongModel extends BaseModel implements Serializable {
         this.trackNumber = trackNumber;
         this.path = path;
         this.date = date;
+
+        catorytype = 1;
     }
 }

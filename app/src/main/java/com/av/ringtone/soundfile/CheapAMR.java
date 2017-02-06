@@ -500,7 +500,7 @@ public class CheapAMR extends CheapSoundFile {
             break;
 
         default:
-            System.out.println("Unsupported frame type: " + frameType);
+            System.out.println("Unsupported frame catorytype: " + frameType);
             addFrame(frameOffset, blockSize + 1, 1);
             break;
         }
@@ -847,7 +847,7 @@ public class CheapAMR extends CheapSoundFile {
     }
 
     // Block size in bytes for each of the 16 frame types, not
-    // counting the initial byte that indicates the frame type.
+    // counting the initial byte that indicates the frame catorytype.
     // Can be used to skip over unsupported frame types.
     static private int BLOCK_SIZES[] = {
         12, 13, 15, 17, 19, 20, 26, 31,

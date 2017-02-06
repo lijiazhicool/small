@@ -43,6 +43,8 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     private boolean mSortReverseByLength = true;
     private boolean mSortReverseByDate = true;
 
+    private boolean mIsInit = false;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_cuttered;
@@ -75,7 +77,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_RINGTONE,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),temp.lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_RINGTONE,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
@@ -91,7 +93,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_MUSIC,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_MUSIC,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),new File(fileName).lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
@@ -107,7 +109,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_NOTIFICATION,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_NOTIFICATION,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),new File(fileName).lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
@@ -122,12 +124,22 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                     String fileName = temp.getName();
                     String artist = "" + getResources().getText(R.string.artist_name);
 
-                    CutterModel tempModel = new CutterModel(FILE_KIND_ALARM,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),temp.getAbsolutePath(),new File(fileName).lastModified());
+                    CutterModel tempModel = new CutterModel(FILE_KIND_ALARM,fileName, temp.getAbsolutePath(), artist, FileUtils.getAudioLength(getActivity(),temp), temp.length(),new File(fileName).lastModified());
                     UserDatas.getInstance().addCuttereds(tempModel);
                 }
             }
         }
         mPathTv.setText(FileUtils.getAppDir_show());
+        mIsInit = true;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser && mIsInit) {
+            UserDatas.getInstance().resetCutteds();
+            ((MainActivity)getActivity()).stop();
+        }
     }
 
     @Override
@@ -186,7 +198,10 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     }
 
     @Override
-    public void updateCutters() {
+    public void updatePlayStatus(int mainType) {
+        if (mainType != 3){
+            return;
+        }
         mAdapter.notifyDataSetChanged();
     }
 

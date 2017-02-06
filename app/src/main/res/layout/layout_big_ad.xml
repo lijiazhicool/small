@@ -52,7 +52,6 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 tools:text="labellabellabellabellabellabellabellabellabellabellabellabel"
-                android:text="Sponsored"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="15sp"/>
         </LinearLayout>

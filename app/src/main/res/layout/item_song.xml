@@ -3,14 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/padding_16"
-    android:paddingTop="@dimen/padding_16"
     android:paddingLeft="@dimen/padding_16">
 
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/padding_16"
         android:orientation="horizontal">
 
         <ImageView
@@ -18,15 +17,17 @@
             android:layout_width="@dimen/image_width"
             android:layout_height="@dimen/image_width"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:padding="1dp"
             android:src="@drawable/ic_music" />
 
         <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/type_iv"
             android:layout_toLeftOf="@+id/popup_menu"
+            android:layout_toRightOf="@+id/type_iv"
             android:orientation="vertical"
             android:paddingLeft="12dp"
             android:paddingTop="5dp">
@@ -38,8 +39,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textSize="16sp"
                 android:textColor="@color/text_black"
+                android:textSize="16sp"
                 tools:text="Hella narwha." />
 
             <TextView
@@ -49,11 +50,10 @@
                 android:ellipsize="end"
                 android:paddingTop="3dp"
                 android:singleLine="true"
-                android:textSize="14sp"
                 android:textColor="@color/text_gray"
+                android:textSize="14sp"
                 tools:text="02:30 artistname " />
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/popup_menu"
@@ -64,6 +64,13 @@
             android:padding="@dimen/padding_16"
             android:src="@drawable/ic_more" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/ll"
+            android:layout_marginLeft="52dip"
+            android:layout_marginTop="@dimen/padding_16"
+            android:background="@color/text_gray" />
 
     </RelativeLayout>
 

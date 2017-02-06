@@ -5,6 +5,10 @@ import java.util.List;
 
 import com.av.ringtone.R;
 import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.logic.MainActivity;
+import com.av.ringtone.logic.MediaListener;
+import com.av.ringtone.model.CutterModel;
+import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
@@ -32,10 +36,13 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
 
     private List<SongModel> mDatas;
     private BaseActivity mContext;
+    private MediaListener mListener;
+    private SongModel currentPlayItem = null;
 
-    public SongsAdapter(BaseActivity context, List<SongModel> list) {
+    public SongsAdapter(MainActivity context, List<SongModel> list) {
         this.mDatas = list;
         this.mContext = context;
+        mListener = context;
     }
 
     @Override
@@ -47,11 +54,11 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
 
     @Override
     public void onBindViewHolder(ItemHolder itemHolder, int i) {
+
         SongModel localItem = mDatas.get(i);
         itemHolder.type.setImageResource(R.drawable.ic_music_small);
         itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration / 1000) + " | " + localItem.artist + " | "
-            + FileUtils.getFileDir(localItem.path));
+        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
         itemHolder.rl.setTag(localItem);
         itemHolder.rl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +68,46 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
             }
         });
         setOnPopupMenuListener(itemHolder, i);
+
+        if (localItem.playStatus == 0) {
+            itemHolder.type.setImageResource(R.drawable.icon_record);
+        } else if (localItem.playStatus == 1) {
+            itemHolder.type.setImageResource(R.drawable.ic_pause);
+        } else {
+            itemHolder.type.setImageResource(R.drawable.icon_play);
+        }
+
+        itemHolder.title.setText(localItem.title);
+        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
+        setOnPopupMenuListener(itemHolder, i);
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SongModel local = (SongModel) v.getTag();
+                if (mListener != null) {
+                    if (local.playStatus == 0) {
+                        // ---播放
+                        mListener.play(local);
+                        local.playStatus = 1;
+                    } else if (local.playStatus == 1) {
+                        // ---暂停
+                        mListener.pause();
+                        local.playStatus = 2;
+                    } else {
+                        // ---播放
+                        mListener.play(local);
+                        local.playStatus = 1;
+                    }
+                    if (currentPlayItem != null && local != currentPlayItem) {
+                        currentPlayItem.playStatus = 0;
+                    }
+                    currentPlayItem = local;
+                    notifyDataSetChanged();
+                }
+            }
+        });
+
     }
 
     private String getDuration(int d) {

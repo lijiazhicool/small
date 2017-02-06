@@ -1,19 +1,15 @@
 package com.av.ringtone.logic;
 
-import com.av.ringtone.Constants;
+import com.av.ringtone.ADManager;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
-import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,12 +35,6 @@ public class SaveSuccessActivity extends BaseActivity {
     private ImageView mBackIv;
     private LinearLayout mRingtonell, mNotificationll, mAlarmll, mSharell;
     private LinearLayout nativeAdContainer;
-
-    private NativeAd mNativeAd;
-
-    private final static String EVENT_AD_TYPE = "Save_Success_NativeAd_Click";
-    private final static String EVENT_AD_NAME = "Save_Success_NativeAd";
-    private final static String EVENT_AD_ID = "Save_Success_NativeAd_ID";
 
     private Uri mUri;
 
@@ -150,69 +140,55 @@ public class SaveSuccessActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        showBigNativeAd();
+        showAd();
     }
 
-    private void showBigNativeAd() {
-        mNativeAd = new NativeAd(this, Constants.AD_PLACE_SAVE);
-        mNativeAd.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError error) {
-                // Ad error callback
-                System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
-            }
+    private void showAd() {
+        NativeAd nativeAd = ADManager.getInstance().mSaveSuccessAD;
+        if (null == nativeAd){
+            return;
+        }
+        nativeAdContainer.setVisibility(View.VISIBLE);
+        LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
+        LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
+        nativeAdContainer.removeAllViews();
+        nativeAdContainer.addView(adView);
 
-            @Override
-            public void onAdLoaded(Ad ad) {
-                nativeAdContainer.setVisibility(View.VISIBLE);
-                LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
-                LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
-                nativeAdContainer.removeAllViews();
-                nativeAdContainer.addView(adView);
+        // Create native UI using the ad metadata.
+        ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+        TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+        MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+        TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+        Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
-                // Create native UI using the ad metadata.
-                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
-                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
-                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-                TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
-                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
-                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+        TextView nativeAdSponsor = (TextView) adView.findViewById(R.id.sponsored_label);
 
-                // Set the Text.
-                nativeAdTitle.setText(mNativeAd.getAdTitle());
-                nativeAdSocialContext.setText(mNativeAd.getAdSocialContext());
-                nativeAdBody.setText(mNativeAd.getAdBody());
-                nativeAdCallToAction.setText(mNativeAd.getAdCallToAction());
+        // Set the Text.
+        nativeAdTitle.setText(nativeAd.getAdTitle());
+        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+        nativeAdBody.setText(nativeAd.getAdBody());
+        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-                // Download and display the ad icon.
-                NativeAd.Image adIcon = mNativeAd.getAdIcon();
-                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+        nativeAdSponsor.setText(nativeAd.getAdBody());
 
-                // Download and display the cover image.
-                nativeAdMedia.setNativeAd(mNativeAd);
+        // Download and display the ad icon.
+        NativeAd.Image adIcon = nativeAd.getAdIcon();
+        NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
 
-                // Add the AdChoices icon
-                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
-                AdChoicesView adChoicesView = new AdChoicesView(SaveSuccessActivity.this, mNativeAd, true);
-                adChoicesContainer.addView(adChoicesView);
+        // Download and display the cover image.
+        nativeAdMedia.setNativeAd(nativeAd);
 
-                // Register the Title and CTA button to listen for clicks.
-                List<View> clickableViews = new ArrayList<>();
-                clickableViews.add(nativeAdTitle);
-                clickableViews.add(nativeAdCallToAction);
-                mNativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
-            }
+        // Add the AdChoices icon
+        LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+        AdChoicesView adChoicesView = new AdChoicesView(SaveSuccessActivity.this, nativeAd, true);
+        adChoicesContainer.addView(adChoicesView);
 
-            @Override
-            public void onAdClicked(Ad ad) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
-            }
-        });
-        // Request an ad
-        mNativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
+        // Register the Title and CTA button to listen for clicks.
+        List<View> clickableViews = new ArrayList<>();
+        clickableViews.add(nativeAdTitle);
+        clickableViews.add(nativeAdCallToAction);
+        nativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.av.ringtone.ADManager;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
@@ -15,9 +16,11 @@ import com.av.ringtone.logic.ringtone.CutteredFragment;
 import com.av.ringtone.logic.ringtone.CuttersAdapter;
 import com.av.ringtone.logic.song.SongFragment;
 import com.av.ringtone.logic.song.SongsAdapter;
+import com.av.ringtone.model.BaseModel;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.SharePreferenceUtil;
 import com.av.ringtone.utils.ShareUtils;
@@ -55,7 +58,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 public class MainActivity extends BaseActivity
-    implements CuttersAdapter.MediaListener, UserDatas.GotoFragmentListener {
+    implements MediaListener, UserDatas.GotoFragmentListener {
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     private FragmentPagerAdapter mAdpter;
@@ -74,7 +77,7 @@ public class MainActivity extends BaseActivity
     private boolean mIsPlaying;
     private MediaPlayer mPlayer;
 
-    private CutterModel currentModel = null;
+    private VoiceModel currentModel = null;
 
 
     SharePreferenceUtil mSharePreferenceUtil;
@@ -100,6 +103,14 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void initBundleExtra() {
+        if (getIntent() != null) {
+            String action = getIntent().getAction();
+            if(Intent.ACTION_VIEW.equals(action)) {
+                BaseModel model = new BaseModel();
+                model.path = getIntent().getData().getPath();
+                NavigationUtils.goToCutter(MainActivity.this,model);
+            }
+        }
     }
 
     @Override
@@ -132,6 +143,8 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 mSearchll.setVisibility(View.GONE);
+                mSearchev.setText("");
+                stop();
                 InputMethodManager imm =
                     (InputMethodManager) mSearchev.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
@@ -141,6 +154,8 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 mSearchll.setVisibility(View.GONE);
+                mSearchev.setText("");
+                stop();
                 InputMethodManager imm =
                     (InputMethodManager) mSearchev.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
@@ -364,6 +379,8 @@ public class MainActivity extends BaseActivity
         }
 
         UserDatas.getInstance().addAppStart();
+        //缓存广告
+        ADManager.getInstance().loadSaveSuccessAD(this);
     }
 
     private void freshMediaDB() {
@@ -381,7 +398,6 @@ public class MainActivity extends BaseActivity
                     }
                 });
         }
-
     }
 
     private void initViewPages() {
@@ -447,17 +463,17 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void play(CutterModel model) {
+    public void play(final VoiceModel model) {
         currentModel = model;
         mIsPlaying = false;
         mPlayer.reset();
         try {
-            mPlayer.setDataSource(MainActivity.this, Uri.fromFile(new File(model.localPath)));
+            mPlayer.setDataSource(MainActivity.this, Uri.fromFile(new File(model.path)));
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     currentModel.playStatus = 0;
-                    UserDatas.getInstance().updateCutters();
+                        UserDatas.getInstance().updateCuttersPlayStatus(model.catorytype);
                 }
             });
             mPlayer.prepare();
@@ -498,7 +514,7 @@ public class MainActivity extends BaseActivity
             mIsPlaying = false;
             if (currentModel != null) {
                 currentModel.playStatus = 0;
-                UserDatas.getInstance().updateCutters();
+                UserDatas.getInstance().updateCuttersPlayStatus(currentModel.catorytype);
             }
         }
     }

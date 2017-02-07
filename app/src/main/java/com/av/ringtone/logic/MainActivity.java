@@ -57,8 +57,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
-public class MainActivity extends BaseActivity
-    implements MediaListener, UserDatas.GotoFragmentListener {
+public class MainActivity extends BaseActivity implements MediaListener, UserDatas.GotoFragmentListener {
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     private FragmentPagerAdapter mAdpter;
@@ -79,9 +78,8 @@ public class MainActivity extends BaseActivity
 
     private VoiceModel currentModel = null;
 
-
     SharePreferenceUtil mSharePreferenceUtil;
-    private String KEY="is_check_hint";
+    private String KEY = "is_check_hint";
 
     public static void launch(Context context) {
         Intent i = new Intent(context, MainActivity.class);
@@ -105,10 +103,10 @@ public class MainActivity extends BaseActivity
     protected void initBundleExtra() {
         if (getIntent() != null) {
             String action = getIntent().getAction();
-            if(Intent.ACTION_VIEW.equals(action)) {
+            if (Intent.ACTION_VIEW.equals(action)) {
                 BaseModel model = new BaseModel();
                 model.path = getIntent().getData().getPath();
-                NavigationUtils.goToCutter(MainActivity.this,model);
+                NavigationUtils.goToCutter(MainActivity.this, model);
             }
         }
     }
@@ -135,7 +133,7 @@ public class MainActivity extends BaseActivity
         mrRfreshIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                UserDatas.getInstance().loadMusics();
+                // UserDatas.getInstance().loadMusics();
                 freshMediaDB();
             }
         });
@@ -362,25 +360,25 @@ public class MainActivity extends BaseActivity
         UserDatas.getInstance().setContext(this);
         UserDatas.getInstance().loadDatas();
 
-        if (!UserDatas.getInstance().isRated(getVersionCode())){
-            if (UserDatas.getInstance().getAppStart()!=0 && UserDatas.getInstance().getAppStart()%7==0){
-                RateDialog dialog =
-                        new RateDialog(this, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String appPackageName = getPackageName();
-                                launchAppDetail(appPackageName, "com.android.vending");
-                                UserDatas.getInstance().addRated(getVersionCode());
-                            }
-                        });
+        if (!UserDatas.getInstance().isRated(getVersionCode())) {
+            if (UserDatas.getInstance().getAppStart() != 0 && UserDatas.getInstance().getAppStart() % 7 == 0) {
+                RateDialog dialog = new RateDialog(this, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String appPackageName = getPackageName();
+                        launchAppDetail(appPackageName, "com.android.vending");
+                        UserDatas.getInstance().addRated(getVersionCode());
+                    }
+                });
                 dialog.setCancelable(true);
                 dialog.show();
             }
         }
 
         UserDatas.getInstance().addAppStart();
-        //缓存广告
+        // 缓存广告
         ADManager.getInstance().loadSaveSuccessAD(this);
+        ADManager.getInstance().loadHomeAD(this);
     }
 
     private void freshMediaDB() {
@@ -473,7 +471,7 @@ public class MainActivity extends BaseActivity
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     currentModel.playStatus = 0;
-                        UserDatas.getInstance().updateCuttersPlayStatus(model.catorytype);
+                    UserDatas.getInstance().updateCuttersPlayStatus(model.catorytype);
                 }
             });
             mPlayer.prepare();
@@ -543,8 +541,10 @@ public class MainActivity extends BaseActivity
             System.exit(0);
         }
     }
+
     /**
      * 获取版本号
+     * 
      * @return 当前应用的版本号
      */
     public int getVersionCode() {

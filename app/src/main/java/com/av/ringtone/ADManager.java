@@ -4,6 +4,7 @@ import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -27,12 +28,14 @@ import java.util.List;
 public class ADManager {
     private static volatile ADManager instance;
 
-    public NativeAd mSaveSuccessAD = null;
+    private NativeAd mSaveSuccessAD = null;
+    private boolean mLoadSaveADSuccess = false;
     private final static String EVENT_AD_TYPE = "Save_Success_NativeAd_Click";
     private final static String EVENT_AD_NAME = "Save_Success_NativeAd";
     private final static String EVENT_AD_ID = "Save_Success_NativeAd_ID";
 
-    public NativeAd mHomeAd = null;
+    private NativeAd mHomeAd = null;
+    private boolean mLoadHomeADSuccess = false;
     private final static String EVENT_Big_AD_TYPE = "Home_Big_NativeAd_Click";
     private final static String EVENT_Big_AD_NAME = "Home_Big_NativeAd";
     private final static String EVENT_Big_AD_ID = "Home_Big_NativeAd_ID";
@@ -52,18 +55,34 @@ public class ADManager {
         return instance;
     }
 
+    public NativeAd getHomeAd(){
+        if (mLoadHomeADSuccess){
+            return mHomeAd;
+        }
+        return null;
+
+    }
+    public NativeAd getSaveSuccessAD(){
+        if (mLoadSaveADSuccess){
+            return mSaveSuccessAD;
+        }
+        return null;
+    }
+
     public void loadHomeAD(final Context context) {
         mHomeAd = new NativeAd(context, Constants.AD_PLACE_HOME_BIG);
-        // AdSettings.addTestDevice("6707cd54fb24a306ba41dfacb8af2d8d");
+//         AdSettings.addTestDevice("6707cd54fb24a306ba41dfacb8af2d8d");
         mHomeAd.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError error) {
                 // Ad error callback
                 mHomeAd = null;
+                mLoadHomeADSuccess = false;
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
+                mLoadHomeADSuccess = true;
             }
 
             @Override
@@ -87,12 +106,13 @@ public class ADManager {
             @Override
             public void onError(Ad ad, AdError error) {
                 // Ad error callback
-                // System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
                 mSaveSuccessAD = null;
+                mLoadSaveADSuccess = true;
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
+                mLoadSaveADSuccess = true;
             }
 
             @Override

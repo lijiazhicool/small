@@ -181,10 +181,16 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                             case R.id.menu_sort_name:
                                 UserDatas.getInstance().sortByName(mCurrentPage);
                                 break;
-                            case R.id.menu_sort_length:
-                                UserDatas.getInstance().sortByLength(mCurrentPage);
-                                break;
                             case R.id.menu_sort_date:
+                                UserDatas.getInstance().sortByDate(mCurrentPage);
+                                break;
+                            case R.id.menu_sort_track:
+                                UserDatas.getInstance().sortByDate(mCurrentPage);
+                                break;
+                            case R.id.menu_sort_artist:
+                                UserDatas.getInstance().sortByDate(mCurrentPage);
+                                break;
+                            case R.id.menu_sort_album:
                                 UserDatas.getInstance().sortByDate(mCurrentPage);
                                 break;
                             case R.id.menu_about:
@@ -209,6 +215,15 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                     menu.getMenu().setGroupVisible(R.id.menu_group_sort, false);
                 } else {
                     menu.getMenu().setGroupVisible(R.id.menu_group_sort, true);
+                    if (mCurrentPage == 1){
+                        menu.getMenu().getItem(0).getSubMenu().getItem(2).setVisible(true);
+                        menu.getMenu().getItem(0).getSubMenu().getItem(3).setVisible(true);
+                        menu.getMenu().getItem(0).getSubMenu().getItem(4).setVisible(true);
+                    } else {
+                        menu.getMenu().getItem(0).getSubMenu().getItem(2).setVisible(false);
+                        menu.getMenu().getItem(0).getSubMenu().getItem(3).setVisible(false);
+                        menu.getMenu().getItem(0).getSubMenu().getItem(4).setVisible(false);
+                    }
                 }
                 menu.show();
             }

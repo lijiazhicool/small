@@ -101,36 +101,22 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:gravity="center"
+            android:nextFocusDown="@+id/play"
+            android:textColor="@android:color/white"
+            android:nextFocusUp="@+id/endmarker" />
+
         <View style="@style/HorizontalDivider" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="13dip"
-            android:paddingTop="13dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/total"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/total_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:text="00:00"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dip"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -158,16 +144,33 @@
                 android:textColor="#eeeeee"
                 android:textSize="16sp" />
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total"
+                    android:textColor="#50e3c2"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/total_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textColor="#50e3c2"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/mark_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="80dip"
                 android:clickable="true"
                 android:text="@string/end_label"
                 android:textColor="#eeeeee"
@@ -193,10 +196,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dip"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/padding_16"
-            android:paddingLeft="27dip">
+            android:paddingLeft="27dip"
+            android:paddingRight="27dip">
 
             <ImageButton
                 android:id="@+id/rew"
@@ -218,33 +221,24 @@
                 android:layout_marginLeft="@dimen/padding_16"
                 android:background="@drawable/ic_select_end" />
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
+                android:layout_height="1px"
+                android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/save"
-                    android:layout_width="56dip"
-                    android:layout_height="56dip"
-                    android:background="@drawable/ic_save" />
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/save"
+                android:layout_width="56dip"
+                android:layout_height="56dip"
+                android:background="@drawable/ic_save" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:nextFocusDown="@+id/play"
-            android:nextFocusUp="@+id/endmarker"
-            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/ad_ll"
             android:layout_width="match_parent"
             android:layout_height="50dip"
             android:gravity="bottom"
+            android:visibility="gone"
             android:orientation="vertical">
 
         </LinearLayout>

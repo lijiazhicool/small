@@ -1271,7 +1271,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         // save data
         UserDatas.getInstance().addCuttereds(
-            new CutterModel(mNewFileKind, title.toString(), newPath, artist, duration, fileSize,outFile.lastModified()));
+            new CutterModel(mNewFileKind, title.toString(), newPath, artist, duration, fileSize,outFile.lastModified(),true));
 
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);

@@ -159,14 +159,24 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/ad_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dip"
+            android:layout_marginLeft="@dimen/padding_16"
+            android:text="Click to support us:"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/text_black"
+            android:textSize="16sp" />
         <LinearLayout
             android:id="@+id/ad_ll"
             android:layout_width="match_parent"
             android:layout_height="292dp"
+            android:layout_marginTop="5dip"
             android:orientation="vertical"
-            android:layout_marginTop="33dip"
-            android:background="@drawable/item_bg_home"
-            android:padding="@dimen/padding_16"
             android:visibility="gone"
             android:layout_marginLeft="@dimen/padding_16"
             android:layout_marginRight="@dimen/padding_16" />

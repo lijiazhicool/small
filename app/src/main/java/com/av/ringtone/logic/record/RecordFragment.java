@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
-import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
@@ -17,6 +17,12 @@ import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.RecordingDialog;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -43,8 +49,15 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     private static final int RECORD_AUDIO = 1001;
     private RecyclerView mRecyclerView;
     private RecordsAdapter mAdapter;
-    private LinearLayout mEmptyll;
+    private TextView mEmptyTv;
     private ImageView mFab;
+
+    private LinearLayout mAdll;
+
+    private AdView adView;
+    private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
+    private final static String EVENT_AD_NAME = "Fragment_AdView";
+    private final static String EVENT_AD_ID = "Fragment_AdView_ID";
 
     private final static int FLAG_WAV = 0;
     private final static int FLAG_AMR = 1;
@@ -60,7 +73,6 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     private int mRecordingTime = 0;
 
     private boolean mSortReverseByName = true;
-    private boolean mSortReverseByLength = true;
     private boolean mSortReverseByDate = true;
 
     private boolean mIsInit = false;
@@ -72,30 +84,17 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
 
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
-        mEmptyll = findViewById(R.id.empty_tv);
+        mEmptyTv = findViewById(R.id.empty_tv);
         mRecyclerView = findViewById(R.id.recyclerView);
         mFab = findViewById(R.id.fab);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        mAdll = findViewById(R.id.ad_ll);
     }
 
     @Override
     protected void initData() {
-        String status = Environment.getExternalStorageState();
-        if (status.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
-            ToastUtils.makeToastAndShow(mActivity, getString(R.string.sdcard_readonly));
-            return;
-        }
-        if (status.equals(Environment.MEDIA_SHARED)) {
-            ToastUtils.makeToastAndShow(mActivity, getString(R.string.sdcard_shared));
-            return;
-        }
-        if (!status.equals(Environment.MEDIA_MOUNTED)) {
-            ToastUtils.makeToastAndShow(mActivity, getString(R.string.no_sdcard));
-            return;
-        }
-
         List<RecordModel> list = UserDatas.getInstance().getRecords();
         if (list.size()==0){
             //load from sdcard
@@ -115,6 +114,37 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             mRecyclerView.setAdapter(mAdapter);
         }
         mIsInit = true;
+        loadBanner();
+    }
+
+    protected void loadBanner() {
+        // Instantiate an AdView view
+        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_BANNER, AdSize.BANNER_HEIGHT_50);
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                adView.destroy();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                if (null != mAdll) {
+                    mAdll.setVisibility(View.VISIBLE);
+                    mAdll.addView(adView);
+                }
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
+            }
+        });
+
+        // Request to load an ad
+        adView.loadAd();
     }
 
     @Override
@@ -216,9 +246,9 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     @Override
     public void updateRecords(List<RecordModel> list) {
         if (list == null || list.size() == 0) {
-            mEmptyll.setVisibility(View.VISIBLE);
+            mEmptyTv.setVisibility(View.VISIBLE);
         } else {
-            mEmptyll.setVisibility(View.GONE);
+            mEmptyTv.setVisibility(View.GONE);
         }
         mAdapter = new RecordsAdapter((MainActivity) getActivity(), list);
         mRecyclerView.setAdapter(mAdapter);
@@ -283,44 +313,6 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     }
 
     @Override
-    public void sortByLength(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_RECORD){
-            return;
-        }
-        List<RecordModel> list = mAdapter.getDatas();
-
-        if (mSortReverseByLength){
-            Collections.sort(list, new Comparator<RecordModel>(){
-                public int compare(RecordModel o1, RecordModel o2) {
-                    if(o1.duration < o2.duration){
-                        return 1;
-                    }
-                    if(o1.duration == o2.duration){
-                        return 0;
-                    }
-                    return -1;
-                }
-            });
-        } else {
-            Collections.sort(list, new Comparator<RecordModel>(){
-                public int compare(RecordModel o1, RecordModel o2) {
-                    if(o1.duration > o2.duration){
-                        return 1;
-                    }
-                    if(o1.duration == o2.duration){
-                        return 0;
-                    }
-                    return -1;
-                }
-            });
-        }
-        mAdapter.upateDatas(list);
-        if (isNeedRevers) {
-            mSortReverseByLength = !mSortReverseByLength;
-        }
-    }
-
-    @Override
     public void sortByDate(int sortType, boolean isNeedRevers) {
         if (sortType!= UserDatas.SORT_RECORD){
             return;
@@ -356,6 +348,21 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
         if (isNeedRevers) {
             mSortReverseByDate = !mSortReverseByDate;
         }
+    }
+
+    @Override
+    public void sortByTrack(int sortType, boolean isNeedRevers) {
+
+    }
+
+    @Override
+    public void sortByArtist(int sortType, boolean isNeedRevers) {
+
+    }
+
+    @Override
+    public void sortByAlbum(int sortType, boolean isNeedRevers) {
+
     }
 
     /**

@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class SaveSuccessActivity extends BaseActivity {
     private ImageView mBackIv;
     private LinearLayout mRingtonell, mNotificationll, mAlarmll, mSharell;
     private LinearLayout nativeAdContainer;
+    private TextView mAdHintTv;
 
     private Uri mUri;
 
@@ -69,6 +71,8 @@ public class SaveSuccessActivity extends BaseActivity {
         mAlarmll = findView(R.id.alarm);
         mSharell = findView(R.id.share);
         nativeAdContainer = findView(R.id.ad_ll);
+        mAdHintTv = findView(R.id.ad_hint_tv);
+
     }
 
     @Override
@@ -144,13 +148,14 @@ public class SaveSuccessActivity extends BaseActivity {
     }
 
     private void showAd() {
-        NativeAd nativeAd = ADManager.getInstance().mSaveSuccessAD;
+        NativeAd nativeAd = ADManager.getInstance().getSaveSuccessAD();
         if (null == nativeAd){
             return;
         }
         nativeAdContainer.setVisibility(View.VISIBLE);
+        mAdHintTv.setVisibility(View.VISIBLE);
         LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
-        LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
+        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
         nativeAdContainer.removeAllViews();
         nativeAdContainer.addView(adView);
 
@@ -158,19 +163,15 @@ public class SaveSuccessActivity extends BaseActivity {
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
         TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
         MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+//        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
         TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
         Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
-        TextView nativeAdSponsor = (TextView) adView.findViewById(R.id.sponsored_label);
-
         // Set the Text.
         nativeAdTitle.setText(nativeAd.getAdTitle());
-        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+//        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
         nativeAdBody.setText(nativeAd.getAdBody());
         nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-
-        nativeAdSponsor.setText(nativeAd.getAdBody());
 
         // Download and display the ad icon.
         NativeAd.Image adIcon = nativeAd.getAdIcon();

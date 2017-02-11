@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">MP3 Cutter &amp; Ringtone Maker</string>
-    <string name="welcome_hint">MP3 Cutter \n Ringtone Maker</string>
+    <string name="app_name">Ringtone Maker</string>
+    <string name="welcome_hint">New MP3 Ringtone Maker</string>
 
     <string name="facebook_app_id">1064813890295110</string>
 
@@ -9,6 +9,11 @@
     <string name="menu_sort_name">Name</string>
     <string name="menu_sort_length">Length</string>
     <string name="menu_sort_date">Date</string>
+    <string name="menu_sort_track">Track</string>
+    <string name="menu_sort_artist">Artist</string>
+    <string name="menu_sort_album">Album</string>
+
+
     <string name="menu_about">About</string>
     <string name="menu_rate">Rate us</string>
     <string name="menu_invite">Invite Friends</string>
@@ -24,7 +29,7 @@
 
     <!--title-->
     <string name="title_cutter">Cut Audio</string>
-    <string name="title_main">MP3 Cutter</string>
+    <string name="title_main">New Ringtone Maker</string>
 
 
     <!--第三方-->
@@ -36,7 +41,7 @@
     <string name="zoom_out">Zoom Out</string>
     <string name="start_label">Start</string>
     <string name="end_label">End</string>
-    <string name="total">Total:</string>
+    <string name="total">Length:</string>
     <!-- Progress dialog text for loading or saving... -->
     <string name="progress_dialog_loading">Loading...</string>
     <string name="progress_dialog_saving">Saving...</string>
@@ -101,9 +106,9 @@
     <string name="about_version">Version: V %1$s</string>
 
 
-    <string name="sdcard_readonly">Sorry, the SD Card is mounted as read-only and MP3 Cutter &amp; Ringtone Maker requires it to be writable.</string>
-    <string name="no_sdcard">Sorry, MP3 Cutter &amp; Ringtone Maker can\'t run unless you have an SD Card inserted.</string>
-    <string name="sdcard_shared">Sorry, MP3 Cutter &amp; Ringtone Maker can\'t run while your handset is mounted as a USB device.</string>
+    <!--<string name="sdcard_readonly">Sorry, the SD Card is mounted as read-only and MP3 Cutter &amp; Ringtone Maker requires it to be writable.</string>-->
+    <!--<string name="no_sdcard">Sorry, MP3 Cutter &amp; Ringtone Maker can\'t run unless you have an SD Card inserted.</string>-->
+    <!--<string name="sdcard_shared">Sorry, MP3 Cutter &amp; Ringtone Maker can\'t run while your handset is mounted as a USB device.</string>-->
 
 
     <string name="error_no_sdcard">没有SD卡，无法存储录音数据</string>

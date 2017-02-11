@@ -60,9 +60,10 @@ public class UserDatas {
     public static final int SORT_RECORD = 2;
     public static final int SORT_CUT = 3;
 
-    private UserDatas(){
+    private UserDatas() {
 
     }
+
     public static UserDatas getInstance() {
         if (sUserDatas == null) {
             synchronized (UserDatas.class) {
@@ -293,14 +294,6 @@ public class UserDatas {
         }
     }
 
-    public void sortByLength(int sortType) {
-        for (DataChangedListener listener : mListenerList) {
-            if (null != listener) {
-                listener.sortByLength(sortType, true);
-            }
-        }
-    }
-
     public void sortByDate(int sortType) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
@@ -309,29 +302,54 @@ public class UserDatas {
         }
     }
 
-    /**            重新设置 播放状态，即播放状态复原               **/
-    public void resetSongs(){
+    public void sortByTrack(int sortType) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.sortByTrack(sortType, true);
+            }
+        }
+    }
+
+    public void sortByArtist(int sortType) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.sortByArtist(sortType, true);
+            }
+        }
+    }
+
+    public void sortByAlbum(int sortType) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.sortByAlbum(sortType, true);
+            }
+        }
+    }
+
+    /** 重新设置 播放状态，即播放状态复原 **/
+    public void resetSongs() {
         for (SongModel model : getSongs()) {
             model.playStatus = 0;
         }
         updateCuttersPlayStatus(1);
     }
-    public void resetRecords(){
+
+    public void resetRecords() {
         for (RecordModel model : getRecords()) {
             model.playStatus = 0;
         }
         mLightModelCache.putModelList(RECORD_S_KEY, mRecords);
         updateCuttersPlayStatus(2);
     }
-    public void resetCutteds(){
+
+    public void resetCutteds() {
         for (CutterModel model : getCuttereds()) {
             model.playStatus = 0;
+            model.isNew = false;
         }
         mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
         updateCuttersPlayStatus(3);
     }
-
-
 
     private class loadSongs extends AsyncTask<String, Void, String> {
         @Override
@@ -368,9 +386,13 @@ public class UserDatas {
 
         void sortByName(int sortType, boolean isNeedRevers);
 
-        void sortByLength(int sortType, boolean isNeedRevers);
-
         void sortByDate(int sortType, boolean isNeedRevers);
+
+        void sortByTrack(int sortType, boolean isNeedRevers);
+
+        void sortByArtist(int sortType, boolean isNeedRevers);
+
+        void sortByAlbum(int sortType, boolean isNeedRevers);
     }
 
     public interface DataCountChangedListener {

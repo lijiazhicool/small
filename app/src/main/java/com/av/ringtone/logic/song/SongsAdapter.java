@@ -14,6 +14,7 @@ import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
+import com.av.ringtone.views.MusicVisualizer;
 
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -56,32 +58,24 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
     public void onBindViewHolder(ItemHolder itemHolder, int i) {
 
         SongModel localItem = mDatas.get(i);
-        itemHolder.type.setImageResource(R.drawable.ic_music_small);
-        itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
-        itemHolder.rl.setTag(localItem);
-        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final SongModel tempModel = (SongModel) v.getTag();
-                NavigationUtils.goToCutter(mContext, tempModel);
-            }
-        });
-        setOnPopupMenuListener(itemHolder, i);
-
         if (localItem.playStatus == 0) {
-            itemHolder.type.setImageResource(R.drawable.icon_record);
+            itemHolder.type.setImageResource(R.drawable.ic_music_small);
+            itemHolder.type.setVisibility(View.VISIBLE);
+            itemHolder.musicVisualizer.setVisibility(View.GONE);
         } else if (localItem.playStatus == 1) {
-            itemHolder.type.setImageResource(R.drawable.ic_pause);
+            itemHolder.type.setVisibility(View.GONE);
+            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         } else {
-            itemHolder.type.setImageResource(R.drawable.icon_play);
+            itemHolder.type.setImageResource(R.drawable.ic_music_small);
+            itemHolder.type.setVisibility(View.VISIBLE);
+            itemHolder.musicVisualizer.setVisibility(View.GONE);
         }
 
         itemHolder.title.setText(localItem.title);
         itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
         setOnPopupMenuListener(itemHolder, i);
-        itemHolder.rl.setTag(localItem);
-        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+        itemHolder.typelayout.setTag(localItem);
+        itemHolder.typelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SongModel local = (SongModel) v.getTag();
@@ -107,7 +101,14 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                 }
             }
         });
-
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final SongModel tempModel = (SongModel) v.getTag();
+                NavigationUtils.goToCutter(mContext, tempModel);
+            }
+        });
     }
 
     private String getDuration(int d) {
@@ -208,14 +209,20 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
         protected RelativeLayout rl;
         protected TextView title, artist;
         protected ImageView type, popupMenu;
+        private MusicVisualizer musicVisualizer;
+        private LinearLayout typelayout;
 
         public ItemHolder(View view) {
             super(view);
             this.rl = (RelativeLayout) view.findViewById(R.id.rl);
             this.type = (ImageView) view.findViewById(R.id.type_iv);
+            this.typelayout = (LinearLayout)view.findViewById(R.id.type_ll);
+
             this.title = (TextView) view.findViewById(R.id.song_title);
             this.artist = (TextView) view.findViewById(R.id.song_detail);
             this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
+            this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
+            musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
         }
     }
 

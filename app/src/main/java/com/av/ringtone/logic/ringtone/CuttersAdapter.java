@@ -9,12 +9,12 @@ import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.logic.MediaListener;
 import com.av.ringtone.model.CutterModel;
-import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
+import com.av.ringtone.views.MusicVisualizer;
 
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,17 +72,35 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
             } else {
                 itemHolder.type.setImageResource(R.drawable.ic_phone);
             }
+            itemHolder.type.setVisibility(View.VISIBLE);
+            itemHolder.musicVisualizer.setVisibility(View.GONE);
         } else if (localItem.playStatus == 1) {
-            itemHolder.type.setImageResource(R.drawable.ic_pause);
+            itemHolder.type.setVisibility(View.GONE);
+            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         } else {
-            itemHolder.type.setImageResource(R.drawable.icon_play);
+            if (localItem.type == FILE_KIND_MUSIC) {
+                itemHolder.type.setImageResource(R.drawable.ic_music);
+            } else if (localItem.type == FILE_KIND_ALARM) {
+                itemHolder.type.setImageResource(R.drawable.ic_alarm);
+            } else if (localItem.type == FILE_KIND_NOTIFICATION) {
+                itemHolder.type.setImageResource(R.drawable.icon_notifications);
+            } else {
+                itemHolder.type.setImageResource(R.drawable.ic_phone);
+            }
+            itemHolder.type.setVisibility(View.VISIBLE);
+            itemHolder.musicVisualizer.setVisibility(View.GONE);
         }
 
+        if (localItem.isNew){
+            itemHolder.newTv.setVisibility(View.VISIBLE);
+        } else {
+            itemHolder.newTv.setVisibility(View.GONE);
+        }
         itemHolder.title.setText(localItem.title);
         itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
         setOnPopupMenuListener(itemHolder, i);
-        itemHolder.rl.setTag(localItem);
-        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+        itemHolder.typelayout.setTag(localItem);
+        itemHolder.typelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CutterModel local = (CutterModel) v.getTag();
@@ -107,6 +126,15 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                 }
             }
         });
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CutterModel local = (CutterModel) v.getTag();
+                NavigationUtils.goToCutter(mContext, local);
+            }
+        });
+
     }
 
     private String getDuration(int d) {
@@ -133,9 +161,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         final Uri newUri = Uri.fromFile(new File(tempModel.path));
                         switch (item.getItemId()) {
                             case R.id.menu_edit:
-                                SongModel model =
-                                    new SongModel(tempModel.title, tempModel.path, tempModel.duration, tempModel.date);
-                                NavigationUtils.goToCutter(mContext, model);
+                                NavigationUtils.goToCutter(mContext, tempModel);
                                 break;
                             case R.id.menu_default:
                                 CommonDialog dialog =
@@ -221,16 +247,22 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
 
     public class ItemHolder extends RecyclerView.ViewHolder {
         protected RelativeLayout rl;
-        protected TextView title, artist;
+        protected TextView title, artist, newTv;
         protected ImageView type, popupMenu;
+        private MusicVisualizer musicVisualizer;
+        private LinearLayout typelayout;
 
         public ItemHolder(View view) {
             super(view);
             this.rl = (RelativeLayout) view.findViewById(R.id.rl);
             this.type = (ImageView) view.findViewById(R.id.type_iv);
+            this.typelayout = (LinearLayout)view.findViewById(R.id.type_ll);
+            this.newTv = (TextView) view.findViewById(R.id.new_tv);
             this.title = (TextView) view.findViewById(R.id.song_title);
             this.artist = (TextView) view.findViewById(R.id.song_detail);
             this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
+            this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
+            musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
         }
     }
 

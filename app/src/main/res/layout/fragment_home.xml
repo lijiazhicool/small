@@ -93,8 +93,6 @@
         android:layout_width="match_parent"
         android:layout_height="292dp"
         android:orientation="vertical"
-        android:background="@drawable/item_bg_home"
-        android:padding="@dimen/padding_16"
         android:visibility="gone"
         android:layout_marginLeft="@dimen/padding_16"
         android:layout_marginRight="@dimen/padding_16" />

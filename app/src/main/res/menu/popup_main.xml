@@ -13,13 +13,24 @@
 
                 </item>
                 <item
-                    android:id="@+id/menu_sort_length"
-                    android:title="@string/menu_sort_length">
+                    android:id="@+id/menu_sort_date"
+                    android:title="@string/menu_sort_date">
+
+                </item>
+
+                <item
+                    android:id="@+id/menu_sort_track"
+                    android:title="@string/menu_sort_track">
 
                 </item>
                 <item
-                    android:id="@+id/menu_sort_date"
-                    android:title="@string/menu_sort_date">
+                    android:id="@+id/menu_sort_artist"
+                    android:title="@string/menu_sort_artist">
+
+                </item>
+                <item
+                    android:id="@+id/menu_sort_album"
+                    android:title="@string/menu_sort_album">
 
                 </item>
             </menu>
@@ -28,21 +39,21 @@
     <item
         android:id="@+id/menu_about"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        app:showAsAction="never"
-        android:title="@string/menu_about" />
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_rate"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        app:showAsAction="never"
-        android:title="@string/menu_rate" />
+        android:title="@string/menu_rate"
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_invite"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        app:showAsAction="never"
-        android:title="@string/menu_invite" />
+        android:title="@string/menu_invite"
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_help"
         android:actionProviderClass="android.widget.ShareActionProvider"
-        app:showAsAction="never"
-        android:title="@string/menu_help" />
+        android:title="@string/menu_help"
+        app:showAsAction="never" />
 </menu>

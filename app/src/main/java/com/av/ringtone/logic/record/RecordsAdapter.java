@@ -14,6 +14,7 @@ import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
+import com.av.ringtone.views.MusicVisualizer;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -63,32 +65,24 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
     @Override
     public void onBindViewHolder(ItemHolder itemHolder, int i) {
         RecordModel localItem = mDatas.get(i);
-        itemHolder.type.setImageResource(R.drawable.icon_record);
-        itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
-        itemHolder.rl.setTag(localItem);
-        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final RecordModel tempModel = (RecordModel) v.getTag();
-                NavigationUtils.goToCutter(mContext, tempModel);
-            }
-        });
-        setOnPopupMenuListener(itemHolder, i);
-
         if (localItem.playStatus == 0) {
-                itemHolder.type.setImageResource(R.drawable.icon_record);
+            itemHolder.type.setImageResource(R.drawable.icon_record);
+            itemHolder.type.setVisibility(View.VISIBLE);
+            itemHolder.musicVisualizer.setVisibility(View.GONE);
         } else if (localItem.playStatus == 1) {
-            itemHolder.type.setImageResource(R.drawable.ic_pause);
+            itemHolder.type.setVisibility(View.GONE);
+            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         } else {
-            itemHolder.type.setImageResource(R.drawable.icon_play);
+            itemHolder.type.setImageResource(R.drawable.icon_record);
+            itemHolder.type.setVisibility(View.VISIBLE);
+            itemHolder.musicVisualizer.setVisibility(View.GONE);
         }
 
         itemHolder.title.setText(localItem.title);
         itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
         setOnPopupMenuListener(itemHolder, i);
-        itemHolder.rl.setTag(localItem);
-        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+        itemHolder.typelayout.setTag(localItem);
+        itemHolder.typelayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RecordModel local = (RecordModel) v.getTag();
@@ -114,10 +108,18 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                 }
             }
         });
+        itemHolder.rl.setTag(localItem);
+        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final RecordModel tempModel = (RecordModel) v.getTag();
+                NavigationUtils.goToCutter(mContext, tempModel);
+            }
+        });
     }
 
     private String getDuration(int d) {
-        int min = d/60;
+        int min = d / 60;
         int sec = d - 60 * min;
         return String.format("%02d:%02d", min, sec);
     }
@@ -142,20 +144,22 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                                 NavigationUtils.goToCutter(mContext, tempModel);
                                 break;
                             case R.id.popup_song_delete:
-                                CommonDialog dialog =
-                                        new CommonDialog(mContext,mContext.getString(R.string.delete_title), mContext.getString(R.string.delete_content),"Delete", new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                File file = new File(tempModel.path);
-                                                if (file.exists()) {
-                                                    file.delete();
-                                                }
-                                                mDatas.remove(tempModel);
-                                                UserDatas.getInstance().setRecords(mDatas);
-                                                notifyDataSetChanged();
-                                                ToastUtils.makeToastAndShowLong(mContext,mContext.getString(R.string.delete_success));
+                                CommonDialog dialog = new CommonDialog(mContext,
+                                    mContext.getString(R.string.delete_title),
+                                    mContext.getString(R.string.delete_content), "Delete", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            File file = new File(tempModel.path);
+                                            if (file.exists()) {
+                                                file.delete();
                                             }
-                                        });
+                                            mDatas.remove(tempModel);
+                                            UserDatas.getInstance().setRecords(mDatas);
+                                            notifyDataSetChanged();
+                                            ToastUtils.makeToastAndShowLong(mContext,
+                                                mContext.getString(R.string.delete_success));
+                                        }
+                                    });
                                 dialog.setCancelable(false);
                                 dialog.show();
                                 break;
@@ -173,14 +177,19 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         protected RelativeLayout rl;
         protected TextView title, artist;
         protected ImageView type, popupMenu;
+        private MusicVisualizer musicVisualizer;
+        private LinearLayout typelayout;
 
         public ItemHolder(View view) {
             super(view);
             this.rl = (RelativeLayout) view.findViewById(R.id.rl);
             this.type = (ImageView) view.findViewById(R.id.type_iv);
+            this.typelayout = (LinearLayout)view.findViewById(R.id.type_ll);
             this.title = (TextView) view.findViewById(R.id.song_title);
             this.artist = (TextView) view.findViewById(R.id.song_detail);
             this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
+            this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
+            musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
         }
     }
 
@@ -188,7 +197,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         return mDatas;
     }
 
-    public void upateDatas(List<RecordModel> list){
+    public void upateDatas(List<RecordModel> list) {
         mDatas = list;
         notifyDataSetChanged();
     }

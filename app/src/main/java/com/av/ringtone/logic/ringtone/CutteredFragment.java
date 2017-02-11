@@ -1,5 +1,6 @@
 package com.av.ringtone.logic.ringtone;
 
+import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
@@ -8,6 +9,12 @@ import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.FileUtils;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -39,8 +46,14 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     private TextView mPathTv;
     private LinearLayout mOpenFilell;
 
+    private LinearLayout mAdll;
+
+    private AdView adView;
+    private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
+    private final static String EVENT_AD_NAME = "Fragment_AdView";
+    private final static String EVENT_AD_ID = "Fragment_AdView_ID";
+
     private boolean mSortReverseByName = true;
-    private boolean mSortReverseByLength = true;
     private boolean mSortReverseByDate = true;
 
     private boolean mIsInit = false;
@@ -130,7 +143,38 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             }
         }
         mPathTv.setText(FileUtils.getAppDir_show());
+        loadBanner();
         mIsInit = true;
+    }
+
+    protected void loadBanner() {
+        // Instantiate an AdView view
+        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_BANNER, AdSize.BANNER_HEIGHT_50);
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                adView.destroy();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                if (null != mAdll) {
+                    mAdll.setVisibility(View.VISIBLE);
+                    mAdll.addView(adView);
+                }
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
+            }
+        });
+
+        // Request to load an ad
+        adView.loadAd();
     }
 
     @Override
@@ -273,43 +317,6 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         }
     }
 
-    @Override
-    public void sortByLength(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_CUT){
-            return;
-        }
-        List<CutterModel> list = mAdapter.getDatas();
-
-        if (mSortReverseByLength){
-            Collections.sort(list, new Comparator<CutterModel>(){
-                public int compare(CutterModel o1, CutterModel o2) {
-                    if(o1.duration < o2.duration){
-                        return 1;
-                    }
-                    if(o1.duration == o2.duration){
-                        return 0;
-                    }
-                    return -1;
-                }
-            });
-        } else {
-            Collections.sort(list, new Comparator<CutterModel>(){
-                public int compare(CutterModel o1, CutterModel o2) {
-                    if(o1.duration > o2.duration){
-                        return 1;
-                    }
-                    if(o1.duration == o2.duration){
-                        return 0;
-                    }
-                    return -1;
-                }
-            });
-        }
-        mAdapter.upateDatas(list);
-        if (isNeedRevers) {
-            mSortReverseByLength = !mSortReverseByLength;
-        }
-    }
 
     @Override
     public void sortByDate(int sortType, boolean isNeedRevers) {
@@ -347,5 +354,20 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         if (isNeedRevers) {
             mSortReverseByDate = !mSortReverseByDate;
         }
+    }
+
+    @Override
+    public void sortByTrack(int sortType, boolean isNeedRevers) {
+
+    }
+
+    @Override
+    public void sortByArtist(int sortType, boolean isNeedRevers) {
+
+    }
+
+    @Override
+    public void sortByAlbum(int sortType, boolean isNeedRevers) {
+
     }
 }

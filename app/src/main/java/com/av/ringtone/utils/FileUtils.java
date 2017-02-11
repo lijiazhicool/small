@@ -22,7 +22,7 @@ import android.text.TextUtils;
 
 public class FileUtils {
 
-    public static final String app_dir = "/mp3cut";
+    public static final String app_dir = "/new_ringtone";
     public static final String sdcard_dir = "/sdcard";
 
     // 文件夹名

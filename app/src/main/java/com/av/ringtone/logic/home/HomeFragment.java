@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -219,7 +220,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     }
 
     private void showBigNativeAd() {
-        NativeAd nativeAd = ADManager.getInstance().mHomeAd;
+        NativeAd nativeAd = ADManager.getInstance().getHomeAd();
         if (null == nativeAd) {
             nativeAdContainer.setVisibility(View.GONE);
             return;
@@ -228,7 +229,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         nativeAdContainer.setVisibility(View.VISIBLE);
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        LinearLayout adView = (LinearLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
+        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
         nativeAdContainer.removeAllViews();
         nativeAdContainer.addView(adView);
 
@@ -236,19 +237,15 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
         TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
         MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+//        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
         TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
         Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
-        TextView nativeAdSponsor = (TextView) adView.findViewById(R.id.sponsored_label);
-
         // Set the Text.
         nativeAdTitle.setText(nativeAd.getAdTitle());
-        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+//        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
         nativeAdBody.setText(nativeAd.getAdBody());
         nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-
-        nativeAdSponsor.setText(nativeAd.getAdBody());
 
         // Download and display the ad icon.
         NativeAd.Image adIcon = nativeAd.getAdIcon();
@@ -267,6 +264,10 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         clickableViews.add(nativeAdTitle);
         clickableViews.add(nativeAdCallToAction);
         nativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
+    }
+
+    private void scanMusic(){
+
     }
 
     // 自定义适配器

@@ -238,6 +238,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
+                    mAdll.setVisibility(View.VISIBLE);
                     mAdll.addView(adView);
                 }
             }
@@ -251,7 +252,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             }
         });
 
-        // Request to load an ad
+        // Request to load an ad_front
         adView.loadAd();
     }
 

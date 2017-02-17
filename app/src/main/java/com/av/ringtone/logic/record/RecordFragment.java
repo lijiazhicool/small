@@ -119,7 +119,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
 
     protected void loadBanner() {
         // Instantiate an AdView view
-        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_BANNER, AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_RECORD_BANNER, AdSize.BANNER_HEIGHT_50);
         adView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
@@ -129,8 +129,8 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
-                    mAdll.setVisibility(View.VISIBLE);
                     mAdll.addView(adView);
+                    mAdll.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -143,7 +143,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             }
         });
 
-        // Request to load an ad
+        // Request to load an ad_front
         adView.loadAd();
     }
 
@@ -185,27 +185,29 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             public void onClick(View v) {
                 // andoird 7.0 不能调用系统录音
                 if (Build.VERSION.SDK_INT >= 24) {
-                    mDialog = new RecordingDialog(mActivity, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            stop();
-                        }
-                    }, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            stop();
-                            String fileName = FileUtils.getFileName(mRecordFilePath);
-                            RecordModel tempModel = new RecordModel(fileName, mRecordFilePath, mRecordingTime / 1000, new File(mRecordFilePath).lastModified());
-                            UserDatas.getInstance().addRecord(tempModel);
-                            mAdapter.setDatas(UserDatas.getInstance().getRecords());
-
-                            NavigationUtils.goToCutter(mActivity, tempModel);
-                        }
-                    });
-                    mDialog.setCancelable(false);
-                    mDialog.show();
-                    mTimerTextView = (TextView) mDialog.findViewById(R.id.record_audio_timer);
-                    record(FLAG_AMR);
+                    ToastUtils.makeToastAndShow(getActivity(),"No support Android Nougat 7.0");
+                    return;
+//                    mDialog = new RecordingDialog(mActivity, new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            stop();
+//                        }
+//                    }, new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            stop();
+//                            String fileName = FileUtils.getFileName(mRecordFilePath);
+//                            RecordModel tempModel = new RecordModel(fileName, mRecordFilePath, mRecordingTime / 1000, new File(mRecordFilePath).lastModified());
+//                            UserDatas.getInstance().addRecord(tempModel);
+//                            mAdapter.setDatas(UserDatas.getInstance().getRecords());
+//
+//                            NavigationUtils.goToCutter(mActivity, tempModel);
+//                        }
+//                    });
+//                    mDialog.setCancelable(false);
+//                    mDialog.show();
+//                    mTimerTextView = (TextView) mDialog.findViewById(R.id.record_audio_timer);
+//                    record(FLAG_AMR);
                 } else {
                     Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
                     startActivityForResult(intent, RECORD_AUDIO);

@@ -128,16 +128,16 @@ public class FileUtils {
         return sdcard_dir + app_dir;
     }
     public static String getMusicDir_show() {
-        return sdcard_dir + "/music/";
+        return sdcard_dir + app_dir+ "/music/";
     }
     public static String getRingtoneDir_show() {
-        return sdcard_dir +  "/ringtone/";
+        return sdcard_dir + app_dir+ "/ringtone/";
     }
     public static String getNotificationDir_show() {
-        return sdcard_dir + "/notification/";
+        return sdcard_dir + app_dir+"/notification/";
     }
     public static String getAlarmDir_show() {
-        return sdcard_dir + "/alarm/";
+        return sdcard_dir + app_dir+"/alarm/";
     }
 
     public static String getMusicPath(Context activity) {

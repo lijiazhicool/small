@@ -17,6 +17,11 @@ public class SongModel extends VoiceModel {
     public long id;
     public int trackNumber;
 
+    public SongModel(String path) {
+        this.path = path;
+        catorytype = 1;
+    }
+
     public SongModel(String title, String path, int duration, long date) {
         this.title = title;
         this.path = path;
@@ -39,5 +44,21 @@ public class SongModel extends VoiceModel {
         this.date = date;
 
         catorytype = 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SongModel songModel = (SongModel) o;
+
+        return path.equals(songModel.path);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return path.hashCode();
     }
 }

@@ -14,6 +14,7 @@ import com.av.ringtone.logic.record.RecordFragment;
 import com.av.ringtone.logic.record.RecordsAdapter;
 import com.av.ringtone.logic.ringtone.CutteredFragment;
 import com.av.ringtone.logic.ringtone.CuttersAdapter;
+import com.av.ringtone.logic.scan.ScanActivity;
 import com.av.ringtone.logic.song.SongFragment;
 import com.av.ringtone.logic.song.SongsAdapter;
 import com.av.ringtone.model.BaseModel;
@@ -134,7 +135,8 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             @Override
             public void onClick(View v) {
                 // UserDatas.getInstance().loadMusics();
-                freshMediaDB();
+//                freshMediaDB();
+                startActivityForResult(new Intent(MainActivity.this, ScanActivity.class),1001);
             }
         });
         mSearchll.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +304,17 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         UserDatas.getInstance().register(this);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK){
+            switch (requestCode){
+                case 1001:
+                    UserDatas.getInstance().loadMusics();
+                    break;
+            }
+        }
+    }
+
     private List<SongModel> filterSongs(List<SongModel> dataList, String newText) {
         newText = newText.toLowerCase();
         if (TextUtils.isEmpty(newText)) {
@@ -394,6 +407,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         // 缓存广告
         ADManager.getInstance().loadSaveSuccessAD(this);
         ADManager.getInstance().loadHomeAD(this);
+        ADManager.getInstance().loadScanSuccessAD(this);
     }
 
     private void freshMediaDB() {
@@ -486,7 +500,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     currentModel.playStatus = 0;
-                    UserDatas.getInstance().updateCuttersPlayStatus(model.catorytype);
+                    UserDatas.getInstance().updatePlayStatus(model.catorytype);
                 }
             });
             mPlayer.prepare();
@@ -527,7 +541,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             mIsPlaying = false;
             if (currentModel != null) {
                 currentModel.playStatus = 0;
-                UserDatas.getInstance().updateCuttersPlayStatus(currentModel.catorytype);
+                UserDatas.getInstance().updatePlayStatus(currentModel.catorytype);
             }
         }
     }

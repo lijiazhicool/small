@@ -39,7 +39,6 @@ import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
  */
 
 public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHolder> {
-
     private List<CutterModel> mDatas;
     private BaseActivity mContext;
     private MediaListener mListener;

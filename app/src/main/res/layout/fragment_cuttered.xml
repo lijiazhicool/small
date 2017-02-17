@@ -12,43 +12,59 @@
         android:textSize="20dip" />
 
     <LinearLayout
-        android:id="@+id/openll"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_ll"
         android:layout_width="match_parent"
-        android:layout_height="40dip"
-        android:paddingLeft="@dimen/padding_16"
-        android:paddingRight="@dimen/padding_16"
-        android:gravity="center"
-        android:background="#f0f0f0"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorPrimary"
-            android:text="Saved path：" />
-        <TextView
-            android:id="@+id/path_tv"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/openll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:singleLine="true"
-            android:gravity="center_vertical"
-            tools:text="/sdcard/mp3cut" />
-        <ImageView
-            android:layout_marginLeft="@dimen/padding_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_folder"/>
+            android:layout_height="40dip"
+            android:paddingLeft="@dimen/padding_16"
+            android:paddingRight="@dimen/padding_16"
+            android:gravity="center"
+            android:background="#f0f0f0"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:text="Saved path：" />
+            <TextView
+                android:id="@+id/path_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                tools:text="/sdcard/mp3cut" />
+            <ImageView
+                android:layout_marginLeft="@dimen/padding_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_folder"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ad_ll"
+            android:layout_below="@+id/openll"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:visibility="gone"
+            android:gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/openll"
+        android:layout_above="@+id/bottom_ll"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

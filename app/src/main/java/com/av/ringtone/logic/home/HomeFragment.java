@@ -7,10 +7,12 @@ import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.model.HomeModel;
 import com.av.ringtone.utils.ShareUtils;
+import com.av.ringtone.views.Rotatable;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -18,6 +20,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +50,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private TextView mSharetv;
 
     private NativeAd mSmallNativeAd;
+
+    private boolean isVisibleToUser = false;//当前界面是否可见
 
     private final static String EVENT_Small_AD_TYPE = "Home_Small_NativeAd_Click";
     private final static String EVENT_Small_AD_NAME = "Home_Small_NativeAd";
@@ -93,6 +98,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         } else {
             randomShow();
         }
+        handler.postDelayed(runnable, TIME); //每隔1s执行
         mIsInit = true;
     }
 
@@ -118,6 +124,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
         if (isVisibleToUser) {
             if (UserDatas.getInstance().getCutCount() >= 3 && mIsInit) {
                 randomShow();
@@ -167,6 +174,8 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         showBigNativeAd();
     }
 
+
+
     @Override
     public void updatecount(int isong, int irecord, int icutter) {
         if (null == mDatas || mDatas.size() == 0) {
@@ -187,6 +196,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     private void showSmallNativeAd() {
         mSmallNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_SMALL);
+//        AdSettings.addTestDevice("28098e2b8ba1737743e3a116ec401021");
         mSmallNativeAd.setAdListener(new AdListener() {
 
             @Override
@@ -197,12 +207,19 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
             @Override
             public void onAdLoaded(Ad ad) {
-                HomeModel model = new HomeModel(4, mSmallNativeAd);
-                if (mDatas.contains(model)) {
+                //已经有广告了
+                if (mDatas.size()>3){
+                    HomeModel model = mDatas.get(3);
                     mDatas.remove(model);
+                    model.addAd(mSmallNativeAd);
+                    mDatas.add(model);
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    HomeModel tempModel = new HomeModel(4);
+                    tempModel.addAd(mSmallNativeAd);
+                    mDatas.add(tempModel);
+                    mAdapter.notifyDataSetChanged();
                 }
-                mDatas.add(new HomeModel(4, mSmallNativeAd));
-                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -215,7 +232,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                 showSmallNativeAd();
             }
         });
-        // Request an ad
+        // Request an ad_front
         mSmallNativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
     }
 
@@ -233,21 +250,21 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         nativeAdContainer.removeAllViews();
         nativeAdContainer.addView(adView);
 
-        // Create native UI using the ad metadata.
+        // Create native UI using the ad_front metadata.
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
         TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
         MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-//        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+        // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
         TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
         Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
         // Set the Text.
         nativeAdTitle.setText(nativeAd.getAdTitle());
-//        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+        // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
         nativeAdBody.setText(nativeAd.getAdBody());
         nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-        // Download and display the ad icon.
+        // Download and display the ad_front icon.
         NativeAd.Image adIcon = nativeAd.getAdIcon();
         NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
 
@@ -266,14 +283,32 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         nativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
     }
 
-    private void scanMusic(){
+    private int TIME = 2000;
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
 
-    }
+        @Override
+        public void run() {
+            // handler自带方法实现定时器
+            try {
+                handler.postDelayed(this, TIME);
+                if (isVisibleToUser){
+                    showSmallNativeAd();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 
     // 自定义适配器
     class MyAdapter extends BaseAdapter {
         // 上下文对象
         private Context context;
+        CircleImageView imageViewFront;
+        CircleImageView imageViewBack;
+        RelativeLayout rlCardRoot;
 
         MyAdapter(Context context) {
             this.context = context;
@@ -294,33 +329,112 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         // 创建View方法
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_home, null);
-            CircleImageView image = (CircleImageView) convertView.findViewById(R.id.image);
+            rlCardRoot = (RelativeLayout) convertView.findViewById(R.id.targetView);
+            setCameraDistance();
+            imageViewFront = (CircleImageView) convertView.findViewById(R.id.frontView);
+            imageViewBack = (CircleImageView) convertView.findViewById(R.id.backView);
             TextView title = (TextView) convertView.findViewById(R.id.title);
             TextView subtitle = (TextView) convertView.findViewById(R.id.subtitle);
 
             HomeModel local = mDatas.get(position);
             if (local.type == 4) {
-                if (null != local.ad) {
-                    // Download and display the ad icon.
-                    NativeAd.Image adIcon = local.ad.getAdIcon();
-                    NativeAd.downloadAndDisplayImage(adIcon, image);
-                    title.setText(local.ad.getAdTitle());
-                    subtitle.setText(local.ad.getAdSubtitle());
+//                if (null != local.ad_front) {
+//                    // Download and display the ad_front icon.
+//                    NativeAd.Image adIcon = local.ad_front.getAdIcon();
+//                    NativeAd.downloadAndDisplayImage(adIcon, imageViewFront);
+//                    title.setText(local.ad_front.getAdTitle());
+//                    subtitle.setText(local.ad_front.getAdSubtitle());
+//
+//                    // Register the Title and CTA button to listen for clicks.
+//                    List<View> clickableViews = new ArrayList<>();
+//                    clickableViews.add(imageViewFront);
+//                    clickableViews.add(title);
+//                    clickableViews.add(subtitle);
+//                    local.ad_front.registerViewForInteraction(convertView, clickableViews);
+//                }
 
-                    // Register the Title and CTA button to listen for clicks.
-                    List<View> clickableViews = new ArrayList<>();
-                    clickableViews.add(image);
-                    clickableViews.add(title);
-                    clickableViews.add(subtitle);
-                    mSmallNativeAd.registerViewForInteraction(convertView, clickableViews);
+                if (null != local.ad_front) {
+                    if (null != local.ad_back){
+                        // Download and display the ad_front icon.
+                        NativeAd.Image adIcon = local.ad_front.getAdIcon();
+                        NativeAd.downloadAndDisplayImage(adIcon, imageViewFront);
+                        title.setText(local.ad_front.getAdTitle());
+                        subtitle.setText(local.ad_front.getAdSubtitle());
+
+                        // Register the Title and CTA button to listen for clicks.
+                        List<View> clickableViews = new ArrayList<>();
+                        clickableViews.add(imageViewFront);
+                        clickableViews.add(title);
+                        clickableViews.add(subtitle);
+                        local.ad_front.registerViewForInteraction(convertView, clickableViews);
+
+                        // Download and display the ad_front icon.
+                        NativeAd.Image adIconBack = local.ad_back.getAdIcon();
+                        NativeAd.downloadAndDisplayImage(adIconBack, imageViewBack);
+                        title.setText(local.ad_back.getAdTitle());
+                        subtitle.setText(local.ad_back.getAdSubtitle());
+
+                        // Register the Title and CTA button to listen for clicks.
+                        List<View> clickableViewsBack = new ArrayList<>();
+                        clickableViewsBack.add(imageViewBack);
+                        clickableViewsBack.add(title);
+                        clickableViewsBack.add(subtitle);
+                        local.ad_back.registerViewForInteraction(convertView, clickableViewsBack);
+                        //旋转
+                        rotable();
+                    } else {
+                        // Download and display the ad_front icon.
+                        NativeAd.Image adIcon = local.ad_front.getAdIcon();
+                        NativeAd.downloadAndDisplayImage(adIcon, imageViewFront);
+                        title.setText(local.ad_front.getAdTitle());
+                        subtitle.setText(local.ad_front.getAdSubtitle());
+
+                        // Register the Title and CTA button to listen for clicks.
+                        List<View> clickableViews = new ArrayList<>();
+                        clickableViews.add(imageViewFront);
+                        clickableViews.add(title);
+                        clickableViews.add(subtitle);
+                        local.ad_front.registerViewForInteraction(convertView, clickableViews);
+                    }
                 }
+
+
+
+
             } else {
-                image.setImageResource(mDatas.get(position).resId);
+                imageViewFront.setImageResource(mDatas.get(position).resId);
                 title.setText(mDatas.get(position).title);
                 subtitle.setText(mDatas.get(position).subtitle);
             }
 
             return convertView;
+        }
+
+        /**
+         * 翻转
+         */
+        public void rotable() {
+            if (View.VISIBLE == imageViewBack.getVisibility()) {
+                Rotatable rotatable = new Rotatable.Builder(rlCardRoot).sides(R.id.frontView, R.id.backView)
+                    .direction(Rotatable.ROTATE_X).rotationCount(1).build();
+                rotatable.setTouchEnable(false);
+                rotatable.rotate(Rotatable.ROTATE_X, 0, 1500);
+            } else if (View.VISIBLE == imageViewFront.getVisibility()) {
+                imageViewBack.setRotationX(180f);
+                Rotatable rotatable = new Rotatable.Builder(rlCardRoot).sides(R.id.frontView, R.id.backView)
+                    .direction(Rotatable.ROTATE_X).rotationCount(1).build();
+                rotatable.setTouchEnable(false);
+                rotatable.rotate(Rotatable.ROTATE_X, -180, 1500);
+            }
+        }
+
+        /**
+         * 改变视角距离, 贴近屏幕
+         */
+        private void setCameraDistance() {
+            int distance = 10000;
+            float scale = getResources().getDisplayMetrics().density * distance;
+            rlCardRoot.setCameraDistance(scale);
         }
     }
 }

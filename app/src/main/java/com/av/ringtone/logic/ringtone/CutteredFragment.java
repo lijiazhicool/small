@@ -12,6 +12,7 @@ import com.av.ringtone.utils.FileUtils;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -68,6 +69,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         mEmptyTv = findViewById(R.id.empty_tv);
         mPathTv = findViewById(R.id.path_tv);
         mOpenFilell = findViewById(R.id.openll);
+        mAdll = findViewById(R.id.ad_ll);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -148,8 +150,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     }
 
     protected void loadBanner() {
-        // Instantiate an AdView view
-        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_BANNER, AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_SAVED_BANNER, AdSize.BANNER_HEIGHT_50);
         adView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
@@ -159,8 +160,8 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
-                    mAdll.setVisibility(View.VISIBLE);
                     mAdll.addView(adView);
+                    mAdll.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -173,7 +174,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             }
         });
 
-        // Request to load an ad
+        // Request to load an ad_front
         adView.loadAd();
     }
 
@@ -224,6 +225,10 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     public void onStop() {
         super.onStop();
         UserDatas.getInstance().unregister(this);
+        if (mIsInit) {
+            UserDatas.getInstance().resetCutteds();
+            ((MainActivity)getActivity()).stop();
+        }
     }
 
     @Override

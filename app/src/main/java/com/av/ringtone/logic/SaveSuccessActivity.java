@@ -159,7 +159,7 @@ public class SaveSuccessActivity extends BaseActivity {
         nativeAdContainer.removeAllViews();
         nativeAdContainer.addView(adView);
 
-        // Create native UI using the ad metadata.
+        // Create native UI using the ad_front metadata.
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
         TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
         MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
@@ -173,7 +173,7 @@ public class SaveSuccessActivity extends BaseActivity {
         nativeAdBody.setText(nativeAd.getAdBody());
         nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-        // Download and display the ad icon.
+        // Download and display the ad_front icon.
         NativeAd.Image adIcon = nativeAd.getAdIcon();
         NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
 

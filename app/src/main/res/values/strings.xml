@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Ringtone Maker</string>
-    <string name="welcome_hint">New MP3 Ringtone Maker</string>
+    <string name="welcome_hint">Lite MP3 Ringtone Maker</string>
 
     <string name="facebook_app_id">1064813890295110</string>
 
@@ -29,7 +29,7 @@
 
     <!--title-->
     <string name="title_cutter">Cut Audio</string>
-    <string name="title_main">New Ringtone Maker</string>
+    <string name="title_main">Lite Ringtone Maker</string>
 
 
     <!--第三方-->

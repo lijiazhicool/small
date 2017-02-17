@@ -40,6 +40,12 @@ public class ADManager {
     private final static String EVENT_Big_AD_NAME = "Home_Big_NativeAd";
     private final static String EVENT_Big_AD_ID = "Home_Big_NativeAd_ID";
 
+    private NativeAd mScanAd = null;
+    private boolean mLoadScanADSuccess = false;
+    private final static String EVENT_Scan_AD_TYPE = "Scan_NativeAd_Click";
+    private final static String EVENT_Scan_AD_NAME = "Scan_NativeAd";
+    private final static String EVENT_Scan_AD_ID = "Scan_NativeAd_ID";
+
     private ADManager() {
 
     }
@@ -69,9 +75,17 @@ public class ADManager {
         return null;
     }
 
+    public NativeAd getScanAd(){
+        if (mLoadScanADSuccess){
+            return mScanAd;
+        }
+        return null;
+
+    }
+
     public void loadHomeAD(final Context context) {
         mHomeAd = new NativeAd(context, Constants.AD_PLACE_HOME_BIG);
-//         AdSettings.addTestDevice("6707cd54fb24a306ba41dfacb8af2d8d");
+//         AdSettings.addTestDevice("20392423b6018f252800f228eb3391e7");
         mHomeAd.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError error) {
@@ -96,7 +110,7 @@ public class ADManager {
                 loadHomeAD(context);
             }
         });
-        // Request an ad
+        // Request an ad_front
         mHomeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
     }
 
@@ -126,7 +140,37 @@ public class ADManager {
                 loadSaveSuccessAD(context);
             }
         });
-        // Request an ad
+        // Request an ad_front
         mSaveSuccessAD.loadAd(NativeAd.MediaCacheFlag.ALL);
+    }
+
+    public void loadScanSuccessAD(final Context context) {
+        mScanAd = new NativeAd(context, Constants.AD_PLACE_SCAN_NATIVE);
+        mScanAd.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError error) {
+                // Ad error callback
+                mScanAd = null;
+                mLoadScanADSuccess = true;
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                mLoadScanADSuccess = true;
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_Scan_AD_TYPE);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_Scan_AD_NAME);
+                FirebaseAnalytics.getInstance(context).logEvent(EVENT_Scan_AD_TYPE, bundle);
+
+                // 广告点击后，请求新的广告缓存
+                loadScanSuccessAD(context);
+            }
+        });
+        // Request an ad_front
+        mScanAd.loadAd(NativeAd.MediaCacheFlag.ALL);
     }
 }

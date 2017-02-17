@@ -12,6 +12,7 @@ import com.av.ringtone.utils.ToastUtils;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -50,6 +51,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     private int mSortType = 0;
     private boolean mIsInit = false;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_music;
@@ -76,8 +78,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     protected void loadBanner() {
-        // Instantiate an AdView view
-        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_BANNER, AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_MUSIC_BANNER, AdSize.BANNER_HEIGHT_50);
         adView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
@@ -87,8 +88,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
-                    mAdll.setVisibility(View.VISIBLE);
                     mAdll.addView(adView);
+                    mAdll.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -101,7 +102,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             }
         });
 
-        // Request to load an ad
+        // Request to load an ad_front
         adView.loadAd();
     }
 
@@ -110,7 +111,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         super.setUserVisibleHint(isVisibleToUser);
         if (!isVisibleToUser && mIsInit) {
             UserDatas.getInstance().resetSongs();
-            ((MainActivity)getActivity()).stop();
+            ((MainActivity) getActivity()).stop();
         }
     }
 
@@ -135,12 +136,16 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
             mEmptyTv.setVisibility(View.GONE);
             mRecyclerView.setAdapter(mAdapter);
         }
-        if (mSortType ==  0){
+        if (mSortType == 0) {
             sortByName_fresh();
-        } else if (mSortType ==  1){
+        } else if (mSortType == 1) {
             sortByDate_fresh();
-        } else if (mSortType == 2){
-            sortByDate_fresh();
+        } else if (mSortType == 2) {
+            sortByTrack_fresh();
+        } else if (mSortType == 3) {
+            sortByArtist_fresh();
+        } else if (mSortType == 4) {
+            sortByAlbum_fresh();
         }
     }
 
@@ -156,7 +161,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void updatePlayStatus(int mainType) {
-        if (mainType != 1){
+        if (mainType != 1) {
             return;
         }
         mAdapter.notifyDataSetChanged();
@@ -164,37 +169,31 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByName(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_SONG){
+        if (sortType != UserDatas.SORT_SONG) {
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        if (mSortReverseByName){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (mSortReverseByName) {
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.title.compareTo(o2.title)<0){
+                    if (o1.title.compareTo(o2.title) < 0) {
                         return 1;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.title.compareTo(o2.title)>0){
+                    if (o1.title.compareTo(o2.title) > 0) {
                         return 1;
                     }
                     return -1;
@@ -210,30 +209,30 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByDate(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_SONG){
+        if (sortType != UserDatas.SORT_SONG) {
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        if (mSortReverseByDate){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (mSortReverseByDate) {
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.date < o2.date){
+                    if (o1.date < o2.date) {
                         return 1;
                     }
-                    if(o1.date == o2.date){
+                    if (o1.date == o2.date) {
                         return 0;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    //按照学生的年龄进行倒序排列
-                    if(o1.date > o2.date){
+                    // 按照学生的年龄进行倒序排列
+                    if (o1.date > o2.date) {
                         return 1;
                     }
-                    if(o1.date == o2.date){
+                    if (o1.date == o2.date) {
                         return 0;
                     }
                     return -1;
@@ -242,36 +241,37 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         }
         mAdapter.upateDatas(list);
         if (isNeedRevers) {
-        mSortReverseByDate = !mSortReverseByDate;}
+            mSortReverseByDate = !mSortReverseByDate;
+        }
         mSortType = 1;
     }
 
     @Override
     public void sortByTrack(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_SONG){
+        if (sortType != UserDatas.SORT_SONG) {
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        if (mSortReverseByTrack){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (mSortReverseByTrack) {
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.trackNumber < o2.trackNumber){
+                    if (o1.trackNumber < o2.trackNumber) {
                         return 1;
                     }
-                    if(o1.trackNumber == o2.trackNumber){
+                    if (o1.trackNumber == o2.trackNumber) {
                         return 0;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    //按照学生的年龄进行倒序排列
-                    if(o1.trackNumber > o2.trackNumber){
+                    // 按照学生的年龄进行倒序排列
+                    if (o1.trackNumber > o2.trackNumber) {
                         return 1;
                     }
-                    if(o1.trackNumber == o2.trackNumber){
+                    if (o1.trackNumber == o2.trackNumber) {
                         return 0;
                     }
                     return -1;
@@ -280,43 +280,38 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         }
         mAdapter.upateDatas(list);
         if (isNeedRevers) {
-            mSortReverseByTrack = !mSortReverseByTrack;}
+            mSortReverseByTrack = !mSortReverseByTrack;
+        }
         mSortType = 2;
     }
 
     @Override
     public void sortByArtist(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_SONG){
+        if (sortType != UserDatas.SORT_SONG) {
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        if (mSortReverseByArtist){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (mSortReverseByArtist) {
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.artist.compareTo(o2.artist)<0){
+                    if (o1.artist.compareTo(o2.artist) < 0) {
                         return 1;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.artist.compareTo(o2.artist)>0){
+                    if (o1.artist.compareTo(o2.artist) > 0) {
                         return 1;
                     }
                     return -1;
@@ -332,37 +327,31 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByAlbum(int sortType, boolean isNeedRevers) {
-        if (sortType!= UserDatas.SORT_SONG){
+        if (sortType != UserDatas.SORT_SONG) {
             return;
         }
         List<SongModel> list = mAdapter.getDatas();
-        if (mSortReverseByAlbum){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (mSortReverseByAlbum) {
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.albumName.compareTo(o2.albumName)<0){
+                    if (o1.albumName.compareTo(o2.albumName) < 0) {
                         return 1;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.albumName.compareTo(o2.albumName)>0){
+                    if (o1.albumName.compareTo(o2.albumName) > 0) {
                         return 1;
                     }
                     return -1;
@@ -378,33 +367,27 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     private void sortByName_fresh() {
         List<SongModel> list = mAdapter.getDatas();
-        if (!mSortReverseByName){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (!mSortReverseByName) {
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.title.compareTo(o2.title)<0){
+                    if (o1.title.compareTo(o2.title) < 0) {
                         return 1;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
 
                 /*
-                 * int compare(Student o1, Student o2) 返回一个基本类型的整型，
-                 * 返回负数表示：o1 小于o2，
-                 * 返回0 表示：o1和o2相等，
-                 * 返回正数表示：o1大于o2。
+                 * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
                  */
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.title.compareTo(o2.title)>0){
+                    if (o1.title.compareTo(o2.title) > 0) {
                         return 1;
                     }
                     return -1;
@@ -417,26 +400,26 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     private void sortByDate_fresh() {
         List<SongModel> list = mAdapter.getDatas();
-        if (!mSortReverseByDate){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (!mSortReverseByDate) {
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.date < o2.date){
+                    if (o1.date < o2.date) {
                         return 1;
                     }
-                    if(o1.date == o2.date){
+                    if (o1.date == o2.date) {
                         return 0;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    //按照学生的年龄进行倒序排列
-                    if(o1.date > o2.date){
+                    // 按照学生的年龄进行倒序排列
+                    if (o1.date > o2.date) {
                         return 1;
                     }
-                    if(o1.date == o2.date){
+                    if (o1.date == o2.date) {
                         return 0;
                     }
                     return -1;
@@ -446,27 +429,28 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         mAdapter.upateDatas(list);
         mSortType = 1;
     }
+
     private void sortByTrack_fresh() {
         List<SongModel> list = mAdapter.getDatas();
-        if (!mSortReverseByTrack){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (!mSortReverseByTrack) {
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.trackNumber < o2.trackNumber){
+                    if (o1.trackNumber < o2.trackNumber) {
                         return 1;
                     }
-                    if(o1.trackNumber == o2.trackNumber){
+                    if (o1.trackNumber == o2.trackNumber) {
                         return 0;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.trackNumber > o2.trackNumber){
+                    if (o1.trackNumber > o2.trackNumber) {
                         return 1;
                     }
-                    if(o1.trackNumber == o2.trackNumber){
+                    if (o1.trackNumber == o2.trackNumber) {
                         return 0;
                     }
                     return -1;
@@ -476,21 +460,22 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         mAdapter.upateDatas(list);
         mSortType = 2;
     }
+
     private void sortByArtist_fresh() {
         List<SongModel> list = mAdapter.getDatas();
-        if (!mSortReverseByArtist){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (!mSortReverseByArtist) {
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.artist.compareTo(o2.artist)<0){
+                    if (o1.artist.compareTo(o2.artist) < 0) {
                         return 1;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.artist.compareTo(o2.artist)>0){
+                    if (o1.artist.compareTo(o2.artist) > 0) {
                         return 1;
                     }
                     return -1;
@@ -500,21 +485,22 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         mAdapter.upateDatas(list);
         mSortType = 3;
     }
+
     private void sortByAlbum_fresh() {
         List<SongModel> list = mAdapter.getDatas();
-        if (!mSortReverseByAlbum){
-            Collections.sort(list, new Comparator<SongModel>(){
+        if (!mSortReverseByAlbum) {
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.albumName.compareTo(o2.albumName)<0){
+                    if (o1.albumName.compareTo(o2.albumName) < 0) {
                         return 1;
                     }
                     return -1;
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>(){
+            Collections.sort(list, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
-                    if(o1.albumName.compareTo(o2.albumName)>0){
+                    if (o1.albumName.compareTo(o2.albumName) > 0) {
                         return 1;
                     }
                     return -1;

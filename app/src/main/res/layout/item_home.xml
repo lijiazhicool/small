@@ -7,21 +7,45 @@
     android:background="@drawable/item_bg_home"
     android:gravity="center_vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image"
+    <RelativeLayout
+        android:id="@+id/targetView"
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_width"
         android:layout_marginBottom="16dip"
         android:layout_marginLeft="4dip"
-        android:layout_marginTop="16dip"
-        tools:src="@drawable/ic_music" />
+        android:layout_marginTop="16dip">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/frontView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_music"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/backView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="invisible"
+            tools:src="@drawable/ic_music" />
+    </RelativeLayout>
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/image"-->
+        <!--android:layout_width="@dimen/image_width"-->
+        <!--android:layout_height="@dimen/image_width"-->
+        <!--android:layout_marginBottom="16dip"-->
+        <!--android:layout_marginLeft="4dip"-->
+        <!--android:layout_marginTop="16dip"-->
+        <!--tools:src="@drawable/ic_music" />-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dip"
-        android:layout_toRightOf="@id/image"
+        android:layout_toRightOf="@id/targetView"
         android:orientation="vertical">
 
         <TextView

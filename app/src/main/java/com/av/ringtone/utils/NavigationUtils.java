@@ -2,6 +2,7 @@ package com.av.ringtone.utils;
 
 import com.av.ringtone.logic.AboutActivity;
 import com.av.ringtone.logic.edit.CutterActivity;
+import com.av.ringtone.logic.scan.ScanActivity;
 import com.av.ringtone.model.BaseModel;
 
 import android.content.Context;
@@ -23,6 +24,11 @@ public class NavigationUtils {
 
     public static void goToAbout(Context context) {
         Intent intent = new Intent(context, AboutActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void goToScan(Context context) {
+        Intent intent = new Intent(context, ScanActivity.class);
         context.startActivity(intent);
     }
 }

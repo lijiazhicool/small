@@ -278,7 +278,7 @@ public class UserDatas {
         }
     }
 
-    public void updateCuttersPlayStatus(int mainType) {
+    public void updatePlayStatus(int mainType) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
                 listener.updatePlayStatus(mainType);
@@ -331,7 +331,7 @@ public class UserDatas {
         for (SongModel model : getSongs()) {
             model.playStatus = 0;
         }
-        updateCuttersPlayStatus(1);
+        updatePlayStatus(1);
     }
 
     public void resetRecords() {
@@ -339,7 +339,7 @@ public class UserDatas {
             model.playStatus = 0;
         }
         mLightModelCache.putModelList(RECORD_S_KEY, mRecords);
-        updateCuttersPlayStatus(2);
+        updatePlayStatus(2);
     }
 
     public void resetCutteds() {
@@ -348,7 +348,7 @@ public class UserDatas {
             model.isNew = false;
         }
         mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
-        updateCuttersPlayStatus(3);
+        updatePlayStatus(3);
     }
 
     private class loadSongs extends AsyncTask<String, Void, String> {

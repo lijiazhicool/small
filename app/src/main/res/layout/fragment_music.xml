@@ -11,19 +11,19 @@
         android:text="@string/no_data"
         android:textSize="20dip" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ad_ll" />
+
     <LinearLayout
         android:id="@+id/ad_ll"
         android:layout_width="match_parent"
         android:layout_height="50dip"
-        android:visibility="gone"
-        android:gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ad_ll" />
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone" />
 
 </RelativeLayout>

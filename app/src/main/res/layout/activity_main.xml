@@ -35,7 +35,7 @@
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
             android:paddingRight="10dip"
-            android:src="@drawable/ic_refresh" />
+            android:src="@drawable/ic_scan" />
 
         <ImageView
             android:id="@+id/search"

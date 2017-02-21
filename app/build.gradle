@@ -5,10 +5,10 @@ android {
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "com.av.ringtone"
-        minSdkVersion 14
+        minSdkVersion 13
         targetSdkVersion 22
-        versionCode 102
-        versionName "1.0.2"
+        versionCode 103
+        versionName "1.0.3"
     }
     signingConfigs {
         releaseConfig {

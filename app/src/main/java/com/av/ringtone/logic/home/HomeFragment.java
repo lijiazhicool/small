@@ -141,6 +141,9 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (null!= handler) {
+            handler.removeCallbacks(runnable);
+        }
         UserDatas.getInstance().unregister(this);
     }
 

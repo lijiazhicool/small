@@ -46,7 +46,7 @@ import static android.app.Activity.RESULT_OK;
  * 录音
  */
 public class RecordFragment extends BaseFragment implements UserDatas.DataChangedListener {
-    private static final int RECORD_AUDIO = 1001;
+    private static final int RECORD_AUDIO = 1002;
     private RecyclerView mRecyclerView;
     private RecordsAdapter mAdapter;
     private TextView mEmptyTv;

@@ -136,15 +136,12 @@ public class WaterRadarView extends View {
 
     private void drawCircleIntellgent(Canvas canvas, int flag) {
         mPaintCircle.setColor(mCircleColor);
-        Log.e("Tag", "flag "+flag);
         for (int i = 1; i < flag; i++) {
             mPaintCircle.setColor(mCircleColor);
             float alpha = Math.min(255f, mLinearInterpolator.getInterpolation((mCircleCount - i) * 1f / (mCircleCount - 1)) * 255);
 
             mPaintCircle.setAlpha((int) alpha);
-            Log.e("Tag", "alpha "+alpha);
             float radius = mDecelerateInterpolator.getInterpolation(i * 1f / (mCircleCount - 1)) * (mBitmapWidth / 2 + mWidth / 2 - 150);
-            Log.e("Tag", "radius "+radius);
             canvas.drawCircle(0, 0, radius, mPaintCircle);
         }
     }

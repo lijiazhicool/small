@@ -7,6 +7,7 @@ import java.util.List;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 /**
  * Created by LiJiaZhi
@@ -45,9 +46,10 @@ public class MusicScan extends Thread {
     }
 
     private void searchFile(String filePath) {
+        Log.e("Tag", "MusicScan searchFile "+"thread "+Thread.currentThread().getId()+ " "+Thread.currentThread().getName());
         File file = new File(filePath);
         Message msg = new Message();
-        msg.obj = file;
+        msg.obj = filePath;
         msg.what = NOW_SCAN_FOLDER;
         handler.sendMessage(msg);
         List<File> folderList = new ArrayList<File>();
@@ -76,7 +78,7 @@ public class MusicScan extends Thread {
                 String extriName = file.getName().substring(dot, file.getName().length());// 得到文件的扩展名
                 if (isRight(extriName)) {
                     Message msg = new Message();
-                    msg.obj = file;
+                    msg.obj = file.getAbsolutePath();
                     msg.what = FIND_FILE;
                     handler.sendMessage(msg);
                 }

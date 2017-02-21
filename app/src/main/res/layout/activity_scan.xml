@@ -1,9 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:RippleWaveView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@android:color/white"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -29,13 +32,13 @@
             android:textSize="@dimen/text_big" />
     </LinearLayout>
 
-    <com.av.ringtone.views.WaterRadarView
-        android:id="@+id/wrv"
-        android:layout_width="240dip"
-        android:layout_height="240dip"
-        RippleWaveView:circle_color="#1EAAF1"
-        RippleWaveView:default_image="@drawable/music"
-        RippleWaveView:image_width="66dip" />
+    <!--<com.av.ringtone.views.WaterRadarView-->
+        <!--android:id="@+id/wrv"-->
+        <!--android:layout_width="176dip"-->
+        <!--android:layout_height="176dip"-->
+        <!--RippleWaveView:circle_color="#1EAAF1"-->
+        <!--RippleWaveView:default_image="@drawable/music"-->
+        <!--RippleWaveView:image_width="84dip" />-->
 
     <TextView
         android:id="@+id/hint_tv"
@@ -54,18 +57,19 @@
         android:layout_marginLeft="16dip"
         android:layout_marginRight="16dip"
         android:layout_marginTop="2dip"
-        android:text=""
-        android:singleLine="true"
-        android:textColor="#03a9f4" />
+        android:ellipsize="end"
+        android:lines="3"
+        android:textColor="#4a4a4a"
+        tools:text="dfsd/fsdfsdfs/dfsdfs//dfsdfsdfsdf/sdfsdfsdfsd/fsdfsdfsdfsdfsdfsd/fsdfsdfsdfsdfsdfsdfsdfsdfs/dfsdfsdfsdfs/dfsdfsdfsdfsdfsdf" />
 
     <LinearLayout
         android:id="@+id/home_ad_ll"
         android:layout_width="match_parent"
         android:layout_height="292dp"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:background="@color/colorPrimary"
         android:layout_marginLeft="@dimen/padding_16"
-        android:layout_marginRight="@dimen/padding_16" />
+        android:layout_marginRight="@dimen/padding_16"
+        android:layout_marginTop="8dip"
+        android:orientation="vertical"
+        android:visibility="gone" />
 
 </LinearLayout>

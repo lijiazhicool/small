@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             public void onClick(View v) {
                 // UserDatas.getInstance().loadMusics();
 //                freshMediaDB();
-                startActivityForResult(new Intent(MainActivity.this, ScanActivity.class),1001);
+                startActivity(new Intent(MainActivity.this, ScanActivity.class));
             }
         });
         mSearchll.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +212,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                         return false;
                     }
                 });
-                menu.inflate(R.menu.popup_main);
+                menu.getMenuInflater().inflate(R.menu.popup_main,menu.getMenu());
                 if (mCurrentPage == 0) {
                     menu.getMenu().setGroupVisible(R.id.menu_group_sort, false);
                 } else {
@@ -302,17 +302,6 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             }
         });
         UserDatas.getInstance().register(this);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK){
-            switch (requestCode){
-                case 1001:
-                    UserDatas.getInstance().loadMusics();
-                    break;
-            }
-        }
     }
 
     private List<SongModel> filterSongs(List<SongModel> dataList, String newText) {

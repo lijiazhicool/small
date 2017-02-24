@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:RippleWaveView="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:background="@android:color/white"
     android:orientation="vertical">
 
@@ -33,34 +31,64 @@
     </LinearLayout>
 
     <!--<com.av.ringtone.views.WaterRadarView-->
-        <!--android:id="@+id/wrv"-->
-        <!--android:layout_width="176dip"-->
-        <!--android:layout_height="176dip"-->
-        <!--RippleWaveView:circle_color="#1EAAF1"-->
-        <!--RippleWaveView:default_image="@drawable/music"-->
-        <!--RippleWaveView:image_width="84dip" />-->
+    <!--android:id="@+id/wrv"-->
+    <!--android:layout_width="176dip"-->
+    <!--android:layout_height="176dip"-->
+    <!--RippleWaveView:circle_color="#1EAAF1"-->
+    <!--RippleWaveView:default_image="@drawable/music"-->
+    <!--RippleWaveView:image_width="84dip" />-->
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/file_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dip"
+            android:layout_marginRight="16dip"
+            android:layout_marginTop="2dip"
+            android:ellipsize="end"
+            android:lines="10"
+            android:textColor="#4a4a4a"
+            tools:text="dfsd/fsdfsdfs/dfsdfs//dfsdfsdfsdf/sdfsdfsdfsd/fsdfsdfsdfsdfsdfsd/fsdfsdfsdfsdfsdfsdfsdfsdfs/dfsdfsdfsdfs/dfsdfsdfsdfsdfsdf" />
+
+        <TextView
+            android:id="@+id/done_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dip"
+            android:text="Done"
+            android:visibility="gone"
+            android:textColor="#03a9f4"
+            android:textSize="38sp" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/hint_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dip"
         android:layout_marginTop="2dip"
         android:text="Scanning for musics："
         android:textColor="#03a9f4"
-        android:textSize="20sp" />
-
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/file_tv"
-        android:layout_width="match_parent"
+        android:id="@+id/scan_btn"
+        android:layout_width="120dip"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dip"
-        android:layout_marginRight="16dip"
-        android:layout_marginTop="2dip"
-        android:ellipsize="end"
-        android:lines="3"
-        android:textColor="#4a4a4a"
-        tools:text="dfsd/fsdfsdfs/dfsdfs//dfsdfsdfsdf/sdfsdfsdfsd/fsdfsdfsdfsdfsdfsd/fsdfsdfsdfsdfsdfsdfsdfsdfs/dfsdfsdfsdfs/dfsdfsdfsdfsdfsdf" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/bg_button_green"
+        android:padding="10dip"
+        android:gravity="center"
+        android:text="Scan Music"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:id="@+id/home_ad_ll"

@@ -20,7 +20,6 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.model.SongModel;
-import com.av.ringtone.views.WaterRadarView;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
@@ -33,7 +32,7 @@ public class ScanActivity extends BaseActivity {
     private ImageView mBackIv;
     private TextView mHintTv;
     private TextView mFileTv;
-//    private WaterRadarView mWaterRadarView;
+    private TextView mScanTv, mDoneTv;
     private LinearLayout nativeAdContainer;
 
     private List<SongModel> mSongModelList;
@@ -51,7 +50,9 @@ public class ScanActivity extends BaseActivity {
     private HandlerThread mCheckMsgThread;
     private Handler mHandler;
 
-    private boolean iStop = false;
+    private boolean iStopRunning = false;
+
+    private int mStart = 0;// 是否开始扫描 0:未开始 1：正在 2：完成
 
     private Runnable MusicScanRunnable = new Runnable() {
         @Override
@@ -60,7 +61,6 @@ public class ScanActivity extends BaseActivity {
             boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
             if (sdCardExist) {
                 sdDir = Environment.getExternalStorageDirectory();
-                mHintTv.setText("0 musics found");
                 searchFile(sdDir.getPath());
             } else {
                 Message msg = new Message();
@@ -93,14 +93,40 @@ public class ScanActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-//        mWaterRadarView = (WaterRadarView) findViewById(R.id.wrv);
         mHintTv = (TextView) findViewById(R.id.hint_tv);
         mFileTv = (TextView) findViewById(R.id.file_tv);
+        mScanTv = (TextView) findViewById(R.id.scan_btn);
+        mDoneTv = (TextView) findViewById(R.id.done_tv);
+
         nativeAdContainer = (LinearLayout) findViewById(R.id.home_ad_ll);
     }
 
     @Override
     protected void initListeners() {
+        mScanTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mStart == 0) {
+                    // 开始
+                    mHandler.post(MusicScanRunnable);
+                    mScanTv.setText("Cancel");
+                    mHintTv.setText("0 musics found");
+                    mStart = 1;
+                } else if (mStart == 1) {
+                    // 取消
+                    iStopRunning = true;
+                    mHandler.removeCallbacks(MusicScanRunnable);
+                    mCheckMsgThread.quit();
+                    mScanTv.setText("Done");
+                    mDoneTv.setVisibility(View.VISIBLE);
+                    mFileTv.setVisibility(View.INVISIBLE);
+                    mStart = 2;
+                } else {
+                    // 完成
+                    onBackPressed();
+                }
+            }
+        });
     }
 
     @Override
@@ -111,25 +137,25 @@ public class ScanActivity extends BaseActivity {
         mHandler = new Handler(mCheckMsgThread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
-                 Log.e("Tag", "Message " + msg.obj + "thread " + Thread.currentThread().getId() + " "
-                 + Thread.currentThread().getName());
+                Log.e("Tag", "Message " + msg.obj + "thread " + Thread.currentThread().getId() + " "
+                    + Thread.currentThread().getName());
                 switch (msg.what) {
                     case FIND_FILE:
-                        final String filePath = (String) msg.obj;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mFilePathList.add(filePath);
-                                if (mFilePathList.size() > 0) {
-                                    mHintTv.setText(String.valueOf(mFilePathList.size()) + " musics found");
-                                }
-                                if (!mSongModelList.contains(new SongModel(filePath))) {
-                                    MediaScannerConnection.scanFile(ScanActivity.this, new String[] { filePath }, null,
-                                        null);
-                                    isNew = true;
-                                }
-                            }
-                        });
+                        // final String filePath = (String) msg.obj;
+                        // runOnUiThread(new Runnable() {
+                        // @Override
+                        // public void run() {
+                        // mFilePathList.add(filePath);
+                        // if (mFilePathList.size() > 0) {
+                        // mHintTv.setText(String.valueOf(mFilePathList.size()) + " musics found");
+                        // }
+                        // if (!mSongModelList.contains(new SongModel(filePath))) {
+                        // MediaScannerConnection.scanFile(ScanActivity.this, new String[] { filePath }, null,
+                        // null);
+                        // isNew = true;
+                        // }
+                        // }
+                        // });
                         break;
                     case NOT_FOUNT_SDCARD:
                         runOnUiThread(new Runnable() {
@@ -147,9 +173,14 @@ public class ScanActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 mFileTv.setText("");
-                                mHintTv.setText(String.valueOf(mFilePathList.size()) + " musics found"  +"   Done！！！！！");
-//                                mWaterRadarView.updateBitmap(R.drawable.scanned);
-//                                mWaterRadarView.stop();
+                                mHintTv.setText(String.valueOf(mFilePathList.size()) + " musics found");
+                                iStopRunning = true;
+                                mHandler.removeCallbacks(MusicScanRunnable);
+                                mCheckMsgThread.quit();
+                                mScanTv.setText("Done");
+                                mDoneTv.setVisibility(View.VISIBLE);
+                                mFileTv.setVisibility(View.INVISIBLE);
+                                mStart = 2;
                                 isFinished = true;
                             }
                         });
@@ -157,30 +188,24 @@ public class ScanActivity extends BaseActivity {
                 }
             }
         };
-        mHandler.post(MusicScanRunnable);
         showNativeAd();
     }
 
     private void searchFile(final String filePath) {
         File file = new File(filePath);
-        // Message msg = new Message();
-        // Message msg = mHandler.obtainMessage();
-        // msg.obj = filePath;
-        // msg.what = NOW_SCAN_FOLDER;
-        // mHandler.sendMessage(msg);
-        if (iStop){
+        if (iStopRunning) {
             return;
         }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                 Log.e("Tag", "searchFile " +"thread " + Thread.currentThread().getId() + " "
-                 + Thread.currentThread().getName());
+                Log.e("Tag", "searchFile " + "thread " + Thread.currentThread().getId() + " "
+                    + Thread.currentThread().getName());
                 mFileTv.setText("" + filePath);
             }
         });
         try {
-            Thread.sleep(50);
+            Thread.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -199,21 +224,40 @@ public class ScanActivity extends BaseActivity {
             checkChild(file);
         }
         for (File folder : folderList) {
-            searchFile(folder.getPath());
+            // 不扫描隐藏文件
+            if (!folder.getName().contains(".")) {
+                searchFile(folder.getPath());
+            }
         }
     }
 
     private void checkChild(File file) {
         if (file.isFile()) {
+            final String filePath = file.getAbsolutePath();
             int dot = file.getName().lastIndexOf(".");
             if (dot > -1 && dot < file.getName().length()) {
                 String extriName = file.getName().substring(dot, file.getName().length());// 得到文件的扩展名
                 if (isRight(extriName)) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mFilePathList.add(filePath);
+                            if (mFilePathList.size() > 0) {
+                                mHintTv.setText(String.valueOf(mFilePathList.size()) + " musics found");
+                            }
+                            if (!mSongModelList.contains(new SongModel(filePath))) {
+                                MediaScannerConnection.scanFile(ScanActivity.this, new String[] { filePath }, null,
+                                    null);
+                                isNew = true;
+                            }
+                        }
+                    });
                     // Message msg = new Message();
-                    Message msg = mHandler.obtainMessage();
-                    msg.obj = file.getAbsolutePath();
-                    msg.what = FIND_FILE;
-                    mHandler.sendMessage(msg);
+//                    Message msg = mHandler.obtainMessage();
+//                    msg.obj = file.getAbsolutePath();
+//                    msg.what = FIND_FILE;
+//                    mHandler.sendMessage(msg);
                 }
             }
         }
@@ -230,8 +274,8 @@ public class ScanActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        iStop = true;
-         mHandler.removeCallbacks(MusicScanRunnable);
+        iStopRunning = true;
+        mHandler.removeCallbacks(MusicScanRunnable);
         mCheckMsgThread.quit();
     }
 

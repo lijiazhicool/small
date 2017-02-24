@@ -1,73 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dip">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dip"
+            android:layout_weight="1"
+            android:text="Rate your experience"
+            android:textColor="@color/text_black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/close_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dip"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dip"
-        android:layout_marginLeft="15dip"
-        android:layout_marginTop="20dip"
-        android:text="Enjoy，Rate us"
-        android:textColor="@color/text_black"
-        android:textSize="20sp" />
-
-    <LinearLayout
-        android:id="@+id/starll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_star"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_marginLeft="12dip"
         android:layout_marginTop="10dip"
-        android:layout_gravity="right"
-        android:gravity="center_vertical">
+        android:text="How would you rate our app?"
+        android:textColor="@color/text_gray"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="56dip"
-            android:text="Rate Now"
-            android:textColor="#3f52b5"
-            android:textSize="14sp" />
+    <com.av.ringtone.views.RatingBar
+        android:id="@+id/ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dip"
+        android:layout_marginTop="12dip"
+        app:automatic="fully"
+        app:isIndicator="false"
+        app:numStars="5"
+        app:progress="@drawable/ic_star"
+        app:progressed="@drawable/ic_star_24_px"
+        app:rating="0"
+        app:spacing="6dp"
+        app:stepSize="0.2"
+        android:layout_marginBottom="14dip"/>
 
-        <TextView
-            android:id="@+id/later"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dip"
-            android:textColor="#3f52b5"
-            android:text="Rate Later"
-            android:textSize="14sp" />
-
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/hint_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dip"
+        android:layout_marginBottom="14dip"
+        android:gravity="center"
+        android:text="Thanks For your Rating!"
+        android:visibility="gone"
+        android:textColor="#f5a623"
+        android:textSize="18sp" />
 </LinearLayout>

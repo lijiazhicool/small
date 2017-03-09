@@ -8,17 +8,15 @@ import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
-import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.model.VoiceModel;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -110,8 +108,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (!isVisibleToUser && mIsInit) {
-            UserDatas.getInstance().resetSongs();
             ((MainActivity) getActivity()).stop();
+            UserDatas.getInstance().resetSongs();
         }
     }
 
@@ -125,6 +123,10 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     public void onStop() {
         super.onStop();
         UserDatas.getInstance().unregister(this);
+        if (mIsInit) {
+            UserDatas.getInstance().resetSongs();
+            ((MainActivity)getActivity()).stop();
+        }
     }
 
     @Override
@@ -160,8 +162,16 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     @Override
-    public void updatePlayStatus(int mainType) {
-        if (mainType != 1) {
+    public void updatePlayStatus(VoiceModel model) {
+        if (model.catorytype != 1) {
+            return;
+        }
+        mAdapter.updatePlayStatus(model);
+    }
+
+    @Override
+    public void resetPlayStatus(int catorytype) {
+        if (catorytype != 1) {
             return;
         }
         mAdapter.notifyDataSetChanged();

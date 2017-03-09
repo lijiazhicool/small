@@ -62,9 +62,9 @@
             android:layout_gravity="center"
             android:padding="10dip"
             android:text="Done"
-            android:visibility="gone"
             android:textColor="#03a9f4"
-            android:textSize="38sp" />
+            android:textSize="38sp"
+            android:visibility="gone" />
     </FrameLayout>
 
     <TextView
@@ -84,9 +84,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dip"
         android:background="@drawable/bg_button_green"
-        android:padding="10dip"
         android:gravity="center"
+        android:padding="10dip"
         android:text="Scan Music"
+        android:layout_marginBottom="10dip"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
@@ -96,8 +97,9 @@
         android:layout_height="292dp"
         android:layout_marginLeft="@dimen/padding_16"
         android:layout_marginRight="@dimen/padding_16"
-        android:layout_marginTop="8dip"
         android:orientation="vertical"
-        android:visibility="gone" />
+        android:visibility="visible">
+    </LinearLayout>
 
+    <include layout="@layout/layout_share_saved" />
 </LinearLayout>

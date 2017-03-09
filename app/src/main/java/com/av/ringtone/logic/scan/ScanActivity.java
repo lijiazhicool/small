@@ -9,6 +9,8 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.utils.ShareUtils;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
@@ -27,13 +30,19 @@ import com.facebook.ads.NativeAd;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ScanActivity extends BaseActivity {
     private ImageView mBackIv;
     private TextView mHintTv;
     private TextView mFileTv;
     private TextView mScanTv, mDoneTv;
-    private LinearLayout nativeAdContainer;
+    private LinearLayout mNativeAdContainer;
+
+    private LinearLayout mSharell;
+    private TextView mSharetv;
+    private Animation mTranstionAnim;
+
 
     private List<SongModel> mSongModelList;
     private List<String> mFilePathList = new ArrayList<>();
@@ -98,7 +107,10 @@ public class ScanActivity extends BaseActivity {
         mScanTv = (TextView) findViewById(R.id.scan_btn);
         mDoneTv = (TextView) findViewById(R.id.done_tv);
 
-        nativeAdContainer = (LinearLayout) findViewById(R.id.home_ad_ll);
+        mSharell = (LinearLayout) findViewById(R.id.share_ll);
+        mSharetv = (TextView) findViewById(R.id.cutcount_tv);
+
+        mNativeAdContainer = (LinearLayout) findViewById(R.id.home_ad_ll);
     }
 
     @Override
@@ -127,10 +139,18 @@ public class ScanActivity extends BaseActivity {
                 }
             }
         });
+        mSharell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareUtils.shareHomeSavedText(ScanActivity.this);
+            }
+        });
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        mTranstionAnim = AnimationUtils.loadAnimation(this, R.anim.anim_bottom_in);
+
         mSongModelList = UserDatas.getInstance().getSongs();
         mCheckMsgThread = new HandlerThread("handler_thread");
         mCheckMsgThread.start();
@@ -141,21 +161,6 @@ public class ScanActivity extends BaseActivity {
                     + Thread.currentThread().getName());
                 switch (msg.what) {
                     case FIND_FILE:
-                        // final String filePath = (String) msg.obj;
-                        // runOnUiThread(new Runnable() {
-                        // @Override
-                        // public void run() {
-                        // mFilePathList.add(filePath);
-                        // if (mFilePathList.size() > 0) {
-                        // mHintTv.setText(String.valueOf(mFilePathList.size()) + " musics found");
-                        // }
-                        // if (!mSongModelList.contains(new SongModel(filePath))) {
-                        // MediaScannerConnection.scanFile(ScanActivity.this, new String[] { filePath }, null,
-                        // null);
-                        // isNew = true;
-                        // }
-                        // }
-                        // });
                         break;
                     case NOT_FOUNT_SDCARD:
                         runOnUiThread(new Runnable() {
@@ -165,9 +170,6 @@ public class ScanActivity extends BaseActivity {
                             }
                         });
                         break;
-                    // case NOW_SCAN_FOLDER:
-                    // mFileTv.setText("" + msg.obj);
-                    // break;
                     case FIND_FINISH:
                         runOnUiThread(new Runnable() {
                             @Override
@@ -188,7 +190,21 @@ public class ScanActivity extends BaseActivity {
                 }
             }
         };
-        showNativeAd();
+        randomShow();
+    }
+
+    private void randomShow(){
+        // 1-2
+        int index = new Random().nextInt(2) + 1;
+        if (index % 2 == 0) {
+            mSharell.setVisibility(View.VISIBLE);
+            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+            mNativeAdContainer.setVisibility(View.GONE);
+            mSharell.startAnimation(mTranstionAnim);
+        } else {
+            mSharell.setVisibility(View.GONE);
+            showNativeAd();
+        }
     }
 
     private void searchFile(final String filePath) {
@@ -225,9 +241,9 @@ public class ScanActivity extends BaseActivity {
         }
         for (File folder : folderList) {
             // 不扫描隐藏文件
-            if (!folder.getName().contains(".")) {
+//            if (!folder.getName().contains(".")) {
                 searchFile(folder.getPath());
-            }
+//            }
         }
     }
 
@@ -290,16 +306,16 @@ public class ScanActivity extends BaseActivity {
     private void showNativeAd() {
         NativeAd nativeAd = ADManager.getInstance().getScanAd();
         if (null == nativeAd) {
-            nativeAdContainer.setVisibility(View.GONE);
+            mNativeAdContainer.setVisibility(View.GONE);
             return;
         }
 
-        nativeAdContainer.setVisibility(View.VISIBLE);
+        mNativeAdContainer.setVisibility(View.VISIBLE);
 
         LayoutInflater inflater = LayoutInflater.from(ScanActivity.this);
-        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
-        nativeAdContainer.removeAllViews();
-        nativeAdContainer.addView(adView);
+        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
         // Create native UI using the ad_front metadata.
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
@@ -331,6 +347,9 @@ public class ScanActivity extends BaseActivity {
         List<View> clickableViews = new ArrayList<>();
         clickableViews.add(nativeAdTitle);
         clickableViews.add(nativeAdCallToAction);
-        nativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
+        nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
+
+
+        mNativeAdContainer.startAnimation(mTranstionAnim);
     }
 }

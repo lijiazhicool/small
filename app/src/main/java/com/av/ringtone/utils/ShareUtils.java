@@ -28,11 +28,21 @@ public class ShareUtils {
         act.startActivity(Intent.createChooser(shareIntent, "Share To"));
     }
     //home
-    public static void shareHomeText(Activity act) {
+    public static void shareHomeSavedText(Activity act) {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT,
                 String.format("I have maked %1$d ringtones with  mp3 cutter and ringtone maker APP,come and enjoy it ! https://play.google.com/store/apps/details?id=com.av.ringtone", UserDatas.getInstance().getCutCount()));
+        shareIntent.setType("text/plain");
+
+        // 设置分享列表的标题，并且每次都显示分享列表
+        act.startActivity(Intent.createChooser(shareIntent, "Share To"));
+    }
+    public static void shareHomeMusicText(Activity act) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                String.format("I have  %1$d musics with  mp3 cutter and ringtone maker APP,come and enjoy it ! https://play.google.com/store/apps/details?id=com.av.ringtone", UserDatas.getInstance().getSongs().size()));
         shareIntent.setType("text/plain");
 
         // 设置分享列表的标题，并且每次都显示分享列表

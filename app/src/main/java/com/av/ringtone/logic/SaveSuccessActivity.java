@@ -19,6 +19,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 保存成功
@@ -34,11 +37,14 @@ import java.util.List;
 public class SaveSuccessActivity extends BaseActivity {
     private static final String INTENT_IN_URI = "intent_in_uri";
     private ImageView mBackIv;
-    private LinearLayout mRingtonell, mNotificationll, mAlarmll, mSharell;
-    private LinearLayout nativeAdContainer;
+    private LinearLayout mRingtonell, mNotificationll, mAlarmll, mShareButton;
+    private LinearLayout mNativeAdContainer;
     private TextView mAdHintTv;
-
     private Uri mUri;
+
+    private LinearLayout mSharell;
+    private TextView mSharetv;
+    private Animation mTranstionAnim;
 
     // 启动
     public static void launch(Context context, Uri uri) {
@@ -69,9 +75,12 @@ public class SaveSuccessActivity extends BaseActivity {
         mRingtonell = findView(R.id.ringtone);
         mNotificationll = findView(R.id.notification);
         mAlarmll = findView(R.id.alarm);
-        mSharell = findView(R.id.share);
-        nativeAdContainer = findView(R.id.ad_ll);
+        mShareButton = findView(R.id.share);
+        mNativeAdContainer = findView(R.id.ad_ll);
         mAdHintTv = findView(R.id.ad_hint_tv);
+
+        mSharell = (LinearLayout) findViewById(R.id.share_ll);
+        mSharetv = (TextView) findViewById(R.id.cutcount_tv);
 
     }
 
@@ -86,16 +95,17 @@ public class SaveSuccessActivity extends BaseActivity {
         mRingtonell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonDialog dialog =
-                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_ringtone_title),getString(R.string.set_ringtone_content),"",new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this, RingtoneManager.TYPE_RINGTONE,
-                                        mUri);
-                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, getString(R.string.set_ringtone_success));
-                                onBackPressed();
-                            }
-                        });
+                CommonDialog dialog = new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_ringtone_title),
+                    getString(R.string.set_ringtone_content), "", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this,
+                                RingtoneManager.TYPE_RINGTONE, mUri);
+                            ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this,
+                                getString(R.string.set_ringtone_success));
+                            onBackPressed();
+                        }
+                    });
                 dialog.setCancelable(true);
                 dialog.show();
             }
@@ -104,12 +114,14 @@ public class SaveSuccessActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 CommonDialog dialog =
-                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_notification_title),getString(R.string.set_notification_content),"",new View.OnClickListener() {
+                    new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_notification_title),
+                        getString(R.string.set_notification_content), "", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this, RingtoneManager.TYPE_NOTIFICATION,
-                                        mUri);
-                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, getString(R.string.set_notification_success));
+                                RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this,
+                                    RingtoneManager.TYPE_NOTIFICATION, mUri);
+                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this,
+                                    getString(R.string.set_notification_success));
                                 onBackPressed();
                             }
                         });
@@ -121,55 +133,79 @@ public class SaveSuccessActivity extends BaseActivity {
         mAlarmll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonDialog dialog =
-                        new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_alarm_title),getString(R.string.set_alarm_content),"",new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this, RingtoneManager.TYPE_ALARM, mUri);
-                                ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this, getString(R.string.set_alarm_success));
-                                onBackPressed();
-                            }
-                        });
+                CommonDialog dialog = new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_alarm_title),
+                    getString(R.string.set_alarm_content), "", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            RingtoneManager.setActualDefaultRingtoneUri(SaveSuccessActivity.this,
+                                RingtoneManager.TYPE_ALARM, mUri);
+                            ToastUtils.makeToastAndShowLong(SaveSuccessActivity.this,
+                                getString(R.string.set_alarm_success));
+                            onBackPressed();
+                        }
+                    });
                 dialog.setCancelable(true);
                 dialog.show();
+            }
+        });
+        mShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareUtils.shareFile(SaveSuccessActivity.this, mUri);
             }
         });
         mSharell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtils.shareFile(SaveSuccessActivity.this, mUri);
+                ShareUtils.shareHomeSavedText(SaveSuccessActivity.this);
             }
         });
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        showAd();
+        mTranstionAnim = AnimationUtils.loadAnimation(this, R.anim.anim_bottom_in);
+        randomShow();
+    }
+
+    private void randomShow() {
+        // 1-2
+        int index = new Random().nextInt(2) + 1;
+        if (index % 2 == 0) {
+            mSharell.setVisibility(View.VISIBLE);
+            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+            mAdHintTv.setVisibility(View.GONE);
+            mNativeAdContainer.setVisibility(View.GONE);
+            mSharell.startAnimation(mTranstionAnim);
+        } else {
+            mSharell.setVisibility(View.GONE);
+            showAd();
+        }
     }
 
     private void showAd() {
         NativeAd nativeAd = ADManager.getInstance().getSaveSuccessAD();
-        if (null == nativeAd){
+        if (null == nativeAd) {
             return;
         }
-        nativeAdContainer.setVisibility(View.VISIBLE);
+        mNativeAdContainer.setVisibility(View.VISIBLE);
         mAdHintTv.setVisibility(View.VISIBLE);
         LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
-        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
-        nativeAdContainer.removeAllViews();
-        nativeAdContainer.addView(adView);
+        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
         // Create native UI using the ad_front metadata.
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
         TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
         MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-//        TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+        // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
         TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
         Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
         // Set the Text.
         nativeAdTitle.setText(nativeAd.getAdTitle());
-//        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+        // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
         nativeAdBody.setText(nativeAd.getAdBody());
         nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
@@ -189,7 +225,9 @@ public class SaveSuccessActivity extends BaseActivity {
         List<View> clickableViews = new ArrayList<>();
         clickableViews.add(nativeAdTitle);
         clickableViews.add(nativeAdCallToAction);
-        nativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
+        nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
+
+        mNativeAdContainer.startAnimation(mTranstionAnim);
     }
 
     @Override

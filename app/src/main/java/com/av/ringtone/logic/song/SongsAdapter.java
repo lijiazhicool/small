@@ -10,6 +10,7 @@ import com.av.ringtone.logic.MediaListener;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
@@ -20,6 +21,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,17 +61,15 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
     public void onBindViewHolder(ItemHolder itemHolder, int i) {
 
         SongModel localItem = mDatas.get(i);
+        Log.d("progress ", "onBindViewHolder "+ localItem.title+" status "+localItem.playStatus);
         if (localItem.playStatus == 0) {
             itemHolder.type.setImageResource(R.drawable.ic_music_small);
             itemHolder.type.setVisibility(View.VISIBLE);
             itemHolder.musicVisualizer.setVisibility(View.GONE);
-        } else if (localItem.playStatus == 1) {
-            itemHolder.type.setVisibility(View.GONE);
-            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         } else {
             itemHolder.type.setImageResource(R.drawable.ic_music_small);
-            itemHolder.type.setVisibility(View.VISIBLE);
-            itemHolder.musicVisualizer.setVisibility(View.GONE);
+            itemHolder.type.setVisibility(View.GONE);
+            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         }
 
         itemHolder.title.setText(localItem.title);
@@ -84,17 +85,15 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                         // ---播放
                         mListener.play(local);
                         local.playStatus = 1;
-                    } else if (local.playStatus == 1) {
+                    } else {
                         // ---暂停
                         mListener.pause();
-                        local.playStatus = 2;
-                    } else {
-                        // ---播放
-                        mListener.play(local);
-                        local.playStatus = 1;
+                        local.playStatus = 0;
+                        local.progress = 0;
                     }
                     if (currentPlayItem != null && local != currentPlayItem) {
                         currentPlayItem.playStatus = 0;
+                        currentPlayItem.progress = 0;
                     }
                     currentPlayItem = local;
                     notifyDataSetChanged();
@@ -109,6 +108,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
                 NavigationUtils.goToCutter(mContext, tempModel);
             }
         });
+        itemHolder.progressBar.setProgress(localItem.progress);
     }
 
     private String getDuration(int d) {
@@ -211,6 +211,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
         protected ImageView type, popupMenu;
         private MusicVisualizer musicVisualizer;
         private LinearLayout typelayout;
+        protected ProgressBar progressBar;
 
         public ItemHolder(View view) {
             super(view);
@@ -222,6 +223,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
             this.artist = (TextView) view.findViewById(R.id.song_detail);
             this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
             this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
+            this.progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+
             musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
         }
     }
@@ -233,5 +236,20 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ItemHolder> 
     public void upateDatas(List<SongModel> list) {
         mDatas = list;
         notifyDataSetChanged();
+    }
+
+    public void updatePlayStatus(VoiceModel model){
+        int index = mDatas.indexOf(model);
+        Log.d("progress ", "index "+index+ " title "+model.title+" status "+model.playStatus);
+        if (model.playStatus ==0 ){
+            //播放完成了
+            if (index<mDatas.size()-1){
+                if (mListener!= null){
+                    currentPlayItem = mDatas.get(index+1);
+                    mListener.play(currentPlayItem);
+                }
+            }
+        }
+        notifyItemChanged(index);
     }
 }

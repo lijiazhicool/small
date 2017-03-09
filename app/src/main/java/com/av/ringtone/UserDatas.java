@@ -12,6 +12,7 @@ import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RateModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.modelcache.LightModelCache;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -278,10 +279,17 @@ public class UserDatas {
         }
     }
 
-    public void updatePlayStatus(int mainType) {
+    public void updatePlayStatus(VoiceModel model) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
-                listener.updatePlayStatus(mainType);
+                listener.updatePlayStatus(model);
+            }
+        }
+    }
+    public void resetPlayStatus(int catorytype) {
+        for (DataChangedListener listener : mListenerList) {
+            if (null != listener) {
+                listener.resetPlayStatus(catorytype);
             }
         }
     }
@@ -330,25 +338,28 @@ public class UserDatas {
     public void resetSongs() {
         for (SongModel model : getSongs()) {
             model.playStatus = 0;
+            model.progress = 0;
         }
-        updatePlayStatus(1);
+        resetPlayStatus(1);
     }
 
     public void resetRecords() {
         for (RecordModel model : getRecords()) {
             model.playStatus = 0;
+            model.progress = 0;
         }
         mLightModelCache.putModelList(RECORD_S_KEY, mRecords);
-        updatePlayStatus(2);
+        resetPlayStatus(2);
     }
 
     public void resetCutteds() {
         for (CutterModel model : getCuttereds()) {
             model.playStatus = 0;
             model.isNew = false;
+            model.progress = 0;
         }
         mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
-        updatePlayStatus(3);
+        resetPlayStatus(3);
     }
 
     private class loadSongs extends AsyncTask<String, Void, String> {
@@ -382,7 +393,8 @@ public class UserDatas {
 
         void updateCutters(List<CutterModel> list);
 
-        void updatePlayStatus(int mainType);
+        void updatePlayStatus(VoiceModel model);
+        void resetPlayStatus(int catorytype);
 
         void sortByName(int sortType, boolean isNeedRevers);
 

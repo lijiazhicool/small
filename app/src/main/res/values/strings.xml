@@ -92,15 +92,17 @@
     <string name="delete">Delete</string>
     <string name="delete_success"> delete success</string>
 
-    <string name="tab_one">HOME</string>
-    <string name="tab_two">MUSIC</string>
-    <string name="tab_three">RECORD</string>
-    <string name="tab_four">SAVED</string>
+    <string name="tab_one">Home</string>
+    <string name="tab_two">Library</string>
+    <string name="tab_three">Cropped</string>
+    <string name="tab_four">Record</string>
 
     <string name="home_music_count">%1$d songs</string>
     <string name="home_record_count">%1$d records</string>
-    <string name="home_cuttered_count">%1$d saveds</string>
+    <string name="home_cuttered_count">%1$d croppeds</string>
     <string name="home_cut_count">You have cutted %1$d songs, share it!</string>
+    <string name="home_music_count_share">ou have %1$d musics, you can share!</string>
+
 
     <!--about-->
     <string name="about_version">Version: V %1$s</string>

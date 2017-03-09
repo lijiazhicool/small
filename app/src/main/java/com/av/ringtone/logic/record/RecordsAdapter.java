@@ -10,6 +10,7 @@ import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.logic.MediaListener;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
@@ -24,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -69,13 +71,10 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
             itemHolder.type.setImageResource(R.drawable.icon_record);
             itemHolder.type.setVisibility(View.VISIBLE);
             itemHolder.musicVisualizer.setVisibility(View.GONE);
-        } else if (localItem.playStatus == 1) {
-            itemHolder.type.setVisibility(View.GONE);
-            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         } else {
             itemHolder.type.setImageResource(R.drawable.icon_record);
-            itemHolder.type.setVisibility(View.VISIBLE);
-            itemHolder.musicVisualizer.setVisibility(View.GONE);
+            itemHolder.type.setVisibility(View.GONE);
+            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         }
 
         itemHolder.title.setText(localItem.title);
@@ -91,17 +90,15 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                         // ---播放
                         mListener.play(local);
                         local.playStatus = 1;
-                    } else if (local.playStatus == 1) {
+                    } else {
                         // ---暂停
                         mListener.pause();
-                        local.playStatus = 2;
-                    } else {
-                        // ---播放
-                        mListener.play(local);
-                        local.playStatus = 1;
+                        local.playStatus = 0;
+                        local.progress = 0;
                     }
                     if (currentPlayItem != null && local != currentPlayItem) {
                         currentPlayItem.playStatus = 0;
+                        currentPlayItem.progress = 0;
                     }
                     currentPlayItem = local;
                     notifyDataSetChanged();
@@ -116,6 +113,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
                 NavigationUtils.goToCutter(mContext, tempModel);
             }
         });
+        itemHolder.progressBar.setProgress(localItem.progress);
     }
 
     private String getDuration(int d) {
@@ -179,6 +177,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         protected ImageView type, popupMenu;
         private MusicVisualizer musicVisualizer;
         private LinearLayout typelayout;
+        protected ProgressBar progressBar;
 
         public ItemHolder(View view) {
             super(view);
@@ -189,6 +188,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
             this.artist = (TextView) view.findViewById(R.id.song_detail);
             this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
             this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
+            this.progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
             musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
         }
     }
@@ -201,4 +201,19 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ItemHold
         mDatas = list;
         notifyDataSetChanged();
     }
+
+    public void updatePlayStatus(VoiceModel model){
+        int index = mDatas.indexOf(model);
+        if (model.playStatus ==0 ){
+            //播放完成了
+            if (index<mDatas.size()-1){
+                if (mListener!= null){
+                    currentPlayItem = mDatas.get(index+1);
+                    mListener.play(currentPlayItem);
+                }
+            }
+        }
+        notifyItemChanged(index);
+    }
+
 }

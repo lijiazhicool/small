@@ -23,6 +23,10 @@ public class RateDialog extends Dialog {
         setContentView(R.layout.dialog_rate);
         findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                view.setTag(1);
+                if (null != listener) {
+                    listener.onClick(view);
+                }
                 dismiss();
             }
         });
@@ -30,6 +34,7 @@ public class RateDialog extends Dialog {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingBar.setTag(0);
                 if (rating >= 3.0f) {
                     if (null != listener) {
                         listener.onClick(ratingBar);

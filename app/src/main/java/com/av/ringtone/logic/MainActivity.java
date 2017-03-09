@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import com.av.ringtone.ADManager;
 import com.av.ringtone.R;
@@ -48,6 +51,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -76,6 +80,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
     private boolean mIsPlaying;
     private MediaPlayer mPlayer;
+
+    protected Timer UPDATE_PROGRESS_TIMER;// 更新进度条的定时器
+    protected ProgressTimerTask mProgressTimerTask;
 
     private VoiceModel currentModel = null;
 
@@ -135,13 +142,20 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             @Override
             public void onClick(View v) {
                 // UserDatas.getInstance().loadMusics();
-//                freshMediaDB();
+                // freshMediaDB();
                 startActivity(new Intent(MainActivity.this, ScanActivity.class));
             }
         });
         mSearchll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mCurrentPage == 1){
+                    UserDatas.getInstance().resetSongs();
+                }else if (mCurrentPage == 2){
+                    UserDatas.getInstance().resetCutteds();
+                } else {
+                    UserDatas.getInstance().resetRecords();
+                }
                 mSearchll.setVisibility(View.GONE);
                 mSearchev.setText("");
                 stop();
@@ -153,6 +167,13 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         mSearchBackiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mCurrentPage == 1){
+                    UserDatas.getInstance().resetSongs();
+                }else if (mCurrentPage == 2){
+                    UserDatas.getInstance().resetCutteds();
+                } else {
+                    UserDatas.getInstance().resetRecords();
+                }
                 mSearchll.setVisibility(View.GONE);
                 mSearchev.setText("");
                 stop();
@@ -212,12 +233,12 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                         return false;
                     }
                 });
-                menu.getMenuInflater().inflate(R.menu.popup_main,menu.getMenu());
+                menu.getMenuInflater().inflate(R.menu.popup_main, menu.getMenu());
                 if (mCurrentPage == 0) {
                     menu.getMenu().setGroupVisible(R.id.menu_group_sort, false);
                 } else {
                     menu.getMenu().setGroupVisible(R.id.menu_group_sort, true);
-                    if (mCurrentPage == 1){
+                    if (mCurrentPage == 1) {
                         menu.getMenu().getItem(0).getSubMenu().getItem(2).setVisible(true);
                         menu.getMenu().getItem(0).getSubMenu().getItem(3).setVisible(true);
                         menu.getMenu().getItem(0).getSubMenu().getItem(4).setVisible(true);
@@ -305,6 +326,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     }
 
     private List<SongModel> filterSongs(List<SongModel> dataList, String newText) {
+        if (null == newText) {
+            return new ArrayList<>();
+        }
         newText = newText.toLowerCase();
         if (TextUtils.isEmpty(newText)) {
             return new ArrayList<>();
@@ -323,6 +347,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     }
 
     private List<RecordModel> filterRecords(List<RecordModel> dataList, String newText) {
+        if (null == newText) {
+            return new ArrayList<>();
+        }
         newText = newText.toLowerCase();
         if (TextUtils.isEmpty(newText)) {
             return new ArrayList<>();
@@ -341,6 +368,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     }
 
     private List<CutterModel> filterCutters(List<CutterModel> dataList, String newText) {
+        if (null == newText) {
+            return new ArrayList<>();
+        }
         newText = newText.toLowerCase();
         if (TextUtils.isEmpty(newText)) {
             return new ArrayList<>();
@@ -393,6 +423,8 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         }
 
         UserDatas.getInstance().addAppStart();
+        // 默认显示music
+        mViewPager.setCurrentItem(1);
         // 缓存广告
         ADManager.getInstance().loadSaveSuccessAD(this);
         ADManager.getInstance().loadHomeAD(this);
@@ -410,7 +442,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                 new String[] { Environment.getExternalStorageDirectory().getAbsolutePath() }, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
-                        UserDatas.getInstance().loadMusics();
+//                        UserDatas.getInstance().loadMusics();
                     }
                 });
         }
@@ -420,8 +452,8 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         // 初始化四个布局
         HomeFragment tab01 = new HomeFragment();
         SongFragment tab02 = new SongFragment();
-        RecordFragment tab03 = new RecordFragment();
-        CutteredFragment tab04 = new CutteredFragment();
+        CutteredFragment tab03 = new CutteredFragment();
+        RecordFragment tab04 = new RecordFragment();
 
         mFragments.add(tab01);
         mFragments.add(tab02);
@@ -482,21 +514,37 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     public void play(final VoiceModel model) {
         currentModel = model;
         mIsPlaying = false;
+        if (mPlayer.isPlaying()){
+            Log.d("progress ", "isPlaying");
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+            mPlayer = new MediaPlayer();
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        }
         mPlayer.reset();
         try {
             mPlayer.setDataSource(MainActivity.this, Uri.fromFile(new File(model.path)));
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
+                    Log.d("progress ", "onCompletion");
+                    cancelProgressTimer();
                     currentModel.playStatus = 0;
-                    UserDatas.getInstance().updatePlayStatus(model.catorytype);
+                    currentModel.progress = 0;
+                    UserDatas.getInstance().updatePlayStatus(model);
                 }
             });
             mPlayer.prepare();
             mPlayer.start();
-        } catch (IOException e) {
+            Log.d("progress ", "play");
+            currentModel.playStatus = 1;
+            startProgressTimer();
+        } catch (Exception e) {
+            Log.d("progress ", e.getLocalizedMessage());
             e.printStackTrace();
             mIsPlaying = false;
+            cancelProgressTimer();
         }
         mIsPlaying = true;
     }
@@ -506,6 +554,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         if (mPlayer.isPlaying()) {
             mPlayer.pause();
             mIsPlaying = false;
+            cancelProgressTimer();
         }
     }
 
@@ -514,6 +563,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         if (mPlayer.isPlaying()) {
             mPlayer.stop();
             mIsPlaying = false;
+            cancelProgressTimer();
         }
     }
 
@@ -530,7 +580,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             mIsPlaying = false;
             if (currentModel != null) {
                 currentModel.playStatus = 0;
-                UserDatas.getInstance().updatePlayStatus(currentModel.catorytype);
+                UserDatas.getInstance().updatePlayStatus(currentModel);
             }
         }
     }
@@ -550,6 +600,28 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
     @Override
     public void onBackPressed() {
+        if (!UserDatas.getInstance().isRated(getVersionCode())) {
+            RateDialog dialog = new RateDialog(this, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int tag = (int) v.getTag();
+                    if (tag == 1) {
+                        MainActivity.this.finish();
+                        System.exit(0);
+                    } else {
+                        String appPackageName = getPackageName();
+                        launchAppDetail(appPackageName, "com.android.vending");
+                        UserDatas.getInstance().addRated(getVersionCode());
+                        MainActivity.this.finish();
+                        System.exit(0);
+                    }
+                }
+            });
+            dialog.setCancelable(true);
+            dialog.show();
+            return;
+        }
+
         long mNowTime = System.currentTimeMillis();// 获取第一次按键时间
         if ((mNowTime - mPressedTime) > 2000) {// 比较两次按键时间差
             ToastUtils.makeToastAndShow(this, " Press back key again to exit!");
@@ -577,4 +649,46 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         }
     }
 
+    protected void startProgressTimer() {
+        cancelProgressTimer();
+        UPDATE_PROGRESS_TIMER = new Timer();
+        mProgressTimerTask = new ProgressTimerTask();
+        UPDATE_PROGRESS_TIMER.schedule(mProgressTimerTask, 0, 300);
+        Log.d("progress ", "startProgressTimer");
+    }
+
+    protected void cancelProgressTimer() {
+        Log.d("progress ", "cancelProgressTimer");
+        if (UPDATE_PROGRESS_TIMER != null) {
+            UPDATE_PROGRESS_TIMER.cancel();
+        }
+        if (mProgressTimerTask != null) {
+            mProgressTimerTask.cancel();
+        }
+
+    }
+
+    protected class ProgressTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            try {
+                if (!mPlayer.isPlaying()){
+                    return;
+                }
+                int position = mPlayer.getCurrentPosition();
+                int duration = mPlayer.getDuration();
+                int progress = position * 100 / (duration == 0 ? 1 : duration);
+                Log.d("progress ", "" + progress);
+                currentModel.progress = progress;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        UserDatas.getInstance().updatePlayStatus(currentModel);
+                    }
+                });
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -13,10 +13,10 @@ import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
-import com.av.ringtone.views.RecordingDialog;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
@@ -29,7 +29,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -166,6 +165,10 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     public void onStop() {
         super.onStop();
         UserDatas.getInstance().unregister(this);
+        if (mIsInit) {
+            UserDatas.getInstance().resetRecords();
+            ((MainActivity)getActivity()).stop();
+        }
     }
 
     @Override
@@ -262,8 +265,16 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     }
 
     @Override
-    public void updatePlayStatus(int mainType) {
-        if (mainType != 2){
+    public void updatePlayStatus(VoiceModel model) {
+        if (model.catorytype != 2){
+            return;
+        }
+        mAdapter.updatePlayStatus(model);
+    }
+
+    @Override
+    public void resetPlayStatus(int catorytype) {
+        if (catorytype != 2) {
             return;
         }
         mAdapter.notifyDataSetChanged();

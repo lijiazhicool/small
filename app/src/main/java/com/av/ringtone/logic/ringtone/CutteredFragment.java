@@ -8,11 +8,11 @@ import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -43,7 +43,7 @@ import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
 public class CutteredFragment extends BaseFragment implements UserDatas.DataChangedListener {
     private RecyclerView mRecyclerView;
     private CuttersAdapter mAdapter;
-    private TextView mEmptyTv;
+    private LinearLayout mEmptyll;
     private TextView mPathTv;
     private LinearLayout mOpenFilell;
 
@@ -66,7 +66,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
-        mEmptyTv = findViewById(R.id.empty_tv);
+        mEmptyll = findViewById(R.id.empty_ll);
         mPathTv = findViewById(R.id.path_tv);
         mOpenFilell = findViewById(R.id.openll);
         mAdll = findViewById(R.id.ad_ll);
@@ -247,8 +247,15 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     }
 
     @Override
-    public void updatePlayStatus(int mainType) {
-        if (mainType != 3){
+    public void updatePlayStatus(VoiceModel model) {
+        if (model.catorytype != 3){
+            return;
+        }
+        mAdapter.updatePlayStatus(model);
+    }
+    @Override
+    public void resetPlayStatus(int catorytype) {
+        if (catorytype != 3) {
             return;
         }
         mAdapter.notifyDataSetChanged();
@@ -271,9 +278,9 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
         mAdapter = new CuttersAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
-            mEmptyTv.setVisibility(View.VISIBLE);
+            mEmptyll.setVisibility(View.VISIBLE);
         } else {
-            mEmptyTv.setVisibility(View.GONE);
+            mEmptyll.setVisibility(View.GONE);
             mRecyclerView.setAdapter(mAdapter);
         }
     }

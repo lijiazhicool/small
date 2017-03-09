@@ -9,6 +9,7 @@ import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.logic.MediaListener;
 import com.av.ringtone.model.CutterModel;
+import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ShareUtils;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -73,10 +75,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
             }
             itemHolder.type.setVisibility(View.VISIBLE);
             itemHolder.musicVisualizer.setVisibility(View.GONE);
-        } else if (localItem.playStatus == 1) {
-            itemHolder.type.setVisibility(View.GONE);
-            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
-        } else {
+        } else{
             if (localItem.type == FILE_KIND_MUSIC) {
                 itemHolder.type.setImageResource(R.drawable.ic_music);
             } else if (localItem.type == FILE_KIND_ALARM) {
@@ -86,8 +85,8 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
             } else {
                 itemHolder.type.setImageResource(R.drawable.ic_phone);
             }
-            itemHolder.type.setVisibility(View.VISIBLE);
-            itemHolder.musicVisualizer.setVisibility(View.GONE);
+            itemHolder.type.setVisibility(View.GONE);
+            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
         }
 
         if (localItem.isNew){
@@ -108,17 +107,15 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                         // ---播放
                         mListener.play(local);
                         local.playStatus = 1;
-                    } else if (local.playStatus == 1) {
+                    } else {
                         // ---暂停
                         mListener.pause();
-                        local.playStatus = 2;
-                    } else {
-                        // ---播放
-                        mListener.play(local);
-                        local.playStatus = 1;
+                        local.playStatus = 0;
+                        local.progress = 0;
                     }
                     if (currentPlayItem != null && local != currentPlayItem) {
                         currentPlayItem.playStatus = 0;
+                        currentPlayItem.progress = 0;
                     }
                     currentPlayItem = local;
                     notifyDataSetChanged();
@@ -133,7 +130,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                 NavigationUtils.goToCutter(mContext, local);
             }
         });
-
+        itemHolder.progressBar.setProgress(localItem.progress);
     }
 
     private String getDuration(int d) {
@@ -243,6 +240,20 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
         mDatas = list;
         notifyDataSetChanged();
     }
+    public void updatePlayStatus(VoiceModel model){
+        int index = mDatas.indexOf(model);
+        if (model.playStatus ==0 ){
+            //播放完成了
+            if (index<mDatas.size()-1){
+                if (mListener!= null){
+                    currentPlayItem = mDatas.get(index+1);
+                    mListener.play(currentPlayItem);
+                }
+            }
+        }
+        notifyItemChanged(index);
+    }
+
 
     public class ItemHolder extends RecyclerView.ViewHolder {
         protected RelativeLayout rl;
@@ -250,7 +261,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
         protected ImageView type, popupMenu;
         private MusicVisualizer musicVisualizer;
         private LinearLayout typelayout;
-
+        protected ProgressBar progressBar;
         public ItemHolder(View view) {
             super(view);
             this.rl = (RelativeLayout) view.findViewById(R.id.rl);
@@ -261,6 +272,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
             this.artist = (TextView) view.findViewById(R.id.song_detail);
             this.popupMenu = (ImageView) view.findViewById(R.id.popup_menu);
             this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
+            this.progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
             musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
         }
     }

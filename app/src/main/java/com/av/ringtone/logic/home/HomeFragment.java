@@ -12,7 +12,6 @@ import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -24,6 +23,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -42,14 +43,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeFragment extends BaseFragment implements UserDatas.DataCountChangedListener {
 
     private GridView mGridView;
-    private LinearLayout nativeAdContainer;
+    private LinearLayout mNativeAdContainer;
     private List<HomeModel> mDatas = new ArrayList<>();
     private MyAdapter mAdapter;
 
-    private LinearLayout mSharell, mInfoll;
-    private TextView mSharetv;
+    private LinearLayout mSavedSharell;
+    private TextView mSavedSharetv;
+
+    private LinearLayout mMusicSharell;
+    private TextView mMusicSharetv;
+
+
+
 
     private NativeAd mSmallNativeAd;
+
+    private Animation mTranstionAnim;
 
     private boolean isVisibleToUser = false;//当前界面是否可见
 
@@ -67,10 +76,12 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     protected void initView(View parentView, Bundle savedInstanceState) {
         mGridView = findViewById(R.id.gv);
-        mSharell = findViewById(R.id.share_ll);
-        mInfoll = findViewById(R.id.info_ll);
-        mSharetv = findViewById(R.id.cutcount_tv);
-        nativeAdContainer = findViewById(R.id.home_ad_ll);
+        mSavedSharell = findViewById(R.id.share_ll);
+        mSavedSharetv = findViewById(R.id.cutcount_tv);
+        mNativeAdContainer = findViewById(R.id.home_ad_ll);
+
+        mMusicSharell = findViewById(R.id.share_music_ll);
+        mMusicSharetv = findViewById(R.id.musiccount_tv);
     }
 
     @Override
@@ -80,44 +91,48 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
     @Override
     protected void initData() {
+        mTranstionAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_bottom_in);
         mDatas.clear();
         mDatas.add(new HomeModel(1, R.drawable.ic_music, getString(R.string.tab_two),
             String.format(getString(R.string.home_music_count), 0)));
-        mDatas.add(new HomeModel(2, R.drawable.ic_tones, getString(R.string.tab_four),
+        mDatas.add(new HomeModel(2, R.drawable.ic_tones, getString(R.string.tab_three),
             String.format(getString(R.string.home_cuttered_count), 0)));
-        mDatas.add(new HomeModel(3, R.drawable.icon_record, getString(R.string.tab_three),
+        mDatas.add(new HomeModel(3, R.drawable.icon_record, getString(R.string.tab_four),
             String.format(getString(R.string.home_record_count), 0)));
         mAdapter = new MyAdapter(getActivity());
         mGridView.setAdapter(mAdapter);
         loadAds();
 
-        if (UserDatas.getInstance().getCutCount() < 3) {
-            mSharell.setVisibility(View.GONE);
-            nativeAdContainer.setVisibility(View.GONE);
-            mInfoll.setVisibility(View.VISIBLE);
-        } else {
-            randomShow();
-        }
+        randomShow();
         handler.postDelayed(runnable, TIME); //每隔1s执行
         mIsInit = true;
     }
 
     private void randomShow() {
+        if (UserDatas.getInstance().getCutCount() ==0){
+            mSavedSharell.setVisibility(View.GONE);
+            mMusicSharell.setVisibility(View.GONE);
+            showBigNativeAd();
+            return;
+        }
         // 1-3
         int index = new Random().nextInt(3) + 1;
         if (index % 3 == 0) {
-            mSharell.setVisibility(View.VISIBLE);
-            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
-            nativeAdContainer.setVisibility(View.GONE);
-            mInfoll.setVisibility(View.GONE);
+            mSavedSharell.setVisibility(View.VISIBLE);
+            mSavedSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+            mNativeAdContainer.setVisibility(View.GONE);
+            mMusicSharell.setVisibility(View.GONE);
+            mSavedSharell.startAnimation(mTranstionAnim);
         } else if (index % 3 == 1) {
-            mSharell.setVisibility(View.GONE);
+            mSavedSharell.setVisibility(View.GONE);
             showBigNativeAd();
-            mInfoll.setVisibility(View.GONE);
+            mMusicSharell.setVisibility(View.GONE);
         } else if (index % 3 == 2) {
-            mSharell.setVisibility(View.GONE);
-            nativeAdContainer.setVisibility(View.GONE);
-            mInfoll.setVisibility(View.VISIBLE);
+            mSavedSharell.setVisibility(View.GONE);
+            mNativeAdContainer.setVisibility(View.GONE);
+            mMusicSharell.setVisibility(View.VISIBLE);
+            mMusicSharetv.setText(String.format(getString(R.string.home_music_count_share), UserDatas.getInstance().getSongs().size()));
+            mMusicSharell.startAnimation(mTranstionAnim);
         }
     }
 
@@ -156,17 +171,23 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                     if (position == 0) {
                         UserDatas.getInstance().gotoIndex(1);
                     } else if (position == 1) {
-                        UserDatas.getInstance().gotoIndex(3);
-                    } else {
                         UserDatas.getInstance().gotoIndex(2);
+                    } else {
+                        UserDatas.getInstance().gotoIndex(3);
                     }
                 }
             }
         });
-        mSharell.setOnClickListener(new View.OnClickListener() {
+        mSavedSharell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtils.shareHomeText(mActivity);
+                ShareUtils.shareHomeSavedText(mActivity);
+            }
+        });
+        mMusicSharell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareUtils.shareHomeMusicText(mActivity);
             }
         });
     }
@@ -242,16 +263,16 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private void showBigNativeAd() {
         NativeAd nativeAd = ADManager.getInstance().getHomeAd();
         if (null == nativeAd) {
-            nativeAdContainer.setVisibility(View.GONE);
+            mNativeAdContainer.setVisibility(View.GONE);
             return;
         }
 
-        nativeAdContainer.setVisibility(View.VISIBLE);
+        mNativeAdContainer.setVisibility(View.VISIBLE);
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, nativeAdContainer, false);
-        nativeAdContainer.removeAllViews();
-        nativeAdContainer.addView(adView);
+        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
         // Create native UI using the ad_front metadata.
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
@@ -283,10 +304,11 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         List<View> clickableViews = new ArrayList<>();
         clickableViews.add(nativeAdTitle);
         clickableViews.add(nativeAdCallToAction);
-        nativeAd.registerViewForInteraction(nativeAdContainer, clickableViews);
+        nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
+        mNativeAdContainer.startAnimation(mTranstionAnim);
     }
 
-    private int TIME = 2000;
+    private int TIME = 4000;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
 
@@ -384,7 +406,12 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                         clickableViewsBack.add(subtitle);
                         local.ad_back.registerViewForInteraction(convertView, clickableViewsBack);
                         //旋转
-                        rotable();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                rotable();
+                            }
+                        },1000);
                     } else {
                         // Download and display the ad_front icon.
                         NativeAd.Image adIcon = local.ad_front.getAdIcon();

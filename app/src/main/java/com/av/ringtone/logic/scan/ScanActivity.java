@@ -194,17 +194,19 @@ public class ScanActivity extends BaseActivity {
     }
 
     private void randomShow(){
-        // 1-2
-        int index = new Random().nextInt(2) + 1;
-        if (index % 2 == 0) {
-            mSharell.setVisibility(View.VISIBLE);
-            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
-            mNativeAdContainer.setVisibility(View.GONE);
-            mSharell.startAnimation(mTranstionAnim);
-        } else {
-            mSharell.setVisibility(View.GONE);
-            showNativeAd();
-        }
+        mSharell.setVisibility(View.GONE);
+        showNativeAd();
+//        // 1-2
+//        int index = new Random().nextInt(2) + 1;
+//        if (index % 2 == 0) {
+//            mSharell.setVisibility(View.VISIBLE);
+//            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+//            mNativeAdContainer.setVisibility(View.GONE);
+//            mSharell.startAnimation(mTranstionAnim);
+//        } else {
+//            mSharell.setVisibility(View.GONE);
+//            showNativeAd();
+//        }
     }
 
     private void searchFile(final String filePath) {

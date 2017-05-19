@@ -104,36 +104,41 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         loadAds();
 
         randomShow();
-        handler.postDelayed(runnable, TIME); //每隔1s执行
+//        去掉定时请求小广告
+//        handler.postDelayed(runnable, TIME); //每隔1s执行
         mIsInit = true;
     }
 
     private void randomShow() {
-        if (UserDatas.getInstance().getCutCount() ==0){
-            mSavedSharell.setVisibility(View.GONE);
-            mMusicSharell.setVisibility(View.GONE);
-            showBigNativeAd();
-            return;
-        }
-        // 1-3
-        int index = new Random().nextInt(3) + 1;
-        if (index % 3 == 0) {
-            mSavedSharell.setVisibility(View.VISIBLE);
-            mSavedSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
-            mNativeAdContainer.setVisibility(View.GONE);
-            mMusicSharell.setVisibility(View.GONE);
-            mSavedSharell.startAnimation(mTranstionAnim);
-        } else if (index % 3 == 1) {
-            mSavedSharell.setVisibility(View.GONE);
-            showBigNativeAd();
-            mMusicSharell.setVisibility(View.GONE);
-        } else if (index % 3 == 2) {
-            mSavedSharell.setVisibility(View.GONE);
-            mNativeAdContainer.setVisibility(View.GONE);
-            mMusicSharell.setVisibility(View.VISIBLE);
-            mMusicSharetv.setText(String.format(getString(R.string.home_music_count_share), UserDatas.getInstance().getSongs().size()));
-            mMusicSharell.startAnimation(mTranstionAnim);
-        }
+        mSavedSharell.setVisibility(View.GONE);
+        mMusicSharell.setVisibility(View.GONE);
+        showBigNativeAd();
+
+//        if (UserDatas.getInstance().getCutCount() ==0){
+//            mSavedSharell.setVisibility(View.GONE);
+//            mMusicSharell.setVisibility(View.GONE);
+//            showBigNativeAd();
+//            return;
+//        }
+//        // 1-3
+//        int index = new Random().nextInt(3) + 1;
+//        if (index % 3 == 0) {
+//            mSavedSharell.setVisibility(View.VISIBLE);
+//            mSavedSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+//            mNativeAdContainer.setVisibility(View.GONE);
+//            mMusicSharell.setVisibility(View.GONE);
+//            mSavedSharell.startAnimation(mTranstionAnim);
+//        } else if (index % 3 == 1) {
+//            mSavedSharell.setVisibility(View.GONE);
+//            showBigNativeAd();
+//            mMusicSharell.setVisibility(View.GONE);
+//        } else if (index % 3 == 2) {
+//            mSavedSharell.setVisibility(View.GONE);
+//            mNativeAdContainer.setVisibility(View.GONE);
+//            mMusicSharell.setVisibility(View.VISIBLE);
+//            mMusicSharetv.setText(String.format(getString(R.string.home_music_count_share), UserDatas.getInstance().getSongs().size()));
+//            mMusicSharell.startAnimation(mTranstionAnim);
+//        }
     }
 
     @Override

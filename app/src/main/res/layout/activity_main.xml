@@ -6,7 +6,6 @@
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     android:clipToPadding="true"
-
     android:orientation="vertical">
 
     <LinearLayout

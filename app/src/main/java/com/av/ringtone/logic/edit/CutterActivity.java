@@ -1265,13 +1265,14 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
 
         FileUtils.copyFile(outPath, newPath);
 
-        // save data
-        UserDatas.getInstance().addCuttereds(new CutterModel(mNewFileKind, title.toString(), newPath, artist, duration,
-            fileSize, outFile.lastModified(), true));
-
         // Insert it into the database
         Uri uri = MediaStore.Audio.Media.getContentUriForPath(outPath);
         final Uri newUri = getContentResolver().insert(uri, values);
+
+        // save data
+        UserDatas.getInstance().addCuttereds(new CutterModel(mNewFileKind, title.toString(), newPath, artist, duration,
+                fileSize, outFile.lastModified(), true,newUri.toString()));
+
         setResult(RESULT_OK, new Intent().setData(newUri));
 
         // Update a preference that counts how many times we've

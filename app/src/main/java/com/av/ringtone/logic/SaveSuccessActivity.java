@@ -169,18 +169,20 @@ public class SaveSuccessActivity extends BaseActivity {
     }
 
     private void randomShow() {
-        // 1-2
-        int index = new Random().nextInt(2) + 1;
-        if (index % 2 == 0) {
-            mSharell.setVisibility(View.VISIBLE);
-            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
-            mAdHintTv.setVisibility(View.GONE);
-            mNativeAdContainer.setVisibility(View.GONE);
-            mSharell.startAnimation(mTranstionAnim);
-        } else {
-            mSharell.setVisibility(View.GONE);
-            showAd();
-        }
+        mSharell.setVisibility(View.GONE);
+        showAd();
+//        // 1-2
+//        int index = new Random().nextInt(2) + 1;
+//        if (index % 2 == 0) {
+//            mSharell.setVisibility(View.VISIBLE);
+//            mSharetv.setText(String.format(getString(R.string.home_cut_count), UserDatas.getInstance().getCutCount()));
+//            mAdHintTv.setVisibility(View.GONE);
+//            mNativeAdContainer.setVisibility(View.GONE);
+//            mSharell.startAnimation(mTranstionAnim);
+//        } else {
+//            mSharell.setVisibility(View.GONE);
+//            showAd();
+//        }
     }
 
     private void showAd() {

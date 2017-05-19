@@ -10,8 +10,10 @@ public class CutterModel extends VoiceModel {
     // public String localPath; // 本地自己存储的路径
     public boolean isNew;// 是否是新保存的
 
+    public String newUri;
+
     public CutterModel(int type, String title, String path, String artisit, int duration, long fileSize, long date,
-        boolean isNew) {
+        boolean isNew,String uri) {
         this.type = type;
         this.title = title;
         this.path = path;
@@ -20,6 +22,7 @@ public class CutterModel extends VoiceModel {
         this.fileSize = fileSize;
         this.date = date;
         this.isNew = isNew;
+        this.newUri = uri;
 
         catorytype = 3;
     }

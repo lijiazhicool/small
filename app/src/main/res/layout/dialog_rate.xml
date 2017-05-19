@@ -44,11 +44,11 @@
         android:layout_marginLeft="32dip"
         android:layout_marginTop="12dip"
         app:automatic="fully"
-        app:isIndicator="false"
+        app:isIndicator="true"
         app:numStars="5"
         app:progress="@drawable/ic_star"
         app:progressed="@drawable/ic_star_24_px"
-        app:rating="0"
+        app:rating="1"
         app:spacing="6dp"
         app:stepSize="0.2"
         android:layout_marginBottom="14dip"/>

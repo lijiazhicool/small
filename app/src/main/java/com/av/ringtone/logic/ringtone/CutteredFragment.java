@@ -18,9 +18,12 @@ import com.facebook.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -232,6 +235,24 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1005:
+                if(data==null)
+                {
+                    return;
+                }
+                //处理返回的data,获取选择的联系人信息
+                Uri uri=data.getData();
+                //因为手机的联系人和手机号并不再同一个数据库中，所以我们需要分别做处理
+                String[] contacts=getPhoneContacts(uri);
+                int kk = 0;
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
@@ -381,5 +402,35 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     @Override
     public void sortByAlbum(int sortType, boolean isNeedRevers) {
 
+    }
+
+    private String[] getPhoneContacts(Uri uri){
+        String[] contact=new String[2];
+        //得到ContentResolver对象
+        ContentResolver cr = getActivity().getContentResolver();
+        //取得电话本中开始一项的光标
+        Cursor cursor=cr.query(uri,null,null,null,null);
+        if(cursor!=null)
+        {
+            cursor.moveToFirst();
+            //取得联系人姓名
+            int nameFieldColumnIndex=cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+            contact[0]=cursor.getString(nameFieldColumnIndex);
+            //取得电话号码
+            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
+            if(phone != null){
+                phone.moveToFirst();
+                contact[1] = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            }
+            phone.close();
+            cursor.close();
+        }
+        else
+        {
+            return null;
+        }
+        return contact;
     }
 }

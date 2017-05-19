@@ -1,12 +1,10 @@
 package com.av.ringtone.logic;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Logger;
 
 import com.av.ringtone.ADManager;
 import com.av.ringtone.R;
@@ -32,10 +30,13 @@ import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.RateDialog;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
@@ -43,6 +44,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -61,6 +64,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class MainActivity extends BaseActivity implements MediaListener, UserDatas.GotoFragmentListener {
     private List<Fragment> mFragments = new ArrayList<>();
@@ -423,8 +427,6 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         }
 
         UserDatas.getInstance().addAppStart();
-        // 默认显示music
-        mViewPager.setCurrentItem(1);
         // 缓存广告
         ADManager.getInstance().loadSaveSuccessAD(this);
         ADManager.getInstance().loadHomeAD(this);
@@ -690,5 +692,49 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                 e.printStackTrace();
             }
         }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1005:
+                if(data==null)
+                {
+                    return;
+                }
+                //处理返回的data,获取选择的联系人信息
+                Uri uri=data.getData();
+                setPhoneContacts(uri);
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    private void setPhoneContacts(Uri dataUri){
+        //得到ContentResolver对象
+        ContentResolver cr = getContentResolver();
+        //取得电话本中开始一项的光标
+        Cursor cursor=cr.query(dataUri,null,null,null,null);
+        if(cursor!=null)
+        {
+            cursor.moveToFirst();
+            int dataIndex = cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID);
+            String contactId = cursor.getString(dataIndex);
+
+            dataIndex = cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME);
+            String displayName = cursor.getString(dataIndex);
+            Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactId);
+
+            ContentValues values = new ContentValues();
+            values.put(ContactsContract.Contacts.CUSTOM_RINGTONE, UserDatas.getInstance().getAssignContactUri());
+            getContentResolver().update(uri, values, null, null);
+
+            String message = getResources().getText(R.string.success_contact_ringtone) + " " + displayName;
+
+            Toast.makeText(this, message, Toast.LENGTH_SHORT)
+                    .show();
+
+            cursor.close();
+            return;
+        }
+        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
     }
 }

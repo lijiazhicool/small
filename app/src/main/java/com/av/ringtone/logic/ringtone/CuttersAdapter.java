@@ -17,8 +17,10 @@ import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
 import com.av.ringtone.views.MusicVisualizer;
 
+import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import android.widget.TextView;
 import static com.av.ringtone.Constants.FILE_KIND_ALARM;
 import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
 import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
+import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
 
 /**
  * Created by LiJiaZhi on 16/12/19.
@@ -151,6 +154,13 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
             public void onClick(View v) {
                 final CutterModel tempModel = (CutterModel) v.getTag();
                 PopupMenu menu = new PopupMenu(mContext, v);
+                menu.inflate(R.menu.popup_ringtone);
+                if (tempModel.type == FILE_KIND_RINGTONE) {//铃声
+                    menu.getMenu().findItem(R.id.menu_assgin).setVisible(true);
+                } else {
+                    menu.getMenu().findItem(R.id.menu_assgin).setVisible(false);
+                }
+
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -226,11 +236,15 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
                             case R.id.menu_share:
                                 ShareUtils.shareFile(mContext, Uri.fromFile(new File(tempModel.path)));
                                 break;
+                            case R.id.menu_assgin:
+                                UserDatas.getInstance().setAssignContactUri(tempModel.newUri);
+                                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                                mContext.startActivityForResult(intent, 1005);
+                                break;
                         }
                         return false;
                     }
                 });
-                menu.inflate(R.menu.popup_ringtone);
                 menu.show();
             }
         });

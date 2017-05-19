@@ -23,6 +23,11 @@
         app:showAsAction="never"
         android:title="@string/menu_set_alarm" />
     <item
+        android:id="@+id/menu_assgin"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        app:showAsAction="never"
+        android:title="@string/menu_assgin" />
+    <item
         android:id="@+id/menu_delete"
         android:actionProviderClass="android.widget.ShareActionProvider"
         app:showAsAction="never"

@@ -61,6 +61,9 @@ public class UserDatas {
     public static final int SORT_RECORD = 2;
     public static final int SORT_CUT = 3;
 
+
+    private String mAssignContactUri;
+
     private UserDatas() {
 
     }
@@ -360,6 +363,14 @@ public class UserDatas {
         }
         mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
         resetPlayStatus(3);
+    }
+
+    public String getAssignContactUri() {
+        return mAssignContactUri;
+    }
+
+    public void setAssignContactUri(String uri) {
+        this.mAssignContactUri = uri;
     }
 
     private class loadSongs extends AsyncTask<String, Void, String> {

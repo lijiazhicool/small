@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fabricante de toque</string>
+    <string name="welcome_hint">Tubo MP3 Fabricante de toque</string>
+
+    <string name="facebook_app_id">1064813890295110</string>
+
+    <!--main menu-->
+    <string name="menu_sort">Ordenar por……</string>
+    <string name="menu_sort_name">Nome</string>
+    <string name="menu_sort_length">comprimento</string>
+    <string name="menu_sort_date">Encontro</string>
+    <string name="menu_sort_track">Faixa</string>
+    <string name="menu_sort_artist">Artista</string>
+    <string name="menu_sort_album">Álbum</string>
+
+
+    <string name="menu_about">Sobre</string>
+    <string name="menu_rate">Nos avalie</string>
+    <string name="menu_invite">Convide amigos</string>
+    <string name="menu_help">Ajuda e Feedback</string>
+
+    <string name="menu_set_default">Definir como toque padrão</string>
+    <string name="menu_set_notification">Definir como notificação padrão</string>
+    <string name="menu_set_alarm">Definir como toque de alarme</string>
+    <string name="menu_share">Compartilhar</string>
+
+
+    <string name="share_to_friends">Compartilhar com amigos</string>
+
+    <!--title-->
+    <string name="title_cutter">Cortar áudio</string>
+    <string name="title_main">Fabricante de toque</string>
+
+
+    <!--第三方-->
+    <string name="start_marker">Marcador de início</string>
+    <string name="end_marker">Marcador de fim</string>
+    <string name="play">Toque</string>
+    <string name="stop">Pare</string>
+    <string name="zoom_in">Mais Zoom</string>
+    <string name="zoom_out">Reduzir o zoom</string>
+    <string name="start_label">Começar</string>
+    <string name="end_label">Fim</string>
+    <string name="total">Comprimento:</string>
+    <!-- Progress dialog text for loading or saving... -->
+    <string name="progress_dialog_loading">Carregando...</string>
+    <string name="progress_dialog_saving">Salvando...</string>
+
+    <string name="play_error">Não é possível reproduzir este arquivo de mídia</string>
+    <string name="no_unique_filename">Não foi possível encontrar o nome de arquivo exclusivo</string>
+    <string name="too_small_error">Não é possível salvar um arquivo tão pequeno, tente torná-lo mais.</string>
+    <string name="write_error">Erro ao gravar o arquivo</string>
+    <string name="read_error">Erro ao ler o arquivo</string>
+
+    <string name="bad_extension_error">Desculpe, Ringdroid ainda não é capaz de editar arquivos do tipo</string>
+    <string name="no_extension_error">Desculpe, o Ringdroid não pode editar um arquivo se ele não tiver uma extensão como .mp3 ou .wav</string>
+
+    <string name="time_seconds">Segundos</string>
+    <string name="progress_dialog_recording">Gravação…</string>
+
+
+    <!--
+     File Save dialog
+     -->
+
+    <string name="file_save_title">Salvar como:</string>
+    <string name="file_save_button_save">Salvar</string>
+    <string name="file_save_button_cancel">Cancelar</string>
+
+    <string name="ringtone_type_label">Tipo:</string>
+
+    <string name="type_music">Música</string>
+    <string name="type_alarm">Alarme</string>
+    <string name="type_notification">Notificação</string>
+    <string name="type_ringtone">toque</string>
+
+    <string name="ringtone_name_label">Nome do arquivo:</string>
+
+    <string name="artist_name">Mp3 cortador</string>
+
+    <string name="alert_title_success">Sucesso</string>
+    <string name="alert_title_failure">Erro</string>
+    <string name="alert_ok_button">Está bem</string>
+
+    <string name="no_space_error">Seu cartão SD está cheio, não há espaço suficiente para salvar este arquivo.</string>
+
+
+    <string name="search_hint">Pesquisa</string>
+
+    <string name="no_data">Sem dados</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="delete_success">Eliminar o sucesso</string>
+
+    <string name="tab_one">Casa</string>
+    <string name="tab_two">Biblioteca</string>
+    <string name="tab_three">Recortado</string>
+    <string name="tab_four">Registro</string>
+
+    <string name="home_music_count">%1$d Canções</string>
+    <string name="home_record_count">%1$d Registros</string>
+    <string name="home_cuttered_count">%1$d Colhidos</string>
+    <string name="home_cut_count">Você cortou% 1 $ d músicas, compartilhe-o!</string>
+    <string name="home_music_count_share">Você tem músicas% 1 $ d, você pode compartilhar!</string>
+
+
+    <!--about-->
+    <string name="about_version">Versão: V %1$s</string>
+
+    <string name="error_no_sdcard">Sem cartão de memória</string>
+    <string name="error_state_record">Gravação now.please parar de gravar em primeiro lugar</string>
+    <string name="error_unknown">erro desconhecido</string>
+
+    <string name="delete_content">Tem certeza de que deseja excluir este arquivo?</string>
+    <string name="set_ringtone_content">Tem a certeza de definir como toque predefinido?</string>
+    <string name="set_notification_content">Tem certeza de definir como notificação padrão?</string>
+    <string name="set_alarm_content">Tem certeza de definir como toque de alarme?</string>
+
+    <string name="delete_title">Excluir arquivo</string>
+    <string name="set_ringtone_title">Definir como toque padrão</string>
+    <string name="set_notification_title">Definir como notificação padrão</string>
+    <string name="set_alarm_title">Definir como alarme padrão</string>
+
+    <string name="set_ringtone_success">Sim, Definir o sucesso do Ringtone Padrão!</string>
+    <string name="set_notification_success">Sim, Definir sucesso de notificação padrão</string>
+    <string name="set_alarm_success">Sim, Defina o sucesso do alarme padrão!</string>
+
+    <!--add-->
+    <string name="menu_assgin">Atribuir para entrar em contato</string>
+    <string name="success_contact_ringtone">Toque de campainha atribuído com êxito a:</string>
+</resources>

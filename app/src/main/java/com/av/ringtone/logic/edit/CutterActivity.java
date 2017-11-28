@@ -27,6 +27,7 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.app.Activity;
@@ -76,7 +77,8 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private TextView mTotaltv;
     private LinearLayout mAdll;
 
-    private AdView adView;
+    private AdView facebookAdView;
+    private com.google.android.gms.ads.AdView googleAdView;
     private final static String EVENT_AD_TYPE = "AdView_Click";
     private final static String EVENT_AD_NAME = "AdView";
     private final static String EVENT_AD_ID = "AdView_ID";
@@ -181,6 +183,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mBackIv = findView(R.id.back);
         mTotaltv = findView(R.id.total_tv);
         mAdll = findView(R.id.ad_ll);
+        googleAdView = findView(R.id.google_adView);
         loadGui();
     }
 
@@ -206,7 +209,11 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mHandler = new Handler();
         mHandler.postDelayed(mTimerRunnable, 100);
 
-        loadBanner();
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            loadFacebookBanner();
+        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
+            loadGoogleBanner();
+        }
         loadFromFile();
 
         if (!mSharePreferenceUtil.getBooleanValue(KEY, false)) {
@@ -224,20 +231,21 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }
     }
 
-    protected void loadBanner() {
+    protected void loadFacebookBanner() {
         // Instantiate an AdView view
-        adView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
-        adView.setAdListener(new AdListener() {
+        facebookAdView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
+//        AdSettings.addTestDevice("aff47d50dc337bfaa97cc10f11856607");
+        facebookAdView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
-                adView.destroy();
+                facebookAdView.destroy();
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
                     mAdll.setVisibility(View.VISIBLE);
-                    mAdll.addView(adView);
+                    mAdll.addView(facebookAdView);
                 }
             }
 
@@ -251,7 +259,13 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         });
 
         // Request to load an ad_front
-        adView.loadAd();
+        facebookAdView.loadAd();
+    }
+
+    protected void loadGoogleBanner() {
+        googleAdView.setVisibility(View.VISIBLE);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        googleAdView.loadAd(adRequest);
     }
 
     /** Called with the activity is finally destroyed. */
@@ -264,8 +278,8 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }
         mPlayer = null;
 
-        if (null != adView) {
-            adView.destroy();
+        if (null != facebookAdView) {
+            facebookAdView.destroy();
         }
 
         super.onDestroy();
@@ -1594,7 +1608,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                     if (mStartPos > mMaxPos) {
                         mStartPos = 0;
                         mStartText.setText("0.00");
-                        mStartText.setSelection(mEndText.getText().toString().length());
+                        mStartText.setSelection(mStartText.getText().toString().length());
                         ToastUtils.makeToastAndShow(CutterActivity.this,
                             "Start time must be less than the maximum time!");
                     }

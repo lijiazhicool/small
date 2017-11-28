@@ -1,6 +1,7 @@
 package com.av.ringtone.logic;
 
 import com.av.ringtone.ADManager;
+import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
@@ -10,6 +11,8 @@ import com.av.ringtone.views.CommonDialog;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,7 +32,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 保存成功
@@ -39,6 +41,7 @@ public class SaveSuccessActivity extends BaseActivity {
     private ImageView mBackIv;
     private LinearLayout mRingtonell, mNotificationll, mAlarmll, mShareButton;
     private LinearLayout mNativeAdContainer;
+    private NativeExpressAdView googleAdView;
     private TextView mAdHintTv;
     private Uri mUri;
 
@@ -77,6 +80,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mAlarmll = findView(R.id.alarm);
         mShareButton = findView(R.id.share);
         mNativeAdContainer = findView(R.id.ad_ll);
+        googleAdView = findView(R.id.nativeExpressAdView);
         mAdHintTv = findView(R.id.ad_hint_tv);
 
         mSharell = (LinearLayout) findViewById(R.id.share_ll);
@@ -89,7 +93,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mBackIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         mRingtonell.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +174,14 @@ public class SaveSuccessActivity extends BaseActivity {
 
     private void randomShow() {
         mSharell.setVisibility(View.GONE);
-        showAd();
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            showFacebookAd();
+        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
+            googleAdView.setVisibility(View.VISIBLE);
+            AdRequest request = new AdRequest.Builder().build();
+            googleAdView.loadAd(request);
+        }
+
 //        // 1-2
 //        int index = new Random().nextInt(2) + 1;
 //        if (index % 2 == 0) {
@@ -181,11 +192,11 @@ public class SaveSuccessActivity extends BaseActivity {
 //            mSharell.startAnimation(mTranstionAnim);
 //        } else {
 //            mSharell.setVisibility(View.GONE);
-//            showAd();
+//            showFacebookAd();
 //        }
     }
 
-    private void showAd() {
+    private void showFacebookAd() {
         NativeAd nativeAd = ADManager.getInstance().getSaveSuccessAD();
         if (null == nativeAd) {
             return;
@@ -234,7 +245,7 @@ public class SaveSuccessActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        UserDatas.getInstance().gotoIndex(3);
+        UserDatas.getInstance().gotoIndex(2);
         super.onBackPressed();
     }
 }

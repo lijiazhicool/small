@@ -14,6 +14,8 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.app.Activity;
@@ -36,14 +38,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends BaseFragment implements UserDatas.DataCountChangedListener {
 
     private GridView mGridView;
+
     private LinearLayout mNativeAdContainer;
+    private NativeExpressAdView googleAdView;
+
     private List<HomeModel> mDatas = new ArrayList<>();
     private MyAdapter mAdapter;
 
@@ -79,6 +83,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mSavedSharell = findViewById(R.id.share_ll);
         mSavedSharetv = findViewById(R.id.cutcount_tv);
         mNativeAdContainer = findViewById(R.id.home_ad_ll);
+        googleAdView = findViewById(R.id.nativeExpressAdView);
 
         mMusicSharell = findViewById(R.id.share_music_ll);
         mMusicSharetv = findViewById(R.id.musiccount_tv);
@@ -103,7 +108,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mGridView.setAdapter(mAdapter);
         loadAds();
 
-        randomShow();
 //        去掉定时请求小广告
 //        handler.postDelayed(runnable, TIME); //每隔1s执行
         mIsInit = true;
@@ -198,12 +202,16 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     }
 
     private void loadAds() {
-        // add data
-        showSmallNativeAd();
-        showBigNativeAd();
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            showSmallNativeAd();
+            showBigNativeAd();
+        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
+            googleAdView.setVisibility(View.VISIBLE);
+            AdRequest request = new AdRequest.Builder().build();
+            //addTestDevice("F8F7E522387E716840962BA0993D8F4B").
+            googleAdView.loadAd(request);
+        }
     }
-
-
 
     @Override
     public void updatecount(int isong, int irecord, int icutter) {
@@ -283,7 +291,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
         TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
         MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-        // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+        // TextView nativeAdSocialContext = (TextView) googleAdView.findViewById(R.id.native_ad_social_context);
         TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
         Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 

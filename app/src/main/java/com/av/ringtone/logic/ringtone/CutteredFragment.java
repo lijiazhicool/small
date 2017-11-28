@@ -15,6 +15,7 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.content.ActivityNotFoundException;
@@ -52,7 +53,8 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     private LinearLayout mAdll;
 
-    private AdView adView;
+    private AdView facebookAdView;
+    private com.google.android.gms.ads.AdView googleAdView;
     private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
     private final static String EVENT_AD_NAME = "Fragment_AdView";
     private final static String EVENT_AD_ID = "Fragment_AdView_ID";
@@ -73,6 +75,34 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         mPathTv = findViewById(R.id.path_tv);
         mOpenFilell = findViewById(R.id.openll);
         mAdll = findViewById(R.id.ad_ll);
+        googleAdView = findViewById(R.id.google_adView);
+        googleAdView.setAdListener(new com.google.android.gms.ads.AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                googleAdView.setVisibility(View.VISIBLE);
+            }
+        });
 
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -148,22 +178,26 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             }
         }
         mPathTv.setText(FileUtils.getAppDir_show());
-        loadBanner();
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            loadFacebookBanner();
+        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
+            loadGoogleBanner();
+        }
         mIsInit = true;
     }
 
-    protected void loadBanner() {
-        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_SAVED_BANNER, AdSize.BANNER_HEIGHT_50);
-        adView.setAdListener(new AdListener() {
+    protected void loadFacebookBanner() {
+        facebookAdView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_SAVED_BANNER, AdSize.BANNER_HEIGHT_50);
+        facebookAdView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
-                adView.destroy();
+                facebookAdView.destroy();
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
-                    mAdll.addView(adView);
+                    mAdll.addView(facebookAdView);
                     mAdll.setVisibility(View.VISIBLE);
                 }
             }
@@ -178,7 +212,12 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         });
 
         // Request to load an ad_front
-        adView.loadAd();
+        facebookAdView.loadAd();
+    }
+
+    protected void loadGoogleBanner() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        googleAdView.loadAd(adRequest);
     }
 
     @Override
@@ -284,6 +323,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     public void updateCutters(List<CutterModel> list) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         //时间倒序
         Collections.sort(list, new Comparator<CutterModel>(){
             public int compare(CutterModel o1, CutterModel o2) {
@@ -307,6 +347,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     }
     @Override
     public void sortByName(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType!= UserDatas.SORT_CUT){
             return;
         }
@@ -353,6 +394,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     @Override
     public void sortByDate(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType!= UserDatas.SORT_CUT){
             return;
         }

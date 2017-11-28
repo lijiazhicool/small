@@ -14,6 +14,7 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.os.Bundle;
@@ -36,7 +37,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     private TextView mEmptyTv;
     private LinearLayout mAdll;
 
-    private AdView adView;
+    private com.facebook.ads.AdView facebookAdView;
+    private com.google.android.gms.ads.AdView googleAdView;
     private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
     private final static String EVENT_AD_NAME = "Fragment_AdView";
     private final static String EVENT_AD_ID = "Fragment_AdView_ID";
@@ -63,11 +65,43 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mAdll = findViewById(R.id.ad_ll);
+        googleAdView = findViewById(R.id.google_adView);
+        googleAdView.setAdListener(new com.google.android.gms.ads.AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                googleAdView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     protected void initData() {
-        loadBanner();
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            loadFacebookBanner();
+        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
+            loadGoogleBanner();
+        }
         mIsInit = true;
     }
 
@@ -75,18 +109,18 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     protected void initListener() {
     }
 
-    protected void loadBanner() {
-        adView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_MUSIC_BANNER, AdSize.BANNER_HEIGHT_50);
-        adView.setAdListener(new AdListener() {
+    protected void loadFacebookBanner() {
+        facebookAdView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_MUSIC_BANNER, AdSize.BANNER_HEIGHT_50);
+        facebookAdView.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
-                adView.destroy();
+                facebookAdView.destroy();
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
                 if (null != mAdll) {
-                    mAdll.addView(adView);
+                    mAdll.addView(facebookAdView);
                     mAdll.setVisibility(View.VISIBLE);
                 }
             }
@@ -101,7 +135,12 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         });
 
         // Request to load an ad_front
-        adView.loadAd();
+        facebookAdView.loadAd();
+    }
+
+    protected void loadGoogleBanner() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        googleAdView.loadAd(adRequest);
     }
 
     @Override
@@ -125,7 +164,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         UserDatas.getInstance().unregister(this);
         if (mIsInit) {
             UserDatas.getInstance().resetSongs();
-            ((MainActivity)getActivity()).stop();
+            ((MainActivity) getActivity()).stop();
         }
     }
 
@@ -179,6 +218,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByName(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
@@ -219,6 +259,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByDate(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
@@ -258,6 +299,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByTrack(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
@@ -297,6 +339,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByArtist(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
@@ -337,6 +380,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void sortByAlbum(int sortType, boolean isNeedRevers) {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
@@ -376,6 +420,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     private void sortByName_fresh() {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByName) {
             Collections.sort(list, new Comparator<SongModel>() {
@@ -409,6 +454,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     private void sortByDate_fresh() {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByDate) {
             Collections.sort(list, new Comparator<SongModel>() {
@@ -441,6 +487,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     private void sortByTrack_fresh() {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByTrack) {
             Collections.sort(list, new Comparator<SongModel>() {
@@ -472,6 +519,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     private void sortByArtist_fresh() {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByArtist) {
             Collections.sort(list, new Comparator<SongModel>() {
@@ -497,6 +545,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     }
 
     private void sortByAlbum_fresh() {
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByAlbum) {
             Collections.sort(list, new Comparator<SongModel>() {

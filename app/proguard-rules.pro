@@ -18,6 +18,9 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes Exceptions,InnerClasses
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
+
 
 -keep class com.google.android.gms.internal.** { *; }
 -keep class com.facebook.ads.** { *; }
@@ -32,3 +35,9 @@
 # 第三方包 jl1.0.1.jar
 -dontwarn javazoom.jl.**
 -keep class javazoom.jl.** { *;}
+
+#google ad
+-dontwarn com.google.firebase.**
+-keep public class com.google.firebase.** { *; }
+-dontwarn com.google.android.gms.**
+-keep public class com.google.android.gms.** { *; }

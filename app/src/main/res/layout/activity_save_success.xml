@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_cutter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -186,6 +187,15 @@
             android:layout_marginTop="5dip"
             android:orientation="vertical"
             android:visibility="gone" />
+        <com.google.android.gms.ads.NativeExpressAdView
+            android:id="@+id/nativeExpressAdView"
+            android:layout_width="match_parent"
+            android:layout_height="292dp"
+            android:layout_marginLeft="@dimen/padding_16"
+            android:layout_marginRight="@dimen/padding_16"
+            ads:adSize="328x292"
+            android:visibility="gone"
+            ads:adUnitId="@string/scan_native" />
 
         <include layout="@layout/layout_share_saved" />
 

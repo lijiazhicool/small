@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.av.ringtone.ADManager;
+import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
@@ -428,9 +429,11 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
         UserDatas.getInstance().addAppStart();
         // 缓存广告
-        ADManager.getInstance().loadSaveSuccessAD(this);
-        ADManager.getInstance().loadHomeAD(this);
-        ADManager.getInstance().loadScanSuccessAD(this);
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            ADManager.getInstance().loadSaveSuccessAD(this);
+            ADManager.getInstance().loadHomeAD(this);
+            ADManager.getInstance().loadScanSuccessAD(this);
+        }
     }
 
     private void freshMediaDB() {

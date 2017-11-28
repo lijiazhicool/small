@@ -3,7 +3,7 @@
 
 	<string name="app_name">صانع النغمات</string>
 	<string name="welcome_hint">أنبوب MP3 صانع النغمات</string>
-	<string name="facebook_app_id">1064813890295110</string>
+	<string name="facebook_app_id">327888767628713</string>
 	<string name="menu_sort">فرز حسب...</string>
 	<string name="menu_sort_name">الاسم</string>
 	<string name="menu_sort_length">طول</string>
@@ -65,12 +65,12 @@
 	<string name="tab_two">مكتبة</string>
 	<string name="tab_three">اقتصاص</string>
 	<string name="tab_four">سجل</string>
-	<string name="home_music_count">% 1$ د الأغاني</string>
-	<string name="home_record_count">% 1$ د السجلات</string>
-	<string name="home_cuttered_count">% 1$ كروبيدس د</string>
+	<string name="home_music_count">%1$ d  الأغاني</string>
+	<string name="home_record_count">%1$ d السجلات</string>
+	<string name="home_cuttered_count">%1$ d كروبيدس د</string>
 	<string name="home_cut_count">لديك % 1 cutted $ الأغاني د، تشاركه!</string>
 	<string name="home_music_count_share">أوو قد % 1$ موسيقى د، يمكنك مشاركة!</string>
-	<string name="about_version">الإصدار: V % 1$ s</string>
+	<string name="about_version">%1$s : النسخة</string>
 	<string name="error_no_sdcard">لا sdcard</string>
 	<string name="error_state_record">تسجيل now.please إيقاف التسجيل أولاً</string>
 	<string name="error_unknown">خطأ غير معروف</string>

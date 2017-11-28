@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.av.ringtone.ADManager;
+import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
@@ -26,6 +27,11 @@ import com.av.ringtone.utils.ShareUtils;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.VideoOptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,6 +44,7 @@ public class ScanActivity extends BaseActivity {
     private TextView mFileTv;
     private TextView mScanTv, mDoneTv;
     private LinearLayout mNativeAdContainer;
+    private NativeExpressAdView googleAdView;
 
     private LinearLayout mSharell;
     private TextView mSharetv;
@@ -110,7 +117,60 @@ public class ScanActivity extends BaseActivity {
         mSharell = (LinearLayout) findViewById(R.id.share_ll);
         mSharetv = (TextView) findViewById(R.id.cutcount_tv);
 
-        mNativeAdContainer = (LinearLayout) findViewById(R.id.home_ad_ll);
+        mNativeAdContainer = (LinearLayout) findViewById(R.id.ad_ll);
+        googleAdView = findView(R.id.nativeExpressAdView);
+        // Set its video options.
+        googleAdView.setVideoOptions(new VideoOptions.Builder()
+                .setStartMuted(true)
+                .build());
+
+        // The VideoController can be used to get lifecycle events and info about an ad's video
+        // asset. One will always be returned by getVideoController, even if the ad has no video
+        // asset.
+        final VideoController mVideoController = googleAdView.getVideoController();
+        mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
+            @Override
+            public void onVideoEnd() {
+                super.onVideoEnd();
+            }
+        });
+
+        // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
+        // loading.
+        googleAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (mVideoController.hasVideoContent()) {
+                } else {
+                }
+            }
+        });
+        googleAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+        });
     }
 
     @Override
@@ -195,7 +255,13 @@ public class ScanActivity extends BaseActivity {
 
     private void randomShow(){
         mSharell.setVisibility(View.GONE);
-        showNativeAd();
+        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
+            loadFacebookBanner();
+        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
+            googleAdView.setVisibility(View.VISIBLE);
+            AdRequest request = new AdRequest.Builder().build();
+            googleAdView.loadAd(request);
+        }
 //        // 1-2
 //        int index = new Random().nextInt(2) + 1;
 //        if (index % 2 == 0) {
@@ -305,7 +371,7 @@ public class ScanActivity extends BaseActivity {
         super.onBackPressed();
     }
 
-    private void showNativeAd() {
+    private void loadFacebookBanner() {
         NativeAd nativeAd = ADManager.getInstance().getScanAd();
         if (null == nativeAd) {
             mNativeAdContainer.setVisibility(View.GONE);

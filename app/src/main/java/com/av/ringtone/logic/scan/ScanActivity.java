@@ -17,10 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.av.ringtone.ADManager;
+import com.av.ringtone.StatisticsManager;
+import com.av.ringtone.ad.ADConstants;
+import com.av.ringtone.ad.ADManager;
 import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
+import com.av.ringtone.ad.NativeAD;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.utils.ShareUtils;
@@ -36,7 +39,6 @@ import com.google.android.gms.ads.VideoOptions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ScanActivity extends BaseActivity {
     private ImageView mBackIv;
@@ -44,7 +46,6 @@ public class ScanActivity extends BaseActivity {
     private TextView mFileTv;
     private TextView mScanTv, mDoneTv;
     private LinearLayout mNativeAdContainer;
-    private NativeExpressAdView googleAdView;
 
     private LinearLayout mSharell;
     private TextView mSharetv;
@@ -118,59 +119,6 @@ public class ScanActivity extends BaseActivity {
         mSharetv = (TextView) findViewById(R.id.cutcount_tv);
 
         mNativeAdContainer = (LinearLayout) findViewById(R.id.ad_ll);
-        googleAdView = findView(R.id.nativeExpressAdView);
-        // Set its video options.
-        googleAdView.setVideoOptions(new VideoOptions.Builder()
-                .setStartMuted(true)
-                .build());
-
-        // The VideoController can be used to get lifecycle events and info about an ad's video
-        // asset. One will always be returned by getVideoController, even if the ad has no video
-        // asset.
-        final VideoController mVideoController = googleAdView.getVideoController();
-        mVideoController.setVideoLifecycleCallbacks(new VideoController.VideoLifecycleCallbacks() {
-            @Override
-            public void onVideoEnd() {
-                super.onVideoEnd();
-            }
-        });
-
-        // Set an AdListener for the AdView, so the Activity can take action when an ad has finished
-        // loading.
-        googleAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (mVideoController.hasVideoContent()) {
-                } else {
-                }
-            }
-        });
-        googleAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
-        });
     }
 
     @Override
@@ -179,12 +127,14 @@ public class ScanActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (mStart == 0) {
+                    StatisticsManager.submit(ScanActivity.this,StatisticsManager.EVENT_SCAN, "start",null,null);
                     // 开始
                     mHandler.post(MusicScanRunnable);
                     mScanTv.setText("Cancel");
                     mHintTv.setText("0 musics found");
                     mStart = 1;
                 } else if (mStart == 1) {
+                    StatisticsManager.submit(ScanActivity.this,StatisticsManager.EVENT_SCAN, "cancel",null,null);
                     // 取消
                     iStopRunning = true;
                     mHandler.removeCallbacks(MusicScanRunnable);
@@ -194,6 +144,7 @@ public class ScanActivity extends BaseActivity {
                     mFileTv.setVisibility(View.INVISIBLE);
                     mStart = 2;
                 } else {
+                    StatisticsManager.submit(ScanActivity.this,StatisticsManager.EVENT_SCAN, "complete",null,null);
                     // 完成
                     onBackPressed();
                 }
@@ -255,13 +206,7 @@ public class ScanActivity extends BaseActivity {
 
     private void randomShow(){
         mSharell.setVisibility(View.GONE);
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            loadFacebookBanner();
-        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
-            googleAdView.setVisibility(View.VISIBLE);
-            AdRequest request = new AdRequest.Builder().build();
-            googleAdView.loadAd(request);
-        }
+        loadFacebookBanner();
 //        // 1-2
 //        int index = new Random().nextInt(2) + 1;
 //        if (index % 2 == 0) {
@@ -372,52 +317,72 @@ public class ScanActivity extends BaseActivity {
     }
 
     private void loadFacebookBanner() {
-        NativeAd nativeAd = ADManager.getInstance().getScanAd();
-        if (null == nativeAd) {
-            mNativeAdContainer.setVisibility(View.GONE);
-            return;
-        }
+        new NativeAD().loadAD(this, ADManager.AD_Facebook, ADConstants.facebook_savesuccess_native, new NativeAD.ADListener() {
+            @Override
+            public void onLoadedSuccess(NativeAd nativeAd, String adId) {
+                if (null == nativeAd) {
+                    mNativeAdContainer.setVisibility(View.GONE);
+                    return;
+                }
 
-        mNativeAdContainer.setVisibility(View.VISIBLE);
+                mNativeAdContainer.setVisibility(View.VISIBLE);
 
-        LayoutInflater inflater = LayoutInflater.from(ScanActivity.this);
-        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
-        mNativeAdContainer.removeAllViews();
-        mNativeAdContainer.addView(adView);
+                LayoutInflater inflater = LayoutInflater.from(ScanActivity.this);
+                RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
+                mNativeAdContainer.removeAllViews();
+                mNativeAdContainer.addView(adView);
 
-        // Create native UI using the ad_front metadata.
-        ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
-        TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
-        MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-        // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
-        TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
-        Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+                // Create native UI using the ad_front metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
-        // Set the Text.
-        nativeAdTitle.setText(nativeAd.getAdTitle());
-        // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-        nativeAdBody.setText(nativeAd.getAdBody());
-        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+                // Set the Text.
+                nativeAdTitle.setText(nativeAd.getAdTitle());
+                // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                nativeAdBody.setText(nativeAd.getAdBody());
+                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-        // Download and display the ad_front icon.
-        NativeAd.Image adIcon = nativeAd.getAdIcon();
-        NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+                // Download and display the ad_front icon.
+                NativeAd.Image adIcon = nativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
 
-        // Download and display the cover image.
-        nativeAdMedia.setNativeAd(nativeAd);
+                // Download and display the cover image.
+                nativeAdMedia.setNativeAd(nativeAd);
 
-        // Add the AdChoices icon
-        LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
-        AdChoicesView adChoicesView = new AdChoicesView(ScanActivity.this, nativeAd, true);
-        adChoicesContainer.addView(adChoicesView);
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(ScanActivity.this, nativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
 
-        // Register the Title and CTA button to listen for clicks.
-        List<View> clickableViews = new ArrayList<>();
-        clickableViews.add(nativeAdTitle);
-        clickableViews.add(nativeAdCallToAction);
-        nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
+                // Register the Title and CTA button to listen for clicks.
+                List<View> clickableViews = new ArrayList<>();
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
 
 
-        mNativeAdContainer.startAnimation(mTranstionAnim);
+                mNativeAdContainer.startAnimation(mTranstionAnim);
+            }
+
+            @Override
+            public void onLoadedFailed(String msg, String adId, int errorcode) {
+
+            }
+
+            @Override
+            public void onAdClick() {
+
+            }
+
+            @Override
+            public void onAdImpression(NativeAd ad, String adId) {
+
+            }
+        });
+
     }
 }

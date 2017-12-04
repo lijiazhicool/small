@@ -53,12 +53,6 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
 
     private LinearLayout mAdll;
 
-    private AdView facebookAdView;
-    private com.google.android.gms.ads.AdView googleAdView;
-    private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
-    private final static String EVENT_AD_NAME = "Fragment_AdView";
-    private final static String EVENT_AD_ID = "Fragment_AdView_ID";
-
     private boolean mSortReverseByName = true;
     private boolean mSortReverseByDate = true;
 
@@ -75,34 +69,6 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         mPathTv = findViewById(R.id.path_tv);
         mOpenFilell = findViewById(R.id.openll);
         mAdll = findViewById(R.id.ad_ll);
-        googleAdView = findViewById(R.id.google_adView);
-        googleAdView.setAdListener(new com.google.android.gms.ads.AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                googleAdView.setVisibility(View.VISIBLE);
-            }
-        });
 
         mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -178,47 +144,9 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             }
         }
         mPathTv.setText(FileUtils.getAppDir_show());
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            loadFacebookBanner();
-        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
-            loadGoogleBanner();
-        }
         mIsInit = true;
     }
 
-    protected void loadFacebookBanner() {
-        facebookAdView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_SAVED_BANNER, AdSize.BANNER_HEIGHT_50);
-        facebookAdView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                facebookAdView.destroy();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                if (null != mAdll) {
-                    mAdll.addView(facebookAdView);
-                    mAdll.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
-            }
-        });
-
-        // Request to load an ad_front
-        facebookAdView.loadAd();
-    }
-
-    protected void loadGoogleBanner() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        googleAdView.loadAd(adRequest);
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

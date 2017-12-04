@@ -1,7 +1,6 @@
 package com.av.ringtone.base;
 
 import com.av.ringtone.R;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +23,6 @@ import android.widget.FrameLayout;
  */
 
 public abstract class BaseActivity extends FragmentActivity {
-    //统计
-    protected FirebaseAnalytics mFirebaseAnalytics;
 
     protected FrameLayout mContentLayout;
 
@@ -56,8 +54,6 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(bundle);
         rootView = LayoutInflater.from(this).inflate(R.layout.activity_base, null);
         setContentView(rootView);
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         mContentLayout = (FrameLayout) findViewById(R.id.layout_content);
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.av.ringtone.Constants;
 import com.av.ringtone.R;
+import com.av.ringtone.StatisticsManager;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
@@ -54,8 +55,6 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
 
     private LinearLayout mAdll;
 
-    private AdView facebookAdView;
-    private com.google.android.gms.ads.AdView googleAdView;
     private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
     private final static String EVENT_AD_NAME = "Fragment_AdView";
     private final static String EVENT_AD_ID = "Fragment_AdView_ID";
@@ -92,34 +91,6 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mAdll = findViewById(R.id.ad_ll);
-        googleAdView = findViewById(R.id.google_adView);
-        googleAdView.setAdListener(new com.google.android.gms.ads.AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                googleAdView.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     @Override
@@ -143,46 +114,41 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             mRecyclerView.setAdapter(mAdapter);
         }
         mIsInit = true;
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            loadFacebookBanner();
-        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
-            loadGoogleBanner();
-        }
     }
-
-    protected void loadFacebookBanner() {
-        // Instantiate an AdView view
-        facebookAdView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_RECORD_BANNER, AdSize.BANNER_HEIGHT_50);
-        facebookAdView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                facebookAdView.destroy();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                if (null != mAdll) {
-                    mAdll.addView(facebookAdView);
-                    mAdll.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
-            }
-        });
-
-        // Request to load an ad_front
-        facebookAdView.loadAd();
-    }
-    protected void loadGoogleBanner() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        googleAdView.loadAd(adRequest);
-    }
+//
+//    protected void loadFacebookBanner() {
+//        // Instantiate an AdView view
+//        facebookAdView = new AdView(getActivity(), Constants.AD_PLACE_FRAGMENT_RECORD_BANNER, AdSize.BANNER_HEIGHT_50);
+//        facebookAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onError(Ad ad, AdError adError) {
+//                facebookAdView.destroy();
+//            }
+//
+//            @Override
+//            public void onAdLoaded(Ad ad) {
+//                if (null != mAdll) {
+//                    mAdll.addView(facebookAdView);
+//                    mAdll.setVisibility(View.VISIBLE);
+//                }
+//            }
+//
+//            @Override
+//            public void onAdClicked(Ad ad) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
+//                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+//                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
+//            }
+//        });
+//
+//        // Request to load an ad_front
+//        facebookAdView.loadAd();
+//    }
+//    protected void loadGoogleBanner() {
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        googleAdView.loadAd(adRequest);
+//    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -224,6 +190,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StatisticsManager.submit(mActivity,StatisticsManager.EVENT_RECORD, null,null,null);
                 // andoird 7.0 不能调用系统录音
                 if (Build.VERSION.SDK_INT >= 24) {
                     ToastUtils.makeToastAndShow(getActivity(),"No support Android Nougat 7.0");

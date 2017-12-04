@@ -9,8 +9,10 @@ import java.io.RandomAccessFile;
 
 import com.av.ringtone.Constants;
 import com.av.ringtone.R;
+import com.av.ringtone.StatisticsManager;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.logic.SaveSuccessActivity;
 import com.av.ringtone.model.BaseModel;
 import com.av.ringtone.model.CutterModel;
@@ -77,8 +79,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     private TextView mTotaltv;
     private LinearLayout mAdll;
 
-    private AdView facebookAdView;
-    private com.google.android.gms.ads.AdView googleAdView;
     private final static String EVENT_AD_TYPE = "AdView_Click";
     private final static String EVENT_AD_NAME = "AdView";
     private final static String EVENT_AD_ID = "AdView_ID";
@@ -183,7 +183,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mBackIv = findView(R.id.back);
         mTotaltv = findView(R.id.total_tv);
         mAdll = findView(R.id.ad_ll);
-        googleAdView = findView(R.id.google_adView);
         loadGui();
     }
 
@@ -209,11 +208,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mHandler = new Handler();
         mHandler.postDelayed(mTimerRunnable, 100);
 
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            loadFacebookBanner();
-        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
-            loadGoogleBanner();
-        }
         loadFromFile();
 
         if (!mSharePreferenceUtil.getBooleanValue(KEY, false)) {
@@ -231,42 +225,42 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }
     }
 
-    protected void loadFacebookBanner() {
-        // Instantiate an AdView view
-        facebookAdView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
-//        AdSettings.addTestDevice("aff47d50dc337bfaa97cc10f11856607");
-        facebookAdView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                facebookAdView.destroy();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                if (null != mAdll) {
-                    mAdll.setVisibility(View.VISIBLE);
-                    mAdll.addView(facebookAdView);
-                }
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
-            }
-        });
-
-        // Request to load an ad_front
-        facebookAdView.loadAd();
-    }
-
-    protected void loadGoogleBanner() {
-        googleAdView.setVisibility(View.VISIBLE);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        googleAdView.loadAd(adRequest);
-    }
+//    protected void loadFacebookBanner() {
+//        // Instantiate an AdView view
+//        facebookAdView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
+////        AdSettings.addTestDevice("aff47d50dc337bfaa97cc10f11856607");
+//        facebookAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onError(Ad ad, AdError adError) {
+//                facebookAdView.destroy();
+//            }
+//
+//            @Override
+//            public void onAdLoaded(Ad ad) {
+//                if (null != mAdll) {
+//                    mAdll.setVisibility(View.VISIBLE);
+//                    mAdll.addView(facebookAdView);
+//                }
+//            }
+//
+//            @Override
+//            public void onAdClicked(Ad ad) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
+//                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
+//                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
+//            }
+//        });
+//
+//        // Request to load an ad_front
+//        facebookAdView.loadAd();
+//    }
+//
+//    protected void loadGoogleBanner() {
+//        googleAdView.setVisibility(View.VISIBLE);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        googleAdView.loadAd(adRequest);
+//    }
 
     /** Called with the activity is finally destroyed. */
     @Override
@@ -277,11 +271,6 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             mPlayer.stop();
         }
         mPlayer = null;
-
-        if (null != facebookAdView) {
-            facebookAdView.destroy();
-        }
-
         super.onDestroy();
     }
 
@@ -1505,12 +1494,14 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
                 ToastUtils.makeToastAndShow(CutterActivity.this, "start must be smaller than end！");
                 return;
             }
+            StatisticsManager.submit(CutterActivity.this,StatisticsManager.EVENT_CUT, "save",null,null);
             onSave();
         }
     };
 
     private OnClickListener mPlayListener = new OnClickListener() {
         public void onClick(View sender) {
+            StatisticsManager.submit(CutterActivity.this,StatisticsManager.EVENT_CUT, "play",null,null);
             onPlay(mStartPos);
         }
     };
@@ -1525,6 +1516,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             mOffsetGoal = mOffset;
             enableZoomButtons();
             updateDisplay();
+            StatisticsManager.submit(CutterActivity.this,StatisticsManager.EVENT_CUT, "zoomin",null,null);
         }
     };
 
@@ -1538,6 +1530,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
             mOffsetGoal = mOffset;
             enableZoomButtons();
             updateDisplay();
+            StatisticsManager.submit(CutterActivity.this,StatisticsManager.EVENT_CUT, "zoomout",null,null);
         }
     };
 

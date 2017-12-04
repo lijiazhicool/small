@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.av.ringtone.ADManager;
+import com.av.ringtone.LoadingDialog;
+import com.av.ringtone.StatisticsManager;
+import com.av.ringtone.ad.ADConstants;
+import com.av.ringtone.ad.ADManager;
 import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
+import com.av.ringtone.ad.Interstitial;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.home.HomeFragment;
 import com.av.ringtone.logic.record.RecordFragment;
@@ -28,12 +32,14 @@ import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.SharePreferenceUtil;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
+import com.av.ringtone.views.HintDialog;
 import com.av.ringtone.views.RateDialog;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -45,8 +51,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -104,6 +110,21 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     @Override
     protected void onPostResume() {
         super.onPostResume();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mIsResumed = true;
+        if (!mIsOpenAdShown) {
+            showOpenAD();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mIsResumed = false;
     }
 
     @Override
@@ -190,6 +211,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         mSearchIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StatisticsManager.submit(MainActivity.this,StatisticsManager.EVENT_SEARCH, null,null,null);
                 mSearchll.setVisibility(View.VISIBLE);
                 mSearchev.requestFocus();
                 InputMethodManager imm =
@@ -225,10 +247,12 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                                 NavigationUtils.goToAbout(MainActivity.this);
                                 break;
                             case R.id.menu_rate:
+                                StatisticsManager.submit(MainActivity.this,StatisticsManager.EVENT_RATE, null,null,null);
                                 String appPackageName = getPackageName();
                                 launchAppDetail(appPackageName, "com.android.vending");
                                 break;
                             case R.id.menu_invite:
+                                StatisticsManager.submit(MainActivity.this,StatisticsManager.EVENT_INVITE, null,null,null);
                                 ShareUtils.shareAppText(MainActivity.this);
                                 break;
                             case R.id.menu_help:
@@ -428,12 +452,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         }
 
         UserDatas.getInstance().addAppStart();
+
         // 缓存广告
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            ADManager.getInstance().loadSaveSuccessAD(this);
-            ADManager.getInstance().loadHomeAD(this);
-            ADManager.getInstance().loadScanSuccessAD(this);
-        }
+        loadOpenAD();
     }
 
     private void freshMediaDB() {
@@ -739,5 +760,105 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             return;
         }
         Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public static final String KEY_LAST_OPEN_TIME = "key_last_open_time";
+    private Interstitial mFirstOpenInterstitialAd;
+    private boolean mIsResumed = true;//当前页面是否在前台
+    private boolean mIsOpenAdShown = false;//open广告是否展示
+    private boolean mIsOpenLoadSuc = false;
+    LoadingDialog dialog;
+    private Handler mHandler = new Handler();
+
+    //第一次打开
+    private void loadOpenAD() {
+        //nomral级别以上才展示插屏
+        if (ADManager.sLevel < ADManager.Level_Normal) {
+            return;
+        }
+
+        if (!mSharePreferenceUtil.getBooleanValue(KEY, false)) {
+            HintDialog dialog = new HintDialog(this, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean isChecked = (boolean) v.getTag();
+                    if (isChecked) {
+                        mSharePreferenceUtil.putBoolean(KEY, true);
+                    }
+                }
+            });
+            dialog.setCancelable(true);
+            dialog.show();
+        }
+
+        long second = mSharePreferenceUtil.getLongValue(KEY_LAST_OPEN_TIME, 0);
+        if (second == 0 || (System.currentTimeMillis() / 1000 - second) / 60 >= 2) {
+            mSharePreferenceUtil.putLong(KEY_LAST_OPEN_TIME, System.currentTimeMillis() / 1000);
+
+            String adID = "";
+           if (ADManager.sPlatForm == ADManager.AD_Google) {
+                adID = ADConstants.google_open_interstitial;
+            } else if (ADManager.sPlatForm == ADManager.AD_Facebook) {
+                adID = ADConstants.facebook_open_interstitial;
+            }
+            if (!TextUtils.isEmpty(adID)) {
+                mFirstOpenInterstitialAd = new Interstitial();
+                mFirstOpenInterstitialAd.loadAD(this, ADManager.sPlatForm, adID, new Interstitial.ADListener() {
+                    @Override
+                    public void onLoadedSuccess() {
+                        mIsOpenLoadSuc = true;
+                        if (mIsResumed) {
+                            showOpenAD();
+                        } else {
+                            mIsOpenAdShown = false;
+                        }
+                    }
+
+                    @Override
+                    public void onLoadedFailed() {
+
+                    }
+
+                    @Override
+                    public void onAdDisplayed() {
+                    }
+
+                    @Override
+                    public void onAdClose() {
+
+                    }
+                });
+            }
+        }
+    }
+    private void showOpenAD() {
+        if (!mIsOpenLoadSuc) {
+            return;
+        }
+        mIsOpenAdShown = true;
+        // create alert dialog
+        if (dialog == null) {
+            dialog = new LoadingDialog(MainActivity.this, R.style.dialog);
+            dialog.setCancelable(true);
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    if (null != mFirstOpenInterstitialAd) {
+                        mFirstOpenInterstitialAd.show();
+                    }
+                }
+            });
+        }
+        if (null != dialog && !isFinishing() && !dialog.isShowing())
+            dialog.show();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (null != dialog && dialog.isShowing() && !isFinishing()) {
+                    dialog.dismiss();
+                }
+            }
+        }, 1000);
     }
 }

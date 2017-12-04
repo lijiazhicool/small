@@ -1,9 +1,12 @@
 package com.av.ringtone.logic;
 
-import com.av.ringtone.ADManager;
+import com.av.ringtone.StatisticsManager;
+import com.av.ringtone.ad.ADConstants;
+import com.av.ringtone.ad.ADManager;
 import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
+import com.av.ringtone.ad.NativeAD;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
@@ -99,6 +102,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mRingtonell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StatisticsManager.submit(SaveSuccessActivity.this,StatisticsManager.EVENT_SAVE, "ringtone",null,null);
                 CommonDialog dialog = new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_ringtone_title),
                     getString(R.string.set_ringtone_content), "", new View.OnClickListener() {
                         @Override
@@ -117,6 +121,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mNotificationll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StatisticsManager.submit(SaveSuccessActivity.this,StatisticsManager.EVENT_SAVE, "notification",null,null);
                 CommonDialog dialog =
                     new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_notification_title),
                         getString(R.string.set_notification_content), "", new View.OnClickListener() {
@@ -137,6 +142,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mAlarmll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StatisticsManager.submit(SaveSuccessActivity.this,StatisticsManager.EVENT_SAVE, "alarm",null,null);
                 CommonDialog dialog = new CommonDialog(SaveSuccessActivity.this, getString(R.string.set_alarm_title),
                     getString(R.string.set_alarm_content), "", new View.OnClickListener() {
                         @Override
@@ -155,6 +161,7 @@ public class SaveSuccessActivity extends BaseActivity {
         mShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StatisticsManager.submit(SaveSuccessActivity.this,StatisticsManager.EVENT_SAVE, "share",null,null);
                 ShareUtils.shareFile(SaveSuccessActivity.this, mUri);
             }
         });
@@ -174,14 +181,7 @@ public class SaveSuccessActivity extends BaseActivity {
 
     private void randomShow() {
         mSharell.setVisibility(View.GONE);
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            showFacebookAd();
-        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
-            googleAdView.setVisibility(View.VISIBLE);
-            AdRequest request = new AdRequest.Builder().build();
-            googleAdView.loadAd(request);
-        }
-
+        showFacebookAd();
 //        // 1-2
 //        int index = new Random().nextInt(2) + 1;
 //        if (index % 2 == 0) {
@@ -197,50 +197,66 @@ public class SaveSuccessActivity extends BaseActivity {
     }
 
     private void showFacebookAd() {
-        NativeAd nativeAd = ADManager.getInstance().getSaveSuccessAD();
-        if (null == nativeAd) {
-            return;
-        }
-        mNativeAdContainer.setVisibility(View.VISIBLE);
-        mAdHintTv.setVisibility(View.VISIBLE);
-        LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
-        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
-        mNativeAdContainer.removeAllViews();
-        mNativeAdContainer.addView(adView);
+        new NativeAD().loadAD(this, ADManager.AD_Facebook, ADConstants.facebook_savesuccess_native, new NativeAD.ADListener() {
+            @Override
+            public void onLoadedSuccess(NativeAd nativeAd, String adId) {
+                mNativeAdContainer.setVisibility(View.VISIBLE);
+                mAdHintTv.setVisibility(View.VISIBLE);
+                LayoutInflater inflater = LayoutInflater.from(SaveSuccessActivity.this);
+                RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
+                mNativeAdContainer.removeAllViews();
+                mNativeAdContainer.addView(adView);
 
-        // Create native UI using the ad_front metadata.
-        ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
-        TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
-        MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-        // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
-        TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
-        Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+                // Create native UI using the ad_front metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                // TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
 
-        // Set the Text.
-        nativeAdTitle.setText(nativeAd.getAdTitle());
-        // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-        nativeAdBody.setText(nativeAd.getAdBody());
-        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+                // Set the Text.
+                nativeAdTitle.setText(nativeAd.getAdTitle());
+                // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                nativeAdBody.setText(nativeAd.getAdBody());
+                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-        // Download and display the ad_front icon.
-        NativeAd.Image adIcon = nativeAd.getAdIcon();
-        NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+                // Download and display the ad_front icon.
+                NativeAd.Image adIcon = nativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
 
-        // Download and display the cover image.
-        nativeAdMedia.setNativeAd(nativeAd);
+                // Download and display the cover image.
+                nativeAdMedia.setNativeAd(nativeAd);
 
-        // Add the AdChoices icon
-        LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
-        AdChoicesView adChoicesView = new AdChoicesView(SaveSuccessActivity.this, nativeAd, true);
-        adChoicesContainer.addView(adChoicesView);
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(SaveSuccessActivity.this, nativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
 
-        // Register the Title and CTA button to listen for clicks.
-        List<View> clickableViews = new ArrayList<>();
-        clickableViews.add(nativeAdTitle);
-        clickableViews.add(nativeAdCallToAction);
-        nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
+                // Register the Title and CTA button to listen for clicks.
+                List<View> clickableViews = new ArrayList<>();
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
 
-        mNativeAdContainer.startAnimation(mTranstionAnim);
+                mNativeAdContainer.startAnimation(mTranstionAnim);
+            }
+
+            @Override
+            public void onLoadedFailed(String msg, String adId, int errorcode) {
+
+            }
+
+            @Override
+            public void onAdClick() {
+
+            }
+
+            @Override
+            public void onAdImpression(NativeAd ad, String adId) {
+
+            }
+        });
     }
 
     @Override

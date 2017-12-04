@@ -1,9 +1,12 @@
 package com.av.ringtone.logic.home;
 
-import com.av.ringtone.ADManager;
+import com.av.ringtone.StatisticsManager;
+import com.av.ringtone.ad.ADConstants;
+import com.av.ringtone.ad.ADManager;
 import com.av.ringtone.Constants;
 import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
+import com.av.ringtone.ad.NativeAD;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.model.HomeModel;
 import com.av.ringtone.utils.ShareUtils;
@@ -46,7 +49,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private GridView mGridView;
 
     private LinearLayout mNativeAdContainer;
-    private NativeExpressAdView googleAdView;
 
     private List<HomeModel> mDatas = new ArrayList<>();
     private MyAdapter mAdapter;
@@ -57,18 +59,9 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     private LinearLayout mMusicSharell;
     private TextView mMusicSharetv;
 
-
-
-
-    private NativeAd mSmallNativeAd;
-
     private Animation mTranstionAnim;
 
     private boolean isVisibleToUser = false;//当前界面是否可见
-
-    private final static String EVENT_Small_AD_TYPE = "Home_Small_NativeAd_Click";
-    private final static String EVENT_Small_AD_NAME = "Home_Small_NativeAd";
-    private final static String EVENT_Small_AD_ID = "Home_Small_NativeAd_ID";
 
     private boolean mIsInit = false;
 
@@ -83,7 +76,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         mSavedSharell = findViewById(R.id.share_ll);
         mSavedSharetv = findViewById(R.id.cutcount_tv);
         mNativeAdContainer = findViewById(R.id.home_ad_ll);
-        googleAdView = findViewById(R.id.nativeExpressAdView);
 
         mMusicSharell = findViewById(R.id.share_music_ll);
         mMusicSharetv = findViewById(R.id.musiccount_tv);
@@ -165,9 +157,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (null!= handler) {
-            handler.removeCallbacks(runnable);
-        }
         UserDatas.getInstance().unregister(this);
     }
 
@@ -184,6 +173,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                     } else {
                         UserDatas.getInstance().gotoIndex(3);
                     }
+                    StatisticsManager.submit(mActivity,StatisticsManager.EVENT_HOME_GRID, String.valueOf(position),null,null);
                 }
             }
         });
@@ -202,15 +192,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
     }
 
     private void loadAds() {
-        if (Constants.Ad_type == Constants.AD_FACEBOOK) {
-            showSmallNativeAd();
-            showBigNativeAd();
-        } else if (Constants.Ad_type == Constants.AD_GOOGLE) {
-            googleAdView.setVisibility(View.VISIBLE);
-            AdRequest request = new AdRequest.Builder().build();
-            //addTestDevice("F8F7E522387E716840962BA0993D8F4B").
-            googleAdView.loadAd(request);
-        }
+        showBigNativeAd();
     }
 
     @Override
@@ -231,114 +213,74 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
         }
     }
 
-    private void showSmallNativeAd() {
-        mSmallNativeAd = new NativeAd(mActivity, Constants.AD_PLACE_HOME_SMALL);
-//        AdSettings.addTestDevice("28098e2b8ba1737743e3a116ec401021");
-        mSmallNativeAd.setAdListener(new AdListener() {
-
-            @Override
-            public void onError(Ad ad, AdError error) {
-                // Ad error callback
-                System.err.println("onError " + error.getErrorCode() + " " + error.getErrorMessage());
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                //已经有广告了
-                if (mDatas.size()>3){
-                    HomeModel model = mDatas.get(3);
-                    mDatas.remove(model);
-                    model.addAd(mSmallNativeAd);
-                    mDatas.add(model);
-                    mAdapter.notifyDataSetChanged();
-                } else {
-                    HomeModel tempModel = new HomeModel(4);
-                    tempModel.addAd(mSmallNativeAd);
-                    mDatas.add(tempModel);
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_Small_AD_ID);
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_Small_AD_NAME);
-                mFirebaseAnalytics.logEvent(EVENT_Small_AD_TYPE, bundle);
-                // 广告点击后，请求新的广告缓存
-                showSmallNativeAd();
-            }
-        });
-        // Request an ad_front
-        mSmallNativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
-    }
 
     private void showBigNativeAd() {
-        NativeAd nativeAd = ADManager.getInstance().getHomeAd();
-        if (null == nativeAd) {
-            mNativeAdContainer.setVisibility(View.GONE);
-            return;
-        }
-
-        mNativeAdContainer.setVisibility(View.VISIBLE);
-
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
-        mNativeAdContainer.removeAllViews();
-        mNativeAdContainer.addView(adView);
-
-        // Create native UI using the ad_front metadata.
-        ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
-        TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
-        MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
-        // TextView nativeAdSocialContext = (TextView) googleAdView.findViewById(R.id.native_ad_social_context);
-        TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
-        Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
-
-        // Set the Text.
-        nativeAdTitle.setText(nativeAd.getAdTitle());
-        // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-        nativeAdBody.setText(nativeAd.getAdBody());
-        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-
-        // Download and display the ad_front icon.
-        NativeAd.Image adIcon = nativeAd.getAdIcon();
-        NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
-
-        // Download and display the cover image.
-        nativeAdMedia.setNativeAd(nativeAd);
-
-        // Add the AdChoices icon
-        LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
-        AdChoicesView adChoicesView = new AdChoicesView(getActivity(), nativeAd, true);
-        adChoicesContainer.addView(adChoicesView);
-
-        // Register the Title and CTA button to listen for clicks.
-        List<View> clickableViews = new ArrayList<>();
-        clickableViews.add(nativeAdTitle);
-        clickableViews.add(nativeAdCallToAction);
-        nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
-        mNativeAdContainer.startAnimation(mTranstionAnim);
-    }
-
-    private int TIME = 4000;
-    Handler handler = new Handler();
-    Runnable runnable = new Runnable() {
-
-        @Override
-        public void run() {
-            // handler自带方法实现定时器
-            try {
-                handler.postDelayed(this, TIME);
-                if (isVisibleToUser){
-                    showSmallNativeAd();
+        new NativeAD().loadAD(getActivity(), ADManager.AD_Facebook, ADConstants.facebook_pause_native, new NativeAD.ADListener() {
+            @Override
+            public void onLoadedSuccess(NativeAd nativeAd, String adId) {
+                if (null == nativeAd) {
+                    mNativeAdContainer.setVisibility(View.GONE);
+                    return;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
+                mNativeAdContainer.setVisibility(View.VISIBLE);
+
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.layout_big_ad, mNativeAdContainer, false);
+                mNativeAdContainer.removeAllViews();
+                mNativeAdContainer.addView(adView);
+
+                // Create native UI using the ad_front metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                // TextView nativeAdSocialContext = (TextView) googleAdView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+
+                // Set the Text.
+                nativeAdTitle.setText(nativeAd.getAdTitle());
+                // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                nativeAdBody.setText(nativeAd.getAdBody());
+                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+
+                // Download and display the ad_front icon.
+                NativeAd.Image adIcon = nativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+
+                // Download and display the cover image.
+                nativeAdMedia.setNativeAd(nativeAd);
+
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(getActivity(), nativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
+
+                // Register the Title and CTA button to listen for clicks.
+                List<View> clickableViews = new ArrayList<>();
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                nativeAd.registerViewForInteraction(mNativeAdContainer, clickableViews);
+                mNativeAdContainer.startAnimation(mTranstionAnim);
+            }
+
+            @Override
+            public void onLoadedFailed(String msg, String adId, int errorcode) {
+
+            }
+
+            @Override
+            public void onAdClick() {
+
+            }
+
+            @Override
+            public void onAdImpression(NativeAd ad, String adId) {
+
+            }
+        });
+
+    }
 
     // 自定义适配器
     class MyAdapter extends BaseAdapter {

@@ -1,13 +1,15 @@
 package com.av.ringtone.logic.record;
 
+import static android.app.Activity.RESULT_OK;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
-import com.av.ringtone.StatisticsManager;
+import com.example.ad.ADManager;
+import com.example.ad.StatisticsManager;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
@@ -18,14 +20,10 @@ import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.ToastUtils;
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.facebook.ads.NativeAd;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -41,7 +39,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static android.app.Activity.RESULT_OK;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 录音
@@ -54,10 +52,6 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     private ImageView mFab;
 
     private LinearLayout mAdll;
-
-    private final static String EVENT_AD_TYPE = "Fragment_AdView_Click";
-    private final static String EVENT_AD_NAME = "Fragment_AdView";
-    private final static String EVENT_AD_ID = "Fragment_AdView_ID";
 
     private final static int FLAG_WAV = 0;
     private final static int FLAG_AMR = 1;
@@ -76,6 +70,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     private boolean mSortReverseByDate = true;
 
     private boolean mIsInit = false;
+    private List<RecordModel> mDataLists;
 
     @Override
     protected int getLayoutId() {
@@ -96,7 +91,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
     @Override
     protected void initData() {
         List<RecordModel> list = UserDatas.getInstance().getRecords();
-        if (list.size()==0){
+        if (list.size()==0&& EasyPermissions.hasPermissions(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
             //load from sdcard
             String path = FileUtils.getRecordPath(mActivity);
             File file = new File(path);
@@ -114,6 +109,14 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             mRecyclerView.setAdapter(mAdapter);
         }
         mIsInit = true;
+        ADManager.getInstance().getNativeAdlist(new ADManager.ADNumListener() {
+            @Override
+            public void onLoadedSuccess(List<NativeAd> list, boolean needGif) {
+                if (list.size()>0&&null!=mAdapter) {
+                    mAdapter.upateDatas(mDataLists);
+                }
+            }
+        });
     }
 //
 //    protected void loadFacebookBanner() {
@@ -173,6 +176,23 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
             UserDatas.getInstance().resetRecords();
             ((MainActivity)getActivity()).stop();
         }
+    }
+    private void addADs(){
+        if (null == mDataLists&& mDataLists.size()==0){
+            return;
+        }
+        int mStartIndex = getRandomIndex(mDataLists.size() - 1);
+        for (int i = mStartIndex;i<mDataLists.size()-1;i+=5){
+            RecordModel item = mDataLists.get(mStartIndex);
+            RecordModel temp = new RecordModel(item.title, item.path, item.duration, item.date);
+            temp.catorytype = 4;
+            mDataLists.add(i,temp);
+        }
+    }
+    private int getRandomIndex(int max) {
+        Random random = new Random();
+        int index = random.nextInt(5);
+        return index < max ? index : max;
     }
 
     @Override
@@ -260,6 +280,7 @@ public class RecordFragment extends BaseFragment implements UserDatas.DataChange
         } else {
             mEmptyTv.setVisibility(View.GONE);
         }
+        mDataLists = list;
         mAdapter = new RecordsAdapter((MainActivity) getActivity(), list);
         mRecyclerView.setAdapter(mAdapter);
     }

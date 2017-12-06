@@ -23,7 +23,7 @@ public class SharePreferenceUtil {
         if (sharePreFileName == null) {
             sharePreFileName = context.getPackageName();
         }
-        settings = context.getSharedPreferences(sharePreFileName, context.MODE_WORLD_WRITEABLE);
+        settings = context.getSharedPreferences(sharePreFileName, context.MODE_PRIVATE);
         // editor=settings.edit();
     }
 

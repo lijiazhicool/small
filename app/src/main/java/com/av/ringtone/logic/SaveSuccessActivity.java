@@ -1,21 +1,21 @@
 package com.av.ringtone.logic;
 
-import com.av.ringtone.StatisticsManager;
-import com.av.ringtone.ad.ADConstants;
-import com.av.ringtone.ad.ADManager;
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.av.ringtone.UserDatas;
-import com.av.ringtone.ad.NativeAD;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
+import com.example.ad.ADConstants;
+import com.example.ad.ADManager;
+import com.example.ad.NativeAD;
+import com.example.ad.StatisticsManager;
 import com.facebook.ads.AdChoicesView;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -33,9 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 保存成功
  */
@@ -44,7 +41,6 @@ public class SaveSuccessActivity extends BaseActivity {
     private ImageView mBackIv;
     private LinearLayout mRingtonell, mNotificationll, mAlarmll, mShareButton;
     private LinearLayout mNativeAdContainer;
-    private NativeExpressAdView googleAdView;
     private TextView mAdHintTv;
     private Uri mUri;
 
@@ -83,7 +79,6 @@ public class SaveSuccessActivity extends BaseActivity {
         mAlarmll = findView(R.id.alarm);
         mShareButton = findView(R.id.share);
         mNativeAdContainer = findView(R.id.ad_ll);
-        googleAdView = findView(R.id.nativeExpressAdView);
         mAdHintTv = findView(R.id.ad_hint_tv);
 
         mSharell = (LinearLayout) findViewById(R.id.share_ll);

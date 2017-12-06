@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':ad'
 
 
 //初始化gradle时调用

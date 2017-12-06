@@ -13,7 +13,8 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.av.ringtone.R;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
+
 
 /**
  * Created by LiJiaZhi on 17/2/24.

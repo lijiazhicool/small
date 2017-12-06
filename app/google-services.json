@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1067525858103",
-    "firebase_url": "https://ringtone-2b5e8.firebaseio.com",
-    "project_id": "ringtone-2b5e8",
-    "storage_bucket": "ringtone-2b5e8.appspot.com"
+    "project_number": "499677643978",
+    "firebase_url": "https://newringtonemaker.firebaseio.com",
+    "project_id": "newringtonemaker",
+    "storage_bucket": "newringtonemaker.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1067525858103:android:f74d7465763e9ce4",
+        "mobilesdk_app_id": "1:499677643978:android:997f1c74838322a1",
         "android_client_info": {
-          "package_name": "com.av.ringtone"
+          "package_name": "com.music.ringtonemaker.ringtone.cutter.maker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1067525858103-5d6mkaev9s9esf9kkkvkb1hees9s4dtb.apps.googleusercontent.com",
+          "client_id": "499677643978-em5m4nfanlpim25g469b8chhcs774kdc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.av.ringtone",
+            "package_name": "com.music.ringtonemaker.ringtone.cutter.maker",
             "certificate_hash": "7fd00247acc87344c7a519d4e5360fd46cb6cce2"
           }
         },
         {
-          "client_id": "1067525858103-siblcalfkdapvittuapqfpmu6ji5cmb2.apps.googleusercontent.com",
+          "client_id": "499677643978-lbh2umsjbgdjrkdaodgg1bc6uipdh61r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDz-25R9E6RSDapeQ_FplyuIZ1IsEZR-m8"
+          "current_key": "AIzaSyDnR3WxkLyRCz2L87ybSLufkL7MJXBtwtY"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1067525858103-siblcalfkdapvittuapqfpmu6ji5cmb2.apps.googleusercontent.com",
+              "client_id": "499677643978-lbh2umsjbgdjrkdaodgg1bc6uipdh61r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

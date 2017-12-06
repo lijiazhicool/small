@@ -49,16 +49,18 @@ public class SongModel extends VoiceModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof VoiceModel)) return false;
 
-        SongModel songModel = (SongModel) o;
+        VoiceModel that = (VoiceModel) o;
 
-        return path.equals(songModel.path);
-
+        if (catorytype != that.catorytype) return false;
+        return path != null ? path.equals(that.path) : that.path == null;
     }
 
     @Override
     public int hashCode() {
-        return path.hashCode();
+        int result = catorytype;
+        result = 31 * result + (path != null ? path.hashCode() : 0);
+        return result;
     }
 }

@@ -1,67 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rate_root_container"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginTop="20dip">
+        android:layout_marginTop="36dp"
+        android:background="@android:color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dip"
-            android:layout_weight="1"
-            android:text="Rate your experience"
-            android:textColor="@color/text_black"
-            android:textSize="20sp" />
+            android:layout_marginTop="12dp"
+            android:text="@string/rate_stars"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/close_iv"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/one"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/rate1_grey" />
+
+            <ImageView
+                android:id="@+id/two"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/rate2_grey" />
+
+            <ImageView
+                android:id="@+id/three"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/rate3_grey" />
+
+            <ImageView
+                android:id="@+id/four"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/rate4_grey" />
+
+            <ImageView
+                android:id="@+id/five"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/rate5_grey" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/rate_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dip"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:layout_marginTop="16dp"
+            android:text="@string/rate_content_default"
+            android:textColor="#757575"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/rate_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@+id/rate_action"
+                android:text="@string/rate_cancel"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rate_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textColor="#7ed321"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dip"
-        android:layout_marginTop="10dip"
-        android:text="How would you rate our app?"
-        android:textColor="@color/text_gray"
-        android:textSize="16sp" />
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:src="@drawable/big_star" />
 
-    <com.av.ringtone.views.RatingBar
-        android:id="@+id/ratingbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dip"
-        android:layout_marginTop="12dip"
-        app:automatic="fully"
-        app:isIndicator="true"
-        app:numStars="5"
-        app:progress="@drawable/ic_star"
-        app:progressed="@drawable/ic_star_24_px"
-        app:rating="1"
-        app:spacing="6dp"
-        app:stepSize="0.2"
-        android:layout_marginBottom="14dip"/>
-
-    <TextView
-        android:id="@+id/hint_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dip"
-        android:layout_marginBottom="14dip"
-        android:gravity="center"
-        android:text="Thanks For your Rating!"
-        android:visibility="gone"
-        android:textColor="#f5a623"
-        android:textSize="18sp" />
-</LinearLayout>
+</RelativeLayout>

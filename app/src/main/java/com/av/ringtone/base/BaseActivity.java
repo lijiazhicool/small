@@ -1,6 +1,5 @@
 package com.av.ringtone.base;
 
-import com.av.ringtone.R;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 /**
  * Created by LiJiaZhi on 16/11/7. base

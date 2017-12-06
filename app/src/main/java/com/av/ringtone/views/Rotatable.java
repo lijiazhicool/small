@@ -141,7 +141,7 @@ public class Rotatable implements View.OnTouchListener {
         }
         measureScreenUpToOrientation(newOrientation);
 
-        // reset maxDistances values to recalculate them
+        // reset maxDistances values.xml to recalculate them
         maxDistanceX = NULL_INT;
         maxDistanceY = NULL_INT;
     }
@@ -510,7 +510,7 @@ public class Rotatable implements View.OnTouchListener {
         });
         animatorSet.start();
 
-        // Reset max values to calculate again on touch down
+        // Reset max values.xml to calculate again on touch down
         maxDistanceX = NULL_INT;
         maxDistanceY = NULL_INT;
     }
@@ -555,7 +555,7 @@ public class Rotatable implements View.OnTouchListener {
         }
 
         /**
-         * This listener will receive current rotation values of given view
+         * This listener will receive current rotation values.xml of given view
          */
         public Builder listener(RotationListener listener) {
             this.listener = listener;
@@ -609,7 +609,7 @@ public class Rotatable implements View.OnTouchListener {
         }
 
         /**
-         * Consider not to change pivot values because view may out of its bounders and get invisible.
+         * Consider not to change pivot values.xml because view may out of its bounders and get invisible.
          */
         public Builder pivot(int pivotX, int pivotY) {
             this.pivotX = pivotX;
@@ -618,7 +618,7 @@ public class Rotatable implements View.OnTouchListener {
         }
 
         /**
-         * Consider not to change pivot values because view may out of its bounders and get invisible.
+         * Consider not to change pivot values.xml because view may out of its bounders and get invisible.
          */
         public Builder pivotX(int pivotX) {
             this.pivotX = pivotX;
@@ -626,7 +626,7 @@ public class Rotatable implements View.OnTouchListener {
         }
 
         /**
-         * Consider not to change pivot values because view may out of its bounders and get invisible.
+         * Consider not to change pivot values.xml because view may out of its bounders and get invisible.
          */
         public Builder pivotY(int pivotY) {
             this.pivotY = pivotY;

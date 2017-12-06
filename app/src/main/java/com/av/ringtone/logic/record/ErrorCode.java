@@ -7,7 +7,8 @@ package com.av.ringtone.logic.record;
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 
-import com.av.ringtone.R;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
+
 
 public class ErrorCode {
     public final static int SUCCESS = 1000;

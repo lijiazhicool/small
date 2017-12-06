@@ -1,6 +1,7 @@
 package com.av.ringtone;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -60,7 +61,6 @@ public class UserDatas {
     public static final int SORT_SONG = 1;
     public static final int SORT_RECORD = 2;
     public static final int SORT_CUT = 3;
-
 
     private String mAssignContactUri;
 
@@ -199,6 +199,13 @@ public class UserDatas {
     }
 
     public void setRecords(List<RecordModel> mRecords) {
+        Iterator<RecordModel> sListIterator = mRecords.iterator();
+        while (sListIterator.hasNext()) {
+            RecordModel e = sListIterator.next();
+            if (e.catorytype == 4) {
+                sListIterator.remove();
+            }
+        }
         this.mRecords = mRecords;
         mLightModelCache.putModelList(RECORD_S_KEY, mRecords);
         if (null != mCountListener) {
@@ -222,6 +229,13 @@ public class UserDatas {
     }
 
     public void setCuttereds(List<CutterModel> mCuttereds) {
+        Iterator<CutterModel> sListIterator = mCuttereds.iterator();
+        while (sListIterator.hasNext()) {
+            CutterModel e = sListIterator.next();
+            if (e.catorytype == 4) {
+                sListIterator.remove();
+            }
+        }
         this.mCuttereds = mCuttereds;
         mLightModelCache.putModelList(CUTTERED_S_KEY, mCuttereds);
         if (null != mCountListener) {
@@ -251,7 +265,6 @@ public class UserDatas {
         LinkedBlockingQueue<Runnable> blockingQueue = new LinkedBlockingQueue<Runnable>();
         ExecutorService exec = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, blockingQueue);
         mTask = new loadSongs().executeOnExecutor(exec);
-        // mTask = new loadSongs().execute(String.valueOf(taskcount++));
     }
 
     private void loadReords() {
@@ -289,6 +302,7 @@ public class UserDatas {
             }
         }
     }
+
     public void resetPlayStatus(int catorytype) {
         for (DataChangedListener listener : mListenerList) {
             if (null != listener) {
@@ -405,6 +419,7 @@ public class UserDatas {
         void updateCutters(List<CutterModel> list);
 
         void updatePlayStatus(VoiceModel model);
+
         void resetPlayStatus(int catorytype);
 
         void sortByName(int sortType, boolean isNeedRevers);

@@ -1,25 +1,22 @@
 package com.av.ringtone.logic.home;
 
-import com.av.ringtone.StatisticsManager;
-import com.av.ringtone.ad.ADConstants;
-import com.av.ringtone.ad.ADManager;
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import com.example.ad.ADConstants;
+import com.example.ad.ADManager;
+import com.example.ad.NativeAD;
+import com.example.ad.StatisticsManager;
 import com.av.ringtone.UserDatas;
-import com.av.ringtone.ad.NativeAD;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.model.HomeModel;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.views.Rotatable;
-import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,9 +35,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -98,7 +92,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
             String.format(getString(R.string.home_record_count), 0)));
         mAdapter = new MyAdapter(getActivity());
         mGridView.setAdapter(mAdapter);
-        loadAds();
 
 //        去掉定时请求小广告
 //        handler.postDelayed(runnable, TIME); //每隔1s执行
@@ -189,10 +182,6 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
                 ShareUtils.shareHomeMusicText(mActivity);
             }
         });
-    }
-
-    private void loadAds() {
-        showBigNativeAd();
     }
 
     @Override

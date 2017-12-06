@@ -7,13 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.av.ringtone.LoadingDialog;
-import com.av.ringtone.StatisticsManager;
-import com.av.ringtone.ad.ADConstants;
-import com.av.ringtone.ad.ADManager;
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
-import com.av.ringtone.ad.Interstitial;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.home.HomeFragment;
 import com.av.ringtone.logic.record.RecordFragment;
@@ -32,10 +26,22 @@ import com.av.ringtone.utils.NavigationUtils;
 import com.av.ringtone.utils.SharePreferenceUtil;
 import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
-import com.av.ringtone.views.HintDialog;
+import com.av.ringtone.views.GifAD;
 import com.av.ringtone.views.RateDialog;
+import com.example.ad.ADConstants;
+import com.example.ad.ADManager;
+import com.example.ad.ExitDialog;
+import com.example.ad.Interstitial;
+import com.example.ad.StatisticsManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.music.ringtonemaker.ringtone.cutter.maker.BuildConfig;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -53,6 +59,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -73,7 +80,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-public class MainActivity extends BaseActivity implements MediaListener, UserDatas.GotoFragmentListener {
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+
+public class MainActivity extends BaseActivity implements MediaListener, UserDatas.GotoFragmentListener, EasyPermissions.PermissionCallbacks  {
+    private static final int PERMISSION_STORAGE_TAG = 10001;
+    private static final int PERMISSION_CONTACT_TAG = 10002;
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     private FragmentPagerAdapter mAdpter;
@@ -99,6 +112,8 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
     SharePreferenceUtil mSharePreferenceUtil;
     private String KEY = "is_check_hint";
+
+    private GifAD mGifADView;
 
     public static void launch(Context context) {
         Intent i = new Intent(context, MainActivity.class);
@@ -134,6 +149,13 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
     protected void initBundleExtra() {
         if (getIntent() != null) {
             String action = getIntent().getAction();
@@ -147,6 +169,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
     @Override
     protected void findViewById() {
+        mGifADView = (GifAD) findViewById(R.id.main_gif_ad);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setOffscreenPageLimit(4);
         mTabLayout = (SmartTabLayout) findViewById(R.id.viewpagertab);
@@ -175,9 +198,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         mSearchll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCurrentPage == 1){
+                if (mCurrentPage == 1) {
                     UserDatas.getInstance().resetSongs();
-                }else if (mCurrentPage == 2){
+                } else if (mCurrentPage == 2) {
                     UserDatas.getInstance().resetCutteds();
                 } else {
                     UserDatas.getInstance().resetRecords();
@@ -193,9 +216,9 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         mSearchBackiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCurrentPage == 1){
+                if (mCurrentPage == 1) {
                     UserDatas.getInstance().resetSongs();
-                }else if (mCurrentPage == 2){
+                } else if (mCurrentPage == 2) {
                     UserDatas.getInstance().resetCutteds();
                 } else {
                     UserDatas.getInstance().resetRecords();
@@ -211,7 +234,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         mSearchIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StatisticsManager.submit(MainActivity.this,StatisticsManager.EVENT_SEARCH, null,null,null);
+                StatisticsManager.submit(MainActivity.this, StatisticsManager.EVENT_SEARCH, null, null, null);
                 mSearchll.setVisibility(View.VISIBLE);
                 mSearchev.requestFocus();
                 InputMethodManager imm =
@@ -247,12 +270,17 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                                 NavigationUtils.goToAbout(MainActivity.this);
                                 break;
                             case R.id.menu_rate:
-                                StatisticsManager.submit(MainActivity.this,StatisticsManager.EVENT_RATE, null,null,null);
-                                String appPackageName = getPackageName();
-                                launchAppDetail(appPackageName, "com.android.vending");
+                                StatisticsManager.submit(MainActivity.this, StatisticsManager.EVENT_RATE_MENU, null, null,
+                                    null);
+                                RateDialog rateDialog = new RateDialog();
+                                rateDialog.setDefaultScore(3);
+                                rateDialog.show(getSupportFragmentManager(),"ratfragment");
+//                                String appPackageName = getPackageName();
+//                                launchAppDetail(appPackageName, "com.android.vending");
                                 break;
                             case R.id.menu_invite:
-                                StatisticsManager.submit(MainActivity.this,StatisticsManager.EVENT_INVITE, null,null,null);
+                                StatisticsManager.submit(MainActivity.this, StatisticsManager.EVENT_INVITE, null, null,
+                                    null);
                                 ShareUtils.shareAppText(MainActivity.this);
                                 break;
                             case R.id.menu_help:
@@ -420,6 +448,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     @Override
     protected void initData(Bundle savedInstanceState) {
         mSharePreferenceUtil = new SharePreferenceUtil(this, "MainActivity");
+        initConfig();
         mPlayer = null;
         mIsPlaying = false;
         mPlayer = new MediaPlayer();
@@ -434,27 +463,50 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         mSearchRecyclerView.setLayoutManager(linearLayoutManager);
 
         UserDatas.getInstance().setContext(this);
-        UserDatas.getInstance().loadDatas();
+        startLoadDatas();
 
         if (!UserDatas.getInstance().isRated(getVersionCode())) {
             if (UserDatas.getInstance().getAppStart() != 0 && UserDatas.getInstance().getAppStart() % 7 == 0) {
-                RateDialog dialog = new RateDialog(this, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String appPackageName = getPackageName();
-                        launchAppDetail(appPackageName, "com.android.vending");
-                        UserDatas.getInstance().addRated(getVersionCode());
-                    }
-                });
-                dialog.setCancelable(true);
-                dialog.show();
+                RateDialog rateDialog = new RateDialog();
+                rateDialog.setDefaultScore(3);
+                rateDialog.show(getSupportFragmentManager(),"ratfragment");
             }
         }
 
         UserDatas.getInstance().addAppStart();
 
-        // 缓存广告
-        loadOpenAD();
+        //开始广告缓存
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadOpenAD();
+                ADManager.getInstance().startLoadAD(MainActivity.this);
+            }
+        }, 500);
+    }
+    @AfterPermissionGranted(PERMISSION_STORAGE_TAG)
+    private void startLoadDatas(){
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
+            UserDatas.getInstance().loadDatas();
+        } else {
+            EasyPermissions.requestPermissions(
+                    MainActivity.this,
+                    getString(R.string.permisson_sd),
+                    PERMISSION_STORAGE_TAG,
+                    Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
     }
 
     private void freshMediaDB() {
@@ -468,7 +520,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                 new String[] { Environment.getExternalStorageDirectory().getAbsolutePath() }, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
-//                        UserDatas.getInstance().loadMusics();
+                        // UserDatas.getInstance().loadMusics();
                     }
                 });
         }
@@ -540,7 +592,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
     public void play(final VoiceModel model) {
         currentModel = model;
         mIsPlaying = false;
-        if (mPlayer.isPlaying()){
+        if (mPlayer.isPlaying()) {
             Log.d("progress ", "isPlaying");
             mPlayer.stop();
             mPlayer.release();
@@ -626,41 +678,18 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
     @Override
     public void onBackPressed() {
-        if (!UserDatas.getInstance().isRated(getVersionCode())) {
-            RateDialog dialog = new RateDialog(this, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int tag = (int) v.getTag();
-                    if (tag == 1) {
-                        MainActivity.this.finish();
-                        System.exit(0);
-                    } else {
-                        String appPackageName = getPackageName();
-                        launchAppDetail(appPackageName, "com.android.vending");
-                        UserDatas.getInstance().addRated(getVersionCode());
-                        MainActivity.this.finish();
-                        System.exit(0);
-                    }
-                }
-            });
-            dialog.setCancelable(true);
-            dialog.show();
-            return;
-        }
-
         long mNowTime = System.currentTimeMillis();// 获取第一次按键时间
         if ((mNowTime - mPressedTime) > 2000) {// 比较两次按键时间差
             ToastUtils.makeToastAndShow(this, " Press back key again to exit!");
             mPressedTime = mNowTime;
         } else {// 退出程序
             this.finish();
-            System.exit(0);
         }
     }
 
     /**
      * 获取版本号
-     * 
+     *
      * @return 当前应用的版本号
      */
     public int getVersionCode() {
@@ -698,7 +727,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         @Override
         public void run() {
             try {
-                if (!mPlayer.isPlaying()){
+                if (!mPlayer.isPlaying()) {
                     return;
                 }
                 int position = mPlayer.getCurrentPosition();
@@ -712,33 +741,48 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                         UserDatas.getInstance().updatePlayStatus(currentModel);
                     }
                 });
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    private Uri mUri =null;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case 1005:
-                if(data==null)
-                {
+                if (data == null) {
                     return;
                 }
-                //处理返回的data,获取选择的联系人信息
-                Uri uri=data.getData();
-                setPhoneContacts(uri);
+                // 处理返回的data,获取选择的联系人信息
+                mUri = data.getData();
+                setContact();
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-    private void setPhoneContacts(Uri dataUri){
-        //得到ContentResolver对象
+
+    @AfterPermissionGranted(PERMISSION_CONTACT_TAG)
+    private void setContact(){
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_CONTACTS)){
+            setPhoneContacts(mUri);
+        } else {
+            EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.permisson_contact),
+                    PERMISSION_CONTACT_TAG,
+                    Manifest.permission.WRITE_CONTACTS);
+        }
+    }
+
+    private void setPhoneContacts(Uri dataUri) {
+        // 得到ContentResolver对象
         ContentResolver cr = getContentResolver();
-        //取得电话本中开始一项的光标
-        Cursor cursor=cr.query(dataUri,null,null,null,null);
-        if(cursor!=null)
-        {
+        // 取得电话本中开始一项的光标
+        Cursor cursor = cr.query(dataUri, null, null, null, null);
+        if (cursor != null) {
             cursor.moveToFirst();
             int dataIndex = cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID);
             String contactId = cursor.getString(dataIndex);
@@ -753,8 +797,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
 
             String message = getResources().getText(R.string.success_contact_ringtone) + " " + displayName;
 
-            Toast.makeText(this, message, Toast.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
             cursor.close();
             return;
@@ -762,42 +805,21 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
         Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
     }
 
-
     public static final String KEY_LAST_OPEN_TIME = "key_last_open_time";
     private Interstitial mFirstOpenInterstitialAd;
-    private boolean mIsResumed = true;//当前页面是否在前台
-    private boolean mIsOpenAdShown = false;//open广告是否展示
+    private boolean mIsResumed = true;// 当前页面是否在前台
+    private boolean mIsOpenAdShown = false;// open广告是否展示
     private boolean mIsOpenLoadSuc = false;
     LoadingDialog dialog;
     private Handler mHandler = new Handler();
 
-    //第一次打开
+    // 第一次打开
     private void loadOpenAD() {
-        //nomral级别以上才展示插屏
-        if (ADManager.sLevel < ADManager.Level_Normal) {
-            return;
-        }
-
-        if (!mSharePreferenceUtil.getBooleanValue(KEY, false)) {
-            HintDialog dialog = new HintDialog(this, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean isChecked = (boolean) v.getTag();
-                    if (isChecked) {
-                        mSharePreferenceUtil.putBoolean(KEY, true);
-                    }
-                }
-            });
-            dialog.setCancelable(true);
-            dialog.show();
-        }
-
         long second = mSharePreferenceUtil.getLongValue(KEY_LAST_OPEN_TIME, 0);
         if (second == 0 || (System.currentTimeMillis() / 1000 - second) / 60 >= 2) {
             mSharePreferenceUtil.putLong(KEY_LAST_OPEN_TIME, System.currentTimeMillis() / 1000);
-
             String adID = "";
-           if (ADManager.sPlatForm == ADManager.AD_Google) {
+            if (ADManager.sPlatForm == ADManager.AD_Google) {
                 adID = ADConstants.google_open_interstitial;
             } else if (ADManager.sPlatForm == ADManager.AD_Facebook) {
                 adID = ADConstants.facebook_open_interstitial;
@@ -832,6 +854,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
             }
         }
     }
+
     private void showOpenAD() {
         if (!mIsOpenLoadSuc) {
             return;
@@ -860,5 +883,92 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                 }
             }
         }, 1000);
+    }
+
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private static final String PLATFOM = "ad_platform";
+    private static final String LEVEL = "ad_level_type";
+
+    private void initConfig() {
+        // init
+        ADManager.sPlatForm = mSharePreferenceUtil.getLongValue(PLATFOM, ADManager.AD_Facebook);
+        ADManager.sLevel = mSharePreferenceUtil.getLongValue(LEVEL, ADManager.Level_Normal);
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings =
+            new FirebaseRemoteConfigSettings.Builder().setDeveloperModeEnabled(BuildConfig.DEBUG).build();
+        mFirebaseRemoteConfig.setConfigSettings(configSettings);
+        fetchWelcome();
+    }
+
+    /**
+     * Fetch a welcome message from the Remote Config service, and then activate it.
+     */
+    private void fetchWelcome() {
+        // mWelcomeTextView.setText(mFirebaseRemoteConfig.getString(LOADING_PHRASE_CONFIG_KEY));
+        long cacheExpiration = 3600; // 1 hour in seconds.
+        // If your app is using developer mode, cacheExpiration is set to 0, so each fetch will
+        // retrieve values.xml from the service.
+        if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
+
+        // [START fetch_config_with_callback]
+        // cacheExpirationSeconds is set to cacheExpiration here, indicating the next fetch request
+        // will use fetch data from the Remote Config service, rather than cached parameter values.xml,
+        // if cached parameter values.xml are more than cacheExpiration seconds old.
+        // See Best Practices in the README for more information.
+        mFirebaseRemoteConfig.fetch(cacheExpiration).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    // After config data is successfully fetched, it must be activated before newly fetched
+                    // values.xml are returned.
+                    mFirebaseRemoteConfig.activateFetched();
+                }
+
+                ADManager.sPlatForm = mFirebaseRemoteConfig.getLong("ad_platform_type");
+                ADManager.sLevel = mFirebaseRemoteConfig.getLong("ad_level_type");
+                mSharePreferenceUtil.putLong(PLATFOM, ADManager.sPlatForm);
+
+            }
+        });
+    }
+
+    /**
+     * 显示小动画
+     */
+    private boolean mIsGifShow = false;
+
+    public void showGif() {
+        if (mIsGifShow) {
+            return;
+        }
+        mGifADView.setVisibility(View.VISIBLE);
+        StatisticsManager.submitAd(this, StatisticsManager.ITEM_AD_MAIN_GIF + "shown");
+        mGifADView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StatisticsManager.submitAd(MainActivity.this, StatisticsManager.ITEM_AD_MAIN_GIF + "click");
+                if (ADManager.getInstance().getFeeds().size() > 0) {
+                    showExitDialog();
+                } else {
+                    ADManager.getInstance().mInterstitial.show();
+                }
+                mGifADView.setVisibility(View.GONE);
+                mIsGifShow = false;
+            }
+        });
+        mIsGifShow = true;
+
+    }
+
+    ExitDialog mExitDialog;
+
+    private void showExitDialog() {
+        // 每次都是新dialog，不然facebookad unregister，第二次展示对话框就不能点击了
+        mExitDialog = new ExitDialog(MainActivity.this);
+        mExitDialog.setCancelable(true);
+        if (null != mExitDialog && !isFinishing() && !mExitDialog.isShowing())
+            mExitDialog.show();
     }
 }

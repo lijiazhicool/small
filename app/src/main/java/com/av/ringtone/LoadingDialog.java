@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
+
 /**
  * @author：LiJiaZhi on 2017/12/4
  * open ad loading对话框

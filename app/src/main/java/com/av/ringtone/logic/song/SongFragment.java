@@ -1,10 +1,12 @@
 package com.av.ringtone.logic.song;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
 
-import com.av.ringtone.R;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
@@ -12,6 +14,9 @@ import com.av.ringtone.model.CutterModel;
 import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.model.VoiceModel;
+import com.example.ad.ADManager;
+import com.facebook.ads.NativeAd;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +32,6 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
     private RecyclerView mRecyclerView;
     private SongsAdapter mAdapter;
     private TextView mEmptyTv;
-    private LinearLayout mAdll;
 
     private boolean mSortReverseByName = true;
     private boolean mSortReverseByDate = true;
@@ -37,6 +41,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     private int mSortType = 0;
     private boolean mIsInit = false;
+
+    private List<SongModel> mDataLists;
 
     @Override
     protected int getLayoutId() {
@@ -50,12 +56,19 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mAdll = findViewById(R.id.ad_ll);
     }
 
     @Override
     protected void initData() {
         mIsInit = true;
+        ADManager.getInstance().getNativeAdlist(new ADManager.ADNumListener() {
+            @Override
+            public void onLoadedSuccess(List<NativeAd> list, boolean needGif) {
+                if (list.size()>0&&null!=mAdapter) {
+                    mAdapter.upateDatas(mDataLists);
+                }
+            }
+        });
     }
 
     @Override
@@ -90,6 +103,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     @Override
     public void updateSongs(List<SongModel> list) {
+        mDataLists = list;
         mAdapter = new SongsAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {
             mEmptyTv.setVisibility(View.VISIBLE);
@@ -142,9 +156,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
-        List<SongModel> list = mAdapter.getDatas();
         if (mSortReverseByName) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -157,7 +170,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -170,7 +183,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         if (isNeedRevers) {
             mSortReverseByName = !mSortReverseByName;
         }
@@ -183,9 +196,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
-        List<SongModel> list = mAdapter.getDatas();
         if (mSortReverseByDate) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.date < o2.date) {
                         return 1;
@@ -197,7 +209,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     // 按照学生的年龄进行倒序排列
                     if (o1.date > o2.date) {
@@ -210,7 +222,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         if (isNeedRevers) {
             mSortReverseByDate = !mSortReverseByDate;
         }
@@ -223,9 +235,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
-        List<SongModel> list = mAdapter.getDatas();
         if (mSortReverseByTrack) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.trackNumber < o2.trackNumber) {
                         return 1;
@@ -237,7 +248,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     // 按照学生的年龄进行倒序排列
                     if (o1.trackNumber > o2.trackNumber) {
@@ -250,7 +261,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         if (isNeedRevers) {
             mSortReverseByTrack = !mSortReverseByTrack;
         }
@@ -263,9 +274,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
-        List<SongModel> list = mAdapter.getDatas();
         if (mSortReverseByArtist) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -278,7 +288,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -291,7 +301,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         if (isNeedRevers) {
             mSortReverseByArtist = !mSortReverseByArtist;
         }
@@ -304,9 +314,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
         if (sortType != UserDatas.SORT_SONG) {
             return;
         }
-        List<SongModel> list = mAdapter.getDatas();
         if (mSortReverseByAlbum) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -319,7 +328,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -332,7 +341,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         if (isNeedRevers) {
             mSortReverseByAlbum = !mSortReverseByAlbum;
         }
@@ -341,9 +350,8 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
 
     private void sortByName_fresh() {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByName) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -356,7 +364,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
 
                 /*
                  * int compare(Student o1, Student o2) 返回一个基本类型的整型， 返回负数表示：o1 小于o2， 返回0 表示：o1和o2相等， 返回正数表示：o1大于o2。
@@ -369,15 +377,14 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         mSortType = 0;
     }
 
     private void sortByDate_fresh() {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByDate) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.date < o2.date) {
                         return 1;
@@ -389,7 +396,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     // 按照学生的年龄进行倒序排列
                     if (o1.date > o2.date) {
@@ -402,15 +409,14 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         mSortType = 1;
     }
 
     private void sortByTrack_fresh() {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByTrack) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.trackNumber < o2.trackNumber) {
                         return 1;
@@ -422,7 +428,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.trackNumber > o2.trackNumber) {
                         return 1;
@@ -434,15 +440,14 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         mSortType = 2;
     }
 
     private void sortByArtist_fresh() {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByArtist) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.artist.compareTo(o2.artist) < 0) {
                         return 1;
@@ -451,7 +456,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.artist.compareTo(o2.artist) > 0) {
                         return 1;
@@ -460,15 +465,14 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         mSortType = 3;
     }
 
     private void sortByAlbum_fresh() {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        List<SongModel> list = mAdapter.getDatas();
         if (!mSortReverseByAlbum) {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.albumName.compareTo(o2.albumName) < 0) {
                         return 1;
@@ -477,7 +481,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         } else {
-            Collections.sort(list, new Comparator<SongModel>() {
+            Collections.sort(mDataLists, new Comparator<SongModel>() {
                 public int compare(SongModel o1, SongModel o2) {
                     if (o1.albumName.compareTo(o2.albumName) > 0) {
                         return 1;
@@ -486,7 +490,7 @@ public class SongFragment extends BaseFragment implements UserDatas.DataChangedL
                 }
             });
         }
-        mAdapter.upateDatas(list);
+        mAdapter.upateDatas(mDataLists);
         mSortType = 4;
     }
 }

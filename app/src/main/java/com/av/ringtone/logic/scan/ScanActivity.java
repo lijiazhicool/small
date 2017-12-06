@@ -1,5 +1,22 @@
 package com.av.ringtone.logic.scan;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.av.ringtone.UserDatas;
+import com.av.ringtone.base.BaseActivity;
+import com.av.ringtone.model.SongModel;
+import com.av.ringtone.utils.ShareUtils;
+import com.example.ad.ADConstants;
+import com.example.ad.ADManager;
+import com.example.ad.NativeAD;
+import com.example.ad.StatisticsManager;
+import com.facebook.ads.AdChoicesView;
+import com.facebook.ads.MediaView;
+import com.facebook.ads.NativeAd;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
+
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,29 +33,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.av.ringtone.StatisticsManager;
-import com.av.ringtone.ad.ADConstants;
-import com.av.ringtone.ad.ADManager;
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
-import com.av.ringtone.UserDatas;
-import com.av.ringtone.ad.NativeAD;
-import com.av.ringtone.base.BaseActivity;
-import com.av.ringtone.model.SongModel;
-import com.av.ringtone.utils.ShareUtils;
-import com.facebook.ads.AdChoicesView;
-import com.facebook.ads.MediaView;
-import com.facebook.ads.NativeAd;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.VideoOptions;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScanActivity extends BaseActivity {
     private ImageView mBackIv;

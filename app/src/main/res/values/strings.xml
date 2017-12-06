@@ -2,7 +2,7 @@
     <string name="app_name">Ringtone Maker</string>
     <string name="welcome_hint">Tube MP3 Ringtone Maker </string>
 
-    <string name="facebook_app_id">327888767628713</string>
+    <string name="facebook_app_id">710825282450762</string>
 
     <string name="music_fragment_banner">ca-app-pub-1877164599441785/5129122154</string>
     <string name="record_fragment_banner">ca-app-pub-1877164599441785/7942987757</string>
@@ -139,5 +139,18 @@
     <!--add-->
     <string name="menu_assgin">Assign to contact</string>
     <string name="success_contact_ringtone">Successfully assigned ringtone to:</string>
+
+    <string name="permisson_sd">This app needs access to your SD, so you can edit all your musics.</string>
+    <string name="permisson_contact">This app needs access to your contact, so you can set ringtone.</string>
+
+
+    <string name="rate_stars">Love Ringtone Maker?</string>
+    <string name="rate_content_default">You’ve experienced Ringtone Maker successfully. Please support us with a 5-star ratings.</string>
+    <string name="rate_content_1_4">Would you mind giving us some feedbacks so that we can do better?</string>
+    <string name="rate_content_5">We are feeling loved. Thanks! Please submit your rating on Play Store.</string>
+    <string name="rate_dislike">Dislike it</string>
+    <string name="rate_cancel">Cancel</string>
+    <string name="rate_feedback">Feedback</string>
+    <string name="rate_us">Rate Us</string>
 
 </resources>

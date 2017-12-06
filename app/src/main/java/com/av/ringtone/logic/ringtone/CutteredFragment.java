@@ -1,7 +1,16 @@
 package com.av.ringtone.logic.ringtone;
 
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
+import static com.av.ringtone.Constants.FILE_KIND_ALARM;
+import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
+import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
+import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
+
+import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
+
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseFragment;
 import com.av.ringtone.logic.MainActivity;
@@ -10,14 +19,11 @@ import com.av.ringtone.model.RecordModel;
 import com.av.ringtone.model.SongModel;
 import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.example.ad.ADManager;
+import com.facebook.ads.NativeAd;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -31,15 +37,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import static com.av.ringtone.Constants.FILE_KIND_ALARM;
-import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
-import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
-import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * cuttered
@@ -57,6 +55,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     private boolean mSortReverseByDate = true;
 
     private boolean mIsInit = false;
+    private List<CutterModel> mDataLists;
 
     @Override
     protected int getLayoutId() {
@@ -79,7 +78,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
     @Override
     protected void initData() {
         List<CutterModel> list = UserDatas.getInstance().getCuttereds();
-        if (list.size()==0){
+        if (list.size()==0&&EasyPermissions.hasPermissions(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
             //load from sdcard---ringtone
             String ringtonePath = FileUtils.getRingtonePath(mActivity);
             File ringtonefile = new File(ringtonePath);
@@ -145,6 +144,14 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
         }
         mPathTv.setText(FileUtils.getAppDir_show());
         mIsInit = true;
+        ADManager.getInstance().getNativeAdlist(new ADManager.ADNumListener() {
+            @Override
+            public void onLoadedSuccess(List<NativeAd> list, boolean needGif) {
+                if (list.size()>0&&null!=mAdapter) {
+                    mAdapter.upateDatas(mDataLists);
+                }
+            }
+        });
     }
 
 
@@ -200,7 +207,6 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
             ((MainActivity)getActivity()).stop();
         }
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
@@ -264,6 +270,7 @@ public class CutteredFragment extends BaseFragment implements UserDatas.DataChan
                 return -1;
             }
         });
+        mDataLists = list;
 
         mAdapter = new CuttersAdapter((MainActivity) getActivity(), list);
         if (mAdapter.getDatas().size() == 0) {

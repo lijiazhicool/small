@@ -1,14 +1,22 @@
 package com.av.ringtone.logic.ringtone;
 
-import java.io.File;
-import java.util.List;
+import static com.av.ringtone.Constants.FILE_KIND_ALARM;
+import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
+import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
+import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
 
-import com.av.ringtone.R;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.logic.MediaListener;
 import com.av.ringtone.model.CutterModel;
+import com.av.ringtone.model.SongModel;
 import com.av.ringtone.model.VoiceModel;
 import com.av.ringtone.utils.FileUtils;
 import com.av.ringtone.utils.NavigationUtils;
@@ -16,6 +24,10 @@ import com.av.ringtone.utils.ShareUtils;
 import com.av.ringtone.utils.ToastUtils;
 import com.av.ringtone.views.CommonDialog;
 import com.av.ringtone.views.MusicVisualizer;
+import com.example.ad.ADManager;
+import com.facebook.ads.AdChoicesView;
+import com.facebook.ads.NativeAd;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import android.content.Intent;
 import android.media.RingtoneManager;
@@ -27,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -34,16 +47,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import static com.av.ringtone.Constants.FILE_KIND_ALARM;
-import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
-import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
-import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by LiJiaZhi on 16/12/19.
  */
 
-public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHolder> {
+public class CuttersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CutterModel> mDatas;
     private BaseActivity mContext;
     private MediaListener mListener;
@@ -57,83 +67,118 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
     }
 
     @Override
-    public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public int getItemViewType(int position) {
+        if (mDatas.get(position).catorytype == 4) {
+            return VoiceModel.AD;
+        }
+        return VoiceModel.NORMAL;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        if (viewType == VoiceModel.AD) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_ad, null);
+            return new ADHolder(v);
+        }
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_song, null);
         ItemHolder ml = new ItemHolder(v);
         return ml;
     }
 
     @Override
-    public void onBindViewHolder(ItemHolder itemHolder, int i) {
-        final CutterModel localItem = mDatas.get(i);
-        if (localItem.playStatus == 0) {
-            if (localItem.type == FILE_KIND_MUSIC) {
-                itemHolder.type.setImageResource(R.drawable.ic_music);
-            } else if (localItem.type == FILE_KIND_ALARM) {
-                itemHolder.type.setImageResource(R.drawable.ic_alarm);
-            } else if (localItem.type == FILE_KIND_NOTIFICATION) {
-                itemHolder.type.setImageResource(R.drawable.icon_notifications);
-            } else {
-                itemHolder.type.setImageResource(R.drawable.ic_phone);
-            }
-            itemHolder.type.setVisibility(View.VISIBLE);
-            itemHolder.musicVisualizer.setVisibility(View.GONE);
-        } else{
-            if (localItem.type == FILE_KIND_MUSIC) {
-                itemHolder.type.setImageResource(R.drawable.ic_music);
-            } else if (localItem.type == FILE_KIND_ALARM) {
-                itemHolder.type.setImageResource(R.drawable.ic_alarm);
-            } else if (localItem.type == FILE_KIND_NOTIFICATION) {
-                itemHolder.type.setImageResource(R.drawable.icon_notifications);
-            } else {
-                itemHolder.type.setImageResource(R.drawable.ic_phone);
-            }
-            itemHolder.type.setVisibility(View.GONE);
-            itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
-        }
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof ADHolder) {
+            ADHolder adHolder = (ADHolder) holder;
+            NativeAd nativeAd = ADManager.getInstance().getNextAD();
+            // Set the Text.
+            adHolder.nativeAdTitle.setText(nativeAd.getAdTitle());
+            // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+            adHolder.nativeAdBody.setText(nativeAd.getAdBody());
+            adHolder.nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
 
-        if (localItem.isNew){
-            itemHolder.newTv.setVisibility(View.VISIBLE);
+            // Download and display the ad_front icon.
+            NativeAd.Image adIcon = nativeAd.getAdIcon();
+            NativeAd.downloadAndDisplayImage(adIcon, adHolder.nativeAdIcon);
+            AdChoicesView adChoicesView = new AdChoicesView(mContext, nativeAd, true);
+            adHolder.adChoicesContainer.addView(adChoicesView);
+
+            // Register the Title and CTA button to listen for clicks.
+            List<View> clickableViews = new ArrayList<>();
+            clickableViews.add(adHolder.nativeAdTitle);
+            clickableViews.add(adHolder.nativeAdCallToAction);
+            nativeAd.registerViewForInteraction(adHolder.itemView, clickableViews);
         } else {
-            itemHolder.newTv.setVisibility(View.GONE);
-        }
-        itemHolder.title.setText(localItem.title);
-        itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
-        setOnPopupMenuListener(itemHolder, i);
-        itemHolder.typelayout.setTag(localItem);
-        itemHolder.typelayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CutterModel local = (CutterModel) v.getTag();
-                if (mListener != null) {
-                    if (local.playStatus == 0) {
-                        // ---播放
-                        mListener.play(local);
-                        local.playStatus = 1;
-                    } else {
-                        // ---暂停
-                        mListener.pause();
-                        local.playStatus = 0;
-                        local.progress = 0;
-                    }
-                    if (currentPlayItem != null && local != currentPlayItem) {
-                        currentPlayItem.playStatus = 0;
-                        currentPlayItem.progress = 0;
-                    }
-                    currentPlayItem = local;
-                    notifyDataSetChanged();
+            ItemHolder itemHolder = (ItemHolder) holder;
+            final CutterModel localItem = mDatas.get(i);
+            if (localItem.playStatus == 0) {
+                if (localItem.type == FILE_KIND_MUSIC) {
+                    itemHolder.type.setImageResource(R.drawable.ic_music);
+                } else if (localItem.type == FILE_KIND_ALARM) {
+                    itemHolder.type.setImageResource(R.drawable.ic_alarm);
+                } else if (localItem.type == FILE_KIND_NOTIFICATION) {
+                    itemHolder.type.setImageResource(R.drawable.icon_notifications);
+                } else {
+                    itemHolder.type.setImageResource(R.drawable.ic_phone);
                 }
+                itemHolder.type.setVisibility(View.VISIBLE);
+                itemHolder.musicVisualizer.setVisibility(View.GONE);
+            } else {
+                if (localItem.type == FILE_KIND_MUSIC) {
+                    itemHolder.type.setImageResource(R.drawable.ic_music);
+                } else if (localItem.type == FILE_KIND_ALARM) {
+                    itemHolder.type.setImageResource(R.drawable.ic_alarm);
+                } else if (localItem.type == FILE_KIND_NOTIFICATION) {
+                    itemHolder.type.setImageResource(R.drawable.icon_notifications);
+                } else {
+                    itemHolder.type.setImageResource(R.drawable.ic_phone);
+                }
+                itemHolder.type.setVisibility(View.GONE);
+                itemHolder.musicVisualizer.setVisibility(View.VISIBLE);
             }
-        });
-        itemHolder.rl.setTag(localItem);
-        itemHolder.rl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CutterModel local = (CutterModel) v.getTag();
-                NavigationUtils.goToCutter(mContext, local);
+
+            if (localItem.isNew) {
+                itemHolder.newTv.setVisibility(View.VISIBLE);
+            } else {
+                itemHolder.newTv.setVisibility(View.GONE);
             }
-        });
-        itemHolder.progressBar.setProgress(localItem.progress);
+            itemHolder.title.setText(localItem.title);
+            itemHolder.artist.setText(getDuration(localItem.duration) + " | " + FileUtils.getFileDir(localItem.path));
+            setOnPopupMenuListener(itemHolder, i);
+            itemHolder.typelayout.setTag(localItem);
+            itemHolder.typelayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CutterModel local = (CutterModel) v.getTag();
+                    if (mListener != null) {
+                        if (local.playStatus == 0) {
+                            // ---播放
+                            mListener.play(local);
+                            local.playStatus = 1;
+                        } else {
+                            // ---暂停
+                            mListener.pause();
+                            local.playStatus = 0;
+                            local.progress = 0;
+                        }
+                        if (currentPlayItem != null && local != currentPlayItem) {
+                            currentPlayItem.playStatus = 0;
+                            currentPlayItem.progress = 0;
+                        }
+                        currentPlayItem = local;
+                        notifyDataSetChanged();
+                    }
+                }
+            });
+            itemHolder.rl.setTag(localItem);
+            itemHolder.rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CutterModel local = (CutterModel) v.getTag();
+                    NavigationUtils.goToCutter(mContext, local);
+                }
+            });
+            itemHolder.progressBar.setProgress(localItem.progress);
+        }
     }
 
     private String getDuration(int d) {
@@ -252,8 +297,41 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
 
     public void upateDatas(List<CutterModel> list) {
         mDatas = list;
+        if (ADManager.getInstance().getFeeds().size()>0) {
+            removeADs();
+            addADs();
+        }
         notifyDataSetChanged();
     }
+    private void removeADs(){
+        Iterator<CutterModel> sListIterator = mDatas.iterator();
+        while(sListIterator.hasNext()){
+            CutterModel e = sListIterator.next();
+            if(e.catorytype == 4){
+                sListIterator.remove();
+            }
+        }
+    }
+
+    private void addADs(){
+        if (null == mDatas&& mDatas.size()==0){
+            return;
+        }
+        int mStartIndex = getRandomIndex(mDatas.size() - 1);
+        for (int i = mStartIndex;i<mDatas.size()-1;i+=5){
+            CutterModel item = mDatas.get(mStartIndex);
+            CutterModel temp = new CutterModel(item.type,  item.title, item.path, item.artist, item.duration, item.fileSize,item.date);
+            temp.catorytype = 4;
+            mDatas.add(i,temp);
+        }
+    }
+
+    private int getRandomIndex(int max) {
+        Random random = new Random();
+        int index = random.nextInt(5);
+        return index < max ? index : max;
+    }
+
     public void updatePlayStatus(VoiceModel model){
         int index = mDatas.indexOf(model);
         if (model.playStatus ==0 ){
@@ -288,6 +366,24 @@ public class CuttersAdapter extends RecyclerView.Adapter<CuttersAdapter.ItemHold
             this.musicVisualizer = (MusicVisualizer) view.findViewById(R.id.musicanimate);
             this.progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
             musicVisualizer.setColor(view.getResources().getColor(R.color.colorAccent));
+        }
+    }
+    public class ADHolder extends RecyclerView.ViewHolder {
+        protected View itemView;
+        protected CircleImageView nativeAdIcon;
+        protected TextView nativeAdTitle;
+        protected TextView nativeAdBody;
+        protected Button nativeAdCallToAction;
+        protected LinearLayout adChoicesContainer;
+
+        public ADHolder(View view) {
+            super(view);
+            this.itemView = view;
+            this.nativeAdIcon = (CircleImageView) view.findViewById(R.id.native_ad_icon);
+            this.nativeAdTitle = (TextView) view.findViewById(R.id.native_ad_title);
+            this.nativeAdBody = (TextView) view.findViewById(R.id.native_ad_body);
+            this.nativeAdCallToAction = (Button) view.findViewById(R.id.native_ad_call_to_action);
+            this.adChoicesContainer = (LinearLayout) view.findViewById(R.id.ad_choices_container);
         }
     }
 

@@ -30,8 +30,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.av.ringtone.R;
 import com.av.ringtone.utils.FileUtils;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import static com.av.ringtone.Constants.*;
 

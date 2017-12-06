@@ -1,18 +1,21 @@
 
 package com.av.ringtone.logic.edit;
 
+import static com.av.ringtone.Constants.FILE_KIND_ALARM;
+import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
+import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
+import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.av.ringtone.Constants;
-import com.av.ringtone.R;
-import com.av.ringtone.StatisticsManager;
 import com.av.ringtone.UserDatas;
 import com.av.ringtone.base.BaseActivity;
-import com.av.ringtone.logic.MainActivity;
 import com.av.ringtone.logic.SaveSuccessActivity;
 import com.av.ringtone.model.BaseModel;
 import com.av.ringtone.model.CutterModel;
@@ -24,13 +27,13 @@ import com.av.ringtone.views.FileSaveDialog;
 import com.av.ringtone.views.HintDialog;
 import com.av.ringtone.views.MarkerView;
 import com.av.ringtone.views.WaveformView;
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.example.ad.ADConstants;
+import com.example.ad.ADManager;
+import com.example.ad.NativeAD;
+import com.example.ad.StatisticsManager;
+import com.facebook.ads.AdChoicesView;
+import com.facebook.ads.NativeAd;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -55,21 +58,18 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import static com.av.ringtone.Constants.FILE_KIND_ALARM;
-import static com.av.ringtone.Constants.FILE_KIND_MUSIC;
-import static com.av.ringtone.Constants.FILE_KIND_NOTIFICATION;
-import static com.av.ringtone.Constants.FILE_KIND_RINGTONE;
 
 public class CutterActivity extends BaseActivity implements MarkerView.MarkerListener, WaveformView.WaveformListener {
 
@@ -184,6 +184,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         mTotaltv = findView(R.id.total_tv);
         mAdll = findView(R.id.ad_ll);
         loadGui();
+        loadFacebookAD();
     }
 
     @Override
@@ -225,42 +226,69 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
         }
     }
 
-//    protected void loadFacebookBanner() {
-//        // Instantiate an AdView view
-//        facebookAdView = new AdView(this, Constants.AD_PLACE_CUT_BANNER, AdSize.BANNER_HEIGHT_50);
-////        AdSettings.addTestDevice("aff47d50dc337bfaa97cc10f11856607");
-//        facebookAdView.setAdListener(new AdListener() {
-//            @Override
-//            public void onError(Ad ad, AdError adError) {
-//                facebookAdView.destroy();
-//            }
-//
-//            @Override
-//            public void onAdLoaded(Ad ad) {
-//                if (null != mAdll) {
-//                    mAdll.setVisibility(View.VISIBLE);
-//                    mAdll.addView(facebookAdView);
-//                }
-//            }
-//
-//            @Override
-//            public void onAdClicked(Ad ad) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, EVENT_AD_ID);
-//                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, EVENT_AD_NAME);
-//                mFirebaseAnalytics.logEvent(EVENT_AD_TYPE, bundle);
-//            }
-//        });
-//
-//        // Request to load an ad_front
-//        facebookAdView.loadAd();
-//    }
-//
-//    protected void loadGoogleBanner() {
-//        googleAdView.setVisibility(View.VISIBLE);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        googleAdView.loadAd(adRequest);
-//    }
+    protected void loadFacebookAD() {
+        new NativeAD().loadAD(this, ADManager.AD_Facebook, ADConstants.facebook_pause_native, new NativeAD.ADListener() {
+            @Override
+            public void onLoadedSuccess(NativeAd nativeAd, String adId) {
+                if (null == nativeAd) {
+                    mAdll.setVisibility(View.GONE);
+                    return;
+                }
+                mAdll.setVisibility(View.VISIBLE);
+                LayoutInflater inflater = LayoutInflater.from(CutterActivity.this);
+                RelativeLayout adView = (RelativeLayout) inflater.inflate(R.layout.cut_ad, mAdll, false);
+                mAdll.removeAllViews();
+                mAdll.addView(adView);
+
+                // Create native UI using the ad_front metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+//                MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                // TextView nativeAdSocialContext = (TextView) googleAdView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+
+                // Set the Text.
+                nativeAdTitle.setText(nativeAd.getAdTitle());
+                // nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                nativeAdBody.setText(nativeAd.getAdBody());
+                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+
+                // Download and display the ad_front icon.
+                NativeAd.Image adIcon = nativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+
+                // Download and display the cover image.
+//                nativeAdMedia.setNativeAd(nativeAd);
+
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(CutterActivity.this, nativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
+
+                // Register the Title and CTA button to listen for clicks.
+                List<View> clickableViews = new ArrayList<>();
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                nativeAd.registerViewForInteraction(mAdll, clickableViews);
+            }
+
+            @Override
+            public void onLoadedFailed(String msg, String adId, int errorcode) {
+
+            }
+
+            @Override
+            public void onAdClick() {
+
+            }
+
+            @Override
+            public void onAdImpression(NativeAd ad, String adId) {
+
+            }
+        });
+    }
 
     /** Called with the activity is finally destroyed. */
     @Override

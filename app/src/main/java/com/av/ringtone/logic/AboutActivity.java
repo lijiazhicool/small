@@ -1,8 +1,8 @@
 package com.av.ringtone.logic;
 
-import com.av.ringtone.R;
 import com.av.ringtone.base.BaseActivity;
 import com.av.ringtone.utils.ShareUtils;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;

@@ -1,6 +1,5 @@
 package com.av.ringtone.views;
 
-import com.av.ringtone.R;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -8,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 /**
  * Created by LiJiaZhi on 16/12/31.

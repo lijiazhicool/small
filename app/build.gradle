@@ -4,11 +4,11 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.av.ringtone"
+        applicationId "com.music.ringtonemaker.ringtone.cutter.maker"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 112
-        versionName "1.1.2"
+        versionCode 100
+        versionName "1.0.0"
     }
     signingConfigs {
         releaseConfig {
@@ -69,13 +69,11 @@ android {
         exclude 'META-INF/NOTICE.txt'
     }
     //渠道
+    flavorDimensions 'googleplay'
     productFlavors {
-        //test
-        _test {
-            manifestPlaceholders = [CHANNEL_VALUE: "test"]
-        }
         //googleplay
         googleplay {
+            dimension "googleplay"
             manifestPlaceholders = [CHANNEL_VALUE: "googleplay"]
         }
     }
@@ -86,6 +84,7 @@ dependencies {
     compile('com.ogaclejapan.smarttablayout:library:1.6.1@aar') {
         transitive = true
     }
+    compile project(':ad')
 //    compile 'com.yayandroid:Rotatable:1.1.1'
 
     //facebook ad_front
@@ -103,13 +102,11 @@ dependencies {
 //    compile 'com.google.firebase:firebase-ads:10.0.1'
 
 
-    //google 分析
-    compile 'com.google.firebase:firebase-core:11.2.0'
-    compile 'com.google.firebase:firebase-config:11.2.0'
-    compile 'com.google.firebase:firebase-ads:11.2.0'
-    //facebook
-    compile 'com.facebook.android:audience-network-sdk:4.+'
+
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    implementation 'pub.devrel:easypermissions:1.0.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.av.ringtone">
+    package="com.music.ringtonemaker.ringtone.cutter.maker">
 
     <!-- Include required permissions for Google Mobile Ads to run -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,6 +13,7 @@
 
     <!-- <uses-permission android:name="android.permission.RECORD_AUDIO" /> -->
     <application
+        android:name="com.av.ringtone.App"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
@@ -23,7 +24,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".logic.WelcomeActivity"
+            android:name="com.av.ringtone.logic.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -33,14 +34,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity android:name="com.facebook.ads.AudienceNetworkActivity" -->
-        <!-- android:configChanges="keyboardHidden|orientation|screenSize" /> -->
 
         <activity
-            android:name=".logic.edit.CutterActivity"
+            android:name="com.av.ringtone.logic.edit.CutterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".logic.MainActivity"
+            android:name="com.av.ringtone.logic.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -56,16 +55,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".logic.AboutActivity"
+            android:name="com.av.ringtone.logic.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".logic.SaveSuccessActivity"
+            android:name="com.av.ringtone.logic.SaveSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.facebook.ads.InterstitialAdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".logic.scan.ScanActivity"
+            android:name="com.av.ringtone.logic.scan.ScanActivity"
             android:screenOrientation="portrait" />
     </application>
 

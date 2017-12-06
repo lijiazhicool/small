@@ -29,7 +29,7 @@ import java.util.HashMap;
  * and get a rough estimate of the volume level of each frame.  Each
  * subclass is able to:
  *  - open a sound file
- *  - return the sample rate and number of frames
+ *  - return the sample dialog_rate and number of frames
  *  - return an approximation of the volume level of each frame
  *  - write a new sound file with a subset of the frames
  *
@@ -42,7 +42,7 @@ public class CheapSoundFile {
     public interface ProgressListener {
         /**
          * Will be called by the CheapSoundFile subclass periodically
-         * with values between 0.0 and 1.0.  Return true to continue
+         * with values.xml between 0.0 and 1.0.  Return true to continue
          * loading the file, and false to cancel.
          */
         boolean reportProgress(double fractionComplete);

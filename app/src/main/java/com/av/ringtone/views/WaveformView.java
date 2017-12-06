@@ -26,8 +26,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.av.ringtone.R;
 import com.av.ringtone.soundfile.CheapSoundFile;
+import com.music.ringtonemaker.ringtone.cutter.maker.R;
 
 /**
  * WaveformView is an Android view that displays a visual representation
@@ -501,7 +501,7 @@ public class WaveformView extends View {
         mZoomFactorByZoomLevel = new double[5];
         mValuesByZoomLevel = new double[5][];
 
-        // Level 0 is doubled, with interpolated values
+        // Level 0 is doubled, with interpolated values.xml
         mLenByZoomLevel[0] = numFrames * 2;
         mZoomFactorByZoomLevel[0] = 2.0;
         mValuesByZoomLevel[0] = new double[mLenByZoomLevel[0]];

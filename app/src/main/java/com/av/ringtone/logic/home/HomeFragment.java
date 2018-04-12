@@ -204,7 +204,7 @@ public class HomeFragment extends BaseFragment implements UserDatas.DataCountCha
 
 
     private void showBigNativeAd() {
-        new NativeAD().loadAD(getActivity(), ADManager.AD_Facebook, ADConstants.facebook_pause_native, new NativeAD.ADListener() {
+        new NativeAD().loadAD(getActivity(), ADManager.AD_Facebook, ADConstants.facebook_cut_make_native, new NativeAD.ADListener() {
             @Override
             public void onLoadedSuccess(NativeAd nativeAd, String adId) {
                 if (null == nativeAd) {

@@ -227,7 +227,7 @@ public class CutterActivity extends BaseActivity implements MarkerView.MarkerLis
     }
 
     protected void loadFacebookAD() {
-        new NativeAD().loadAD(this, ADManager.AD_Facebook, ADConstants.facebook_pause_native, new NativeAD.ADListener() {
+        new NativeAD().loadAD(this, ADManager.AD_Facebook, ADConstants.facebook_cut_make_native, new NativeAD.ADListener() {
             @Override
             public void onLoadedSuccess(NativeAd nativeAd, String adId) {
                 if (null == nativeAd) {

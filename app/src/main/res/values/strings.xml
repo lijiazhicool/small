@@ -2,18 +2,6 @@
     <string name="app_name">Ringtone Maker</string>
     <string name="welcome_hint">Tube MP3 Ringtone Maker </string>
 
-    <string name="facebook_app_id">710825282450762</string>
-
-    <string name="music_fragment_banner">ca-app-pub-1877164599441785/5129122154</string>
-    <string name="record_fragment_banner">ca-app-pub-1877164599441785/7942987757</string>
-    <string name="cut_fragment_banner">ca-app-pub-1877164599441785/5489048956</string>
-    <string name="cut_banner">ca-app-pub-1877164599441785/8442515354</string>
-
-    <string name="home_native">ca-app-pub-1877164599441785/8163313756</string>
-    <string name="save_success_native">ca-app-pub-1877164599441785/9640046957</string>
-    <string name="scan_native">ca-app-pub-1877164599441785/2116780157</string>
-
-
 
     <!--main menu-->
     <string name="menu_sort">Sort by……</string>

@@ -304,6 +304,9 @@ public class CuttersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
     private void removeADs(){
+        if (null == mDatas|| mDatas.size()==0){
+            return;
+        }
         Iterator<CutterModel> sListIterator = mDatas.iterator();
         while(sListIterator.hasNext()){
             CutterModel e = sListIterator.next();
@@ -314,7 +317,7 @@ public class CuttersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void addADs(){
-        if (null == mDatas&& mDatas.size()==0){
+        if (null == mDatas|| mDatas.size()==0){
             return;
         }
         int mStartIndex = getRandomIndex(mDatas.size() - 1);

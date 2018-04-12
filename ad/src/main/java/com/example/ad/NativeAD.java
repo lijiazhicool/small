@@ -6,7 +6,6 @@ import java.util.TimerTask;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.NativeAd;
 
 import android.content.Context;
@@ -158,7 +157,7 @@ public class NativeAD {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_REQUEST + "2");
         } else if (adId == ADConstants.facebook_savesuccess_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_REQUEST + "save");
-        } else if (adId == ADConstants.facebook_pause_native) {
+        } else if (adId == ADConstants.facebook_cut_make_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_REQUEST + "pause");
         }
     }
@@ -175,7 +174,7 @@ public class NativeAD {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_LOADED + "2");
         } else if (adId == ADConstants.facebook_savesuccess_native){
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_LOADED + "save");
-        } else if (adId == ADConstants.facebook_pause_native) {
+        } else if (adId == ADConstants.facebook_cut_make_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_LOADED + "pause");
         }
     }
@@ -191,7 +190,7 @@ public class NativeAD {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_FAILED + "2 " + error.getErrorCode());
         } else if (adId == ADConstants.facebook_savesuccess_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_FAILED + "save " + error.getErrorCode());
-        } else if (adId == ADConstants.facebook_pause_native) {
+        } else if (adId == ADConstants.facebook_cut_make_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_FAILED + "pause " + error.getErrorCode());
         }
     }
@@ -207,7 +206,7 @@ public class NativeAD {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_IMPRESSION + "2");
         } else if (adId == ADConstants.facebook_savesuccess_native){
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_IMPRESSION + "save");
-        } else if (adId == ADConstants.facebook_pause_native) {
+        } else if (adId == ADConstants.facebook_cut_make_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_IMPRESSION + "pause");
         }
     }
@@ -223,7 +222,7 @@ public class NativeAD {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_CLICK + "2");
         } else if (adId == ADConstants.facebook_savesuccess_native){
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_CLICK + "save");
-        } else if (adId == ADConstants.facebook_pause_native) {
+        } else if (adId == ADConstants.facebook_cut_make_native) {
             StatisticsManager.submitAd(mContext, StatisticsManager.ITEM_AD_NATIVE_CLICK + "pause");
         }
     }

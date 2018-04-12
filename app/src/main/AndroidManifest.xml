@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.music.ringtonemaker.ringtone.cutter.maker">
 
     <!-- Include required permissions for Google Mobile Ads to run -->
@@ -21,7 +22,7 @@
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+            android:value="155534908510973" />
 
         <activity
             android:name="com.av.ringtone.logic.WelcomeActivity"
@@ -66,6 +67,18 @@
         <activity
             android:name="com.av.ringtone.logic.scan.ScanActivity"
             android:screenOrientation="portrait" />
+
+        <!-- android 7.0 以后 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.music.ringtonemaker.ringtone.cutter.maker.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

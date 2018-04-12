@@ -314,6 +314,9 @@ public class SongsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
     private void removeADs(){
+        if (null == mDatas|| mDatas.size()==0){
+            return;
+        }
         Iterator<SongModel> sListIterator = mDatas.iterator();
         while(sListIterator.hasNext()){
             SongModel e = sListIterator.next();

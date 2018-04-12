@@ -268,6 +268,9 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
     private void removeADs(){
+        if (null == mDatas|| mDatas.size()==0){
+            return;
+        }
         Iterator<RecordModel> sListIterator = mDatas.iterator();
         while(sListIterator.hasNext()){
             RecordModel e = sListIterator.next();
@@ -278,7 +281,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void addADs(){
-        if (null == mDatas&& mDatas.size()==0){
+        if (null == mDatas|| mDatas.size()==0){
             return;
         }
         int mStartIndex = getRandomIndex(mDatas.size() - 1);

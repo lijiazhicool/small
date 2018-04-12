@@ -926,7 +926,7 @@ public class MainActivity extends BaseActivity implements MediaListener, UserDat
                     mFirebaseRemoteConfig.activateFetched();
                 }
 
-                ADManager.sPlatForm = mFirebaseRemoteConfig.getLong("ad_platform_type");
+                ADManager.sPlatForm = mFirebaseRemoteConfig.getLong("ad_platform_type")==0?ADManager.AD_Facebook:mFirebaseRemoteConfig.getLong("ad_platform_type");
                 ADManager.sLevel = mFirebaseRemoteConfig.getLong("ad_level_type");
                 mSharePreferenceUtil.putLong(PLATFOM, ADManager.sPlatForm);
 

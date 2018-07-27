@@ -3,10 +3,12 @@
 buildscript {
     repositories {
         jcenter { }
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.13'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -16,6 +18,7 @@ allprojects {
     repositories {
         jcenter {  }
         maven { url "https://maven.google.com" }
+        google()
     }
 }
 
@@ -42,7 +45,7 @@ def compress = {
         //减去.apk
         def path = name.substring(0, name.length() - 4)
         def guardJarFile = file('./AndResGuard/AndResGuard-cli-1.1.0.jar')
-        def guardConfigFile = file('./AndResGuard/config.xml')
+        def guardConfigFile = file('./AndResGuard/config1.xml')
         def originApkFile = file("./app/build/outputs/apk/${name}")
         def outputDir = file("./build/${path}")
         // 开始执行压缩命令
@@ -68,6 +71,7 @@ def compress = {
 /**
  * gradlew  compressApp
  * 对包进行微信资源压缩
+ * https://blog.csdn.net/lupengfei1009/article/details/57088682
  */
 task compressApp << {
     //清理build目录，可不加
